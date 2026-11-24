@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petricor Académie | Trading Bootcamp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #090d16;
+            color: #f8fafc;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-glass {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .card-glass:hover {
+            border-color: rgba(245, 158, 11, 0.4);
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-amber-500 selection:text-black">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-[#090d16]/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-black font-extrabold text-xl shadow-lg shadow-amber-500/20">
+                        P
+                    </div>
+                    <span class="text-xl font-extrabold tracking-tight text-white">
+                        PETRICOR <span class="text-amber-400">ACADÉMIE</span>
+                    </span>
+                </a>
+
+                <!-- Nav Links -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-300">
+                    <a href="#programme" class="hover:text-amber-400 transition">Programme</a>
+                    <a href="#videos" class="hover:text-amber-400 transition">Vidéos Bootcamp</a>
+                    <a href="#discord" class="hover:text-amber-400 transition">Communauté Discord</a>
+                </div>
+
+                <!-- CTA Button -->
+                <a href="https://wa.me/212656056148?text=Salam%20Petricor%20Acad%C3%A9mie%2C%20bghit%20ncharek%20f%20Trading%20Bootcamp" 
+                   target="_blank"
+                   class="bg-emerald-500 hover:bg-emerald-600 text-black font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition shadow-lg shadow-emerald-500/20">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Rejoindre</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-44 lg:pb-28 overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-amber-400 text-xs font-bold uppercase tracking-wider mb-6">
+                <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                Inscriptions Ouvertes • Trading Bootcamp
+            </div>
+            
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                Maîtrisez les Marchés Financiers avec <span class="gold-gradient">Petricor Académie</span>
+            </h1>
+            
+            <p class="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                Un bootcamp intensif conçu pour transformer votre approche du trading : Smart Money Concepts, gestion du risque stricte et psychologie institutionnelle.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="https://wa.me/212656056148?text=Salam%20Petricor%20Acad%C3%A9mie%2C%20bghit%20les%20infos%203la%20Trading%20Bootcamp" 
+                   target="_blank"
+                   class="w-full sm:w-auto px-8 py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-base flex items-center justify-center gap-3 transition shadow-xl shadow-amber-500/20">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>S'inscrire via WhatsApp</span>
+                </a>
+                
+                <a href="#videos" 
+                   class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-base flex items-center justify-center gap-3 transition">
+                    <i class="fa-solid fa-play text-amber-400"></i>
+                    <span>Voir les Vidéos</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programme Highlights -->
+    <section id="programme" class="py-16 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card-glass p-8 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-5">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Analyse Technique & SMC</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Comprendre la liquidité, les structures de marché (BOS/CHoCH) et les zones d'intérêt institutionnelles.
+                    </p>
+                </div>
+
+                <div class="card-glass p-8 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-5">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Risk Management Pro</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Protéger votre capital et préparer les challenges Prop Firms avec une gestion mathématique précise.
+                    </p>
+                </div>
+
+                <div class="card-glass p-8 rounded-2xl">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl mb-5">
+                        <i class="fa-brands fa-discord"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Live Sessions & Discord</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Analyses quotidiennes en direct, suivi personnalisé et partage de setups au sein de la communauté.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootcamp Videos Section -->
+    <section id="videos" class="py-20 bg-[#0c111d]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Aperçu du <span class="text-amber-400">Trading Bootcamp</span></h2>
+                <p class="text-gray-400 text-sm sm:text-base">
+                    Découvrez nos sessions de formation, analyses de marché et récapitulatifs vidéo.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- VIDEO 1 : Beddel l-link f src="..." b link dial YouTube Embed dialek -->
+                <div class="card-glass rounded-2xl overflow-hidden">
+                    <div class="aspect-video bg-black relative">
+                        <iframe class="w-full h-full" 
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                                title="Module 1 - Introduction au Trading" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Module 01</span>
+                        <h3 class="text-lg font-bold mt-1 mb-2">Bases & Structure du Marché</h3>
+                        <p class="text-gray-400 text-sm">Comprendre comment les prix bougent et identifier les tendances majeures.</p>
+                    </div>
+                </div>
+
+                <!-- VIDEO 2 -->
+                <div class="card-glass rounded-2xl overflow-hidden">
+                    <div class="aspect-video bg-black relative">
+                        <iframe class="w-full h-full" 
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                                title="Module 2 - Liquidité & Smart Money" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Module 02</span>
+                        <h3 class="text-lg font-bold mt-1 mb-2">Liquidité & Order Blocks</h3>
+                        <p class="text-gray-400 text-sm">Repérer les pièges du marché et entrer avec les institutions.</p>
+                    </div>
+                </div>
+
+                <!-- VIDEO 3 -->
+                <div class="card-glass rounded-2xl overflow-hidden">
+                    <div class="aspect-video bg-black relative">
+                        <iframe class="w-full h-full" 
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                                title="Module 3 - Live Trading Recap" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Module 03</span>
+                        <h3 class="text-lg font-bold mt-1 mb-2">Session Live & Psychologie</h3>
+                        <p class="text-gray-400 text-sm">Application pratique sur les graphiques et gestion des émotions.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Discord Community Section -->
+    <section id="discord" class="py-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="rounded-3xl bg-gradient-to-r from-[#5865F2]/20 via-[#111827] to-amber-500/10 border border-[#5865F2]/30 p-8 sm:p-14 text-center relative overflow-hidden">
+                <div class="w-16 h-16 rounded-2xl bg-[#5865F2] text-white flex items-center justify-center text-3xl mx-auto mb-6 shadow-lg shadow-[#5865F2]/30">
+                    <i class="fa-brands fa-discord"></i>
+                </div>
+                
+                <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Rejoignez le Discord <span class="text-[#5865F2]">Petricor Académie</span></h2>
+                <p class="text-gray-300 max-w-xl mx-auto mb-8 text-base">
+                    Accédez aux salons privés, aux analyses quotidiennes, aux annonces du bootcamp et échangez avec les autres traders de l'académie.
+                </p>
+
+                <!-- BEDDEL LIEN DISCORD HNA F href="..." -->
+                <a href="https://discord.gg/TON-LIEN-DISCORD" 
+                   target="_blank"
+                   class="inline-flex items-center gap-3 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold px-8 py-4 rounded-xl text-base transition shadow-xl shadow-[#5865F2]/25">
+                    <i class="fa-brands fa-discord text-xl"></i>
+                    <span>Rejoindre le Serveur Discord</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Direct Contact -->
+    <footer class="border-t border-white/10 py-12 bg-[#060910]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <span class="text-lg font-extrabold text-white">PETRICOR <span class="text-amber-400">ACADÉMIE</span></span>
+                <p class="text-gray-500 text-xs mt-1">© 2026 Petricor Académie. Tous droits réservés.</p>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center gap-6 text-sm font-semibold">
+                <a href="https://wa.me/212656056148" target="_blank" class="text-emerald-400 hover:text-emerald-300 flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>06 56 05 61 48</span>
+                </a>
+                <!-- BEDDEL LIEN DISCORD HNA TANI -->
+                <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank" class="text-indigo-400 hover:text-indigo-300 flex items-center gap-2">
+                    <i class="fa-brands fa-discord text-lg"></i>
+                    <span>Discord Officiel</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/212656056148?text=Salam%20Petricor%20Acad%C3%A9mie%2C%20bghit%20ntsejel%20f%20Bootcamp" 
+       target="_blank" 
+       aria-label="Contacter sur WhatsApp"
+       class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-emerald-500 hover:bg-emerald-400 text-black rounded-full flex items-center justify-center text-3xl shadow-2xl shadow-emerald-500/40 transition transform hover:scale-110">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
