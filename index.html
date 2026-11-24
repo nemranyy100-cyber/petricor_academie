@@ -1,261 +1,476 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Petricor Académie | Trading Bootcamp</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #090d16;
-            color: #f8fafc;
-        }
-        .gold-gradient {
-            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #d97706 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .card-glass {
-            background: rgba(17, 24, 39, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .card-glass:hover {
-            border-color: rgba(245, 158, 11, 0.4);
-            transform: translateY(-4px);
-            transition: all 0.3s ease;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Petricor Académie — Trading Bootcamp & VIP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #070b12;
+      color: #f8fafc;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(251, 191, 36, 0.16);
+    }
+    .gold-glow {
+      box-shadow: 0 0 35px rgba(245, 158, 11, 0.18);
+    }
+  </style>
 </head>
-<body class="antialiased selection:bg-amber-500 selection:text-black">
+<body class="antialiased selection:bg-amber-400 selection:text-slate-950">
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 bg-[#090d16]/90 backdrop-blur-md border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Brand Logo -->
-                <a href="#" class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-black font-extrabold text-xl shadow-lg shadow-amber-500/20">
-                        P
-                    </div>
-                    <span class="text-xl font-extrabold tracking-tight text-white">
-                        PETRICOR <span class="text-amber-400">ACADÉMIE</span>
-                    </span>
-                </a>
-
-                <!-- Nav Links -->
-                <div class="hidden md:flex items-center space-x-8 text-sm font-semibold text-gray-300">
-                    <a href="#programme" class="hover:text-amber-400 transition">Programme</a>
-                    <a href="#videos" class="hover:text-amber-400 transition">Vidéos Bootcamp</a>
-                    <a href="#discord" class="hover:text-amber-400 transition">Communauté Discord</a>
-                </div>
-
-                <!-- CTA Button -->
-                <a href="https://wa.me/212656056148?text=Salam%20Petricor%20Acad%C3%A9mie%2C%20bghit%20ncharek%20f%20Trading%20Bootcamp" 
-                   target="_blank"
-                   class="bg-emerald-500 hover:bg-emerald-600 text-black font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition shadow-lg shadow-emerald-500/20">
-                    <i class="fa-brands fa-whatsapp text-lg"></i>
-                    <span>Rejoindre</span>
-                </a>
-            </div>
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-[#070b12]/90 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+      <a href="#" class="flex items-center gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-400 font-black text-slate-950 text-lg shadow-md">
+          P
         </div>
-    </nav>
+        <div>
+          <span class="block text-sm font-extrabold tracking-wider text-white">PETRICOR <span class="text-amber-400">ACADÉMIE</span></span>
+          <span class="block text-[11px] text-slate-400">Trading Bootcamp &amp; VIP</span>
+        </div>
+      </a>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-44 lg:pb-28 overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-amber-500/10 blur-[120px] rounded-full pointer-events-none"></div>
-        
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center relative z-10">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-amber-400 text-xs font-bold uppercase tracking-wider mb-6">
-                <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-                Inscriptions Ouvertes • Trading Bootcamp
+      <nav class="hidden items-center gap-7 text-sm text-slate-300 md:flex">
+        <a href="#programme" class="hover:text-amber-400 transition">Programme</a>
+        <a href="#inscription" class="hover:text-amber-400 transition">Inscription</a>
+        <a href="#vip-perks" class="hover:text-amber-400 transition">Avantages VIP</a>
+        <a href="#galerie" class="hover:text-amber-400 transition">Galerie &amp; Photos</a>
+        <a href="#communaute" class="hover:text-amber-400 transition">Communauté</a>
+      </nav>
+
+      <div class="flex items-center gap-2.5">
+        <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 border border-emerald-400/40 px-4 py-2 text-xs font-semibold text-emerald-300 hover:bg-emerald-500/25 transition">
+          <i class="fa-brands fa-discord"></i>
+          <span>Rejoindre</span>
+        </a>
+        <a href="https://www.instagram.com/petricor_academie?bqrl=OXBja29tZGh0OHlh" target="_blank" rel="noopener noreferrer"
+           aria-label="Instagram Petricor Académie"
+           class="flex h-9 w-9 items-center justify-center rounded-full border border-slate-700 bg-slate-900 text-pink-400 hover:border-pink-400/60 transition">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden pt-16 pb-20 md:pt-24 md:pb-24">
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.14),transparent_60%)]"></div>
+    <div class="relative mx-auto max-w-4xl px-4 text-center">
+      <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-xs font-semibold tracking-wider text-amber-300 uppercase">
+        <span>Inscriptions Ouvertes • Trading Bootcamp</span>
+      </div>
+
+      <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl leading-tight">
+        Maîtrisez les Marchés Financiers avec <span class="text-amber-400">Petricor Académie</span>
+      </h1>
+
+      <p class="mx-auto mt-6 max-w-2xl text-base text-slate-300 sm:text-lg leading-relaxed">
+        Un bootcamp intensif conçu pour structurer votre lecture du marché, renforcer votre gestion du risque et développer une discipline professionnelle — avec accès direct à notre communauté Discord, WhatsApp et espace VIP.
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center justify-center gap-4">
+        <a href="#inscription"
+           class="inline-flex items-center gap-2.5 rounded-xl bg-amber-400 px-6 py-3.5 text-sm font-bold text-slate-950 hover:bg-amber-300 transition gold-glow">
+          <i class="fa-solid fa-user-check"></i>
+          <span>S'inscrire Maintenant</span>
+        </a>
+
+        <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2.5 rounded-xl border border-emerald-400/40 bg-emerald-500/10 px-6 py-3.5 text-sm font-semibold text-emerald-300 hover:bg-emerald-500/20 transition">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span>WhatsApp Direct</span>
+        </a>
+
+        <a href="https://www.instagram.com/petricor_academie?bqrl=OXBja29tZGh0OHlh" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2.5 rounded-xl border border-slate-700 bg-slate-900/90 px-6 py-3.5 text-sm font-semibold text-slate-200 hover:border-amber-400/50 transition">
+          <i class="fa-brands fa-instagram text-pink-400"></i>
+          <span>Vidéos &amp; Reels (En préparation)</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programme Overview -->
+  <section id="programme" class="py-14 border-t border-slate-800/70">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="mb-10 text-center">
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Programme Bootcamp</span>
+        <h2 class="mt-2 text-2xl font-bold text-white sm:text-3xl">Ce Que Vous Allez Développer</h2>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-3">
+        <div class="glass-card rounded-2xl p-6">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-amber-400/15 text-amber-400">
+            <i class="fa-solid fa-chart-line text-lg"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Structure &amp; Liquidité</h3>
+          <p class="mt-2 text-sm text-slate-300 leading-relaxed">
+            Lecture claire des zones clés, contexte de marché et points d'exécution sans surcharge d'indicateurs.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-400/15 text-emerald-400">
+            <i class="fa-solid fa-shield-halved text-lg"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Risk Management Strict</h3>
+          <p class="mt-2 text-sm text-slate-300 leading-relaxed">
+            Taille de position maîtrisée, ratio risque/rendement cohérent et protection durable du capital.
+          </p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6">
+          <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-400/15 text-indigo-400">
+            <i class="fa-solid fa-brain text-lg"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Psychologie &amp; Rigueur</h3>
+          <p class="mt-2 text-sm text-slate-300 leading-relaxed">
+            Éviter l'overtrading, garder le sang-froid sous pression et suivre un plan de trading discipliné.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inscription & Envoi Coordonnées -->
+  <section id="inscription" class="py-16 border-t border-slate-800/70">
+    <div class="mx-auto max-w-5xl px-4">
+      <div class="mb-10 text-center">
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Admission &amp; Contact</span>
+        <h2 class="mt-2 text-2xl font-bold text-white sm:text-3xl">Formulaire d'Inscription</h2>
+        <p class="mt-2 text-sm text-slate-400">
+          Remplissez vos informations : vos coordonnées sont préparées pour l'envoi direct vers <span class="text-amber-300 font-medium">nemranyy100@gmail.com</span> et WhatsApp.
+        </p>
+      </div>
+
+      <div class="grid gap-8 lg:grid-cols-12">
+        <!-- Form -->
+        <form id="inscriptionForm" class="glass-card rounded-2xl p-6 sm:p-8 lg:col-span-7 space-y-5">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for="fullName" class="mb-1.5 block text-xs font-semibold text-slate-300">Nom &amp; Prénom *</label>
+              <input id="fullName" type="text" required placeholder="Ex: Yasser Nemrany"
+                     class="w-full rounded-xl border border-slate-700 bg-slate-900/90 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none" />
             </div>
-            
-            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight mb-6">
-                Maîtrisez les Marchés Financiers avec <span class="gold-gradient">Petricor Académie</span>
-            </h1>
-            
-            <p class="text-gray-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-                Un bootcamp intensif conçu pour transformer votre approche du trading : Smart Money Concepts, gestion du risque stricte et psychologie institutionnelle.
+            <div>
+              <label for="phone" class="mb-1.5 block text-xs font-semibold text-slate-300">Téléphone / WhatsApp *</label>
+              <input id="phone" type="tel" required placeholder="Ex: +212 6XX XXX XXX"
+                     class="w-full rounded-xl border border-slate-700 bg-slate-900/90 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none" />
+            </div>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for="email" class="mb-1.5 block text-xs font-semibold text-slate-300">Votre Email *</label>
+              <input id="email" type="email" required placeholder="exemple@email.com"
+                     class="w-full rounded-xl border border-slate-700 bg-slate-900/90 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none" />
+            </div>
+            <div>
+              <label for="pack" class="mb-1.5 block text-xs font-semibold text-slate-300">Formule souhaitée *</label>
+              <select id="pack"
+                      class="w-full rounded-xl border border-slate-700 bg-slate-900/90 px-4 py-2.5 text-sm text-white focus:border-amber-400 focus:outline-none">
+                <option value="Bootcamp Standard">Bootcamp Standard</option>
+                <option value="VIP Mentorship" selected>VIP Mentorship (Accès VIP Complet)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="level" class="mb-1.5 block text-xs font-semibold text-slate-300">Niveau actuel &amp; objectifs</label>
+            <textarea id="level" rows="3" placeholder="Débutant / Intermédiaire, marchés préférés, ce que vous cherchez..."
+                      class="w-full rounded-xl border border-slate-700 bg-slate-900/90 px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:border-amber-400 focus:outline-none"></textarea>
+          </div>
+
+          <button type="submit"
+                  class="w-full rounded-xl bg-amber-400 px-6 py-3.5 text-sm font-bold text-slate-950 hover:bg-amber-300 transition cursor-pointer">
+            Valider l'Inscription &amp; Générer l'Accès
+          </button>
+        </form>
+
+        <!-- Confirmation + Coordonnées vers Email & WhatsApp -->
+        <div class="glass-card rounded-2xl p-6 sm:p-8 lg:col-span-5 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Réception des Coordonnées</span>
+              <span id="statusBadge" class="rounded-full bg-slate-800 px-3 py-1 text-[11px] font-semibold text-slate-300">
+                En attente
+              </span>
+            </div>
+
+            <p class="mt-3 text-xs text-slate-400">
+              Destination email : <span class="text-white font-semibold">nemranyy100@gmail.com</span>
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="https://wa.me/212656056148?text=Salam%20Petricor%20Acad%C3%A9mie%2C%20bghit%20les%20infos%203la%20Trading%20Bootcamp" 
-                   target="_blank"
-                   class="w-full sm:w-auto px-8 py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-base flex items-center justify-center gap-3 transition shadow-xl shadow-amber-500/20">
-                    <i class="fa-brands fa-whatsapp text-xl"></i>
-                    <span>S'inscrire via WhatsApp</span>
-                </a>
-                
-                <a href="#videos" 
-                   class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-base flex items-center justify-center gap-3 transition">
-                    <i class="fa-solid fa-play text-amber-400"></i>
-                    <span>Voir les Vidéos</span>
-                </a>
+            <div id="summaryBox" class="mt-4 rounded-xl border border-slate-800 bg-slate-900/80 p-4 text-xs text-slate-300 space-y-1.5">
+              <p class="text-slate-400">Complétez le formulaire à gauche pour générer le récapitulatif de vos coordonnées, le lien email direct vers <span class="text-amber-300">nemranyy100@gmail.com</span> et vos icônes VIP.</p>
             </div>
+
+            <div id="actionButtons" class="mt-4 hidden flex-col gap-2.5">
+              <a id="mailtoLink" href="#"
+                 class="flex items-center justify-center gap-2 rounded-xl bg-amber-400/20 border border-amber-400/50 px-4 py-2.5 text-xs font-bold text-amber-300 hover:bg-amber-400/30 transition">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Envoyer Coordonnées à nemranyy100@gmail.com</span>
+              </a>
+
+              <a id="whatsappConfirmLink" href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
+                 class="flex items-center justify-center gap-2 rounded-xl bg-emerald-500/20 border border-emerald-400/50 px-4 py-2.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/30 transition">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Confirmer sur WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-800/80 text-[11px] text-slate-400">
+            Astuce : Si votre messagerie email n'est pas configurée sur l'appareil, cliquez sur « Confirmer sur WhatsApp » ou copiez le récapitulatif directement.
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Programme Highlights -->
-    <section id="programme" class="py-16 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="card-glass p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-5">
-                        <i class="fa-solid fa-chart-line"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Analyse Technique & SMC</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Comprendre la liquidité, les structures de marché (BOS/CHoCH) et les zones d'intérêt institutionnelles.
-                    </p>
-                </div>
+  <!-- Icônes & Avantages Après Inscription VIP -->
+  <section id="vip-perks" class="py-16 border-t border-slate-800/70">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="mb-10 text-center">
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-amber-400/40 bg-amber-400/10 px-3.5 py-1 text-xs font-bold text-amber-300">
+          <i class="fa-solid fa-crown"></i> APRÈS INSCRIPTION VIP
+        </span>
+        <h2 class="mt-3 text-2xl font-bold text-white sm:text-3xl">Icônes &amp; Accès Débloqués VIP</h2>
+        <p id="vipDynamicNote" class="mt-2 text-sm text-slate-400">
+          Sélectionnez la formule <span class="text-amber-300 font-semibold">VIP Mentorship</span> dans le formulaire pour activer votre badge VIP personnel.
+        </p>
+      </div>
 
-                <div class="card-glass p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-5">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Risk Management Pro</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Protéger votre capital et préparer les challenges Prop Firms avec une gestion mathématique précise.
-                    </p>
-                </div>
-
-                <div class="card-glass p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl mb-5">
-                        <i class="fa-brands fa-discord"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Live Sessions & Discord</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Analyses quotidiennes en direct, suivi personnalisé et partage de setups au sein de la communauté.
-                    </p>
-                </div>
+      <!-- Pass VIP dynamique (apparaît dès l'inscription VIP) -->
+      <div id="vipUnlockedBanner" class="mb-8 hidden rounded-2xl border border-amber-400/50 bg-gradient-to-r from-amber-500/15 via-slate-900 to-emerald-500/15 p-5">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-400 text-slate-950 text-xl font-black">
+              <i class="fa-solid fa-gem"></i>
             </div>
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wider text-amber-300">Statut VIP Activé</div>
+              <div id="vipMemberText" class="text-base font-bold text-white">Membre VIP — Petricor Académie</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
+               class="rounded-lg bg-amber-400 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-amber-300 transition">
+              Accès Discord VIP
+            </a>
+            <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
+               class="rounded-lg bg-emerald-400 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-emerald-300 transition">
+              Ligne Directe WhatsApp
+            </a>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- Bootcamp Videos Section -->
-    <section id="videos" class="py-20 bg-[#0c111d]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-14">
-                <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Aperçu du <span class="text-amber-400">Trading Bootcamp</span></h2>
-                <p class="text-gray-400 text-sm sm:text-base">
-                    Découvrez nos sessions de formation, analyses de marché et récapitulatifs vidéo.
-                </p>
-            </div>
+      <!-- Grille des Icônes VIP -->
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
+           class="glass-card group rounded-2xl p-5 hover:border-amber-400/50 transition">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/15 text-indigo-300 group-hover:scale-105 transition">
+            <i class="fa-brands fa-discord text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-white">Serveur Discord VIP</h3>
+          <p class="mt-1.5 text-xs text-slate-400 leading-relaxed">Salons dédiés, échanges en direct et suivi de la communauté.</p>
+        </a>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- VIDEO 1 : Beddel l-link f src="..." b link dial YouTube Embed dialek -->
-                <div class="card-glass rounded-2xl overflow-hidden">
-                    <div class="aspect-video bg-black relative">
-                        <iframe class="w-full h-full" 
-                                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                                title="Module 1 - Introduction au Trading" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen></iframe>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Module 01</span>
-                        <h3 class="text-lg font-bold mt-1 mb-2">Bases & Structure du Marché</h3>
-                        <p class="text-gray-400 text-sm">Comprendre comment les prix bougent et identifier les tendances majeures.</p>
-                    </div>
-                </div>
+        <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
+           class="glass-card group rounded-2xl p-5 hover:border-emerald-400/50 transition">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500/15 text-emerald-300 group-hover:scale-105 transition">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-white">Support Prioritaire VIP</h3>
+          <p class="mt-1.5 text-xs text-slate-400 leading-relaxed">Contact rapide sur WhatsApp pour vos questions et validations.</p>
+        </a>
 
-                <!-- VIDEO 2 -->
-                <div class="card-glass rounded-2xl overflow-hidden">
-                    <div class="aspect-video bg-black relative">
-                        <iframe class="w-full h-full" 
-                                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                                title="Module 2 - Liquidité & Smart Money" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen></iframe>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Module 02</span>
-                        <h3 class="text-lg font-bold mt-1 mb-2">Liquidité & Order Blocks</h3>
-                        <p class="text-gray-400 text-sm">Repérer les pièges du marché et entrer avec les institutions.</p>
-                    </div>
-                </div>
+        <a href="https://www.instagram.com/petricor_academie?bqrl=OXBja29tZGh0OHlh" target="_blank" rel="noopener noreferrer"
+           class="glass-card group rounded-2xl p-5 hover:border-pink-400/50 transition">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-pink-500/15 text-pink-300 group-hover:scale-105 transition">
+            <i class="fa-solid fa-clapperboard text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-white">Vidéos &amp; Reels (Bientôt)</h3>
+          <p class="mt-1.5 text-xs text-slate-400 leading-relaxed">Les vidéos sont en préparation sur Instagram @petricor_academie.</p>
+        </a>
 
-                <!-- VIDEO 3 -->
-                <div class="card-glass rounded-2xl overflow-hidden">
-                    <div class="aspect-video bg-black relative">
-                        <iframe class="w-full h-full" 
-                                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                                title="Module 3 - Live Trading Recap" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen></iframe>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">Module 03</span>
-                        <h3 class="text-lg font-bold mt-1 mb-2">Session Live & Psychologie</h3>
-                        <p class="text-gray-400 text-sm">Application pratique sur les graphiques et gestion des émotions.</p>
-                    </div>
-                </div>
+        <a href="#galerie"
+           class="glass-card group rounded-2xl p-5 hover:border-amber-400/50 transition">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/15 text-amber-300 group-hover:scale-105 transition">
+            <i class="fa-solid fa-award text-2xl"></i>
+          </div>
+          <h3 class="font-bold text-white">Badge &amp; Journaux VIP</h3>
+          <p class="mt-1.5 text-xs text-slate-400 leading-relaxed">Retrouvez vos visuels, setups et moments clés dans la galerie.</p>
+        </a>
+      </div>
+    </div>
+  </section>
 
-            </div>
+  <!-- Galerie Photos (Espace prêt pour vos futures photos) -->
+  <section id="galerie" class="py-16 border-t border-slate-800/70">
+    <div class="mx-auto max-w-6xl px-4">
+      <div class="mb-10 flex flex-col items-center justify-between gap-4 sm:flex-row">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Espace Photos</span>
+          <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl">Galerie Petricor Académie</h2>
+          <p class="mt-1 text-xs text-slate-400">Emplacements prêts pour ajouter vos photos dès que vous les préparez.</p>
         </div>
-    </section>
+      </div>
 
-    <!-- Discord Community Section -->
-    <section id="discord" class="py-20">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6">
-            <div class="rounded-3xl bg-gradient-to-r from-[#5865F2]/20 via-[#111827] to-amber-500/10 border border-[#5865F2]/30 p-8 sm:p-14 text-center relative overflow-hidden">
-                <div class="w-16 h-16 rounded-2xl bg-[#5865F2] text-white flex items-center justify-center text-3xl mx-auto mb-6 shadow-lg shadow-[#5865F2]/30">
-                    <i class="fa-brands fa-discord"></i>
-                </div>
-                
-                <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Rejoignez le Discord <span class="text-[#5865F2]">Petricor Académie</span></h2>
-                <p class="text-gray-300 max-w-xl mx-auto mb-8 text-base">
-                    Accédez aux salons privés, aux analyses quotidiennes, aux annonces du bootcamp et échangez avec les autres traders de l'académie.
-                </p>
-
-                <!-- BEDDEL LIEN DISCORD HNA F href="..." -->
-                <a href="https://discord.gg/TON-LIEN-DISCORD" 
-                   target="_blank"
-                   class="inline-flex items-center gap-3 bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold px-8 py-4 rounded-xl text-base transition shadow-xl shadow-[#5865F2]/25">
-                    <i class="fa-brands fa-discord text-xl"></i>
-                    <span>Rejoindre le Serveur Discord</span>
-                </a>
-            </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Photo Slot 1 -->
+        <div class="glass-card overflow-hidden rounded-2xl">
+          <div class="flex h-48 flex-col items-center justify-center bg-slate-900/80 border-b border-slate-800 p-4 text-center">
+            <i class="fa-regular fa-image text-3xl text-amber-400/80 mb-2"></i>
+            <span class="text-xs font-semibold text-slate-300">Photo #1 — Setup &amp; Analyse</span>
+            <span class="mt-1 text-[11px] text-slate-500">Ajoutez l'URL de votre image ici</span>
+          </div>
+          <div class="p-4">
+            <h3 class="text-sm font-bold text-white">Session &amp; Lecture Marché</h3>
+            <p class="mt-1 text-xs text-slate-400">Prêt pour votre première photo.</p>
+          </div>
         </div>
-    </section>
 
-    <!-- Footer & Direct Contact -->
-    <footer class="border-t border-white/10 py-12 bg-[#060910]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-left">
-                <span class="text-lg font-extrabold text-white">PETRICOR <span class="text-amber-400">ACADÉMIE</span></span>
-                <p class="text-gray-500 text-xs mt-1">© 2026 Petricor Académie. Tous droits réservés.</p>
-            </div>
-
-            <div class="flex flex-wrap items-center justify-center gap-6 text-sm font-semibold">
-                <a href="https://wa.me/212656056148" target="_blank" class="text-emerald-400 hover:text-emerald-300 flex items-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-lg"></i>
-                    <span>06 56 05 61 48</span>
-                </a>
-                <!-- BEDDEL LIEN DISCORD HNA TANI -->
-                <a href="https://discord.gg/TON-LIEN-DISCORD" target="_blank" class="text-indigo-400 hover:text-indigo-300 flex items-center gap-2">
-                    <i class="fa-brands fa-discord text-lg"></i>
-                    <span>Discord Officiel</span>
-                </a>
-            </div>
+        <!-- Photo Slot 2 -->
+        <div class="glass-card overflow-hidden rounded-2xl">
+          <div class="flex h-48 flex-col items-center justify-center bg-slate-900/80 border-b border-slate-800 p-4 text-center">
+            <i class="fa-regular fa-image text-3xl text-amber-400/80 mb-2"></i>
+            <span class="text-xs font-semibold text-slate-300">Photo #2 — Communauté &amp; VIP</span>
+            <span class="mt-1 text-[11px] text-slate-500">Ajoutez l'URL de votre image ici</span>
+          </div>
+          <div class="p-4">
+            <h3 class="text-sm font-bold text-white">Équipe &amp; Membres VIP</h3>
+            <p class="mt-1 text-xs text-slate-400">Prêt pour votre deuxième photo.</p>
+          </div>
         </div>
-    </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/212656056148?text=Salam%20Petricor%20Acad%C3%A9mie%2C%20bghit%20ntsejel%20f%20Bootcamp" 
-       target="_blank" 
-       aria-label="Contacter sur WhatsApp"
-       class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-emerald-500 hover:bg-emerald-400 text-black rounded-full flex items-center justify-center text-3xl shadow-2xl shadow-emerald-500/40 transition transform hover:scale-110">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+        <!-- Photo Slot 3 -->
+        <div class="glass-card overflow-hidden rounded-2xl">
+          <div class="flex h-48 flex-col items-center justify-center bg-slate-900/80 border-b border-slate-800 p-4 text-center">
+            <i class="fa-regular fa-image text-3xl text-amber-400/80 mb-2"></i>
+            <span class="text-xs font-semibold text-slate-300">Photo #3 — Bootcamp &amp; Moments</span>
+            <span class="mt-1 text-[11px] text-slate-500">Ajoutez l'URL de votre image ici</span>
+          </div>
+          <div class="p-4">
+            <h3 class="text-sm font-bold text-white">Temps Forts Bootcamp</h3>
+            <p class="mt-1 text-xs text-slate-400">Prêt pour votre troisième photo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- Communauté & Liens Officiels -->
+  <section id="communaute" class="py-16 border-t border-slate-800/70">
+    <div class="mx-auto max-w-5xl px-4 text-center">
+      <h2 class="text-2xl font-bold text-white sm:text-3xl">Rejoignez l'Écosystème <span class="text-amber-400">Petricor Académie</span></h2>
+      <p class="mx-auto mt-2 max-w-xl text-sm text-slate-400">
+        Discord actif, contact direct WhatsApp et Instagram en préparation pour les prochaines vidéos.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2.5 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white hover:bg-indigo-500 transition">
+          <i class="fa-brands fa-discord"></i>
+          <span>Serveur Discord</span>
+        </a>
+
+        <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2.5 rounded-xl bg-emerald-500 px-5 py-3 text-sm font-bold text-slate-950 hover:bg-emerald-400 transition">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>WhatsApp Officiel</span>
+        </a>
+
+        <a href="https://www.instagram.com/petricor_academie?bqrl=OXBja29tZGh0OHlh" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2.5 rounded-xl border border-pink-400/40 bg-pink-500/15 px-5 py-3 text-sm font-bold text-pink-300 hover:bg-pink-500/25 transition">
+          <i class="fa-brands fa-instagram"></i>
+          <span>Instagram @petricor_academie</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800/80 py-8 text-center text-xs text-slate-500">
+    <div class="mx-auto max-w-6xl px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <span>© 2026 <strong class="text-slate-300">PETRICOR ACADÉMIE</strong>. Tous droits réservés.</span>
+      <span>Contact : <span class="text-amber-400">nemranyy100@gmail.com</span></span>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
+     aria-label="Contacter sur WhatsApp"
+     class="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-slate-950 shadow-lg hover:bg-emerald-400 transition">
+    <i class="fa-brands fa-whatsapp text-2xl"></i>
+  </a>
+
+  <script>
+    const form = document.getElementById('inscriptionForm');
+    const summaryBox = document.getElementById('summaryBox');
+    const actionButtons = document.getElementById('actionButtons');
+    const mailtoLink = document.getElementById('mailtoLink');
+    const whatsappConfirmLink = document.getElementById('whatsappConfirmLink');
+    const statusBadge = document.getElementById('statusBadge');
+    const vipUnlockedBanner = document.getElementById('vipUnlockedBanner');
+    const vipMemberText = document.getElementById('vipMemberText');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const fullName = document.getElementById('fullName').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const pack = document.getElementById('pack').value;
+      const level = document.getElementById('level').value.trim() || 'Non précisé';
+
+      const subject = encodeURIComponent(`Nouvelle Inscription Petricor Académie - ${fullName} (${pack})`);
+      const bodyText =
+`Bonjour Petricor Académie, voici mes coordonnées d'inscription :
+
+- Nom : ${fullName}
+- Téléphone / WhatsApp : ${phone}
+- Email : ${email}
+- Formule : ${pack}
+- Niveau & objectifs : ${level}`;
+
+      mailtoLink.href = `mailto:nemranyy100@gmail.com?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+
+      const waMsg = encodeURIComponent(`Bonjour Petricor Académie, je viens de remplir le formulaire d'inscription (${pack}) : Nom: ${fullName}, Tél: ${phone}, Email: ${email}.`);
+      whatsappConfirmLink.href = `https://wa.me/qr/DDJ2PAVEIXOGL1?text=${waMsg}`;
+
+      statusBadge.textContent = 'Prêt à envoyer';
+      statusBadge.className = 'rounded-full bg-emerald-500/20 px-3 py-1 text-[11px] font-semibold text-emerald-300';
+
+      summaryBox.innerHTML = `
+        <p><strong class="text-white">Nom :</strong> ${fullName}</p>
+        <p><strong class="text-white">Téléphone :</strong> ${phone}</p>
+        <p><strong class="text-white">Email :</strong> ${email}</p>
+        <p><strong class="text-amber-300">Formule :</strong> ${pack}</p>
+        <p><strong class="text-white">Détails :</strong> ${level}</p>
+      `;
+
+      actionButtons.classList.remove('hidden');
+      actionButtons.classList.add('flex');
+
+      if (pack.toLowerCase().includes('vip')) {
+        vipUnlockedBanner.classList.remove('hidden');
+        vipMemberText.textContent = `Membre VIP — ${fullName} (${email})`;
+      } else {
+        vipUnlockedBanner.classList.add('hidden');
+      }
+    });
+  </script>
 </body>
 </html>
+
