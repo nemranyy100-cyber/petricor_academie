@@ -42,7 +42,6 @@
         radial-gradient(ellipse 55% 50% at 20% 78%, rgba(229, 184, 75, 0.09), transparent 65%),
         radial-gradient(ellipse 80% 80% at 50% 50%, rgba(18, 22, 28, 0.95), #050608 100%);
       overflow: hidden;
-      transition: filter 0.28s ease;
     }
 
     .grain-canvas::before {
@@ -91,7 +90,7 @@
 </head>
 <body class="min-h-screen selection:bg-gold selection:text-obsidian">
 
-  <!-- Top Navigation (4 Pages: Accueil, Community, Backtest, VIP) -->
+  <!-- Top Navigation -->
   <header class="sticky top-0 z-40 backdrop-blur-md bg-obsidian/85 border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 flex-wrap">
       <button type="button" onclick="switchView('accueil')" class="press-blur flex items-center gap-2.5 text-left">
@@ -103,7 +102,6 @@
         </span>
       </button>
 
-      <!-- 4-Page Switcher -->
       <nav class="flex items-center gap-1 px-1.5 py-1 rounded-full pill-nav text-xs overflow-x-auto">
         <button type="button" id="navAccueilBtn" onclick="switchView('accueil')"
                 class="press-blur px-3 py-1.5 rounded-full bg-white text-obsidian font-bold transition whitespace-nowrap">
@@ -123,7 +121,6 @@
         </button>
       </nav>
 
-      <!-- Right Links -->
       <div class="hidden lg:flex items-center gap-2">
         <a href="https://nemranyy100-cyber.github.io/petricor_academie/" target="_blank" rel="noopener noreferrer"
            class="press-blur px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
@@ -146,7 +143,6 @@
   <!-- ========================================================= -->
   <main id="accueilPage" class="block">
 
-    <!-- Hero -->
     <section class="max-w-6xl mx-auto px-4 pt-8 pb-6">
       <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-12 relative">
         <div class="relative z-10 max-w-3xl mx-auto text-center space-y-5 py-2">
@@ -159,7 +155,7 @@
           </h1>
 
           <p class="max-w-xl mx-auto text-sm sm:text-base text-slate-200/85 leading-relaxed">
-            Découvre nos principes de psychologie, entraîne-toi sur notre simulateur Backtest style TradingView, et rejoins l'Espace VIP.
+            Découvre nos principes de psychologie, entraîne-toi sur notre espace Backtest style TradingView, et rejoins l'Espace VIP.
           </p>
 
           <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
@@ -169,7 +165,7 @@
             </a>
             <button type="button" onclick="switchView('backtest')"
                     class="press-blur px-6 py-3 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 font-bold text-xs sm:text-sm transition">
-              📊 Simulateur Backtest
+              📊 Espace Backtest
             </button>
             <button type="button" onclick="switchView('community')"
                     class="press-blur px-6 py-3 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white font-semibold text-xs sm:text-sm transition">
@@ -429,164 +425,149 @@
   </section>
 
   <!-- ========================================================= -->
-  <!-- PAGE 3 : BACKTEST SIMULATOR (STYLE TRADINGVIEW REPLAY)    -->
+  <!-- PAGE 3 : BACKTEST (SESSIONS + TRADINGVIEW WORKSPACE)      -->
   <!-- ========================================================= -->
   <section id="backtestPage" class="hidden max-w-7xl mx-auto px-4 py-6">
-    <div class="rounded-[24px] bg-[#0d1017] editorial-frame overflow-hidden">
 
-      <!-- Top TradingView-Style Toolbar -->
-      <div class="px-4 py-2.5 bg-[#131722] border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-2.5 flex-wrap">
-          <span class="px-2.5 py-1 rounded bg-gold/15 border border-gold/30 text-goldLight font-bold text-xs">
-            PETRICOR REPLAY
+    <!-- VUE A : SESSIONS LIST + NEW SESSION -->
+    <div id="btSessionsLobby" class="rounded-[24px] bg-[#0c0f16] border border-white/10 p-5 sm:p-8 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Petricor Académie • Backtest</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Your Sessions</h2>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1">Choisis une paire, le capital (balance) et crée une session, puis clique dessus pour ouvrir le chart.</p>
+        </div>
+        <button type="button" onclick="openNewSessionModal()"
+                class="press-blur inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-xs sm:text-sm shadow-lg">
+          <span>New Session</span>
+          <span class="text-base leading-none">+</span>
+        </button>
+      </div>
+
+      <div id="btSessionsGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+    </div>
+
+    <!-- VUE B : TRADINGVIEW-STYLE FULL CHART WORKSPACE -->
+    <div id="btChartWorkspace" class="hidden rounded-[20px] bg-[#f4f6f9] text-[#131722] overflow-hidden border border-white/15 shadow-2xl">
+
+      <!-- Top TradingView Bar -->
+      <div class="px-3 py-2 bg-white border-b border-slate-200 flex items-center justify-between gap-2 flex-wrap text-xs">
+        <div class="flex items-center gap-2 flex-wrap">
+          <button type="button" onclick="backToSessionsLobby()"
+                  class="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-bold hover:bg-slate-800 transition">
+            ← Sessions
+          </button>
+
+          <span id="wsSymbolBadge" class="px-2.5 py-1 rounded bg-slate-100 font-extrabold text-slate-900">
+            Nas100
           </span>
-          <select id="btSymbol" onchange="initBacktestData()"
-                  class="px-3 py-1.5 rounded-lg bg-[#1e222d] border border-white/10 text-xs font-bold text-white focus:outline-none focus:border-gold">
-            <option value="XAUUSD">XAUUSD • Gold</option>
-            <option value="EURUSD">EURUSD • Euro</option>
-            <option value="NAS100">NAS100 • Nasdaq</option>
-            <option value="BTCUSD">BTCUSD • Bitcoin</option>
-          </select>
-          <div class="flex items-center gap-1 bg-[#1e222d] p-0.5 rounded-lg text-[11px] font-bold">
-            <button type="button" onclick="setBtTf('15m', this)" class="bt-tf px-2 py-1 rounded bg-gold text-obsidian">15m</button>
-            <button type="button" onclick="setBtTf('1H', this)" class="bt-tf px-2 py-1 rounded text-slate-300 hover:text-white">1H</button>
-            <button type="button" onclick="setBtTf('4H', this)" class="bt-tf px-2 py-1 rounded text-slate-300 hover:text-white">4H</button>
+
+          <div class="flex items-center gap-0.5 bg-slate-100 p-0.5 rounded-lg font-bold">
+            <button type="button" onclick="changeWsTf('1m', this)" class="ws-tf px-2 py-1 rounded bg-blue-600 text-white">1m</button>
+            <button type="button" onclick="changeWsTf('5m', this)" class="ws-tf px-2 py-1 rounded text-slate-700 hover:bg-slate-200">5m</button>
+            <button type="button" onclick="changeWsTf('15m', this)" class="ws-tf px-2 py-1 rounded text-slate-700 hover:bg-slate-200">15m</button>
+            <button type="button" onclick="changeWsTf('1H', this)" class="ws-tf px-2 py-1 rounded text-slate-700 hover:bg-slate-200">1H</button>
+            <button type="button" onclick="changeWsTf('4H', this)" class="ws-tf px-2 py-1 rounded text-slate-700 hover:bg-slate-200">4H</button>
           </div>
+
+          <button type="button" onclick="toggleOrderDrawer()"
+                  class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 font-bold hover:bg-blue-100">
+            + Open Position
+          </button>
+
+          <button type="button" onclick="rewindSession()"
+                  class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold">
+            ⏮ Rewind
+          </button>
         </div>
 
-        <!-- Bar Replay Controls -->
-        <div class="flex items-center gap-1.5 bg-[#1e222d] px-2.5 py-1 rounded-xl border border-white/10">
-          <span class="text-[11px] font-bold text-goldLight mr-1">Bar Replay:</span>
-          <button type="button" onclick="stepBackCandle()" title="Bougie précédente"
-                  class="px-2.5 py-1 rounded bg-white/5 hover:bg-white/15 text-xs font-bold text-white">⏮</button>
-          <button type="button" id="btPlayBtn" onclick="toggleReplayPlay()" title="Play / Pause"
-                  class="px-3 py-1 rounded bg-gold text-obsidian text-xs font-extrabold">▶ Play</button>
-          <button type="button" onclick="stepForwardCandle()" title="Bougie suivante"
-                  class="px-2.5 py-1 rounded bg-white/5 hover:bg-white/15 text-xs font-bold text-white">⏭</button>
-          <select id="btSpeed" onchange="updateReplaySpeed()"
-                  class="ml-1 px-2 py-1 rounded bg-obsidian border border-white/10 text-[11px] font-bold text-slate-200">
-            <option value="900">1x</option>
-            <option value="450" selected>2x</option>
-            <option value="180">5x</option>
-          </select>
-          <button type="button" onclick="initBacktestData()" title="Nouveau scénario"
-                  class="ml-1 px-2.5 py-1 rounded bg-white/5 hover:bg-white/15 text-[11px] font-semibold text-slate-300">
-            ↻ Reset
-          </button>
+        <div class="flex items-center gap-3 font-mono text-xs">
+          <span class="text-slate-600">Session: <strong id="wsSessionName" class="text-slate-900">-</strong></span>
+          <span class="text-slate-600">Balance: <strong id="wsBalance" class="text-emerald-700">$1,000.00</strong></span>
+          <span id="wsPnlBadge" class="px-2 py-0.5 rounded bg-slate-100 font-bold text-slate-800">P&L: $0.00</span>
         </div>
       </div>
 
-      <!-- Main Chart + Right Execution Panel -->
-      <div class="grid lg:grid-cols-12">
+      <!-- Main Body: Left Drawing Tools + Large Chart -->
+      <div class="relative flex min-h-[540px] sm:min-h-[620px] bg-white">
 
-        <!-- Left Drawing Tools + Canvas Chart (8 cols) -->
-        <div class="lg:col-span-8 flex border-b lg:border-b-0 lg:border-r border-white/10 bg-[#131722]">
-          <!-- TradingView Left Sidebar -->
-          <div class="w-11 bg-[#131722] border-r border-white/10 py-3 flex flex-col items-center gap-2.5 shrink-0">
-            <button type="button" id="toolCrosshair" onclick="setDrawTool('crosshair')" title="Curseur / Crosshair"
-                    class="w-8 h-8 rounded-lg bg-gold text-obsidian font-bold text-xs flex items-center justify-center">
-              ✛
-            </button>
-            <button type="button" id="toolHline" onclick="setDrawTool('hline')" title="Ligne Horizontale (POI / Liquidity)"
-                    class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 text-slate-200 font-bold text-xs flex items-center justify-center">
-              ―
-            </button>
-            <button type="button" id="toolBox" onclick="setDrawTool('box')" title="Zone / Order Block (Clic 2 fois)"
-                    class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 text-slate-200 font-bold text-xs flex items-center justify-center">
-              ▭
-            </button>
-            <button type="button" onclick="clearDrawings()" title="Effacer les dessins"
-                    class="w-8 h-8 rounded-lg bg-red-500/15 hover:bg-red-500/25 text-red-300 font-bold text-xs flex items-center justify-center mt-auto">
-              🗑
-            </button>
-          </div>
-
-          <!-- Chart Container -->
-          <div class="flex-1 relative min-h-[430px] sm:min-h-[490px]">
-            <div id="btToolHint" class="absolute top-2.5 left-3 z-10 px-2.5 py-1 rounded bg-black/60 border border-white/10 text-[11px] text-slate-300 pointer-events-none">
-              Outil : Curseur • Utilise ⏭ ou Play pour avancer bougie par bougie
-            </div>
-            <canvas id="btChartCanvas" class="w-full h-full block cursor-crosshair"></canvas>
-          </div>
+        <!-- Left Vertical Toolbar -->
+        <div class="w-11 bg-white border-r border-slate-200 py-2.5 flex flex-col items-center gap-1.5 shrink-0">
+          <button type="button" id="wsToolCross" onclick="setWsTool('crosshair')" title="Crosshair"
+                  class="w-8 h-8 rounded bg-blue-600 text-white font-bold text-xs flex items-center justify-center">
+            ✛
+          </button>
+          <button type="button" id="wsToolTrend" onclick="setWsTool('trendline')" title="Trend Line (2 clics)"
+                  class="w-8 h-8 rounded hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center">
+            ／
+          </button>
+          <button type="button" id="wsToolHline" onclick="setWsTool('hline')" title="Horizontal Line (1 clic)"
+                  class="w-8 h-8 rounded hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center">
+            ―
+          </button>
+          <button type="button" id="wsToolBox" onclick="setWsTool('box')" title="Rectangle / POI Zone (2 clics)"
+                  class="w-8 h-8 rounded hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center">
+            ▭
+          </button>
+          <button type="button" onclick="clearWsDrawings()" title="Effacer dessins"
+                  class="w-8 h-8 rounded hover:bg-red-50 text-red-600 font-bold text-xs flex items-center justify-center mt-auto">
+            🗑
+          </button>
         </div>
 
-        <!-- Right Order & Stats Panel (4 cols) -->
-        <div class="lg:col-span-4 bg-[#131722] p-4 space-y-4 flex flex-col justify-between">
-          <div class="space-y-4">
-            <!-- Account Stats -->
+        <!-- Chart Canvas Area -->
+        <div class="flex-1 relative">
+          <!-- Floating Replay Pill (like screenshot 3) -->
+          <div class="absolute top-3 left-1/2 -translate-x-1/2 z-20 bg-[#1e222d]/95 text-white px-3.5 py-1.5 rounded-xl shadow-xl flex items-center gap-2.5 text-xs">
+            <span class="text-slate-400">⋮⋮</span>
+            <input id="wsReplaySlider" type="range" min="15" max="180" value="55"
+                   oninput="onReplaySliderChange(this.value)"
+                   class="w-24 sm:w-36 accent-blue-500 cursor-pointer">
+            <button type="button" id="wsPlayBtn" onclick="toggleWsPlay()"
+                    class="w-6 h-6 rounded hover:bg-white/10 flex items-center justify-center font-bold">
+              ▶
+            </button>
+            <button type="button" onclick="stepWsCandle()" title="Next Candle"
+                    class="w-6 h-6 rounded hover:bg-white/10 flex items-center justify-center font-bold">
+              ⏭
+            </button>
+            <span id="wsReplayCount" class="font-mono text-[11px] text-slate-300">55 / 180</span>
+          </div>
+
+          <!-- OHLC Header inside Chart -->
+          <div id="wsOhlcBar" class="absolute top-2.5 left-3 z-10 bg-white/85 backdrop-blur px-2.5 py-1 rounded text-[11px] font-mono text-slate-700 pointer-events-none">
+            O: - H: - L: - C: -
+          </div>
+
+          <canvas id="wsChartCanvas" class="w-full h-full block cursor-crosshair"></canvas>
+
+          <!-- Floating Order Drawer (when + Open Position is clicked) -->
+          <div id="wsOrderDrawer" class="hidden absolute top-14 right-20 z-20 w-72 rounded-xl bg-[#131722] text-white border border-white/15 p-4 shadow-2xl space-y-3 text-xs">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-goldLight">Nouvel Ordre</span>
+              <button type="button" onclick="toggleOrderDrawer()" class="text-slate-400 hover:text-white">✕</button>
+            </div>
             <div class="grid grid-cols-3 gap-2">
-              <div class="rounded-xl bg-[#1e222d] p-2.5 border border-white/5">
-                <div class="text-[10px] text-slate-400 uppercase font-bold">Balance</div>
-                <div id="btBalance" class="text-sm font-extrabold text-white mt-0.5">$10,000.00</div>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">Risque ($)</label>
+                <input id="wsRiskInput" type="number" value="50" min="5" class="w-full px-2 py-1 rounded bg-obsidian border border-white/10 text-white font-bold">
               </div>
-              <div class="rounded-xl bg-[#1e222d] p-2.5 border border-white/5">
-                <div class="text-[10px] text-slate-400 uppercase font-bold">Win Rate</div>
-                <div id="btWinRate" class="text-sm font-extrabold text-goldLight mt-0.5">0%</div>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">SL (Pts)</label>
+                <input id="wsSlInput" type="number" value="20" min="1" class="w-full px-2 py-1 rounded bg-obsidian border border-white/10 text-white font-bold">
               </div>
-              <div class="rounded-xl bg-[#1e222d] p-2.5 border border-white/5">
-                <div class="text-[10px] text-slate-400 uppercase font-bold">Total P&L</div>
-                <div id="btTotalPnl" class="text-sm font-extrabold text-emerald-400 mt-0.5">$0.00</div>
-              </div>
-            </div>
-
-            <!-- Order Ticket -->
-            <div class="rounded-xl bg-[#1e222d] p-3.5 border border-white/10 space-y-3">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-white">Exécution Ordre</span>
-                <span id="btLivePrice" class="text-xs font-mono font-bold text-goldLight">2650.00</span>
-              </div>
-
-              <div class="grid grid-cols-3 gap-2 text-xs">
-                <div>
-                  <label class="block text-[10px] text-slate-400 mb-1">Risque ($)</label>
-                  <input id="btRisk" type="number" value="100" min="10" step="10"
-                         class="w-full px-2.5 py-1.5 rounded bg-obsidian border border-white/10 text-white font-bold">
-                </div>
-                <div>
-                  <label class="block text-[10px] text-slate-400 mb-1">SL (Points)</label>
-                  <input id="btSlPts" type="number" value="15" min="1" step="1"
-                         class="w-full px-2.5 py-1.5 rounded bg-obsidian border border-white/10 text-white font-bold">
-                </div>
-                <div>
-                  <label class="block text-[10px] text-slate-400 mb-1">TP (Points)</label>
-                  <input id="btTpPts" type="number" value="45" min="1" step="1"
-                         class="w-full px-2.5 py-1.5 rounded bg-obsidian border border-white/10 text-white font-bold">
-                </div>
-              </div>
-
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <button type="button" onclick="openBacktestTrade('BUY')"
-                        class="press-blur py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs transition">
-                  ▲ BUY / LONG
-                </button>
-                <button type="button" onclick="openBacktestTrade('SELL')"
-                        class="press-blur py-2.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-xs transition">
-                  ▼ SELL / SHORT
-                </button>
-              </div>
-
-              <!-- Active Position Box -->
-              <div id="btActiveTradeBox" class="hidden rounded-lg bg-obsidian/90 border border-gold/30 p-2.5 text-xs space-y-2">
-                <div class="flex items-center justify-between">
-                  <span id="btActiveLabel" class="font-bold text-goldLight">BUY @ 2650.00</span>
-                  <span id="btFloatingPnl" class="font-mono font-bold text-emerald-400">+$0.00</span>
-                </div>
-                <button type="button" onclick="closeActiveTradeManual()"
-                        class="w-full py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-bold text-[11px]">
-                  Fermer la position maintenant
-                </button>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">TP (Pts)</label>
+                <input id="wsTpInput" type="number" value="60" min="1" class="w-full px-2 py-1 rounded bg-obsidian border border-white/10 text-white font-bold">
               </div>
             </div>
-
-            <!-- Backtest History -->
-            <div class="rounded-xl bg-[#1e222d] p-3 border border-white/10 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-white">Historique Backtest</span>
-                <span id="btTradesCount" class="text-[11px] text-slate-400">0 trades</span>
-              </div>
-              <div id="btHistoryList" class="max-h-40 overflow-y-auto space-y-1.5 text-[11px] text-slate-300">
-                <div class="text-slate-500 py-3 text-center">Aucun trade clôturé. Lance Replay et prends ta première position.</div>
-              </div>
+            <div class="grid grid-cols-2 gap-2">
+              <button type="button" onclick="placeWsTrade('BUY')" class="py-2 rounded bg-emerald-600 hover:bg-emerald-500 font-extrabold text-white">BUY</button>
+              <button type="button" onclick="placeWsTrade('SELL')" class="py-2 rounded bg-rose-600 hover:bg-rose-500 font-extrabold text-white">SELL</button>
+            </div>
+            <div id="wsOpenPosInfo" class="hidden rounded bg-obsidian p-2 border border-gold/30 flex items-center justify-between">
+              <span id="wsOpenPosText" class="font-mono text-[11px] text-goldLight"></span>
+              <button type="button" onclick="closeWsTrade()" class="px-2 py-0.5 rounded bg-white/10 text-[10px] font-bold">Close</button>
             </div>
           </div>
         </div>
@@ -594,6 +575,50 @@
       </div>
     </div>
   </section>
+
+  <!-- Modal : New Session (Pair + Balance + Name) -->
+  <div id="newSessionModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="w-full max-w-md rounded-2xl bg-[#121620] border border-white/15 p-6 space-y-4 text-white shadow-2xl">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-extrabold">Create Backtest Session</h3>
+        <button type="button" onclick="closeNewSessionModal()" class="text-slate-400 hover:text-white text-lg">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Session Name</label>
+          <input id="nsName" type="text" placeholder="Ex: PETRICOR ACADEMIE"
+                 class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-white focus:outline-none focus:border-gold">
+        </div>
+
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Pair / Instrument</label>
+          <select id="nsPair" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-white focus:outline-none focus:border-gold">
+            <option value="Nas100">Nas100</option>
+            <option value="XAUUSD">XAUUSD</option>
+            <option value="EURUSD">EURUSD</option>
+            <option value="GBPUSD">GBPUSD</option>
+            <option value="GBPJPY">GBPJPY</option>
+            <option value="BTCUSD">BTCUSD</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Starting Balance ($)</label>
+          <input id="nsBalance" type="number" value="1000" min="100" step="100"
+                 class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-white focus:outline-none focus:border-gold">
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-2 pt-2">
+        <button type="button" onclick="closeNewSessionModal()" class="px-4 py-2 rounded-xl bg-white/10 text-xs font-semibold">Annuler</button>
+        <button type="button" onclick="createAndLaunchSession()"
+                class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-xs">
+          Créer & Ouvrir le Chart →
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- ========================================================= -->
   <!-- PAGE 4 : ESPACE VIP (CODE + MINIATURES + PLAY YOUTUBE)    -->
@@ -620,7 +645,6 @@
         </div>
       </div>
 
-      <!-- Password Gate Box -->
       <div class="relative z-10 rounded-2xl bg-charcoal/95 gold-line p-6 max-w-xl mx-auto space-y-4">
         <div class="space-y-1">
           <label for="confirmCodeInput" class="block text-xs font-bold uppercase tracking-wider text-goldLight">
@@ -648,22 +672,14 @@
         <p id="confirmMessage" class="text-xs hidden rounded-xl p-2.5"></p>
       </div>
 
-      <!-- Locked Placeholder -->
       <div id="videosLockedState" class="relative z-10 rounded-2xl bg-obsidian/80 border border-white/10 p-10 text-center space-y-3">
         <div class="text-3xl">🔒</div>
         <h3 class="text-lg font-bold text-white">Contenu VIP Protégé</h3>
         <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">
           Les vidéos VIP (Séances 1 à 8 + Stratégie + Breakdown) sont verrouillées. Entre le code VIP ci-dessus pour y accéder.
         </p>
-        <div class="pt-2">
-          <button type="button" onclick="switchView('accueil'); setTimeout(()=>document.getElementById('inscription').scrollIntoView({behavior:'smooth'}),120)"
-                  class="press-blur px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-goldLight transition">
-            Pas encore de code ? S'inscrire sur l'Accueil
-          </button>
-        </div>
       </div>
 
-      <!-- Unlocked VIP Videos Grid -->
       <div id="videosUnlockedGrid" class="relative z-10 hidden grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
 
     </div>
@@ -705,7 +721,6 @@
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // === NAVIGATION 4 PAGES ===
     function switchView(view) {
       const pages = {
         accueil: document.getElementById('accueilPage'),
@@ -720,6 +735,8 @@
         vip: document.getElementById('navVipBtn')
       };
 
+      if (view !== 'backtest') stopWsPlay();
+
       Object.keys(pages).forEach(k => {
         if (k === view) {
           pages[k].classList.remove('hidden');
@@ -730,13 +747,12 @@
         }
       });
 
-      if (view === 'backtest') {
-        setTimeout(drawBtChart, 40);
+      if (view === 'backtest' && !document.getElementById('btChartWorkspace').classList.contains('hidden')) {
+        setTimeout(drawWsChart, 40);
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // === YOUTUBE CARDS ===
     function buildYouTubeCard(vid) {
       const thumbUrl = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
       return `
@@ -776,7 +792,6 @@
       document.getElementById('videosUnlockedGrid').innerHTML = VIP_VIDEOS.map(buildYouTubeCard).join('');
     }
 
-    // === VIP GATE ===
     const videosGridEl = document.getElementById('videosUnlockedGrid');
     const videosLockedEl = document.getElementById('videosLockedState');
     const gateStatusBadgeEl = document.getElementById('gateStatusBadge');
@@ -824,7 +839,6 @@
       showConfirmMsg("Espace VIP verrouillé.", true);
     }
 
-    // === FORMULAIRE & RÉCAP ===
     const nomEl = document.getElementById('nom');
     const telEl = document.getElementById('telephone');
     const emailEl = document.getElementById('email');
@@ -895,155 +909,233 @@
       }
     });
 
-    // === BACKTEST ENGINE (TRADINGVIEW STYLE REPLAY) ===
-    let btCandles = [];
-    let btVisibleCount = 45;
-    let btTimer = null;
-    let btBalance = 10000;
-    let btHistory = [];
-    let btActiveTrade = null;
-    let btDrawTool = 'crosshair';
-    let btDrawings = [];
-    let btPendingBox = null;
-    let btMouse = null;
-
-    const SYMBOL_CONFIG = {
-      XAUUSD: { start: 2650, step: 6, dec: 2 },
-      EURUSD: { start: 1.0850, step: 0.0018, dec: 4 },
-      NAS100: { start: 20450, step: 45, dec: 1 },
-      BTCUSD: { start: 92500, step: 350, dec: 0 }
+    // === BACKTEST SESSIONS & TRADINGVIEW WORKSPACE ===
+    const STORAGE_KEY = 'petricor_bt_sessions_v1';
+    const PAIR_BASE = {
+      Nas100: { start: 30600, step: 14, dec: 2 },
+      XAUUSD: { start: 2650, step: 4.5, dec: 2 },
+      EURUSD: { start: 1.0850, step: 0.0014, dec: 4 },
+      GBPUSD: { start: 1.2720, step: 0.0016, dec: 4 },
+      GBPJPY: { start: 194.50, step: 0.25, dec: 2 },
+      BTCUSD: { start: 92500, step: 280, dec: 1 }
     };
 
-    function initBacktestData() {
-      stopReplayPlay();
-      const sym = document.getElementById('btSymbol').value;
-      const cfg = SYMBOL_CONFIG[sym];
-      btCandles = [];
-      let price = cfg.start;
-      let trend = 1;
+    let sessions = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || [
+      { id: 's1', name: 'PETRICOR ACADEMIE', pair: 'Nas100', balance: 1000, startBalance: 1000, date: '25/11/2026' },
+      { id: 's2', name: 'PETRICOR ACADEMIE', pair: 'XAUUSD', balance: 5000, startBalance: 5000, date: '25/11/2026' }
+    ];
 
-      for (let i = 0; i < 220; i++) {
-        if (i % 18 === 0) trend = Math.random() > 0.48 ? 1 : -1;
-        const open = price;
-        const move = (Math.random() - 0.46 + trend * 0.16) * cfg.step;
-        const close = open + move;
-        const high = Math.max(open, close) + Math.random() * cfg.step * 0.85;
-        const low = Math.min(open, close) - Math.random() * cfg.step * 0.85;
-        btCandles.push({ open, high, low, close });
-        price = close;
-      }
+    let activeSession = null;
+    let wsCandles = [];
+    let wsCursor = 55;
+    let wsTimer = null;
+    let wsTool = 'crosshair';
+    let wsDrawings = [];
+    let wsPending = null;
+    let wsMouse = null;
+    let wsOpenTrade = null;
 
-      btVisibleCount = 45;
-      btActiveTrade = null;
-      btDrawings = [];
-      btPendingBox = null;
-      document.getElementById('btActiveTradeBox').classList.add('hidden');
-      updateBtStats();
-      drawBtChart();
+    function saveSessions() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
     }
 
-    function setBtTf(tf, btn) {
-      document.querySelectorAll('.bt-tf').forEach(b => {
-        b.className = 'bt-tf px-2 py-1 rounded text-slate-300 hover:text-white';
-      });
-      btn.className = 'bt-tf px-2 py-1 rounded bg-gold text-obsidian';
-      initBacktestData();
+    function renderSessionsGrid() {
+      const grid = document.getElementById('btSessionsGrid');
+      grid.innerHTML = sessions.map(s => `
+        <div onclick="openSessionChart('${s.id}')"
+             class="press-blur cursor-pointer rounded-xl bg-[#131722] hover:bg-[#191f2e] border border-white/10 hover:border-gold/50 p-4 transition flex flex-col justify-between gap-4">
+          <div class="space-y-1 text-xs">
+            <div class="flex justify-between gap-2"><span class="text-slate-400">Name:</span><span class="font-bold text-white truncate">${s.name}</span></div>
+            <div class="flex justify-between gap-2"><span class="text-slate-400">Pair:</span><span class="font-bold text-goldLight">${s.pair}</span></div>
+            <div class="flex justify-between gap-2"><span class="text-slate-400">Balance:</span><span class="font-mono font-bold text-emerald-400">$${Number(s.balance).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span></div>
+            <div class="flex justify-between gap-2"><span class="text-slate-400">Date:</span><span class="text-slate-300">${s.date}</span></div>
+          </div>
+          <div class="flex items-center justify-between pt-2 border-t border-white/5">
+            <span class="text-[11px] text-slate-400">Ouvrir le chart</span>
+            <span class="w-7 h-7 rounded-full bg-gold/15 text-goldLight flex items-center justify-center text-xs font-bold">▶</span>
+          </div>
+        </div>
+      `).join('');
     }
 
-    function setDrawTool(tool) {
-      btDrawTool = tool;
-      btPendingBox = null;
-      ['toolCrosshair', 'toolHline', 'toolBox'].forEach(id => {
-        document.getElementById(id).className = 'w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 text-slate-200 font-bold text-xs flex items-center justify-center';
-      });
-      const activeMap = { crosshair: 'toolCrosshair', hline: 'toolHline', box: 'toolBox' };
-      document.getElementById(activeMap[tool]).className = 'w-8 h-8 rounded-lg bg-gold text-obsidian font-bold text-xs flex items-center justify-center';
-      const hints = {
-        crosshair: 'Outil : Curseur • Utilise ⏭ ou Play pour avancer bougie par bougie',
-        hline: 'Outil : Ligne Horizontale • Clique sur le chart pour tracer un niveau',
-        box: 'Outil : Zone Liquidity / OB • Clique 2 points sur le chart pour dessiner une zone'
+    function openNewSessionModal() {
+      document.getElementById('nsName').value = 'PETRICOR ACADEMIE';
+      document.getElementById('newSessionModal').classList.remove('hidden');
+    }
+
+    function closeNewSessionModal() {
+      document.getElementById('newSessionModal').classList.add('hidden');
+    }
+
+    function createAndLaunchSession() {
+      const name = (document.getElementById('nsName').value || 'PETRICOR ACADEMIE').trim();
+      const pair = document.getElementById('nsPair').value;
+      const balance = Math.max(100, Number(document.getElementById('nsBalance').value) || 1000);
+      const now = new Date();
+      const dateStr = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+
+      const item = {
+        id: 's_' + Date.now(),
+        name,
+        pair,
+        balance,
+        startBalance: balance,
+        date: dateStr
       };
-      document.getElementById('btToolHint').textContent = hints[tool];
+      sessions.unshift(item);
+      saveSessions();
+      renderSessionsGrid();
+      closeNewSessionModal();
+      openSessionChart(item.id);
     }
 
-    function clearDrawings() {
-      btDrawings = [];
-      btPendingBox = null;
-      drawBtChart();
+    function generatePairCandles(pair) {
+      const cfg = PAIR_BASE[pair] || PAIR_BASE.Nas100;
+      const arr = [];
+      let p = cfg.start;
+      let dir = 1;
+      for (let i = 0; i < 180; i++) {
+        if (i % 20 === 0) dir = Math.random() > 0.48 ? 1 : -1;
+        const open = p;
+        const close = open + (Math.random() - 0.47 + dir * 0.14) * cfg.step;
+        const high = Math.max(open, close) + Math.random() * cfg.step * 0.9;
+        const low = Math.min(open, close) - Math.random() * cfg.step * 0.9;
+        arr.push({ open, high, low, close });
+        p = close;
+      }
+      return arr;
     }
 
-    function toggleReplayPlay() {
-      if (btTimer) {
-        stopReplayPlay();
+    function openSessionChart(sessionId) {
+      activeSession = sessions.find(x => x.id === sessionId) || sessions[0];
+      wsCandles = generatePairCandles(activeSession.pair);
+      wsCursor = 55;
+      wsDrawings = [];
+      wsPending = null;
+      wsOpenTrade = null;
+      stopWsPlay();
+
+      document.getElementById('wsSessionName').textContent = activeSession.name;
+      document.getElementById('wsSymbolBadge').textContent = activeSession.pair;
+      updateWsHeaderStats();
+
+      document.getElementById('btSessionsLobby').classList.add('hidden');
+      document.getElementById('btChartWorkspace').classList.remove('hidden');
+      document.getElementById('wsOrderDrawer').classList.add('hidden');
+      document.getElementById('wsOpenPosInfo').classList.add('hidden');
+
+      const slider = document.getElementById('wsReplaySlider');
+      slider.max = wsCandles.length;
+      slider.value = wsCursor;
+
+      setTimeout(drawWsChart, 50);
+    }
+
+    function backToSessionsLobby() {
+      stopWsPlay();
+      renderSessionsGrid();
+      document.getElementById('btChartWorkspace').classList.add('hidden');
+      document.getElementById('btSessionsLobby').classList.remove('hidden');
+    }
+
+    function changeWsTf(tf, btn) {
+      document.querySelectorAll('.ws-tf').forEach(b => {
+        b.className = 'ws-tf px-2 py-1 rounded text-slate-700 hover:bg-slate-200';
+      });
+      btn.className = 'ws-tf px-2 py-1 rounded bg-blue-600 text-white';
+      wsCandles = generatePairCandles(activeSession.pair);
+      drawWsChart();
+    }
+
+    function rewindSession() {
+      stopWsPlay();
+      wsCursor = 25;
+      wsOpenTrade = null;
+      document.getElementById('wsOpenPosInfo').classList.add('hidden');
+      document.getElementById('wsReplaySlider').value = wsCursor;
+      drawWsChart();
+    }
+
+    function onReplaySliderChange(val) {
+      stopWsPlay();
+      wsCursor = Math.max(15, Number(val));
+      checkWsTrade();
+      drawWsChart();
+    }
+
+    function toggleWsPlay() {
+      if (wsTimer) {
+        stopWsPlay();
       } else {
-        const speed = Number(document.getElementById('btSpeed').value);
-        document.getElementById('btPlayBtn').textContent = '⏸ Pause';
-        btTimer = setInterval(stepForwardCandle, speed);
+        document.getElementById('wsPlayBtn').textContent = '⏸';
+        wsTimer = setInterval(stepWsCandle, 500);
       }
     }
 
-    function stopReplayPlay() {
-      if (btTimer) {
-        clearInterval(btTimer);
-        btTimer = null;
+    function stopWsPlay() {
+      if (wsTimer) {
+        clearInterval(wsTimer);
+        wsTimer = null;
       }
-      const btn = document.getElementById('btPlayBtn');
-      if (btn) btn.textContent = '▶ Play';
+      const b = document.getElementById('wsPlayBtn');
+      if (b) b.textContent = '▶';
     }
 
-    function updateReplaySpeed() {
-      if (btTimer) {
-        stopReplayPlay();
-        toggleReplayPlay();
-      }
-    }
-
-    function stepForwardCandle() {
-      if (btVisibleCount < btCandles.length) {
-        btVisibleCount++;
-        evaluateActiveTrade();
-        drawBtChart();
+    function stepWsCandle() {
+      if (wsCursor < wsCandles.length) {
+        wsCursor++;
+        document.getElementById('wsReplaySlider').value = wsCursor;
+        checkWsTrade();
+        drawWsChart();
       } else {
-        stopReplayPlay();
+        stopWsPlay();
       }
     }
 
-    function stepBackCandle() {
-      stopReplayPlay();
-      if (btVisibleCount > 15) {
-        btVisibleCount--;
-        drawBtChart();
-      }
+    function setWsTool(tool) {
+      wsTool = tool;
+      wsPending = null;
+      ['wsToolCross', 'wsToolTrend', 'wsToolHline', 'wsToolBox'].forEach(id => {
+        document.getElementById(id).className = 'w-8 h-8 rounded hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center';
+      });
+      const map = { crosshair: 'wsToolCross', trendline: 'wsToolTrend', hline: 'wsToolHline', box: 'wsToolBox' };
+      document.getElementById(map[tool]).className = 'w-8 h-8 rounded bg-blue-600 text-white font-bold text-xs flex items-center justify-center';
     }
 
-    function openBacktestTrade(side) {
-      if (btActiveTrade) return;
-      const sym = document.getElementById('btSymbol').value;
-      const cfg = SYMBOL_CONFIG[sym];
-      const current = btCandles[btVisibleCount - 1];
-      const risk = Math.max(10, Number(document.getElementById('btRisk').value) || 100);
-      const slPts = Math.max(1, Number(document.getElementById('btSlPts').value) || 15);
-      const tpPts = Math.max(1, Number(document.getElementById('btTpPts').value) || 45);
-      const unit = cfg.dec === 4 ? 0.0001 : (cfg.dec === 2 ? 0.5 : 10);
+    function clearWsDrawings() {
+      wsDrawings = [];
+      wsPending = null;
+      drawWsChart();
+    }
 
-      const entry = current.close;
+    function toggleOrderDrawer() {
+      document.getElementById('wsOrderDrawer').classList.toggle('hidden');
+    }
+
+    function placeWsTrade(side) {
+      if (!activeSession || wsOpenTrade) return;
+      const cfg = PAIR_BASE[activeSession.pair] || PAIR_BASE.Nas100;
+      const c = wsCandles[wsCursor - 1];
+      const risk = Math.max(5, Number(document.getElementById('wsRiskInput').value) || 50);
+      const slPts = Math.max(1, Number(document.getElementById('wsSlInput').value) || 20);
+      const tpPts = Math.max(1, Number(document.getElementById('wsTpInput').value) || 60);
+      const unit = cfg.dec === 4 ? 0.0001 : (cfg.dec === 1 ? 5 : 1);
+
+      const entry = c.close;
       const sl = side === 'BUY' ? entry - slPts * unit : entry + slPts * unit;
       const tp = side === 'BUY' ? entry + tpPts * unit : entry - tpPts * unit;
 
-      btActiveTrade = { side, entry, sl, tp, risk, rr: +(tpPts / slPts).toFixed(2) };
-      document.getElementById('btActiveTradeBox').classList.remove('hidden');
-      document.getElementById('btActiveLabel').textContent = `${side} @ ${entry.toFixed(cfg.dec)}`;
-      evaluateActiveTrade();
-      drawBtChart();
+      wsOpenTrade = { side, entry, sl, tp, risk, rr: tpPts / slPts };
+      document.getElementById('wsOpenPosInfo').classList.remove('hidden');
+      document.getElementById('wsOpenPosText').textContent = `${side} @ ${entry.toFixed(cfg.dec)}`;
+      checkWsTrade();
+      drawWsChart();
     }
 
-    function evaluateActiveTrade() {
-      if (!btActiveTrade) return;
-      const sym = document.getElementById('btSymbol').value;
-      const cfg = SYMBOL_CONFIG[sym];
-      const c = btCandles[btVisibleCount - 1];
-      const t = btActiveTrade;
-
+    function checkWsTrade() {
+      if (!wsOpenTrade || !activeSession) return;
+      const c = wsCandles[wsCursor - 1];
+      const t = wsOpenTrade;
       let hit = null;
       if (t.side === 'BUY') {
         if (c.low <= t.sl) hit = 'LOSS';
@@ -1052,244 +1144,221 @@
         if (c.high >= t.sl) hit = 'LOSS';
         else if (c.low <= t.tp) hit = 'WIN';
       }
-
       if (hit) {
         const pnl = hit === 'WIN' ? t.risk * t.rr : -t.risk;
-        finalizeTrade(hit, pnl);
-        return;
-      }
-
-      const dist = t.side === 'BUY' ? (c.close - t.entry) : (t.entry - c.close);
-      const fullSl = Math.abs(t.entry - t.sl);
-      const floating = (dist / fullSl) * t.risk;
-      const flEl = document.getElementById('btFloatingPnl');
-      flEl.textContent = `${floating >= 0 ? '+' : ''}$${floating.toFixed(2)}`;
-      flEl.className = `font-mono font-bold ${floating >= 0 ? 'text-emerald-400' : 'text-rose-400'}`;
-    }
-
-    function closeActiveTradeManual() {
-      if (!btActiveTrade) return;
-      const c = btCandles[btVisibleCount - 1];
-      const t = btActiveTrade;
-      const dist = t.side === 'BUY' ? (c.close - t.entry) : (t.entry - c.close);
-      const fullSl = Math.abs(t.entry - t.sl);
-      const pnl = (dist / fullSl) * t.risk;
-      finalizeTrade(pnl >= 0 ? 'WIN' : 'LOSS', pnl);
-    }
-
-    function finalizeTrade(result, pnl) {
-      const sym = document.getElementById('btSymbol').value;
-      btBalance += pnl;
-      btHistory.unshift({
-        sym,
-        side: btActiveTrade.side,
-        result,
-        pnl
-      });
-      btActiveTrade = null;
-      document.getElementById('btActiveTradeBox').classList.add('hidden');
-      updateBtStats();
-      drawBtChart();
-    }
-
-    function updateBtStats() {
-      document.getElementById('btBalance').textContent = `$${btBalance.toFixed(2)}`;
-      const totalPnl = btBalance - 10000;
-      const pnlEl = document.getElementById('btTotalPnl');
-      pnlEl.textContent = `${totalPnl >= 0 ? '+' : ''}$${totalPnl.toFixed(2)}`;
-      pnlEl.className = `text-sm font-extrabold mt-0.5 ${totalPnl >= 0 ? 'text-emerald-400' : 'text-rose-400'}`;
-
-      const wins = btHistory.filter(h => h.pnl > 0).length;
-      const wr = btHistory.length ? Math.round((wins / btHistory.length) * 100) : 0;
-      document.getElementById('btWinRate').textContent = `${wr}%`;
-      document.getElementById('btTradesCount').textContent = `${btHistory.length} trades`;
-
-      const list = document.getElementById('btHistoryList');
-      if (!btHistory.length) {
-        list.innerHTML = `<div class="text-slate-500 py-3 text-center">Aucun trade clôturé. Lance Replay et prends ta première position.</div>`;
-      } else {
-        list.innerHTML = btHistory.map(item => `
-          <div class="flex items-center justify-between px-2.5 py-1.5 rounded bg-obsidian/80 border border-white/5">
-            <span class="font-bold ${item.side === 'BUY' ? 'text-emerald-400' : 'text-rose-400'}">${item.sym} ${item.side}</span>
-            <span class="font-mono font-bold ${item.pnl >= 0 ? 'text-emerald-400' : 'text-rose-400'}">
-              ${item.pnl >= 0 ? '+' : ''}$${item.pnl.toFixed(2)}
-            </span>
-          </div>
-        `).join('');
+        settleWsTrade(pnl);
       }
     }
 
-    function drawBtChart() {
-      const canvas = document.getElementById('btChartCanvas');
+    function closeWsTrade() {
+      if (!wsOpenTrade || !activeSession) return;
+      const c = wsCandles[wsCursor - 1];
+      const t = wsOpenTrade;
+      const dist = t.side === 'BUY' ? (c.close - t.entry) : (t.entry - c.close);
+      const pnl = (dist / Math.abs(t.entry - t.sl)) * t.risk;
+      settleWsTrade(pnl);
+    }
+
+    function settleWsTrade(pnl) {
+      activeSession.balance = Math.max(0, Number(activeSession.balance) + pnl);
+      const idx = sessions.findIndex(x => x.id === activeSession.id);
+      if (idx !== -1) sessions[idx].balance = activeSession.balance;
+      saveSessions();
+      wsOpenTrade = null;
+      document.getElementById('wsOpenPosInfo').classList.add('hidden');
+      updateWsHeaderStats();
+      drawWsChart();
+    }
+
+    function updateWsHeaderStats() {
+      if (!activeSession) return;
+      document.getElementById('wsBalance').textContent = `$${Number(activeSession.balance).toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+      const diff = activeSession.balance - activeSession.startBalance;
+      const badge = document.getElementById('wsPnlBadge');
+      badge.textContent = `P&L: ${diff >= 0 ? '+' : ''}$${diff.toFixed(2)}`;
+      badge.className = `px-2 py-0.5 rounded font-bold ${diff >= 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}`;
+    }
+
+    function drawWsChart() {
+      const canvas = document.getElementById('wsChartCanvas');
       if (!canvas) return;
       const rect = canvas.parentElement.getBoundingClientRect();
-      if (rect.width === 0) return;
+      if (rect.width === 0 || rect.height === 0) return;
 
       canvas.width = rect.width;
       canvas.height = rect.height;
       const ctx = canvas.getContext('2d');
       const W = canvas.width;
       const H = canvas.height;
-      const padRight = 68;
-      const chartW = W - padRight;
+      const rightAxisW = 74;
+      const bottomAxisH = 26;
+      const plotW = W - rightAxisW;
+      const plotH = H - bottomAxisH;
 
-      ctx.fillStyle = '#131722';
+      ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, W, H);
 
-      const slice = btCandles.slice(Math.max(0, btVisibleCount - 65), btVisibleCount);
+      const slice = wsCandles.slice(Math.max(0, wsCursor - 85), wsCursor);
       if (!slice.length) return;
 
-      const sym = document.getElementById('btSymbol').value;
-      const cfg = SYMBOL_CONFIG[sym];
-      document.getElementById('btLivePrice').textContent = slice[slice.length - 1].close.toFixed(cfg.dec);
+      const cfg = PAIR_BASE[activeSession ? activeSession.pair : 'Nas100'] || PAIR_BASE.Nas100;
+      const last = slice[slice.length - 1];
+      document.getElementById('wsOhlcBar').textContent =
+        `O:${last.open.toFixed(cfg.dec)}  H:${last.high.toFixed(cfg.dec)}  L:${last.low.toFixed(cfg.dec)}  C:${last.close.toFixed(cfg.dec)}`;
+      document.getElementById('wsReplayCount').textContent = `${wsCursor} / ${wsCandles.length}`;
 
       let minP = Infinity, maxP = -Infinity;
       slice.forEach(c => {
         if (c.low < minP) minP = c.low;
         if (c.high > maxP) maxP = c.high;
       });
-      if (btActiveTrade) {
-        minP = Math.min(minP, btActiveTrade.sl, btActiveTrade.tp);
-        maxP = Math.max(maxP, btActiveTrade.sl, btActiveTrade.tp);
-      }
-      const margin = (maxP - minP) * 0.14 || 1;
-      minP -= margin;
-      maxP += margin;
+      const pad = (maxP - minP) * 0.14 || 1;
+      minP -= pad;
+      maxP += pad;
 
-      const priceToY = p => H - ((p - minP) / (maxP - minP)) * H;
-      const yToPrice = y => minP + ((H - y) / H) * (maxP - minP);
-      canvas._yToPrice = yToPrice;
+      const xToIdx = x => Math.max(0, Math.min(slice.length - 1, Math.floor((x / plotW) * slice.length)));
+      const idxToX = i => (i + 0.5) * (plotW / Math.max(slice.length, 45));
+      const pToY = p => plotH - ((p - minP) / (maxP - minP)) * plotH;
+      const yToP = y => minP + ((plotH - y) / plotH) * (maxP - minP);
+      canvas._map = { xToIdx, idxToX, pToY, yToP };
 
-      // Grid & Right Price Axis
-      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
-      ctx.fillStyle = '#787b86';
+      // Grid & Price Labels
+      ctx.strokeStyle = '#f0f3fa';
+      ctx.fillStyle = '#434651';
       ctx.font = '11px monospace';
-      for (let i = 1; i <= 6; i++) {
-        const y = (H / 7) * i;
+      for (let i = 1; i <= 7; i++) {
+        const y = (plotH / 8) * i;
         ctx.beginPath();
         ctx.moveTo(0, y);
-        ctx.lineTo(chartW, y);
+        ctx.lineTo(plotW, y);
         ctx.stroke();
-        ctx.fillText(yToPrice(y).toFixed(cfg.dec), chartW + 6, y + 4);
+        ctx.fillText(yToP(y).toFixed(cfg.dec), plotW + 6, y + 4);
       }
 
-      // User Drawings
-      btDrawings.forEach(d => {
+      // Drawings (Zones / Trendlines / Hlines)
+      wsDrawings.forEach(d => {
         if (d.type === 'hline') {
-          const y = priceToY(d.price);
-          ctx.strokeStyle = '#e5b84b';
-          ctx.setLineDash([5, 4]);
+          const y = pToY(d.price);
+          ctx.strokeStyle = '#131722';
+          ctx.lineWidth = 1.4;
           ctx.beginPath();
           ctx.moveTo(0, y);
-          ctx.lineTo(chartW, y);
+          ctx.lineTo(plotW, y);
           ctx.stroke();
-          ctx.setLineDash([]);
+        } else if (d.type === 'trendline') {
+          ctx.strokeStyle = '#2962ff';
+          ctx.lineWidth = 1.8;
+          ctx.beginPath();
+          ctx.moveTo(idxToX(d.i1), pToY(d.p1));
+          ctx.lineTo(idxToX(d.i2), pToY(d.p2));
+          ctx.stroke();
         } else if (d.type === 'box') {
-          const y1 = priceToY(d.p1);
-          const y2 = priceToY(d.p2);
-          ctx.fillStyle = 'rgba(229, 184, 75, 0.14)';
-          ctx.strokeStyle = 'rgba(229, 184, 75, 0.55)';
-          ctx.fillRect(d.x1, Math.min(y1, y2), d.x2 - d.x1, Math.abs(y2 - y1));
-          ctx.strokeRect(d.x1, Math.min(y1, y2), d.x2 - d.x1, Math.abs(y2 - y1));
+          const x1 = idxToX(d.i1), x2 = idxToX(d.i2);
+          const y1 = pToY(d.p1), y2 = pToY(d.p2);
+          ctx.fillStyle = 'rgba(242, 54, 69, 0.16)';
+          ctx.fillRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
         }
       });
 
-      // Candlesticks
-      const stepX = chartW / Math.max(slice.length, 40);
-      const candleW = Math.max(3, stepX * 0.65);
+      // Candlesticks (TradingView crisp style)
+      const candleW = Math.max(3, (plotW / Math.max(slice.length, 45)) * 0.62);
+      slice.forEach((c, i) => {
+        const x = idxToX(i);
+        const bull = c.close >= c.open;
+        const col = bull ? '#2962ff' : '#131722';
 
-      slice.forEach((c, idx) => {
-        const x = idx * stepX + stepX * 0.5;
-        const isBull = c.close >= c.open;
-        const color = isBull ? '#089981' : '#f23645';
-
-        ctx.strokeStyle = color;
+        ctx.strokeStyle = col;
         ctx.lineWidth = 1.2;
         ctx.beginPath();
-        ctx.moveTo(x, priceToY(c.high));
-        ctx.lineTo(x, priceToY(c.low));
+        ctx.moveTo(x, pToY(c.high));
+        ctx.lineTo(x, pToY(c.low));
         ctx.stroke();
 
-        const top = priceToY(Math.max(c.open, c.close));
-        const bot = priceToY(Math.min(c.open, c.close));
-        ctx.fillStyle = color;
-        ctx.fillRect(x - candleW / 2, top, candleW, Math.max(2, bot - top));
+        const top = pToY(Math.max(c.open, c.close));
+        const bot = pToY(Math.min(c.open, c.close));
+        ctx.fillStyle = col;
+        ctx.fillRect(x - candleW / 2, top, candleW, Math.max(1.8, bot - top));
       });
 
-      // Active Trade Entry / SL / TP Lines
-      if (btActiveTrade) {
+      // Active Trade Lines
+      if (wsOpenTrade) {
         [
-          { label: 'TP', price: btActiveTrade.tp, color: '#089981' },
-          { label: btActiveTrade.side, price: btActiveTrade.entry, color: '#e5b84b' },
-          { label: 'SL', price: btActiveTrade.sl, color: '#f23645' }
-        ].forEach(line => {
-          const y = priceToY(line.price);
-          ctx.strokeStyle = line.color;
-          ctx.lineWidth = 1.5;
+          { label: 'TP', price: wsOpenTrade.tp, color: '#089981' },
+          { label: wsOpenTrade.side, price: wsOpenTrade.entry, color: '#2962ff' },
+          { label: 'SL', price: wsOpenTrade.sl, color: '#f23645' }
+        ].forEach(l => {
+          const y = pToY(l.price);
+          ctx.strokeStyle = l.color;
+          ctx.lineWidth = 1.4;
           ctx.beginPath();
           ctx.moveTo(0, y);
-          ctx.lineTo(chartW, y);
+          ctx.lineTo(plotW, y);
           ctx.stroke();
-
-          ctx.fillStyle = line.color;
-          ctx.fillRect(chartW + 2, y - 9, padRight - 4, 18);
-          ctx.fillStyle = '#050608';
+          ctx.fillStyle = l.color;
+          ctx.fillRect(plotW + 2, y - 9, rightAxisW - 4, 18);
+          ctx.fillStyle = '#fff';
           ctx.font = 'bold 10px sans-serif';
-          ctx.fillText(line.label, chartW + 8, y + 3);
+          ctx.fillText(l.label, plotW + 8, y + 3);
         });
       }
 
       // Crosshair
-      if (btMouse && btMouse.x < chartW) {
-        ctx.strokeStyle = 'rgba(255,255,255,0.25)';
-        ctx.setLineDash([3, 3]);
+      if (wsMouse && wsMouse.x < plotW && wsMouse.y < plotH) {
+        ctx.strokeStyle = 'rgba(19, 23, 34, 0.25)';
+        ctx.setLineDash([4, 4]);
         ctx.beginPath();
-        ctx.moveTo(btMouse.x, 0);
-        ctx.lineTo(btMouse.x, H);
-        ctx.moveTo(0, btMouse.y);
-        ctx.lineTo(chartW, btMouse.y);
+        ctx.moveTo(wsMouse.x, 0);
+        ctx.lineTo(wsMouse.x, plotH);
+        ctx.moveTo(0, wsMouse.y);
+        ctx.lineTo(plotW, wsMouse.y);
         ctx.stroke();
         ctx.setLineDash([]);
       }
     }
 
-    const btCanvasEl = document.getElementById('btChartCanvas');
-    btCanvasEl.addEventListener('mousemove', e => {
-      const r = btCanvasEl.getBoundingClientRect();
-      btMouse = { x: e.clientX - r.left, y: e.clientY - r.top };
-      drawBtChart();
+    const wsCanvas = document.getElementById('wsChartCanvas');
+    wsCanvas.addEventListener('mousemove', e => {
+      const r = wsCanvas.getBoundingClientRect();
+      wsMouse = { x: e.clientX - r.left, y: e.clientY - r.top };
+      drawWsChart();
     });
-    btCanvasEl.addEventListener('mouseleave', () => {
-      btMouse = null;
-      drawBtChart();
+    wsCanvas.addEventListener('mouseleave', () => {
+      wsMouse = null;
+      drawWsChart();
     });
-    btCanvasEl.addEventListener('click', e => {
-      if (!btCanvasEl._yToPrice) return;
-      const r = btCanvasEl.getBoundingClientRect();
+    wsCanvas.addEventListener('click', e => {
+      if (!wsCanvas._map) return;
+      const r = wsCanvas.getBoundingClientRect();
       const x = e.clientX - r.left;
       const y = e.clientY - r.top;
-      const p = btCanvasEl._yToPrice(y);
+      const { xToIdx, yToP } = wsCanvas._map;
+      const idx = xToIdx(x);
+      const p = yToP(y);
 
-      if (btDrawTool === 'hline') {
-        btDrawings.push({ type: 'hline', price: p });
-        drawBtChart();
-      } else if (btDrawTool === 'box') {
-        if (!btPendingBox) {
-          btPendingBox = { x1: x, p1: p };
+      if (wsTool === 'hline') {
+        wsDrawings.push({ type: 'hline', price: p });
+        drawWsChart();
+      } else if (wsTool === 'trendline' || wsTool === 'box') {
+        if (!wsPending) {
+          wsPending = { type: wsTool, i1: idx, p1: p };
         } else {
-          btDrawings.push({ type: 'box', x1: btPendingBox.x1, p1: btPendingBox.p1, x2: x, p2: p });
-          btPendingBox = null;
-          drawBtChart();
+          wsDrawings.push({ type: wsTool, i1: wsPending.i1, p1: wsPending.p1, i2: idx, p2: p });
+          wsPending = null;
+          drawWsChart();
         }
       }
     });
-    window.addEventListener('resize', drawBtChart);
+    window.addEventListener('resize', () => {
+      if (!document.getElementById('btChartWorkspace').classList.contains('hidden')) {
+        drawWsChart();
+      }
+    });
 
-    // Init all
+    // Init
     renderCommunityVideos();
+    renderSessionsGrid();
     setVideosUnlockedState(sessionStorage.getItem('petricor_vip_ok') === '1');
     updateRecap();
-    initBacktestData();
   </script>
 </body>
 </html>
