@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Petricor Académie — Trading, Community & VIP</title>
+  <title>Petricor Académie — Accueil, Community & VIP</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,6 +42,7 @@
         radial-gradient(ellipse 55% 50% at 20% 78%, rgba(229, 184, 75, 0.09), transparent 65%),
         radial-gradient(ellipse 80% 80% at 50% 50%, rgba(18, 22, 28, 0.95), #050608 100%);
       overflow: hidden;
+      transition: filter 0.28s ease;
     }
 
     .grain-canvas::before {
@@ -66,18 +67,40 @@
     }
 
     .pill-nav {
-      background: rgba(16, 19, 25, 0.82);
+      background: rgba(16, 19, 25, 0.85);
       backdrop-filter: blur(18px);
       border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* تأثير بلور خفيف عند النقر على أي عنصر أو زر */
+    .press-blur {
+      transition: filter 0.25s ease, transform 0.2s ease, opacity 0.25s ease;
+    }
+    .press-blur:active {
+      filter: blur(2.5px);
+      transform: scale(0.99);
+    }
+
+    .page-blur-pulse {
+      filter: blur(5px);
+      opacity: 0.82;
+    }
+
+    .thumb-card img {
+      transition: transform 0.35s ease, filter 0.3s ease;
+    }
+    .thumb-card:hover img {
+      transform: scale(1.04);
+      filter: blur(1.2px) brightness(0.85);
     }
   </style>
 </head>
 <body class="min-h-screen selection:bg-gold selection:text-obsidian">
 
-  <!-- Top Navigation -->
-  <header class="sticky top-0 z-40 backdrop-blur-md bg-obsidian/80 border-b border-white/10">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-      <button type="button" onclick="switchView('public')" class="flex items-center gap-2.5 text-left">
+  <!-- Top Navigation (3 Pages: Accueil, Community, Espace VIP) -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-obsidian/85 border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-2 flex-wrap">
+      <button type="button" onclick="switchView('accueil')" class="press-blur flex items-center gap-2.5 text-left">
         <span class="w-8 h-8 rounded-full bg-white text-obsidian font-extrabold flex items-center justify-center text-sm">
           P
         </span>
@@ -86,26 +109,34 @@
         </span>
       </button>
 
-      <!-- Center Pill Switcher -->
+      <!-- 3-Page Switcher -->
       <nav class="flex items-center gap-1 px-1.5 py-1 rounded-full pill-nav text-xs">
-        <button type="button" id="navPublicBtn" onclick="switchView('public')"
-                class="px-3.5 py-1.5 rounded-full bg-white text-obsidian font-bold transition">
-          Accueil & Community
+        <button type="button" id="navAccueilBtn" onclick="switchView('accueil')"
+                class="press-blur px-3.5 py-1.5 rounded-full bg-white text-obsidian font-bold transition">
+          1. Accueil
+        </button>
+        <button type="button" id="navCommunityBtn" onclick="switchView('community')"
+                class="press-blur px-3.5 py-1.5 rounded-full text-slate-200 hover:bg-white/10 font-semibold transition">
+          2. Community
         </button>
         <button type="button" id="navVipBtn" onclick="switchView('vip')"
-                class="px-3.5 py-1.5 rounded-full text-goldLight hover:bg-white/10 font-bold transition flex items-center gap-1.5">
-          <span>🔒</span> Espace VIP
+                class="press-blur px-3.5 py-1.5 rounded-full text-goldLight hover:bg-white/10 font-bold transition flex items-center gap-1">
+          <span>🔒</span> 3. VIP
         </button>
       </nav>
 
       <!-- Right Links -->
-      <div class="hidden sm:flex items-center gap-2">
+      <div class="hidden md:flex items-center gap-2">
+        <a href="https://nemranyy100-cyber.github.io/petricor_academie/" target="_blank" rel="noopener noreferrer"
+           class="press-blur px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
+          Site Web ↗
+        </a>
         <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
-           class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
+           class="press-blur px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
           Discord
         </a>
         <a href="https://www.instagram.com/petricor_academie/" target="_blank" rel="noopener noreferrer"
-           class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
+           class="press-blur px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
           Instagram
         </a>
       </div>
@@ -113,16 +144,16 @@
   </header>
 
   <!-- ========================================================= -->
-  <!-- VUE 1 : ACCUEIL (COMMUNITY, PSYCHOLOGIE, INSCRIPTION)     -->
+  <!-- PAGE 1 : ACCUEIL (PSYCHOLOGIE + INSCRIPTION)              -->
   <!-- ========================================================= -->
-  <main id="publicView" class="block">
+  <main id="accueilPage" class="block press-blur">
 
     <!-- Hero -->
-    <section class="max-w-6xl mx-auto px-4 pt-8 pb-8">
+    <section class="max-w-6xl mx-auto px-4 pt-8 pb-6">
       <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-12 relative">
         <div class="relative z-10 max-w-3xl mx-auto text-center space-y-5 py-2">
           <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/50 border border-white/15 text-xs text-goldLight font-semibold">
-            ✦ Petricor Académie • Discipline & Execution
+            ✦ Petricor Académie • Psychologie & Inscription
           </div>
 
           <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.08] text-white">
@@ -130,39 +161,43 @@
           </h1>
 
           <p class="max-w-xl mx-auto text-sm sm:text-base text-slate-200/85 leading-relaxed">
-            Découvre notre communauté, nos conseils de psychologie du trading, et inscris-toi pour accéder aux formations complètes et à l'Espace VIP.
+            Page d'accueil dédiée à la psychologie du trading et à l'inscription. Passe ensuite vers la page Community ou l'Espace VIP.
           </p>
 
-          <div class="flex flex-wrap items-center justify-center gap-3 pt-3">
+          <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
             <a href="#inscription"
-               class="px-6 py-3 rounded-full bg-white text-obsidian font-bold text-xs sm:text-sm hover:bg-goldLight transition">
-              S'inscrire Maintenant ↗
+               class="press-blur px-6 py-3 rounded-full bg-white text-obsidian font-bold text-xs sm:text-sm hover:bg-goldLight transition">
+              S'inscrire Maintenant ↓
             </a>
+            <button type="button" onclick="switchView('community')"
+                    class="press-blur px-6 py-3 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white font-semibold text-xs sm:text-sm transition">
+              ▶ Page Community
+            </button>
             <button type="button" onclick="switchView('vip')"
-                    class="px-6 py-3 rounded-full bg-black/60 hover:bg-black/80 border border-gold/40 text-goldLight font-semibold text-xs sm:text-sm transition">
-              🔒 Accéder à l'Espace VIP
+                    class="press-blur px-6 py-3 rounded-full bg-black/60 hover:bg-black/80 border border-gold/40 text-goldLight font-semibold text-xs sm:text-sm transition">
+              🔒 Page VIP
             </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section Community : Psychologie & Advices -->
+    <!-- Psychologie & Advices -->
     <section id="psychologie" class="max-w-6xl mx-auto px-4 py-8">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Community • Mindset</span>
+          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Page 1 • Mindset</span>
           <h2 class="font-display text-2xl sm:text-3xl font-bold text-white mt-1">Psychologie & Advices</h2>
-          <p class="text-slate-400 text-xs sm:text-sm mt-1">Les principes fondamentaux partagés au sein de la communauté Petricor.</p>
+          <p class="text-slate-400 text-xs sm:text-sm mt-1">Les bases mentales essentielles avant toute exécution sur le marché.</p>
         </div>
         <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
-           class="self-start sm:self-auto px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-semibold text-white transition">
+           class="press-blur self-start sm:self-auto px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-semibold text-white transition">
           Rejoindre le Discord ↗
         </a>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
+        <div class="press-blur rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
           <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
             <img src="psy1.jpg" alt="How to Become a Successful Trader"
                  class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
@@ -179,7 +214,7 @@
           </div>
         </div>
 
-        <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
+        <div class="press-blur rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
           <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
             <img src="psy2.jpg" alt="Focus on one strategy"
                  class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
@@ -194,7 +229,7 @@
           </div>
         </div>
 
-        <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
+        <div class="press-blur rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
           <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
             <img src="psy3.jpg" alt="Respect your trading setup"
                  class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
@@ -209,7 +244,7 @@
           </div>
         </div>
 
-        <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
+        <div class="press-blur rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
           <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
             <img src="psy4.jpg" alt="Make the best trades"
                  class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
@@ -224,7 +259,7 @@
           </div>
         </div>
 
-        <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group sm:col-span-2 lg:col-span-2">
+        <div class="press-blur rounded-2xl bg-charcoal editorial-frame overflow-hidden group sm:col-span-2 lg:col-span-2">
           <div class="aspect-[4/5] lg:aspect-[16/9] bg-[#071126] overflow-hidden">
             <img src="psy5.jpg" alt="Petricor Academy Advices"
                  class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
@@ -241,65 +276,22 @@
             </div>
             <div class="flex items-center gap-2 text-xs">
               <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
-                 class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold transition">Discord</a>
+                 class="press-blur px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold transition">Discord</a>
               <a href="https://www.instagram.com/petricor_academie/" target="_blank" rel="noopener noreferrer"
-                 class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold transition">Instagram</a>
+                 class="press-blur px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold transition">Instagram</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Section Community Videos -->
-    <section id="community-videos" class="max-w-6xl mx-auto px-4 py-8">
-      <div class="grain-canvas editorial-frame rounded-[24px] p-6 sm:p-8 space-y-5">
-        <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Community • Open Access</span>
-            <h2 class="font-display text-2xl font-bold text-white mt-1">Community & Trade Breakdowns</h2>
-            <p class="text-xs sm:text-sm text-slate-300/80 mt-1">Analyses de trades gagnants, récaps et logique d'entrée partagés avec la communauté.</p>
-          </div>
-          <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
-             class="self-start sm:self-auto px-4 py-2 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-semibold hover:bg-emerald-500/25 transition">
-            WhatsApp Communauté
-          </a>
-        </div>
-
-        <div class="relative z-10 grid md:grid-cols-3 gap-4">
-          <div class="rounded-2xl bg-charcoal/90 border border-gold/25 p-5 flex flex-col justify-between space-y-3">
-            <div>
-              <span class="text-[11px] font-bold text-goldLight">BREAKDOWN #01</span>
-              <h3 class="text-base font-bold text-white mt-0.5">Explication d'un Trade</h3>
-              <p class="text-xs text-slate-400 mt-1">Explication complète du contexte HTF, confirmation LTF et gestion du risque.</p>
-            </div>
-            <div>
-              <a href="https://youtu.be/UeXt6TRI6WY?si=2EDGCsZ3Wlb7TJU2" target="_blank" rel="noopener noreferrer"
-                 class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gold text-obsidian font-bold text-xs hover:bg-goldLight transition">
-                Voir la vidéo ↗
-              </a>
-            </div>
-          </div>
-          <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-5 space-y-2">
-            <span class="text-[11px] font-bold text-goldLight">BREAKDOWN #02</span>
-            <h3 class="text-base font-bold text-white">Lecture de Liquidité (Bientôt)</h3>
-            <p class="text-xs text-slate-400">Comment identifier les zones clés avant l'impulsion du marché.</p>
-          </div>
-          <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-5 space-y-2">
-            <span class="text-[11px] font-bold text-goldLight">COMMUNITY RECAP</span>
-            <h3 class="text-base font-bold text-white">Session Q&A & Mindset (Bientôt)</h3>
-            <p class="text-xs text-slate-400">Moments forts et réponses aux questions des membres de l'académie.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Inscription (Formspree) -->
+    <!-- Inscription (Après Psychologie) -->
     <section id="inscription" class="max-w-6xl mx-auto px-4 py-10">
       <div class="grid lg:grid-cols-2 gap-6 items-start">
 
         <div class="grain-canvas editorial-frame rounded-2xl p-6 sm:p-8 space-y-5">
           <div class="relative z-10">
-            <span class="text-xs font-bold tracking-wider uppercase text-goldLight">Rejoindre l'Académie</span>
+            <span class="text-xs font-bold tracking-wider uppercase text-goldLight">Étape suivante • Inscription</span>
             <h2 class="font-display text-2xl font-bold text-white mt-1">Inscription Bootcamp & VIP</h2>
             <p class="text-xs sm:text-sm text-slate-300/80 mt-1">Remplis tes coordonnées pour recevoir ton accès et la confirmation.</p>
           </div>
@@ -335,7 +327,7 @@
             </div>
 
             <div id="vipBanner" class="hidden rounded-xl bg-gold/15 border border-gold/40 p-3.5 text-xs text-goldLight">
-              ★ <strong>VIP Mentorship :</strong> Après validation, tu recevras le mot de passe pour ouvrir l'<strong>Espace VIP</strong> (Séances 1–9 + Explication Trade + Stratégie).
+              ★ <strong>VIP Mentorship :</strong> Après validation, tu recevras le mot de passe pour ouvrir la <strong>Page VIP</strong> (Séances 1–8 + Stratégie + Trade Breakdown).
             </div>
 
             <div>
@@ -345,7 +337,7 @@
             </div>
 
             <button type="submit" id="submitBtn"
-                    class="w-full py-3.5 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-sm hover:opacity-95 transition">
+                    class="press-blur w-full py-3.5 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-sm hover:opacity-95 transition">
               Valider l'Inscription & Envoyer
             </button>
 
@@ -375,19 +367,21 @@
 
           <div class="relative z-10 grid sm:grid-cols-2 gap-3">
             <button type="button" onclick="copyRecap()"
-                    class="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 font-semibold text-xs sm:text-sm transition">
+                    class="press-blur w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 font-semibold text-xs sm:text-sm transition">
               Copier le Récapitulatif
             </button>
             <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
-               class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm text-center transition">
+               class="press-blur w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm text-center transition">
               Confirmer sur WhatsApp
             </a>
           </div>
 
           <div class="relative z-10 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
-            <span>Déjà membre VIP ?</span>
-            <button type="button" onclick="switchView('vip')" class="text-goldLight font-bold hover:underline">
-              Ouvrir l'Espace VIP 🔒 →
+            <button type="button" onclick="switchView('community')" class="press-blur text-white font-semibold hover:underline">
+              → Aller à la Page Community
+            </button>
+            <button type="button" onclick="switchView('vip')" class="press-blur text-goldLight font-bold hover:underline">
+              Ouvrir la Page VIP 🔒 →
             </button>
           </div>
         </div>
@@ -397,16 +391,52 @@
   </main>
 
   <!-- ========================================================= -->
-  <!-- VUE 2 : ESPACE VIP (MOT DE PASSE & STRATÉGIE VIDEOS)      -->
+  <!-- PAGE 2 : COMMUNITY (MINIATURE + PLAY DIRECT YOUTUBE)       -->
   <!-- ========================================================= -->
-  <section id="vipView" class="hidden max-w-6xl mx-auto px-4 py-10">
+  <section id="communityPage" class="hidden press-blur max-w-6xl mx-auto px-4 py-10">
     <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
 
       <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">★ Espace Privé Membre</span>
-          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Petricor VIP — Stratégie & Séances</h2>
-          <p class="text-xs sm:text-sm text-slate-300/80 mt-1">Accès réservé aux membres confirmés avec mot de passe.</p>
+          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Page 2 • Community Open Access</span>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Community & Trade Breakdown</h2>
+          <p class="text-xs sm:text-sm text-slate-300/80 mt-1">
+            Lien du site :
+            <a href="https://nemranyy100-cyber.github.io/petricor_academie/" target="_blank" rel="noopener noreferrer"
+               class="text-goldLight underline">
+              https://nemranyy100-cyber.github.io/petricor_academie/
+            </a>
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <button type="button" onclick="switchView('accueil')"
+                  class="press-blur px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-white transition">
+            ← Accueil
+          </button>
+          <button type="button" onclick="switchView('vip')"
+                  class="press-blur px-3.5 py-1.5 rounded-full bg-gold text-obsidian text-xs font-extrabold hover:bg-goldLight transition">
+            🔒 Page VIP
+          </button>
+        </div>
+      </div>
+
+      <div id="communityVideoGrid" class="relative z-10 grid md:grid-cols-2 gap-6"></div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- PAGE 3 : ESPACE VIP (CODE + MINIATURES + PLAY YOUTUBE)    -->
+  <!-- ========================================================= -->
+  <section id="vipPage" class="hidden press-blur max-w-6xl mx-auto px-4 py-10">
+    <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
+
+      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Page 3 • Espace Privé Membre</span>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Petricor VIP — Séances & Stratégie</h2>
+          <p class="text-xs sm:text-sm text-slate-300/80 mt-1">Entre le code VIP pour afficher les miniatures et ouvrir les vidéos sur YouTube.</p>
         </div>
 
         <div class="flex items-center gap-2.5">
@@ -414,9 +444,9 @@
                 class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-400/30">
             <span>🔒</span> Verrouillé
           </span>
-          <button type="button" onclick="switchView('public')"
-                  class="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-white transition">
-            ← Retour
+          <button type="button" onclick="switchView('accueil')"
+                  class="press-blur px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-white transition">
+            ← Accueil
           </button>
         </div>
       </div>
@@ -425,23 +455,23 @@
       <div class="relative z-10 rounded-2xl bg-charcoal/95 gold-line p-6 max-w-xl mx-auto space-y-4">
         <div class="space-y-1">
           <label for="confirmCodeInput" class="block text-xs font-bold uppercase tracking-wider text-goldLight">
-            Mot de passe VIP
+            Code d'accès VIP
           </label>
           <p class="text-xs text-slate-400">
-            Entre le mot de passe VIP pour débloquer les séances complètes، شرح الصفقة وفيديو Stratégie.
+            Saisis le code VIP pour débloquer toutes les séances et la vidéo Stratégie.
           </p>
         </div>
 
         <div class="flex flex-col sm:flex-row gap-2.5">
-          <input id="confirmCodeInput" type="password" placeholder="Entrez le mot de passe VIP..."
+          <input id="confirmCodeInput" type="password" placeholder="Entrez le code VIP..."
                  onkeydown="if(event.key==='Enter') confirmVideosAccess()"
                  class="flex-1 px-4 py-3 rounded-xl bg-obsidian border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
           <button type="button" onclick="confirmVideosAccess()"
-                  class="px-5 py-3 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-xs sm:text-sm hover:opacity-95 transition">
+                  class="press-blur px-5 py-3 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-xs sm:text-sm hover:opacity-95 transition">
             Débloquer VIP
           </button>
           <button type="button" onclick="lockVideosAccess()"
-                  class="px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-300 font-semibold text-xs sm:text-sm transition">
+                  class="press-blur px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-300 font-semibold text-xs sm:text-sm transition">
             Verrouiller
           </button>
         </div>
@@ -454,12 +484,12 @@
         <div class="text-3xl">🔒</div>
         <h3 class="text-lg font-bold text-white">Contenu VIP Protégé</h3>
         <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">
-          Les séances، شرح الصفقة وفيديو Stratégie sont verrouillées. Entre le mot de passe VIP ci-dessus pour y accéder.
+          Les vidéos VIP (Séances 1 à 8 + Stratégie + Breakdown) sont verrouillées. Entre le code VIP ci-dessus pour y accéder.
         </p>
         <div class="pt-2">
-          <button type="button" onclick="switchView('public'); setTimeout(()=>document.getElementById('inscription').scrollIntoView({behavior:'smooth'}),100)"
-                  class="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-goldLight transition">
-            Pas encore de mot de passe ? S'inscrire ici
+          <button type="button" onclick="switchView('accueil'); setTimeout(()=>document.getElementById('inscription').scrollIntoView({behavior:'smooth'}),120)"
+                  class="press-blur px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-goldLight transition">
+            Pas encore de code ? S'inscrire sur l'Accueil
           </button>
         </div>
       </div>
@@ -479,65 +509,112 @@
   </footer>
 
   <script>
-    // بدّل هاد المودباس للي بغيتي تعطي للأعضاء
     const VIP_PASSWORD = "PETRICORVIP";
 
-    // لائحة الفيديوهات VIP (منها الفيديو الجديد ديال شرح الصفقة)
+    const COMMUNITY_VIDEOS = [
+      {
+        id: "UeXt6TRI6WY",
+        tag: "COMMUNITY BREAKDOWN",
+        title: "Explication d'un Trade",
+        desc: "Analyse complète du trade : contexte, exécution et gestion. Clic sur Play pour ouvrir sur YouTube.",
+        url: "https://youtu.be/UeXt6TRI6WY?si=2EDGCsZ3Wlb7TJU2"
+      }
+    ];
+
     const VIP_VIDEOS = [
-      { code: "SÉANCE 01", title: "Fondamentaux & Structure du Marché", desc: "Lecture du biais directionnel et zones clés.", url: "" },
-      { code: "SÉANCE 02", title: "Liquidité & Manipulation", desc: "Comprendre les sweeps et prises de liquidité.", url: "" },
-      { code: "SÉANCE 03", title: "Zones d'Intérêt (POI)", desc: "Filtrer les zones à haute probabilité.", url: "" },
-      { code: "SÉANCE 04", title: "Confirmation & Entrée", desc: "Timing d'exécution et validation sur timeframe inférieur.", url: "" },
-      { code: "SÉANCE 05", title: "Risk Management & Position Sizing", desc: "Protéger le capital et gérer les séries de pertes.", url: "" },
-      { code: "SÉANCE 06", title: "Sessions & Horaires Clés", desc: "Se concentrer sur les sessions les plus liquides.", url: "" },
-      { code: "SÉANCE 07", title: "Psychologie & Contrôle Émotionnel", desc: "Éviter l'overtrading, le FOMO et la revanche.", url: "" },
-      { code: "SÉANCE 08", title: "Backtest, Journal & Routine", desc: "Construire une revue hebdomadaire rigoureuse.", url: "" },
-      { code: "SÉANCE 09", title: "Cas Pratiques & Exécution Live", desc: "Mise en situation réelle et lecture de la réaction du prix.", url: "" },
-      { code: "TRADE BREAKDOWN", title: "Explication d'un Trade", desc: "شرح تفصيلي لصفقة: السياق، نقطة الدخول، وقف الخسارة وإدارة الصفقة.", url: "https://youtu.be/UeXt6TRI6WY?si=2EDGCsZ3Wlb7TJU2" },
-      { code: "STRATÉGIE VIP", title: "Stratégie Complète Petricor", desc: "Règles d'entrée, invalidation et gestion du trade de A à Z.", url: "" }
+      { id: "z0yGCcyQiiA", tag: "SÉANCE 1", title: "Séance 1 — Fondamentaux & Structure", desc: "Lecture de la structure et des zones clés.", url: "https://youtu.be/z0yGCcyQiiA?si=f4MfyDVrl3TkNNyK" },
+      { id: "Dl9XSxMa0CU", tag: "SÉANCE 2", title: "Séance 2 — Liquidité & Manipulation", desc: "Comprendre la chasse de liquidité sur le marché.", url: "https://youtu.be/Dl9XSxMa0CU?si=LKpdm07tTCITvgb_" },
+      { id: "Bc1DYM7tCP4", tag: "SÉANCE 3", title: "Séance 3 — Zones d'Intérêt (POI)", desc: "Identifier les zones à haute probabilité.", url: "https://youtu.be/Bc1DYM7tCP4?si=Z6wMLPbwUThd371n" },
+      { id: "GoTCmA_GfOg", tag: "SÉANCE 4", title: "Séance 4 — Confirmation & Entrée", desc: "Validation et timing d'entrée précis.", url: "https://youtu.be/GoTCmA_GfOg?si=1HAfu7PKoXJtQvLy" },
+      { id: "HfC1V29ZlHQ", tag: "SÉANCE 5", title: "Séance 5 — Risk Management", desc: "Gestion du risque et protection du capital.", url: "https://youtu.be/HfC1V29ZlHQ?si=4MfOuWeL-yHayBFH" },
+      { id: "VpJE-xb_8gA", tag: "SÉANCE 6", title: "Séance 6 — Sessions & Timing", desc: "Se concentrer sur les sessions les plus actives.", url: "https://youtu.be/VpJE-xb_8gA?si=IQDapH04TXfTMPpM" },
+      { id: "J72V8daXBl0", tag: "SÉANCE 7", title: "Séance 7 — Psychologie du Trading", desc: "Contrôle émotionnel, patience et discipline.", url: "https://youtu.be/J72V8daXBl0?si=q7SP8N5yy6-Lfyjr" },
+      { id: "QFCEqH2vVMk", tag: "SÉANCE 8", title: "Séance 8 — Routine, Journal & Revue", desc: "Suivi des performances et amélioration continue.", url: "https://youtu.be/QFCEqH2vVMk?si=gOfT6_117awTtINt" },
+      { id: "_vjHEg3Wffg", tag: "STRATÉGIE", title: "Stratégie Complète Petricor", desc: "Règles complètes de la stratégie du début à la fin.", url: "https://youtu.be/_vjHEg3Wffg?si=luoKRP3wWdIfAU0P" },
+      { id: "UeXt6TRI6WY", tag: "TRADE BREAKDOWN", title: "Explication d'un Trade", desc: "Explication détaillée d'une prise de position réelle.", url: "https://youtu.be/UeXt6TRI6WY?si=2EDGCsZ3Wlb7TJU2" }
     ];
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    function switchView(view) {
-      const publicView = document.getElementById('publicView');
-      const vipView = document.getElementById('vipView');
-      const navPublicBtn = document.getElementById('navPublicBtn');
-      const navVipBtn = document.getElementById('navVipBtn');
+    function buildYouTubeCard(vid) {
+      const thumbUrl = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
+      return `
+        <div class="press-blur thumb-card rounded-2xl bg-charcoal/95 border border-gold/25 overflow-hidden flex flex-col justify-between">
+          <div>
+            <a href="${vid.url}" target="_blank" rel="noopener noreferrer" class="block relative aspect-video bg-obsidian overflow-hidden group">
+              <img src="${thumbUrl}" alt="${vid.title}"
+                   class="w-full h-full object-cover"
+                   onerror="this.src='https://img.youtube.com/vi/${vid.id}/mqdefault.jpg';">
+              <div class="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition flex items-center justify-center">
+                <span class="px-4 py-2.5 rounded-full bg-gold text-obsidian font-extrabold text-xs shadow-lg flex items-center gap-1.5">
+                  <span>▶</span> Play sur YouTube
+                </span>
+              </div>
+            </a>
+            <div class="p-5">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-goldLight">${vid.tag}</span>
+              <h3 class="text-base font-bold text-white mt-1">${vid.title}</h3>
+              <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">${vid.desc}</p>
+            </div>
+          </div>
+          <div class="px-5 pb-5">
+            <a href="${vid.url}" target="_blank" rel="noopener noreferrer"
+               class="press-blur w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-gold hover:text-obsidian text-white font-bold text-xs transition">
+              <span>▶</span> Play
+            </a>
+          </div>
+        </div>
+      `;
+    }
 
-      if (view === 'vip') {
-        publicView.classList.add('hidden');
-        vipView.classList.remove('hidden');
-        navVipBtn.className = "px-3.5 py-1.5 rounded-full bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold transition flex items-center gap-1.5";
-        navPublicBtn.className = "px-3.5 py-1.5 rounded-full text-slate-300 hover:bg-white/10 font-semibold transition";
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        vipView.classList.add('hidden');
-        publicView.classList.remove('hidden');
-        navPublicBtn.className = "px-3.5 py-1.5 rounded-full bg-white text-obsidian font-bold transition";
-        navVipBtn.className = "px-3.5 py-1.5 rounded-full text-goldLight hover:bg-white/10 font-bold transition flex items-center gap-1.5";
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+    function renderCommunityVideos() {
+      const grid = document.getElementById('communityVideoGrid');
+      grid.innerHTML = COMMUNITY_VIDEOS.map(buildYouTubeCard).join('');
     }
 
     function renderVipVideos() {
       const grid = document.getElementById('videosUnlockedGrid');
-      grid.innerHTML = VIP_VIDEOS.map((vid) => {
-        const mediaBlock = vid.url
-          ? `<a href="${vid.url}" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gold text-obsidian font-bold text-xs hover:bg-goldLight transition">شاهد الفيديو ↗</a>`
-          : `<span class="mt-3 inline-block px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[11px] text-slate-400">رابط الفيديو قريباً</span>`;
+      grid.innerHTML = VIP_VIDEOS.map(buildYouTubeCard).join('');
+    }
 
-        return `
-          <div class="rounded-2xl bg-charcoal/95 border border-gold/25 p-5 flex flex-col justify-between">
-            <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-goldLight">${vid.code}</span>
-              <h3 class="text-base font-bold text-white mt-1">${vid.title}</h3>
-              <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">${vid.desc}</p>
-            </div>
-            <div>${mediaBlock}</div>
-          </div>
-        `;
-      }).join('');
+    function switchView(page) {
+      const accueilPage = document.getElementById('accueilPage');
+      const communityPage = document.getElementById('communityPage');
+      const vipPage = document.getElementById('vipPage');
+
+      const navAccueilBtn = document.getElementById('navAccueilBtn');
+      const navCommunityBtn = document.getElementById('navCommunityBtn');
+      const navVipBtn = document.getElementById('navVipBtn');
+
+      const activeTarget = page === 'community' ? communityPage : page === 'vip' ? vipPage : accueilPage;
+      activeTarget.classList.add('page-blur-pulse');
+
+      setTimeout(() => {
+        accueilPage.classList.add('hidden');
+        communityPage.classList.add('hidden');
+        vipPage.classList.add('hidden');
+
+        navAccueilBtn.className = "press-blur px-3.5 py-1.5 rounded-full text-slate-200 hover:bg-white/10 font-semibold transition";
+        navCommunityBtn.className = "press-blur px-3.5 py-1.5 rounded-full text-slate-200 hover:bg-white/10 font-semibold transition";
+        navVipBtn.className = "press-blur px-3.5 py-1.5 rounded-full text-goldLight hover:bg-white/10 font-bold transition flex items-center gap-1";
+
+        if (page === 'community') {
+          communityPage.classList.remove('hidden');
+          navCommunityBtn.className = "press-blur px-3.5 py-1.5 rounded-full bg-white text-obsidian font-bold transition";
+          renderCommunityVideos();
+        } else if (page === 'vip') {
+          vipPage.classList.remove('hidden');
+          navVipBtn.className = "press-blur px-3.5 py-1.5 rounded-full bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold transition flex items-center gap-1";
+        } else {
+          accueilPage.classList.remove('hidden');
+          navAccueilBtn.className = "press-blur px-3.5 py-1.5 rounded-full bg-white text-obsidian font-bold transition";
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => {
+          activeTarget.classList.remove('page-blur-pulse');
+        }, 180);
+      }, 90);
     }
 
     function confirmVideosAccess() {
@@ -563,7 +640,7 @@
         unlockedGrid.classList.add('grid');
       } else {
         msg.className = "text-xs rounded-xl p-2.5 bg-red-500/15 text-red-300 border border-red-400/30 block";
-        msg.textContent = "الكود غير صحيح، تأكد من المودباس VIP.";
+        msg.textContent = "الكود غير صحيح، تأكد من كود VIP.";
       }
     }
 
