@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Petricor Académie — Trading Bootcamp & Stratégie</title>
+  <title>Petricor Académie — Trading, Community & VIP</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,6 @@
             obsidian: '#050608',
             charcoal: '#0a0c10',
             surface: '#101319',
-            fog: '#9ca3af',
             gold: '#e5b84b',
             goldLight: '#f6d57b',
             goldDark: '#a67c1e',
@@ -36,11 +35,10 @@
       overflow-x: hidden;
     }
 
-    /* Grainy / Smoky Editorial Canvas */
     .grain-canvas {
       position: relative;
       background:
-        radial-gradient(ellipse 75% 65% at 72% 18%, rgba(196, 208, 198, 0.24), transparent 62%),
+        radial-gradient(ellipse 75% 65% at 72% 18%, rgba(196, 208, 198, 0.22), transparent 62%),
         radial-gradient(ellipse 55% 50% at 20% 78%, rgba(229, 184, 75, 0.09), transparent 65%),
         radial-gradient(ellipse 80% 80% at 50% 50%, rgba(18, 22, 28, 0.95), #050608 100%);
       overflow: hidden;
@@ -64,11 +62,11 @@
     }
 
     .gold-line {
-      border: 1px solid rgba(229, 184, 75, 0.32);
+      border: 1px solid rgba(229, 184, 75, 0.35);
     }
 
     .pill-nav {
-      background: rgba(16, 19, 25, 0.78);
+      background: rgba(16, 19, 25, 0.82);
       backdrop-filter: blur(18px);
       border: 1px solid rgba(255, 255, 255, 0.12);
     }
@@ -76,355 +74,397 @@
 </head>
 <body class="min-h-screen selection:bg-gold selection:text-obsidian">
 
-  <!-- Top Minimal Header + Floating Pill Nav -->
-  <header class="sticky top-0 z-40 backdrop-blur-md bg-obsidian/75 border-b border-white/10">
+  <!-- Top Navigation -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-obsidian/80 border-b border-white/10">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-      <a href="#" class="flex items-center gap-2.5">
+      <button type="button" onclick="switchView('public')" class="flex items-center gap-2.5 text-left">
         <span class="w-8 h-8 rounded-full bg-white text-obsidian font-extrabold flex items-center justify-center text-sm">
           P
         </span>
         <span class="font-display font-bold tracking-wider text-xs sm:text-sm text-white">
           PETRICOR ACADÉMIE
         </span>
-      </a>
+      </button>
 
-      <!-- Center Pill Nav -->
-      <nav class="hidden md:flex items-center gap-1 px-2 py-1 rounded-full pill-nav text-xs text-slate-300">
-        <a href="#programmes" class="px-3.5 py-1.5 rounded-full hover:bg-white/10 hover:text-white transition">Programmes</a>
-        <a href="#strategie-videos" class="px-3.5 py-1.5 rounded-full hover:bg-white/10 hover:text-white transition">Stratégie Videos</a>
-        <a href="#inscription" class="px-3.5 py-1.5 rounded-full hover:bg-white/10 hover:text-white transition">Inscription</a>
-        <a href="#galerie" class="px-3.5 py-1.5 rounded-full hover:bg-white/10 hover:text-white transition">Galerie</a>
+      <!-- Center Pill Switcher -->
+      <nav class="flex items-center gap-1 px-1.5 py-1 rounded-full pill-nav text-xs">
+        <button type="button" id="navPublicBtn" onclick="switchView('public')"
+                class="px-3.5 py-1.5 rounded-full bg-white text-obsidian font-bold transition">
+          Accueil & Community
+        </button>
+        <button type="button" id="navVipBtn" onclick="switchView('vip')"
+                class="px-3.5 py-1.5 rounded-full text-goldLight hover:bg-white/10 font-bold transition flex items-center gap-1.5">
+          <span>🔒</span> Espace VIP
+        </button>
       </nav>
 
-      <!-- Right Actions -->
-      <div class="flex items-center gap-2">
+      <!-- Right Links -->
+      <div class="hidden sm:flex items-center gap-2">
         <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
-           class="hidden sm:inline-flex px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
+           class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
           Discord
         </a>
         <a href="https://www.instagram.com/petricor_academie/" target="_blank" rel="noopener noreferrer"
-           class="hidden sm:inline-flex px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
+           class="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
           Instagram
-        </a>
-        <a href="#inscription"
-           class="px-4 py-1.5 rounded-full bg-white text-obsidian font-bold text-xs hover:bg-goldLight transition">
-          Rejoindre
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Hero Stage (Grainy Graphic Reference Inspired) -->
-  <section class="max-w-6xl mx-auto px-4 pt-8 pb-10">
-    <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-12 relative">
-      <!-- Subtle top-center play badge -->
-      <div class="relative z-10 flex justify-center mb-6">
-        <a href="#strategie-videos"
-           class="w-10 h-10 rounded-full bg-black/55 border border-white/20 flex items-center justify-center text-white hover:border-gold transition"
-           title="Voir Stratégie Videos">
-          ▶
+  <!-- ========================================================= -->
+  <!-- VUE 1 : ACCUEIL (COMMUNITY, PSYCHOLOGIE, INSCRIPTION)     -->
+  <!-- ========================================================= -->
+  <main id="publicView" class="block">
+
+    <!-- Hero -->
+    <section class="max-w-6xl mx-auto px-4 pt-8 pb-8">
+      <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-12 relative">
+        <div class="relative z-10 max-w-3xl mx-auto text-center space-y-5 py-2">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/50 border border-white/15 text-xs text-goldLight font-semibold">
+            ✦ Petricor Académie • Discipline & Execution
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.08] text-white">
+            Maîtrise le Marché & Ta <span class="text-goldLight">Psychologie</span>
+          </h1>
+
+          <p class="max-w-xl mx-auto text-sm sm:text-base text-slate-200/85 leading-relaxed">
+            Découvre notre communauté, nos conseils de psychologie du trading, et inscris-toi pour accéder aux formations complètes et à l'Espace VIP.
+          </p>
+
+          <div class="flex flex-wrap items-center justify-center gap-3 pt-3">
+            <a href="#inscription"
+               class="px-6 py-3 rounded-full bg-white text-obsidian font-bold text-xs sm:text-sm hover:bg-goldLight transition">
+              S'inscrire Maintenant ↗
+            </a>
+            <button type="button" onclick="switchView('vip')"
+                    class="px-6 py-3 rounded-full bg-black/60 hover:bg-black/80 border border-gold/40 text-goldLight font-semibold text-xs sm:text-sm transition">
+              🔒 Accéder à l'Espace VIP
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Community : Psychologie & Advices -->
+    <section id="psychologie" class="max-w-6xl mx-auto px-4 py-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Community • Mindset</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white mt-1">Psychologie & Advices</h2>
+          <p class="text-slate-400 text-xs sm:text-sm mt-1">Les principes fondamentaux partagés au sein de la communauté Petricor.</p>
+        </div>
+        <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
+           class="self-start sm:self-auto px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-semibold text-white transition">
+          Rejoindre le Discord ↗
         </a>
       </div>
 
-      <!-- Subtle floating telemetry cues like reference -->
-      <div class="hidden lg:flex justify-between items-center text-[11px] text-slate-300/75 mb-8 relative z-10 px-2">
-        <div class="space-y-0.5">
-          <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-gold"></span> Liquidité & Structure</div>
-          <div class="text-[10px] text-slate-400">Séances 01 → 08</div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Photo 1 -->
+        <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
+          <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
+            <img src="psy1.jpg" alt="How to Become a Successful Trader"
+                 class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="hidden w-full h-full p-6 flex-col justify-between bg-gradient-to-b from-[#0b1f4d] to-[#050811]">
+              <span class="text-xs text-blue-300 font-semibold">Petricor Academy</span>
+              <div class="text-2xl font-extrabold text-white leading-tight">How to Become a Successful Trader</div>
+              <span class="text-xs text-slate-300">Master the financial markets.</span>
+            </div>
+          </div>
+          <div class="p-4 border-t border-white/10">
+            <span class="text-[11px] font-bold text-goldLight uppercase">01 • Vision</span>
+            <h3 class="text-sm font-bold text-white mt-0.5">Devenir un Trader Rentable</h3>
+          </div>
         </div>
-        <div class="px-3 py-1 rounded-full bg-black/45 border border-white/15 text-slate-200">
-          ✦ Petricor Trading Execution • Gold & FX
+
+        <!-- Photo 2 -->
+        <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
+          <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
+            <img src="psy2.jpg" alt="Focus on one strategy"
+                 class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="hidden w-full h-full p-6 flex-col justify-center bg-gradient-to-br from-[#081a4b] to-[#040712]">
+              <p class="text-lg font-bold text-white leading-snug">“Never jump from one strategy to another looking for results. Find one strategy, focus on it, and master it.”</p>
+            </div>
+          </div>
+          <div class="p-4 border-t border-white/10">
+            <span class="text-[11px] font-bold text-goldLight uppercase">02 • Focus</span>
+            <h3 class="text-sm font-bold text-white mt-0.5">Une Seule Stratégie Maîtrisée</h3>
+          </div>
         </div>
-        <div class="text-right space-y-0.5">
-          <div class="flex items-center justify-end gap-1.5">Stratégie & Discipline <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span></div>
-          <div class="text-[10px] text-slate-400">Accès Confirmé</div>
+
+        <!-- Photo 3 -->
+        <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
+          <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
+            <img src="psy3.jpg" alt="Respect your trading setup"
+                 class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="hidden w-full h-full p-6 flex-col justify-center bg-gradient-to-br from-[#081a4b] to-[#040712]">
+              <p class="text-lg font-bold text-white leading-snug">“Respect your trading setup and the specific times you trade. Stay disciplined and stick to your schedule.”</p>
+            </div>
+          </div>
+          <div class="p-4 border-t border-white/10">
+            <span class="text-[11px] font-bold text-goldLight uppercase">03 • Discipline</span>
+            <h3 class="text-sm font-bold text-white mt-0.5">Respecter Ses Horaires & Setups</h3>
+          </div>
+        </div>
+
+        <!-- Photo 4 -->
+        <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
+          <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
+            <img src="psy4.jpg" alt="Make the best trades"
+                 class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="hidden w-full h-full p-6 flex-col justify-center bg-gradient-to-br from-[#081a4b] to-[#040712]">
+              <p class="text-lg font-bold text-white leading-snug">“The goal of a successful trader is to make the best trades. Money is secondary.”</p>
+            </div>
+          </div>
+          <div class="p-4 border-t border-white/10">
+            <span class="text-[11px] font-bold text-goldLight uppercase">04 • Process</span>
+            <h3 class="text-sm font-bold text-white mt-0.5">L'Exécution Avant l'Argent</h3>
+          </div>
+        </div>
+
+        <!-- Photo 5 -->
+        <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group sm:col-span-2 lg:col-span-2">
+          <div class="aspect-[4/5] lg:aspect-[16/9] bg-[#071126] overflow-hidden">
+            <img src="psy5.jpg" alt="Petricor Academy Advices"
+                 class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="hidden w-full h-full p-8 flex-col items-center justify-center text-center bg-gradient-to-br from-[#081a4b] to-[#040712]">
+              <div class="text-2xl font-bold text-white">Petricor Academy</div>
+              <div class="text-xs tracking-[0.35em] text-blue-300 mt-1">ADVICES</div>
+            </div>
+          </div>
+          <div class="p-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span class="text-[11px] font-bold text-goldLight uppercase">05 • Communauté</span>
+              <h3 class="text-sm font-bold text-white mt-0.5">Petricor Academy Advices — Daily Insights</h3>
+            </div>
+            <div class="flex items-center gap-2 text-xs">
+              <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
+                 class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold transition">Discord</a>
+              <a href="https://www.instagram.com/petricor_academie/" target="_blank" rel="noopener noreferrer"
+                 class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold transition">Instagram</a>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Center Editorial Headline -->
-      <div class="relative z-10 max-w-3xl mx-auto text-center space-y-5 py-2">
-        <h1 class="text-3xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight leading-[1.08] text-white">
-          One-Focus Trading & <span class="text-goldLight">Stratégie</span>
-        </h1>
-
-        <p class="max-w-xl mx-auto text-sm sm:text-base text-slate-200/85 leading-relaxed">
-          Une approche structurée où la lecture de la liquidité, la maîtrise du risque et les séances de stratégie se rejoignent avec clarté.
-        </p>
-
-        <div class="flex flex-wrap items-center justify-center gap-3 pt-3">
-          <a href="#strategie-videos"
-             class="px-6 py-3 rounded-full bg-white text-obsidian font-bold text-xs sm:text-sm hover:bg-goldLight transition">
-            Accès Stratégie Videos ↗
+    <!-- Section Community Videos (Trade Breakdowns - Public) -->
+    <section id="community-videos" class="max-w-6xl mx-auto px-4 py-8">
+      <div class="grain-canvas editorial-frame rounded-[24px] p-6 sm:p-8 space-y-5">
+        <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Community • Open Access</span>
+            <h2 class="font-display text-2xl font-bold text-white mt-1">Community & Trade Breakdowns</h2>
+            <p class="text-xs sm:text-sm text-slate-300/80 mt-1">Analyses de trades gagnants, récaps et logique d'entrée partagés avec la communauté.</p>
+          </div>
+          <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
+             class="self-start sm:self-auto px-4 py-2 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-semibold hover:bg-emerald-500/25 transition">
+            WhatsApp Communauté
           </a>
-          <a href="#inscription"
-             class="px-6 py-3 rounded-full bg-black/55 hover:bg-black/75 border border-white/25 text-white font-semibold text-xs sm:text-sm transition">
-            S'inscrire au Bootcamp
-          </a>
+        </div>
+
+        <div class="relative z-10 grid md:grid-cols-3 gap-4">
+          <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-5 space-y-2">
+            <span class="text-[11px] font-bold text-goldLight">BREAKDOWN #01</span>
+            <h3 class="text-base font-bold text-white">Analyse & Exécution (Bientôt)</h3>
+            <p class="text-xs text-slate-400">Explication complète du contexte HTF, confirmation LTF et gestion du risque.</p>
+          </div>
+          <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-5 space-y-2">
+            <span class="text-[11px] font-bold text-goldLight">BREAKDOWN #02</span>
+            <h3 class="text-base font-bold text-white">Lecture de Liquidité (Bientôt)</h3>
+            <p class="text-xs text-slate-400">Comment identifier les zones clés avant l'impulsion du marché.</p>
+          </div>
+          <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-5 space-y-2">
+            <span class="text-[11px] font-bold text-goldLight">COMMUNITY RECAP</span>
+            <h3 class="text-base font-bold text-white">Session Q&A & Mindset (Bientôt)</h3>
+            <p class="text-xs text-slate-400">Moments forts et réponses aux questions des membres de l'académie.</p>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Bottom Editorial Bar -->
-      <div class="relative z-10 mt-10 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-[11px] text-slate-300/80">
-        <div class="flex items-center gap-2">
-          <span class="px-2 py-0.5 rounded bg-white/10 text-white font-semibold">01 / 08</span>
-          <span>Séances & Stratégie</span>
+    <!-- Inscription (Formspree) -->
+    <section id="inscription" class="max-w-6xl mx-auto px-4 py-10">
+      <div class="grid lg:grid-cols-2 gap-6 items-start">
+
+        <!-- Formulaire -->
+        <div class="grain-canvas editorial-frame rounded-2xl p-6 sm:p-8 space-y-5">
+          <div class="relative z-10">
+            <span class="text-xs font-bold tracking-wider uppercase text-goldLight">Rejoindre l'Académie</span>
+            <h2 class="font-display text-2xl font-bold text-white mt-1">Inscription Bootcamp & VIP</h2>
+            <p class="text-xs sm:text-sm text-slate-300/80 mt-1">Remplis tes coordonnées pour recevoir ton accès et la confirmation.</p>
+          </div>
+
+          <form id="inscriptionForm" action="https://formspree.io/f/xzerykgy" method="POST" class="relative z-10 space-y-4">
+            <input type="hidden" name="_subject" id="emailSubject" value="Nouvelle Inscription Petricor Académie">
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-200 mb-1.5">Nom complet</label>
+              <input type="text" id="nom" name="nom" required placeholder="Ex: Yasser Nemrany"
+                     class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-200 mb-1.5">Téléphone / WhatsApp</label>
+              <input type="tel" id="telephone" name="telephone" required placeholder="Ex: +212 6 XX XX XX XX"
+                     class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-200 mb-1.5">Adresse email</label>
+              <input type="email" id="email" name="email" required placeholder="exemple@email.com"
+                     class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-200 mb-1.5">Formule souhaitée</label>
+              <select id="formule" name="formule" onchange="updateVIPBanner()"
+                      class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white focus:outline-none focus:border-gold">
+                <option value="Standard Bootcamp">Standard Bootcamp</option>
+                <option value="VIP Mentorship">VIP Mentorship (Accès Stratégie Videos)</option>
+              </select>
+            </div>
+
+            <div id="vipBanner" class="hidden rounded-xl bg-gold/15 border border-gold/40 p-3.5 text-xs text-goldLight">
+              ★ <strong>VIP Mentorship :</strong> Après validation, tu recevras le mot de passe pour ouvrir l'<strong>Espace VIP</strong> (Séances 1–8 + Stratégie).
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-200 mb-1.5">Niveau & objectifs</label>
+              <textarea id="details" name="details" rows="3" placeholder="Débutant / Intermédiaire, tes objectifs..."
+                        class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold"></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn"
+                    class="w-full py-3.5 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-sm hover:opacity-95 transition">
+              Valider l'Inscription & Envoyer
+            </button>
+
+            <p id="formStatus" class="text-xs sm:text-sm hidden rounded-xl p-3"></p>
+          </form>
         </div>
-        <div class="flex items-center gap-4">
-          <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer" class="hover:text-goldLight transition">WhatsApp</a>
-          <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer" class="hover:text-goldLight transition">Discord</a>
-          <a href="https://www.instagram.com/petricor_academie/" target="_blank" rel="noopener noreferrer" class="hover:text-goldLight transition">Instagram</a>
+
+        <!-- Récapitulatif -->
+        <div class="grain-canvas editorial-frame rounded-2xl p-6 sm:p-8 space-y-5">
+          <div class="relative z-10 flex items-center justify-between gap-2">
+            <div>
+              <span class="text-xs font-bold tracking-wider uppercase text-slate-400">Aperçu en direct</span>
+              <h3 class="text-xl font-bold text-white mt-0.5">Récapitulatif Instantané</h3>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-400/30">
+              Prêt
+            </span>
+          </div>
+
+          <div class="relative z-10 rounded-xl bg-obsidian/90 border border-white/10 p-4 text-sm space-y-1.5 text-slate-200">
+            <div><span class="text-slate-400">Nom :</span> <span id="recapNom">-</span></div>
+            <div><span class="text-slate-400">Téléphone :</span> <span id="recapTel">-</span></div>
+            <div><span class="text-slate-400">Email :</span> <span id="recapEmail">-</span></div>
+            <div><span class="text-slate-400">Formule :</span> <span id="recapFormule" class="text-goldLight font-semibold">Standard Bootcamp</span></div>
+            <div><span class="text-slate-400">Détails :</span> <span id="recapDetails">-</span></div>
+          </div>
+
+          <div class="relative z-10 grid sm:grid-cols-2 gap-3">
+            <button type="button" onclick="copyRecap()"
+                    class="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 font-semibold text-xs sm:text-sm transition">
+              Copier le Récapitulatif
+            </button>
+            <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
+               class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm text-center transition">
+              Confirmer sur WhatsApp
+            </a>
+          </div>
+
+          <div class="relative z-10 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
+            <span>Déjà membre VIP ?</span>
+            <button type="button" onclick="switchView('vip')" class="text-goldLight font-bold hover:underline">
+              Ouvrir l'Espace VIP 🔒 →
+            </button>
+          </div>
         </div>
+
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- Stratégie Videos Section with Owner Confirmation Gate -->
-  <section id="strategie-videos" class="max-w-6xl mx-auto px-4 py-10">
-    <div class="grain-canvas editorial-frame rounded-[26px] p-6 sm:p-8 space-y-6">
-      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+  <!-- ========================================================= -->
+  <!-- VUE 2 : ESPACE VIP (MOT DE PASSE & STRATÉGIE VIDEOS)      -->
+  <!-- ========================================================= -->
+  <section id="vipView" class="hidden max-w-6xl mx-auto px-4 py-10">
+    <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
+
+      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Espace Vidéos Privé</span>
-          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white mt-1">Stratégie Videos</h2>
-          <p class="text-xs sm:text-sm text-slate-300/80 mt-1">
-            Les vidéos restent protégées tant que tu n'as pas validé la confirmation d'accès.
+          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">★ Espace Privé Membre</span>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Petricor VIP — Stratégie & Séances</h2>
+          <p class="text-xs sm:text-sm text-slate-300/80 mt-1">Accès réservé aux membres confirmés avec mot de passe.</p>
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <span id="gateStatusBadge"
+                class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-400/30">
+            <span>🔒</span> Verrouillé
+          </span>
+          <button type="button" onclick="switchView('public')"
+                  class="px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-white transition">
+            ← Retour
+          </button>
+        </div>
+      </div>
+
+      <!-- Password Gate Box -->
+      <div class="relative z-10 rounded-2xl bg-charcoal/95 gold-line p-6 max-w-xl mx-auto space-y-4">
+        <div class="space-y-1">
+          <label for="confirmCodeInput" class="block text-xs font-bold uppercase tracking-wider text-goldLight">
+            Mot de passe VIP
+          </label>
+          <p class="text-xs text-slate-400">
+            Entre le mot de passe VIP pour débloquer les 8 séances complètes et la vidéo Stratégie.
           </p>
         </div>
 
-        <div id="gateStatusBadge"
-             class="self-start lg:self-auto inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-400/30 relative z-10">
-          <span>🔒</span> Confirmation requise
-        </div>
-      </div>
-
-      <!-- Confirmation Control Box -->
-      <div id="confirmationBox" class="relative z-10 rounded-2xl bg-charcoal/90 gold-line p-5 space-y-4">
-        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-          <div class="space-y-1.5 flex-1">
-            <label for="confirmCodeInput" class="block text-xs font-bold uppercase tracking-wider text-goldLight">
-              Confirmation de diffusion (Code d'activation)
-            </label>
-            <p class="text-xs text-slate-400">
-              Entre ton code de confirmation pour autoriser l'affichage et le visionnage des vidéos (code par défaut : <span class="text-slate-200 font-semibold">PETRICOR-VIP</span>).
-            </p>
-            <input id="confirmCodeInput" type="password" placeholder="Entrez le code de confirmation..."
-                   class="mt-2 w-full md:max-w-sm px-4 py-2.5 rounded-xl bg-obsidian border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
-          </div>
-
-          <div class="flex flex-wrap items-center gap-2.5">
-            <button type="button" onclick="confirmVideosAccess()"
-                    class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-xs sm:text-sm hover:opacity-95 transition">
-              Confirmer & Débloquer
-            </button>
-            <button type="button" onclick="lockVideosAccess()"
-                    class="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-200 font-semibold text-xs sm:text-sm transition">
-              Verrouiller
-            </button>
-          </div>
+        <div class="flex flex-col sm:flex-row gap-2.5">
+          <input id="confirmCodeInput" type="password" placeholder="Entrez le mot de passe VIP..."
+                 onkeydown="if(event.key==='Enter') confirmVideosAccess()"
+                 class="flex-1 px-4 py-3 rounded-xl bg-obsidian border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
+          <button type="button" onclick="confirmVideosAccess()"
+                  class="px-5 py-3 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-xs sm:text-sm hover:opacity-95 transition">
+            Débloquer VIP
+          </button>
+          <button type="button" onclick="lockVideosAccess()"
+                  class="px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-300 font-semibold text-xs sm:text-sm transition">
+            Verrouiller
+          </button>
         </div>
 
         <p id="confirmMessage" class="text-xs hidden rounded-xl p-2.5"></p>
       </div>
 
       <!-- Locked Placeholder -->
-      <div id="videosLockedState" class="relative z-10 rounded-2xl bg-obsidian/80 border border-white/10 p-8 text-center space-y-3">
-        <div class="text-2xl">🔒</div>
-        <h3 class="text-lg font-bold text-white">Vidéos en attente de ta confirmation</h3>
+      <div id="videosLockedState" class="relative z-10 rounded-2xl bg-obsidian/80 border border-white/10 p-10 text-center space-y-3">
+        <div class="text-3xl">🔒</div>
+        <h3 class="text-lg font-bold text-white">Contenu VIP Protégé</h3>
         <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">
-          Les 8 séances et la vidéo de stratégie sont masquées. Valide le code de confirmation ci-dessus pour les rendre accessibles.
+          Les Séances 1 à 8 ainsi que la vidéo Stratégie sont verrouillées. Entre le mot de passe VIP ci-dessus pour y accéder.
         </p>
-      </div>
-
-      <!-- Unlocked Videos Grid -->
-      <div id="videosUnlockedGrid" class="relative z-10 hidden grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Populated dynamically via JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Programmes -->
-  <section id="programmes" class="max-w-6xl mx-auto px-4 py-8">
-    <div class="mb-6">
-      <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Choisis Ton Parcours</h2>
-      <p class="text-slate-400 text-sm mt-1">Deux niveaux d'accompagnement adaptés à ton rythme et tes objectifs.</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="grain-canvas editorial-frame rounded-2xl p-6 flex flex-col justify-between space-y-6">
-        <div class="relative z-10 space-y-3">
-          <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-white/10 text-slate-200">
-            STANDARD BOOTCAMP
-          </span>
-          <h3 class="text-xl font-bold text-white">Fondations & Structure</h3>
-          <p class="text-sm text-slate-300/80">Bases solides sur la structure du marché, la liquidité et la gestion du risque.</p>
-          <ul class="space-y-2 text-sm text-slate-200 pt-2">
-            <li>• Lecture du prix & zones de liquidité</li>
-            <li>• Gestion du risque & discipline</li>
-            <li>• Accès communauté Discord & WhatsApp</li>
-          </ul>
-        </div>
-        <button type="button" onclick="selectFormule('Standard Bootcamp')"
-                class="relative z-10 w-full py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 font-semibold text-sm transition">
-          Choisir Standard
-        </button>
-      </div>
-
-      <div class="grain-canvas rounded-2xl p-6 flex flex-col justify-between space-y-6 gold-line">
-        <div class="relative z-10 space-y-3">
-          <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-gold/20 text-goldLight border border-gold/40">
-            ★ VIP MENTORSHIP
-          </span>
-          <h3 class="text-xl font-bold text-goldLight">Accès Prioritaire & Suivi Avancé</h3>
-          <p class="text-sm text-slate-200/85">Pour les membres engagés recherchant un accompagnement avancé et une exécution précise.</p>
-          <ul class="space-y-2 text-sm text-slate-100 pt-2">
-            <li>• Tout le contenu Standard Bootcamp</li>
-            <li>• Stratégies avancées & suivi prioritaire</li>
-            <li>• Orientation directe & accès VIP</li>
-          </ul>
-        </div>
-        <button type="button" onclick="selectFormule('VIP Mentorship')"
-                class="relative z-10 w-full py-3 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-sm hover:opacity-95 transition">
-          Choisir VIP Mentorship
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Inscription + Récapitulatif -->
-  <section id="inscription" class="max-w-6xl mx-auto px-4 py-10">
-    <div class="grid lg:grid-cols-2 gap-6 items-start">
-
-      <!-- Formulaire -->
-      <div class="grain-canvas editorial-frame rounded-2xl p-6 sm:p-8 space-y-5">
-        <div class="relative z-10">
-          <span class="text-xs font-bold tracking-wider uppercase text-goldLight">Inscription</span>
-          <h2 class="font-display text-2xl font-bold text-white mt-1">Formulaire d'Inscription</h2>
-          <p class="text-xs sm:text-sm text-slate-300/80 mt-1">Envoi direct vers <span class="text-goldLight">nemranyy100@gmail.com</span> via Formspree.</p>
-        </div>
-
-        <form id="inscriptionForm" action="https://formspree.io/f/xzerykgy" method="POST" class="relative z-10 space-y-4">
-          <input type="hidden" name="_subject" id="emailSubject" value="Nouvelle Inscription Petricor Académie">
-
-          <div>
-            <label class="block text-xs font-semibold text-slate-200 mb-1.5">Nom complet</label>
-            <input type="text" id="nom" name="nom" required placeholder="Ex: Yasser Nemrany"
-                   class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
-          </div>
-
-          <div>
-            <label class="block text-xs font-semibold text-slate-200 mb-1.5">Téléphone / WhatsApp</label>
-            <input type="tel" id="telephone" name="telephone" required placeholder="Ex: +212 6 XX XX XX XX"
-                   class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
-          </div>
-
-          <div>
-            <label class="block text-xs font-semibold text-slate-200 mb-1.5">Adresse email</label>
-            <input type="email" id="email" name="email" required placeholder="exemple@email.com"
-                   class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
-          </div>
-
-          <div>
-            <label class="block text-xs font-semibold text-slate-200 mb-1.5">Formule souhaitée</label>
-            <select id="formule" name="formule" onchange="updateVIPBanner()"
-                    class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white focus:outline-none focus:border-gold">
-              <option value="Standard Bootcamp">Standard Bootcamp</option>
-              <option value="VIP Mentorship">VIP Mentorship</option>
-            </select>
-          </div>
-
-          <div id="vipBanner" class="hidden rounded-xl bg-gold/15 border border-gold/40 p-3.5 text-xs text-goldLight">
-            ★ <strong>Statut VIP sélectionné :</strong> Priorité sur le suivi et confirmation rapide.
-          </div>
-
-          <div>
-            <label class="block text-xs font-semibold text-slate-200 mb-1.5">Niveau actuel & objectifs</label>
-            <textarea id="details" name="details" rows="3" placeholder="Débutant / Intermédiaire, tes objectifs..."
-                      class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold"></textarea>
-          </div>
-
-          <button type="submit" id="submitBtn"
-                  class="w-full py-3.5 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-sm hover:opacity-95 transition">
-            Valider l'Inscription & Envoyer
+        <div class="pt-2">
+          <button type="button" onclick="switchView('public'); setTimeout(()=>document.getElementById('inscription').scrollIntoView({behavior:'smooth'}),100)"
+                  class="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-goldLight transition">
+            Pas encore de mot de passe ? S'inscrire ici
           </button>
-
-          <p id="formStatus" class="text-xs sm:text-sm hidden rounded-xl p-3"></p>
-        </form>
-      </div>
-
-      <!-- Récapitulatif -->
-      <div class="grain-canvas editorial-frame rounded-2xl p-6 sm:p-8 space-y-5">
-        <div class="relative z-10 flex items-center justify-between gap-2">
-          <div>
-            <span class="text-xs font-bold tracking-wider uppercase text-slate-400">Aperçu en direct</span>
-            <h3 class="text-xl font-bold text-white mt-0.5">Récapitulatif Instantané</h3>
-          </div>
-          <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-400/30">
-            Actif
-          </span>
-        </div>
-
-        <div class="relative z-10 rounded-xl bg-obsidian/90 border border-white/10 p-4 text-sm space-y-1.5 text-slate-200">
-          <div><span class="text-slate-400">Nom :</span> <span id="recapNom">-</span></div>
-          <div><span class="text-slate-400">Téléphone :</span> <span id="recapTel">-</span></div>
-          <div><span class="text-slate-400">Email :</span> <span id="recapEmail">-</span></div>
-          <div><span class="text-slate-400">Formule :</span> <span id="recapFormule" class="text-goldLight font-semibold">Standard Bootcamp</span></div>
-          <div><span class="text-slate-400">Détails :</span> <span id="recapDetails">-</span></div>
-        </div>
-
-        <div class="relative z-10 grid sm:grid-cols-2 gap-3">
-          <button type="button" onclick="copyRecap()"
-                  class="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 font-semibold text-xs sm:text-sm transition">
-            Copier le Récapitulatif
-          </button>
-          <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
-             class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm text-center transition">
-            Confirmer sur WhatsApp
-          </a>
-        </div>
-
-        <div class="relative z-10 pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
-          <span>Canaux officiels :</span>
-          <div class="flex items-center gap-3">
-            <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer" class="text-goldLight hover:underline">Discord</a>
-            <a href="https://www.instagram.com/petricor_academie/" target="_blank" rel="noopener noreferrer" class="text-goldLight hover:underline">Instagram</a>
-            <a href="mailto:nemranyy100@gmail.com" class="text-goldLight hover:underline">Email</a>
-          </div>
         </div>
       </div>
 
-    </div>
-  </section>
+      <!-- Unlocked VIP Videos Grid -->
+      <div id="videosUnlockedGrid" class="relative z-10 hidden grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
 
-  <!-- Galerie -->
-  <section id="galerie" class="max-w-6xl mx-auto px-4 py-10">
-    <div class="mb-6">
-      <h2 class="font-display text-2xl sm:text-3xl font-bold text-white">Galerie Petricor Académie</h2>
-      <p class="text-slate-400 text-sm mt-1">Visuels et moments clés de l'académie.</p>
-    </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="grain-canvas editorial-frame rounded-2xl p-6 h-44 flex flex-col justify-between">
-        <span class="relative z-10 text-xs font-semibold text-goldLight">01 / GRAPHIC</span>
-        <div class="relative z-10">
-          <div class="font-bold text-white">Sessions & Analyse</div>
-          <div class="text-xs text-slate-300/75 mt-1">Emplacement visuel prêt.</div>
-        </div>
-      </div>
-
-      <div class="grain-canvas editorial-frame rounded-2xl p-6 h-44 flex flex-col justify-between">
-        <span class="relative z-10 text-xs font-semibold text-goldLight">02 / GRAPHIC</span>
-        <div class="relative z-10">
-          <div class="font-bold text-white">Bootcamp & Communauté</div>
-          <div class="text-xs text-slate-300/75 mt-1">Emplacement visuel prêt.</div>
-        </div>
-      </div>
-
-      <div class="grain-canvas editorial-frame rounded-2xl p-6 h-44 flex flex-col justify-between">
-        <span class="relative z-10 text-xs font-semibold text-goldLight">03 / GRAPHIC</span>
-        <div class="relative z-10">
-          <div class="font-bold text-white">Stratégie & VIP</div>
-          <div class="text-xs text-slate-300/75 mt-1">Emplacement visuel prêt.</div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -439,203 +479,20 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // === 1. STRATÉGIE VIDEOS DATA ===
-    // Code de confirmation par défaut : PETRICOR-VIP (tu peux le changer ici)
-    const CONFIRMATION_CODE = "PETRICOR-VIP";
+    function switchView(view) {
+      const publicView = document.getElementById('publicView');
+      const vipView = document.getElementById('vipView');
+      const navPublicBtn = document.getElementById('navPublicBtn');
+      const navVipBtn = document.getElementById('navVipBtn');
 
-    const STRATEGY_VIDEOS = [
-      { title: "Séance 1", tag: "Session 01", url: "https://youtu.be/z0yGCcyQiiA?si=f4MfyDVrl3TkNNyK", id: "z0yGCcyQiiA" },
-      { title: "Séance 2", tag: "Session 02", url: "https://youtu.be/Dl9XSxMa0CU?si=LKpdm07tTCITvgb_", id: "Dl9XSxMa0CU" },
-      { title: "Séance 3", tag: "Session 03", url: "https://youtu.be/Bc1DYM7tCP4?si=Z6wMLPbwUThd371n", id: "Bc1DYM7tCP4" },
-      { title: "Séance 4", tag: "Session 04", url: "https://youtu.be/GoTCmA_GfOg?si=1HAfu7PKoXJtQvLy", id: "GoTCmA_GfOg" },
-      { title: "Séance 5", tag: "Session 05", url: "https://youtu.be/HfC1V29ZlHQ?si=4MfOuWeL-yHayBFH", id: "HfC1V29ZlHQ" },
-      { title: "Séance 6", tag: "Session 06", url: "https://youtu.be/VpJE-xb_8gA?si=IQDapH04TXfTMPpM", id: "VpJE-xb_8gA" },
-      { title: "Séance 7", tag: "Session 07", url: "https://youtu.be/J72V8daXBl0?si=q7SP8N5yy6-Lfyjr", id: "J72V8daXBl0" },
-      { title: "Séance 8", tag: "Session 08", url: "https://youtu.be/QFCEqH2vVMk?si=gOfT6_117awTtINt", id: "QFCEqH2vVMk" },
-      { title: "Stratégie", tag: "Core Strategy", url: "https://youtu.be/_vjHEg3Wffg?si=luoKRP3wWdIfAU0P", id: "_vjHEg3Wffg" }
-    ];
-
-    const videosGridEl = document.getElementById('videosUnlockedGrid');
-    const videosLockedEl = document.getElementById('videosLockedState');
-    const gateStatusBadgeEl = document.getElementById('gateStatusBadge');
-    const confirmMsgEl = document.getElementById('confirmMessage');
-
-    function renderStrategyVideos() {
-      videosGridEl.innerHTML = STRATEGY_VIDEOS.map((vid) => `
-        <div class="rounded-2xl bg-charcoal/95 border border-white/12 overflow-hidden flex flex-col justify-between">
-          <div>
-            <div class="aspect-video bg-obsidian relative border-b border-white/10">
-              <iframe
-                class="w-full h-full"
-                src="https://www.youtube.com/embed/${vid.id}"
-                title="${vid.title}"
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="p-4 space-y-1">
-              <span class="inline-block text-[10px] font-bold uppercase tracking-wider text-goldLight">${vid.tag}</span>
-              <h3 class="text-base font-bold text-white">${vid.title}</h3>
-            </div>
-          </div>
-          <div class="px-4 pb-4 pt-1">
-            <a href="${vid.url}" target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center justify-center w-full py-2 px-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-xs font-semibold text-white transition">
-              Ouvrir sur YouTube ↗
-            </a>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function setVideosUnlockedState(unlocked) {
-      if (unlocked) {
-        renderStrategyVideos();
-        videosLockedEl.classList.add('hidden');
-        videosGridEl.classList.remove('hidden');
-        videosGridEl.classList.add('grid');
-        gateStatusBadgeEl.className = "self-start lg:self-auto inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 relative z-10";
-        gateStatusBadgeEl.innerHTML = "<span>✓</span> Accès confirmé & débloqué";
+      if (view === 'vip') {
+        publicView.classList.add('hidden');
+        vipView.classList.remove('hidden');
+        navVipBtn.className = "px-3.5 py-1.5 rounded-full bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold transition flex items-center gap-1.5";
+        navPublicBtn.className = "px-3.5 py-1.5 rounded-full text-slate-300 hover:bg-white/10 font-semibold transition";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        videosGridEl.innerHTML = "";
-        videosGridEl.classList.add('hidden');
-        videosGridEl.classList.remove('grid');
-        videosLockedEl.classList.remove('hidden');
-        gateStatusBadgeEl.className = "self-start lg:self-auto inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-400/30 relative z-10";
-        gateStatusBadgeEl.innerHTML = "<span>🔒</span> Confirmation requise";
-      }
-    }
-
-    function showConfirmMsg(text, ok) {
-      confirmMsgEl.textContent = text;
-      confirmMsgEl.classList.remove('hidden', 'bg-emerald-500/15', 'text-emerald-300', 'border-emerald-500/30', 'bg-red-500/15', 'text-red-300', 'border-red-500/30', 'border');
-      confirmMsgEl.classList.add('border', ok ? 'bg-emerald-500/15' : 'bg-red-500/15', ok ? 'text-emerald-300' : 'text-red-300', ok ? 'border-emerald-500/30' : 'border-red-500/30');
-    }
-
-    function confirmVideosAccess() {
-      const entered = document.getElementById('confirmCodeInput').value.trim();
-      if (entered === CONFIRMATION_CODE) {
-        sessionStorage.setItem('petricor_videos_confirmed', '1');
-        setVideosUnlockedState(true);
-        showConfirmMsg("Confirmation validée. Les vidéos de stratégie sont maintenant accessibles.", true);
-      } else {
-        showConfirmMsg("Code de confirmation incorrect.", false);
-      }
-    }
-
-    function lockVideosAccess() {
-      sessionStorage.removeItem('petricor_videos_confirmed');
-      document.getElementById('confirmCodeInput').value = '';
-      setVideosUnlockedState(false);
-      showConfirmMsg("Les vidéos sont à nouveau verrouillées.", true);
-    }
-
-    if (sessionStorage.getItem('petricor_videos_confirmed') === '1') {
-      setVideosUnlockedState(true);
-    } else {
-      setVideosUnlockedState(false);
-    }
-
-    // === 2. FORMULAIRE & RÉCAPITULATIF ===
-    const nomEl = document.getElementById('nom');
-    const telEl = document.getElementById('telephone');
-    const emailEl = document.getElementById('email');
-    const formuleEl = document.getElementById('formule');
-    const detailsEl = document.getElementById('details');
-    const vipBanner = document.getElementById('vipBanner');
-    const emailSubjectEl = document.getElementById('emailSubject');
-    const formStatusEl = document.getElementById('formStatus');
-    const submitBtn = document.getElementById('submitBtn');
-
-    function getRecapText() {
-      const nom = nomEl.value.trim() || '-';
-      const tel = telEl.value.trim() || '-';
-      const email = emailEl.value.trim() || '-';
-      const formule = formuleEl.value || 'Standard Bootcamp';
-      const details = detailsEl.value.trim() || '-';
-      return `Nouvelle Inscription - Petricor Académie\nNom : ${nom}\nTéléphone : ${tel}\nEmail : ${email}\nFormule : ${formule}\nDétails : ${details}`;
-    }
-
-    function updateRecap() {
-      const nom = nomEl.value.trim() || '-';
-      const tel = telEl.value.trim() || '-';
-      const email = emailEl.value.trim() || '-';
-      const formule = formuleEl.value || 'Standard Bootcamp';
-      const details = detailsEl.value.trim() || '-';
-
-      document.getElementById('recapNom').textContent = nom;
-      document.getElementById('recapTel').textContent = tel;
-      document.getElementById('recapEmail').textContent = email;
-      document.getElementById('recapFormule').textContent = formule;
-      document.getElementById('recapDetails').textContent = details;
-      emailSubjectEl.value = `Nouvelle Inscription Petricor Académie - ${nom} (${formule})`;
-    }
-
-    function updateVIPBanner() {
-      if (formuleEl.value === 'VIP Mentorship') {
-        vipBanner.classList.remove('hidden');
-      } else {
-        vipBanner.classList.add('hidden');
-      }
-      updateRecap();
-    }
-
-    function selectFormule(valeur) {
-      formuleEl.value = valeur;
-      updateVIPBanner();
-      document.getElementById('inscription').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function copyRecap() {
-      navigator.clipboard.writeText(getRecapText()).then(() => {
-        showStatus('Récapitulatif copié.', true);
-      }).catch(() => {
-        showStatus('Impossible de copier.', false);
-      });
-    }
-
-    function showStatus(msg, ok) {
-      formStatusEl.textContent = msg;
-      formStatusEl.classList.remove('hidden', 'bg-emerald-500/15', 'text-emerald-300', 'border-emerald-500/30', 'bg-red-500/15', 'text-red-300', 'border-red-500/30', 'border');
-      formStatusEl.classList.add('border', ok ? 'bg-emerald-500/15' : 'bg-red-500/15', ok ? 'text-emerald-300' : 'text-red-300', ok ? 'border-emerald-500/30' : 'border-red-500/30');
-    }
-
-    [nomEl, telEl, emailEl, formuleEl, detailsEl].forEach(el => {
-      el.addEventListener('input', updateRecap);
-      el.addEventListener('change', updateRecap);
-    });
-
-    document.getElementById('inscriptionForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Envoi en cours...';
-
-      try {
-        const formData = new FormData(this);
-        const response = await fetch(this.getAttribute('action'), {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          showStatus('Inscription envoyée avec succès ! Vérifie ton email.', true);
-          this.reset();
-          updateVIPBanner();
-          updateRecap();
-        } else {
-          showStatus('Erreur lors de l’envoi.', false);
-        }
-      } catch (err) {
-        showStatus('Problème de connexion.', false);
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Valider l'Inscription & Envoyer";
-      }
-    });
-
-    updateRecap();
-  </script>
-</body>
-</html>
+        vipView.classList.add('hidden');
+        publicView.classList.remove('hidden');
+        navPublicBtn.className = "px-3.5 py-1.5 rounded-full bg-white text-obsidian font-bold transition";
+        navVipBtn.class
