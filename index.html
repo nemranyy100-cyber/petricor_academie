@@ -433,18 +433,18 @@
   </section>
 
   <!-- ========================================================= -->
-  <!-- PAGE 3 : BACKTEST (SETUP AVANT FULL-SCREEN CHART)         -->
+  <!-- PAGE 3 : BACKTEST (TRADERS CASA WORKFLOW • 2026+)          -->
   <!-- ========================================================= -->
-  <section id="backtestPage" class="hidden max-w-6xl mx-auto px-4 py-8">
+  <section id="backtestPage" class="hidden max-w-6xl mx-auto px-4 py-8 space-y-6">
 
-    <!-- ÉTAPE 1 : SETUP SESSION (PAIRE + DATE + CAPITAL) -->
+    <!-- ÉTAPE 1 : SETUP SESSION (TRADERS CASA STYLE) -->
     <div id="btSetupScreen" class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
       <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Étape 1 • Configuration Session</span>
-          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Préparer le Backtest</h2>
+          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Petricor Backtest • 2026+</span>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">New Backtest Session</h2>
           <p class="text-xs sm:text-sm text-slate-300/85 mt-1">
-            Choisis la paire, la date de départ et ton capital avant d'ouvrir le chart en plein écran.
+            Configure ta session (Pair, Date 2026, Capital, Risque) puis lance le chart plein écran avec Replay et Entry/SL/TP.
           </p>
         </div>
         <button type="button" onclick="switchView('accueil')"
@@ -453,72 +453,117 @@
         </button>
       </div>
 
-      <div class="relative z-10 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="relative z-10 grid md:grid-cols-2 lg:grid-cols-5 gap-4">
         <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
-          <label class="block text-xs font-bold text-goldLight">1. Paire / Marché</label>
-          <select id="setupPair" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-sm text-white font-bold">
+          <label class="block text-xs font-bold text-goldLight">Session Name</label>
+          <input id="setupSessionName" type="text" value="Session 2026 - London/NY"
+                 class="w-full px-3 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white font-semibold">
+        </div>
+
+        <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
+          <label class="block text-xs font-bold text-goldLight">Pair</label>
+          <select id="setupPair" class="w-full px-3 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white font-bold">
             <option value="XAU/USD">XAU/USD (Gold)</option>
-            <option value="EUR/USD">EUR/USD (Euro)</option>
-            <option value="GBP/USD">GBP/USD (Pound)</option>
-            <option value="BTC/USD">BTC/USD (Bitcoin)</option>
-            <option value="USD/JPY">USD/JPY (Yen)</option>
+            <option value="EUR/USD">EUR/USD</option>
+            <option value="GBP/USD">GBP/USD</option>
+            <option value="BTC/USD">BTC/USD</option>
+            <option value="USD/JPY">USD/JPY</option>
           </select>
         </div>
 
         <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
-          <label class="block text-xs font-bold text-goldLight">2. Date de départ</label>
-          <input id="setupDate" type="date" value="2026-10-15"
-                 class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-sm text-white font-semibold">
+          <label class="block text-xs font-bold text-goldLight">Start Date (2026+)</label>
+          <input id="setupDate" type="date" value="2026-01-02" min="2026-01-01"
+                 class="w-full px-3 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white font-semibold">
         </div>
 
         <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
-          <label class="block text-xs font-bold text-goldLight">3. Capital / Balance ($)</label>
+          <label class="block text-xs font-bold text-goldLight">Balance ($)</label>
           <input id="setupBalance" type="number" value="10000" min="100" step="500"
-                 class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-sm text-white font-mono font-bold">
+                 class="w-full px-3 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white font-mono font-bold">
         </div>
 
         <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
-          <label class="block text-xs font-bold text-goldLight">4. Risque par trade (%)</label>
-          <select id="setupRiskPct" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-sm text-white font-bold">
-            <option value="0.5">0.5% Risque</option>
-            <option value="1" selected>1.0% Risque</option>
-            <option value="2">2.0% Risque</option>
+          <label class="block text-xs font-bold text-goldLight">Risk per Trade (%)</label>
+          <select id="setupRiskPct" class="w-full px-3 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white font-bold">
+            <option value="0.5">0.5%</option>
+            <option value="1" selected>1.0%</option>
+            <option value="2">2.0%</option>
           </select>
         </div>
       </div>
 
-      <!-- Optional Twelve Data API Key -->
-      <div class="relative z-10 rounded-2xl bg-charcoal/80 border border-white/10 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-        <div class="space-y-0.5">
-          <div class="font-bold text-white">Source Data Réelle (Twelve Data API)</div>
-          <div class="text-slate-400">Ajoute ta clé gratuite Twelve Data pour charger l'historique réel du marché (ou laisse vide pour mode démonstration instantané).</div>
+      <!-- Optional CSV or Twelve Data API Key -->
+      <div class="relative z-10 grid md:grid-cols-2 gap-4 text-xs">
+        <div class="rounded-2xl bg-charcoal/80 border border-white/10 p-4 space-y-1.5">
+          <label class="block font-bold text-white">Importer CSV 2026 (Optionnel)</label>
+          <input id="setupCsvFile" type="file" accept=".csv,text/csv"
+                 class="w-full text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:bg-white/10 file:text-white file:font-semibold">
+          <div class="text-[11px] text-slate-400">Colonnes attendues : date/time, open, high, low, close.</div>
         </div>
-        <input id="twelveApiKey" type="text" placeholder="Clé API Twelve Data (optionnel)..."
-               class="w-full sm:w-72 px-3.5 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white placeholder-slate-500">
+
+        <div class="rounded-2xl bg-charcoal/80 border border-white/10 p-4 space-y-1.5">
+          <label class="block font-bold text-white">Clé Twelve Data API (Optionnel)</label>
+          <input id="twelveApiKey" type="text" placeholder="Coller clé Twelve Data..."
+                 class="w-full px-3.5 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white placeholder-slate-500">
+          <div class="text-[11px] text-slate-400">Sans CSV ni clé, une série 2026 est générée pour tester le workflow.</div>
+        </div>
       </div>
 
-      <div class="relative z-10 flex flex-wrap items-center justify-between gap-4 pt-2">
+      <div class="relative z-10 flex flex-wrap items-center justify-between gap-4 pt-1">
         <div class="text-xs text-slate-400">
-          Timeframes : <strong class="text-white">1m</strong> → <strong class="text-white">Weekly</strong> • Settings couleurs candles/chart inclus
+          Workflow : <strong class="text-white">Setup</strong> → <strong class="text-goldLight">Full-Screen Chart</strong> → <strong class="text-white">Replay & Entry/SL/TP</strong> → <strong class="text-white">Journal</strong>
         </div>
         <button type="button" onclick="launchFullScreenTerminal()"
                 class="press-blur px-7 py-3.5 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-sm shadow-lg hover:opacity-95 transition">
-          ⛶ Lancer le Chart Plein Écran →
+          ⛶ Launch Full-Screen Chart →
         </button>
+      </div>
+    </div>
+
+    <!-- Trade Journal (Visible under Setup Screen) -->
+    <div id="btJournalCard" class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-8 space-y-4">
+      <div class="relative z-10 flex items-center justify-between gap-2 flex-wrap">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Historique & Analytics</span>
+          <h3 class="font-display text-xl font-bold text-white mt-0.5">Trade Journal</h3>
+        </div>
+        <button type="button" onclick="clearJournal()"
+                class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-300">
+          Vider le journal
+        </button>
+      </div>
+      <div class="relative z-10 overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-white/10 text-slate-400">
+              <th class="py-2 pr-3">Session / Pair</th>
+              <th class="py-2 px-3">Side</th>
+              <th class="py-2 px-3">Entry</th>
+              <th class="py-2 px-3">SL</th>
+              <th class="py-2 px-3">TP</th>
+              <th class="py-2 px-3">Result</th>
+              <th class="py-2 pl-3 text-right">P&amp;L</th>
+            </tr>
+          </thead>
+          <tbody id="journalTbody" class="divide-y divide-white/5 font-mono">
+            <tr><td colspan="7" class="py-4 text-center text-slate-500 font-sans">Aucun trade clôturé pour le moment.</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
     <!-- ÉTAPE 2 : FULL-SCREEN TRADING TERMINAL -->
     <div id="btFullscreenOverlay" class="hidden rounded-2xl bg-[#0a0c10] border border-white/15 flex flex-col overflow-hidden">
 
-      <!-- Top Bar: Timeframes (1m -> Weekly) + Replay + Settings + Exit Fullscreen -->
+      <!-- Top Bar -->
       <div class="px-3 py-2 bg-[#101319] border-b border-white/10 flex items-center justify-between gap-2 flex-wrap text-xs">
         <div class="flex items-center gap-2 flex-wrap">
           <span id="termPairLabel" class="px-2.5 py-1 rounded bg-gold/15 border border-gold/30 text-goldLight font-extrabold">
             XAU/USD
           </span>
-          <span id="termSourceBadge" class="px-2 py-0.5 rounded bg-white/5 text-[10px] text-slate-300">
-            Data
+          <span id="termDateLabel" class="px-2 py-0.5 rounded bg-white/5 text-[11px] font-mono text-slate-300">
+            2026-01-02
           </span>
 
           <!-- Timeframes 1m to Weekly -->
@@ -540,6 +585,11 @@
                   class="px-2.5 py-0.5 rounded bg-gold text-obsidian font-extrabold">▶ Play</button>
           <button type="button" onclick="stepTermCandle()"
                   class="px-2.5 py-0.5 rounded bg-white/10 hover:bg-white/20 text-white font-bold">⏭ +1</button>
+          <select id="termSpeedSel" onchange="restartPlayIfRunning()" class="bg-[#101319] border border-white/10 rounded px-1.5 py-0.5 text-[11px] text-white">
+            <option value="800">1x</option>
+            <option value="350">2x</option>
+            <option value="150">4x</option>
+          </select>
           <span id="termBarProgress" class="font-mono text-[11px] text-slate-400">0/0</span>
         </div>
 
@@ -556,7 +606,7 @@
         </div>
       </div>
 
-      <!-- Settings Popover (Candle Colors + Chart Theme + Grid) -->
+      <!-- Settings Popover -->
       <div id="chartSettingsPanel" class="hidden bg-[#141923] border-b border-gold/30 px-4 py-3 text-xs">
         <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-4">
           <div class="flex items-center gap-2">
@@ -576,20 +626,21 @@
           </div>
           <label class="flex items-center gap-1.5 text-slate-200 font-semibold cursor-pointer">
             <input id="setShowGrid" type="checkbox" checked onchange="applyChartAppearance()" class="accent-gold">
-            Afficher Grid
+            Grid Lines
           </label>
         </div>
       </div>
 
-      <!-- Chart Canvas (Expands Full Height) -->
+      <!-- Chart Canvas -->
       <div id="tvChartContainer" class="flex-1 w-full min-h-[460px]"></div>
 
       <!-- Bottom Trade & Balance Bar -->
       <div class="px-3 py-2.5 bg-[#101319] border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
         <div class="flex items-center gap-4 font-mono">
           <div><span class="text-slate-400">Balance:</span> <strong id="termBalance" class="text-white">$10,000.00</strong></div>
-          <div><span class="text-slate-400">P&L:</span> <strong id="termPnl" class="text-emerald-400">$0.00</strong></div>
-          <div><span class="text-slate-400">Prix:</span> <strong id="termPrice" class="text-goldLight">-</strong></div>
+          <div><span class="text-slate-400">P&amp;L:</span> <strong id="termPnl" class="text-emerald-400">$0.00</strong></div>
+          <div><span class="text-slate-400">Price:</span> <strong id="termPrice" class="text-goldLight">-</strong></div>
+          <span id="termPosBadge" class="hidden px-2 py-0.5 rounded bg-gold/20 text-goldLight font-bold"></span>
         </div>
 
         <div class="flex items-center gap-2 flex-wrap">
@@ -892,29 +943,50 @@
       }
     });
 
-    // === FULL-SCREEN REAL DATA TERMINAL (TWELVE DATA + LIGHTWEIGHT CHARTS) ===
+    // === TRADERS CASA STYLE TERMINAL (2026+ START) ===
     let tvChart = null;
     let tvSeries = null;
     let allBars = [];
-    let replayIdx = 40;
+    let replayIdx = 35;
     let termInterval = null;
     let termTf = '15min';
     let termStartBalance = 10000;
     let termBalance = 10000;
     let termRiskPct = 1;
     let activeOrder = null;
+    let orderLines = [];
+    let tradeMarkers = [];
+    let journalRows = [];
 
     const PAIR_SPECS = {
-      'XAU/USD': { base: 2650, vol: 5.5, prec: 2 },
-      'EUR/USD': { base: 1.0850, vol: 0.0014, prec: 4 },
-      'GBP/USD': { base: 1.2720, vol: 0.0016, prec: 4 },
-      'BTC/USD': { base: 92500, vol: 320, prec: 1 },
-      'USD/JPY': { base: 152.40, vol: 0.28, prec: 2 }
+      'XAU/USD': { base: 2740, vol: 6.0, prec: 2 },
+      'EUR/USD': { base: 1.0420, vol: 0.0014, prec: 4 },
+      'GBP/USD': { base: 1.2510, vol: 0.0016, prec: 4 },
+      'BTC/USD': { base: 94200, vol: 340, prec: 1 },
+      'USD/JPY': { base: 156.80, vol: 0.28, prec: 2 }
     };
 
-    function buildMarketBars(pair, startDateStr, count = 240) {
+    function parseCsvBars(csvText) {
+      const lines = csvText.trim().split(/\r?\n/).filter(Boolean);
+      if (lines.length < 25) return null;
+      const startRow = /open/i.test(lines[0]) ? 1 : 0;
+      const bars = [];
+      for (let i = startRow; i < lines.length; i++) {
+        const parts = lines[i].split(',');
+        if (parts.length < 5) continue;
+        const ts = Date.parse(parts[0].trim());
+        const o = parseFloat(parts[1]), h = parseFloat(parts[2]), l = parseFloat(parts[3]), c = parseFloat(parts[4]);
+        if (!isNaN(ts) && [o, h, l, c].every(n => !isNaN(n))) {
+          bars.push({ time: Math.floor(ts / 1000), open: o, high: h, low: l, close: c });
+        }
+      }
+      return bars.length >= 25 ? bars : null;
+    }
+
+    function buildSeriesFrom2026(pair, startDateStr, count = 240) {
       const spec = PAIR_SPECS[pair] || PAIR_SPECS['XAU/USD'];
-      const startSec = Math.floor(new Date(startDateStr || '2026-10-15').getTime() / 1000);
+      const safeDate = (startDateStr && startDateStr >= '2026-01-01') ? startDateStr : '2026-01-02';
+      const startSec = Math.floor(new Date(safeDate + 'T00:00:00Z').getTime() / 1000);
       const tfSecMap = { '1min': 60, '5min': 300, '15min': 900, '1h': 3600, '4h': 14400, '1day': 86400, '1week': 604800 };
       const stepSec = tfSecMap[termTf] || 900;
 
@@ -922,11 +994,11 @@
       let trend = 1;
       const bars = [];
       for (let i = 0; i < count; i++) {
-        if (i % 18 === 0) trend = Math.random() > 0.48 ? 1 : -1;
+        if (i % 16 === 0) trend = Math.random() > 0.48 ? 1 : -1;
         const open = price;
-        const close = open + (Math.random() - 0.47 + trend * 0.14) * spec.vol;
-        const high = Math.max(open, close) + Math.random() * spec.vol * 0.85;
-        const low = Math.min(open, close) - Math.random() * spec.vol * 0.85;
+        const close = open + (Math.random() - 0.48 + trend * 0.13) * spec.vol;
+        const high = Math.max(open, close) + Math.random() * spec.vol * 0.8;
+        const low = Math.min(open, close) - Math.random() * spec.vol * 0.8;
         bars.push({
           time: startSec + i * stepSec,
           open: +open.toFixed(spec.prec),
@@ -939,7 +1011,14 @@
       return bars;
     }
 
-    async function fetchRealOrFallbackBars(pair, startDateStr) {
+    async function loadSessionBars(pair, startDateStr) {
+      const fileInput = document.getElementById('setupCsvFile');
+      if (fileInput.files && fileInput.files[0]) {
+        const text = await fileInput.files[0].text();
+        const parsed = parseCsvBars(text);
+        if (parsed) return parsed;
+      }
+
       const apiKey = document.getElementById('twelveApiKey').value.trim();
       if (apiKey) {
         try {
@@ -947,7 +1026,6 @@
           const res = await fetch(url);
           const data = await res.json();
           if (data && Array.isArray(data.values) && data.values.length > 20) {
-            document.getElementById('termSourceBadge').textContent = 'Twelve Data Live/Hist';
             return data.values.reverse().map(v => ({
               time: Math.floor(new Date(v.datetime.replace(' ', 'T') + 'Z').getTime() / 1000),
               open: parseFloat(v.open),
@@ -956,12 +1034,10 @@
               close: parseFloat(v.close)
             }));
           }
-        } catch (err) {
-          console.warn('Fallback market stream used:', err);
-        }
+        } catch (_) {}
       }
-      document.getElementById('termSourceBadge').textContent = 'Market Stream';
-      return buildMarketBars(pair, startDateStr);
+
+      return buildSeriesFrom2026(pair, startDateStr);
     }
 
     function initTvChartIfNeeded() {
@@ -1006,8 +1082,8 @@
       const bear = document.getElementById('setBearColor').value;
       const theme = document.getElementById('setChartTheme').value;
       const showGrid = document.getElementById('setShowGrid').checked;
-
       const isLight = theme === 'light';
+
       tvChart.applyOptions({
         layout: {
           background: { type: 'solid', color: isLight ? '#ffffff' : '#0a0c10' },
@@ -1029,19 +1105,60 @@
       });
     }
 
+    function clearOrderLines() {
+      if (tvSeries && orderLines.length) {
+        orderLines.forEach(line => tvSeries.removePriceLine(line));
+      }
+      orderLines = [];
+    }
+
+    function drawOrderLines(order) {
+      clearOrderLines();
+      if (!tvSeries || !order) return;
+      orderLines.push(tvSeries.createPriceLine({
+        price: order.entry,
+        color: '#e5b84b',
+        lineWidth: 2,
+        lineStyle: LightweightCharts.LineStyle.Solid,
+        axisLabelVisible: true,
+        title: `ENTRY ${order.side}`,
+      }));
+      orderLines.push(tvSeries.createPriceLine({
+        price: order.sl,
+        color: '#f23645',
+        lineWidth: 2,
+        lineStyle: LightweightCharts.LineStyle.Dashed,
+        axisLabelVisible: true,
+        title: 'SL',
+      }));
+      orderLines.push(tvSeries.createPriceLine({
+        price: order.tp,
+        color: '#089981',
+        lineWidth: 2,
+        lineStyle: LightweightCharts.LineStyle.Dashed,
+        axisLabelVisible: true,
+        title: 'TP',
+      }));
+    }
+
     async function launchFullScreenTerminal() {
       const pair = document.getElementById('setupPair').value;
-      const startDate = document.getElementById('setupDate').value;
+      const startDate = document.getElementById('setupDate').value || '2026-01-02';
       termStartBalance = Math.max(100, Number(document.getElementById('setupBalance').value) || 10000);
       termBalance = termStartBalance;
       termRiskPct = Number(document.getElementById('setupRiskPct').value) || 1;
       activeOrder = null;
+      tradeMarkers = [];
+      clearOrderLines();
 
       document.getElementById('termPairLabel').textContent = pair;
+      document.getElementById('termDateLabel').textContent = startDate;
       document.getElementById('termCloseBtn').classList.add('hidden');
+      document.getElementById('termPosBadge').classList.add('hidden');
       updateTerminalStats(0);
 
       document.getElementById('btSetupScreen').classList.add('hidden');
+      document.getElementById('btJournalCard').classList.add('hidden');
       document.getElementById('mainHeader').classList.add('hidden');
       document.getElementById('mainFooter').classList.add('hidden');
 
@@ -1052,8 +1169,8 @@
       initTvChartIfNeeded();
       applyChartAppearance();
 
-      allBars = await fetchRealOrFallbackBars(pair, startDate);
-      replayIdx = Math.min(40, allBars.length);
+      allBars = await loadSessionBars(pair, startDate);
+      replayIdx = Math.min(35, allBars.length);
       renderReplaySlice();
 
       const container = document.getElementById('tvChartContainer');
@@ -1068,6 +1185,8 @@
       document.getElementById('mainHeader').classList.remove('hidden');
       document.getElementById('mainFooter').classList.remove('hidden');
       document.getElementById('btSetupScreen').classList.remove('hidden');
+      document.getElementById('btJournalCard').classList.remove('hidden');
+      renderJournal();
     }
 
     function toggleSettingsPopover() {
@@ -1082,9 +1201,14 @@
       btn.className = 'tf-btn px-2 py-1 rounded bg-gold text-obsidian';
 
       const pair = document.getElementById('setupPair').value;
-      const startDate = document.getElementById('setupDate').value;
-      allBars = await fetchRealOrFallbackBars(pair, startDate);
-      replayIdx = Math.min(40, allBars.length);
+      const startDate = document.getElementById('setupDate').value || '2026-01-02';
+      activeOrder = null;
+      clearOrderLines();
+      document.getElementById('termCloseBtn').classList.add('hidden');
+      document.getElementById('termPosBadge').classList.add('hidden');
+
+      allBars = await loadSessionBars(pair, startDate);
+      replayIdx = Math.min(35, allBars.length);
       renderReplaySlice();
     }
 
@@ -1092,6 +1216,8 @@
       if (!tvSeries || !allBars.length) return;
       const slice = allBars.slice(0, replayIdx);
       tvSeries.setData(slice);
+      tvSeries.setMarkers(tradeMarkers);
+
       const last = slice[slice.length - 1];
       const spec = PAIR_SPECS[document.getElementById('setupPair').value] || PAIR_SPECS['XAU/USD'];
       document.getElementById('termPrice').textContent = last.close.toFixed(spec.prec);
@@ -1111,12 +1237,20 @@
       }
     }
 
+    function restartPlayIfRunning() {
+      if (termInterval) {
+        stopTermPlay();
+        toggleTermPlay();
+      }
+    }
+
     function toggleTermPlay() {
       if (termInterval) {
         stopTermPlay();
       } else {
+        const speed = Number(document.getElementById('termSpeedSel').value) || 800;
         document.getElementById('termPlayBtn').textContent = '⏸ Pause';
-        termInterval = setInterval(stepTermCandle, 600);
+        termInterval = setInterval(stepTermCandle, speed);
       }
     }
 
@@ -1131,7 +1265,7 @@
 
     function openTermOrder(side) {
       if (activeOrder || !allBars.length) return;
-      const last = allBars[replayIdx - 1];
+      const bar = allBars[replayIdx - 1];
       const spec = PAIR_SPECS[document.getElementById('setupPair').value] || PAIR_SPECS['XAU/USD'];
       const riskAmount = termBalance * (termRiskPct / 100);
       const slPts = Math.max(1, Number(document.getElementById('termSlPts').value) || 20);
@@ -1140,34 +1274,69 @@
 
       activeOrder = {
         side,
-        entry: last.close,
-        sl: side === 'BUY' ? last.close - slPts * unit : last.close + slPts * unit,
-        tp: side === 'BUY' ? last.close + tpPts * unit : last.close - tpPts * unit,
+        entry: bar.close,
+        sl: side === 'BUY' ? bar.close - slPts * unit : bar.close + slPts * unit,
+        tp: side === 'BUY' ? bar.close + tpPts * unit : bar.close - tpPts * unit,
         riskAmount,
-        rr: tpPts / slPts
+        rr: tpPts / slPts,
+        prec: spec.prec
       };
+
+      tradeMarkers.push({
+        time: bar.time,
+        position: side === 'BUY' ? 'belowBar' : 'aboveBar',
+        color: side === 'BUY' ? '#089981' : '#f23645',
+        shape: side === 'BUY' ? 'arrowUp' : 'arrowDown',
+        text: `${side} @ ${bar.close.toFixed(spec.prec)}`
+      });
+
+      drawOrderLines(activeOrder);
       document.getElementById('termCloseBtn').classList.remove('hidden');
-      evaluateActiveOrder(last);
+      const badge = document.getElementById('termPosBadge');
+      badge.textContent = `${side} OPEN`;
+      badge.classList.remove('hidden');
+      evaluateActiveOrder(bar);
+    }
+
+    function finalizeTrade(bar, label, pnlAmount) {
+      const o = activeOrder;
+      termBalance = Math.max(0, termBalance + pnlAmount);
+
+      tradeMarkers.push({
+        time: bar.time,
+        position: o.side === 'BUY' ? 'aboveBar' : 'belowBar',
+        color: pnlAmount >= 0 ? '#089981' : '#f23645',
+        shape: 'circle',
+        text: `${label} (${pnlAmount >= 0 ? '+' : ''}$${pnlAmount.toFixed(2)})`
+      });
+
+      journalRows.unshift({
+        label: `${document.getElementById('setupSessionName').value || 'Session'} • ${document.getElementById('setupPair').value}`,
+        side: o.side,
+        entry: o.entry.toFixed(o.prec),
+        sl: o.sl.toFixed(o.prec),
+        tp: o.tp.toFixed(o.prec),
+        result: label,
+        pnl: pnlAmount
+      });
+
+      activeOrder = null;
+      clearOrderLines();
+      document.getElementById('termCloseBtn').classList.add('hidden');
+      document.getElementById('termPosBadge').classList.add('hidden');
+      tvSeries.setMarkers(tradeMarkers);
+      updateTerminalStats(0);
     }
 
     function evaluateActiveOrder(bar) {
       if (!activeOrder) return;
       const o = activeOrder;
-      let hit = null;
       if (o.side === 'BUY') {
-        if (bar.low <= o.sl) hit = 'LOSS';
-        else if (bar.high >= o.tp) hit = 'WIN';
+        if (bar.low <= o.sl) return finalizeTrade(bar, 'SL HIT', -o.riskAmount);
+        if (bar.high >= o.tp) return finalizeTrade(bar, 'TP HIT', o.riskAmount * o.rr);
       } else {
-        if (bar.high >= o.sl) hit = 'LOSS';
-        else if (bar.low <= o.tp) hit = 'WIN';
-      }
-      if (hit) {
-        const realized = hit === 'WIN' ? o.riskAmount * o.rr : -o.riskAmount;
-        termBalance = Math.max(0, termBalance + realized);
-        activeOrder = null;
-        document.getElementById('termCloseBtn').classList.add('hidden');
-        updateTerminalStats(0);
-        return;
+        if (bar.high >= o.sl) return finalizeTrade(bar, 'SL HIT', -o.riskAmount);
+        if (bar.low <= o.tp) return finalizeTrade(bar, 'TP HIT', o.riskAmount * o.rr);
       }
       const move = o.side === 'BUY' ? (bar.close - o.entry) : (o.entry - bar.close);
       const floating = (move / Math.abs(o.entry - o.sl)) * o.riskAmount;
@@ -1180,10 +1349,7 @@
       const o = activeOrder;
       const move = o.side === 'BUY' ? (bar.close - o.entry) : (o.entry - bar.close);
       const realized = (move / Math.abs(o.entry - o.sl)) * o.riskAmount;
-      termBalance = Math.max(0, termBalance + realized);
-      activeOrder = null;
-      document.getElementById('termCloseBtn').classList.add('hidden');
-      updateTerminalStats(0);
+      finalizeTrade(bar, 'CLOSED', realized);
     }
 
     function updateTerminalStats(floating = 0) {
@@ -1194,10 +1360,35 @@
       pnlEl.className = net >= 0 ? 'text-emerald-400' : 'text-rose-400';
     }
 
+    function renderJournal() {
+      const tbody = document.getElementById('journalTbody');
+      if (!journalRows.length) {
+        tbody.innerHTML = '<tr><td colspan="7" class="py-4 text-center text-slate-500 font-sans">Aucun trade clôturé pour le moment.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = journalRows.map(r => `
+        <tr>
+          <td class="py-2 pr-3 font-sans text-white">${r.label}</td>
+          <td class="py-2 px-3 ${r.side === 'BUY' ? 'text-emerald-400' : 'text-rose-400'} font-bold">${r.side}</td>
+          <td class="py-2 px-3">${r.entry}</td>
+          <td class="py-2 px-3 text-rose-300">${r.sl}</td>
+          <td class="py-2 px-3 text-emerald-300">${r.tp}</td>
+          <td class="py-2 px-3">${r.result}</td>
+          <td class="py-2 pl-3 text-right font-bold ${r.pnl >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${r.pnl >= 0 ? '+' : ''}$${r.pnl.toFixed(2)}</td>
+        </tr>
+      `).join('');
+    }
+
+    function clearJournal() {
+      journalRows = [];
+      renderJournal();
+    }
+
     // Init
     renderCommunityVideos();
     setVideosUnlockedState(sessionStorage.getItem('petricor_vip_ok') === '1');
     updateRecap();
+    renderJournal();
   </script>
 </body>
 </html>
