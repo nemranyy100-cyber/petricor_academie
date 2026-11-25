@@ -162,7 +162,6 @@
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Photo 1 -->
         <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
           <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
             <img src="psy1.jpg" alt="How to Become a Successful Trader"
@@ -180,7 +179,6 @@
           </div>
         </div>
 
-        <!-- Photo 2 -->
         <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
           <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
             <img src="psy2.jpg" alt="Focus on one strategy"
@@ -196,7 +194,6 @@
           </div>
         </div>
 
-        <!-- Photo 3 -->
         <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
           <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
             <img src="psy3.jpg" alt="Respect your trading setup"
@@ -212,7 +209,6 @@
           </div>
         </div>
 
-        <!-- Photo 4 -->
         <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
           <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
             <img src="psy4.jpg" alt="Make the best trades"
@@ -228,7 +224,6 @@
           </div>
         </div>
 
-        <!-- Photo 5 -->
         <div class="rounded-2xl bg-charcoal editorial-frame overflow-hidden group sm:col-span-2 lg:col-span-2">
           <div class="aspect-[4/5] lg:aspect-[16/9] bg-[#071126] overflow-hidden">
             <img src="psy5.jpg" alt="Petricor Academy Advices"
@@ -255,7 +250,7 @@
       </div>
     </section>
 
-    <!-- Section Community Videos (Trade Breakdowns - Public) -->
+    <!-- Section Community Videos -->
     <section id="community-videos" class="max-w-6xl mx-auto px-4 py-8">
       <div class="grain-canvas editorial-frame rounded-[24px] p-6 sm:p-8 space-y-5">
         <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -271,10 +266,18 @@
         </div>
 
         <div class="relative z-10 grid md:grid-cols-3 gap-4">
-          <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-5 space-y-2">
-            <span class="text-[11px] font-bold text-goldLight">BREAKDOWN #01</span>
-            <h3 class="text-base font-bold text-white">Analyse & Exécution (Bientôt)</h3>
-            <p class="text-xs text-slate-400">Explication complète du contexte HTF, confirmation LTF et gestion du risque.</p>
+          <div class="rounded-2xl bg-charcoal/90 border border-gold/25 p-5 flex flex-col justify-between space-y-3">
+            <div>
+              <span class="text-[11px] font-bold text-goldLight">BREAKDOWN #01</span>
+              <h3 class="text-base font-bold text-white mt-0.5">Explication d'un Trade</h3>
+              <p class="text-xs text-slate-400 mt-1">Explication complète du contexte HTF, confirmation LTF et gestion du risque.</p>
+            </div>
+            <div>
+              <a href="https://youtu.be/UeXt6TRI6WY?si=2EDGCsZ3Wlb7TJU2" target="_blank" rel="noopener noreferrer"
+                 class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gold text-obsidian font-bold text-xs hover:bg-goldLight transition">
+                Voir la vidéo ↗
+              </a>
+            </div>
           </div>
           <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-5 space-y-2">
             <span class="text-[11px] font-bold text-goldLight">BREAKDOWN #02</span>
@@ -294,7 +297,6 @@
     <section id="inscription" class="max-w-6xl mx-auto px-4 py-10">
       <div class="grid lg:grid-cols-2 gap-6 items-start">
 
-        <!-- Formulaire -->
         <div class="grain-canvas editorial-frame rounded-2xl p-6 sm:p-8 space-y-5">
           <div class="relative z-10">
             <span class="text-xs font-bold tracking-wider uppercase text-goldLight">Rejoindre l'Académie</span>
@@ -333,7 +335,7 @@
             </div>
 
             <div id="vipBanner" class="hidden rounded-xl bg-gold/15 border border-gold/40 p-3.5 text-xs text-goldLight">
-              ★ <strong>VIP Mentorship :</strong> Après validation, tu recevras le mot de passe pour ouvrir l'<strong>Espace VIP</strong> (Séances 1–8 + Stratégie).
+              ★ <strong>VIP Mentorship :</strong> Après validation, tu recevras le mot de passe pour ouvrir l'<strong>Espace VIP</strong> (Séances 1–9 + Explication Trade + Stratégie).
             </div>
 
             <div>
@@ -426,7 +428,7 @@
             Mot de passe VIP
           </label>
           <p class="text-xs text-slate-400">
-            Entre le mot de passe VIP pour débloquer les 8 séances complètes et la vidéo Stratégie.
+            Entre le mot de passe VIP pour débloquer les séances complètes، شرح الصفقة وفيديو Stratégie.
           </p>
         </div>
 
@@ -452,7 +454,7 @@
         <div class="text-3xl">🔒</div>
         <h3 class="text-lg font-bold text-white">Contenu VIP Protégé</h3>
         <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">
-          Les Séances 1 à 8 ainsi que la vidéo Stratégie sont verrouillées. Entre le mot de passe VIP ci-dessus pour y accéder.
+          Les séances، شرح الصفقة وفيديو Stratégie sont verrouillées. Entre le mot de passe VIP ci-dessus pour y accéder.
         </p>
         <div class="pt-2">
           <button type="button" onclick="switchView('public'); setTimeout(()=>document.getElementById('inscription').scrollIntoView({behavior:'smooth'}),100)"
@@ -477,6 +479,24 @@
   </footer>
 
   <script>
+    // بدّل هاد المودباس للي بغيتي تعطي للأعضاء
+    const VIP_PASSWORD = "PETRICORVIP";
+
+    // لائحة الفيديوهات VIP (منها الفيديو الجديد ديال شرح الصفقة)
+    const VIP_VIDEOS = [
+      { code: "SÉANCE 01", title: "Fondamentaux & Structure du Marché", desc: "Lecture du biais directionnel et zones clés.", url: "" },
+      { code: "SÉANCE 02", title: "Liquidité & Manipulation", desc: "Comprendre les sweeps et prises de liquidité.", url: "" },
+      { code: "SÉANCE 03", title: "Zones d'Intérêt (POI)", desc: "Filtrer les zones à haute probabilité.", url: "" },
+      { code: "SÉANCE 04", title: "Confirmation & Entrée", desc: "Timing d'exécution et validation sur timeframe inférieur.", url: "" },
+      { code: "SÉANCE 05", title: "Risk Management & Position Sizing", desc: "Protéger le capital et gérer les séries de pertes.", url: "" },
+      { code: "SÉANCE 06", title: "Sessions & Horaires Clés", desc: "Se concentrer sur les sessions les plus liquides.", url: "" },
+      { code: "SÉANCE 07", title: "Psychologie & Contrôle Émotionnel", desc: "Éviter l'overtrading, le FOMO et la revanche.", url: "" },
+      { code: "SÉANCE 08", title: "Backtest, Journal & Routine", desc: "Construire une revue hebdomadaire rigoureuse.", url: "" },
+      { code: "SÉANCE 09", title: "Cas Pratiques & Exécution Live", desc: "Mise en situation réelle et lecture de la réaction du prix.", url: "" },
+      { code: "TRADE BREAKDOWN", title: "Explication d'un Trade", desc: "شرح تفصيلي لصفقة: السياق، نقطة الدخول، وقف الخسارة وإدارة الصفقة.", url: "https://youtu.be/UeXt6TRI6WY?si=2EDGCsZ3Wlb7TJU2" },
+      { code: "STRATÉGIE VIP", title: "Stratégie Complète Petricor", desc: "Règles d'entrée, invalidation et gestion du trade de A à Z.", url: "" }
+    ];
+
     document.getElementById('year').textContent = new Date().getFullYear();
 
     function switchView(view) {
@@ -495,4 +515,152 @@
         vipView.classList.add('hidden');
         publicView.classList.remove('hidden');
         navPublicBtn.className = "px-3.5 py-1.5 rounded-full bg-white text-obsidian font-bold transition";
-        navVipBtn.class
+        navVipBtn.className = "px-3.5 py-1.5 rounded-full text-goldLight hover:bg-white/10 font-bold transition flex items-center gap-1.5";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function renderVipVideos() {
+      const grid = document.getElementById('videosUnlockedGrid');
+      grid.innerHTML = VIP_VIDEOS.map((vid) => {
+        const mediaBlock = vid.url
+          ? `<a href="${vid.url}" target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gold text-obsidian font-bold text-xs hover:bg-goldLight transition">شاهد الفيديو ↗</a>`
+          : `<span class="mt-3 inline-block px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-[11px] text-slate-400">رابط الفيديو قريباً</span>`;
+
+        return `
+          <div class="rounded-2xl bg-charcoal/95 border border-gold/25 p-5 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-goldLight">${vid.code}</span>
+              <h3 class="text-base font-bold text-white mt-1">${vid.title}</h3>
+              <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">${vid.desc}</p>
+            </div>
+            <div>${mediaBlock}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function confirmVideosAccess() {
+      const input = document.getElementById('confirmCodeInput');
+      const msg = document.getElementById('confirmMessage');
+      const badge = document.getElementById('gateStatusBadge');
+      const lockedState = document.getElementById('videosLockedState');
+      const unlockedGrid = document.getElementById('videosUnlockedGrid');
+
+      const entered = input.value.trim();
+
+      if (entered === VIP_PASSWORD) {
+        sessionStorage.setItem('petricor_vip_unlocked', '1');
+        badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-400/30";
+        badge.innerHTML = "<span>🔓</span> Débloqué";
+
+        msg.className = "text-xs rounded-xl p-2.5 bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 block";
+        msg.textContent = "تم تفعيل الولوج للـ VIP بنجاح.";
+
+        lockedState.classList.add('hidden');
+        renderVipVideos();
+        unlockedGrid.classList.remove('hidden');
+        unlockedGrid.classList.add('grid');
+      } else {
+        msg.className = "text-xs rounded-xl p-2.5 bg-red-500/15 text-red-300 border border-red-400/30 block";
+        msg.textContent = "الكود غير صحيح، تأكد من المودباس VIP.";
+      }
+    }
+
+    function lockVideosAccess() {
+      sessionStorage.removeItem('petricor_vip_unlocked');
+      document.getElementById('confirmCodeInput').value = "";
+
+      const badge = document.getElementById('gateStatusBadge');
+      badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-400/30";
+      badge.innerHTML = "<span>🔒</span> Verrouillé";
+
+      const msg = document.getElementById('confirmMessage');
+      msg.className = "hidden";
+      msg.textContent = "";
+
+      document.getElementById('videosLockedState').classList.remove('hidden');
+      const unlockedGrid = document.getElementById('videosUnlockedGrid');
+      unlockedGrid.classList.add('hidden');
+      unlockedGrid.classList.remove('grid');
+    }
+
+    function updateVIPBanner() {
+      const formule = document.getElementById('formule').value;
+      const banner = document.getElementById('vipBanner');
+      const subject = document.getElementById('emailSubject');
+      document.getElementById('recapFormule').textContent = formule;
+
+      if (formule.includes('VIP')) {
+        banner.classList.remove('hidden');
+        subject.value = "Nouvelle Inscription VIP — Petricor Académie";
+      } else {
+        banner.classList.add('hidden');
+        subject.value = "Nouvelle Inscription Bootcamp — Petricor Académie";
+      }
+    }
+
+    ['nom', 'telephone', 'email', 'details'].forEach((id) => {
+      const el = document.getElementById(id);
+      const targetId = 'recap' + id.charAt(0).toUpperCase() + id.slice(1);
+      el.addEventListener('input', () => {
+        document.getElementById(targetId).textContent = el.value.trim() || '-';
+      });
+    });
+
+    function copyRecap() {
+      const text = [
+        "Nom : " + document.getElementById('recapNom').textContent,
+        "Téléphone : " + document.getElementById('recapTel').textContent,
+        "Email : " + document.getElementById('recapEmail').textContent,
+        "Formule : " + document.getElementById('recapFormule').textContent,
+        "Détails : " + document.getElementById('recapDetails').textContent
+      ].join("\n");
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert("تم نسخ الملخص.");
+      });
+    }
+
+    const form = document.getElementById('inscriptionForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const status = document.getElementById('formStatus');
+      btn.disabled = true;
+      btn.textContent = "جاري الإرسال...";
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          status.className = "text-xs sm:text-sm rounded-xl p-3 bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 block";
+          status.textContent = "تم إرسال التسجيل بنجاح.";
+          form.reset();
+          updateVIPBanner();
+          ['recapNom', 'recapTel', 'recapEmail', 'recapDetails'].forEach((id) => {
+            document.getElementById(id).textContent = '-';
+          });
+        } else {
+          throw new Error('Erreur');
+        }
+      } catch {
+        status.className = "text-xs sm:text-sm rounded-xl p-3 bg-red-500/15 text-red-300 border border-red-400/30 block";
+        status.textContent = "وقع خطأ فالإرسال. عاود المحاولة أو تواصل عبر واتساب.";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Valider l'Inscription & Envoyer";
+      }
+    });
+
+    if (sessionStorage.getItem('petricor_vip_unlocked') === '1') {
+      document.getElementById('confirmCodeInput').value = VIP_PASSWORD;
+      confirmVideosAccess();
+    }
+  </script>
+</body>
+</html>
