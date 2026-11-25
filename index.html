@@ -3,12 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Petricor Académie — Accueil, Community, Backtest & VIP</title><meta name="description" content="Petricor Académie — Trading mindset, backtest checklist, trade journal, and VIP sessions." />
-  <meta name="robots" content="index, follow" />
-  <meta property="og:title" content="Petricor Académie" />
-  <meta property="og:description" content="Mindset, Backtest Hub, Community & VIP Mentorship." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://nemranyy100-cyber.github.io/petricor_academie/" />
+  <title>Petricor Académie — Accueil, Community, Backtest & VIP</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -480,7 +475,7 @@
 
       <div class="relative z-10 grid lg:grid-cols-2 gap-6 items-start">
 
-        <!-- PART 2 : PRE-TRADE STRATEGY CHECKLIST -->
+        <!-- PRE-TRADE STRATEGY CHECKLIST -->
         <div class="rounded-2xl bg-sapphire/95 editorial-frame p-6 space-y-5">
           <div class="flex items-center justify-between gap-2">
             <div>
@@ -521,7 +516,7 @@
           </button>
         </div>
 
-        <!-- PART 3 : LOG SESSION TRADE TO PERFORMANCE HUB -->
+        <!-- LOG SESSION TRADE TO PERFORMANCE HUB -->
         <div class="rounded-2xl bg-sapphire/95 editorial-frame p-6 space-y-4">
           <div>
             <span class="text-[11px] font-bold uppercase tracking-wider text-cyanGlow">Session Logger</span>
@@ -569,38 +564,42 @@
             </div>
 
             <button type="submit"
-                    class="ios26-press w-full py-3 rounded-xl bg-gradient-to-r from-ice to-cyanGlow text-abyss font-extrabold text-xs sm:text-sm">
+                    class="ios26-press w-full py-3 rounded-xl bg-gradient-to-r from-ice to-cyanGlow text-abyss font-extrabold text-xs sm:text-sm hover:opacity-95 transition">
               + Save Trade to Performance Hub
             </button>
           </form>
         </div>
-
       </div>
 
-      <!-- Journal Table -->
-      <div class="relative z-10 rounded-2xl bg-abyss/85 border border-sky-300/15 p-5 space-y-3">
-        <div class="flex items-center justify-between gap-2">
-          <h3 class="text-sm font-extrabold uppercase tracking-wider text-cyanGlow">Logged Trades History</h3>
-          <button type="button" onclick="clearTrades()"
-                  class="ios26-press px-3 py-1 rounded-lg bg-sky-400/10 hover:bg-sky-400/20 text-xs text-sky-200">
-            Clear All
+      <!-- Journal Log Table -->
+      <div class="relative z-10 rounded-2xl bg-sapphire/95 editorial-frame p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-cyanGlow">Execution History</span>
+            <h3 class="text-lg font-extrabold text-white mt-0.5">Session Trade Log</h3>
+          </div>
+          <button type="button" onclick="clearJournalTrades()"
+                  class="ios26-press px-3.5 py-1.5 rounded-xl bg-red-500/15 hover:bg-red-500/25 border border-red-400/30 text-red-200 text-xs font-semibold">
+            Clear Log
           </button>
         </div>
 
         <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs border-collapse">
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
-              <tr class="border-b border-sky-300/15 text-sky-300/75">
-                <th class="py-2 pr-3">Pair</th>
-                <th class="py-2 px-3">Session</th>
-                <th class="py-2 px-3">Side</th>
-                <th class="py-2 px-3">R:R</th>
-                <th class="py-2 px-3">Note</th>
-                <th class="py-2 pl-3 text-right">P&amp;L</th>
+              <tr class="border-b border-sky-300/15 text-sky-300/75 text-xs uppercase">
+                <th class="py-2.5 pr-4">Pair</th>
+                <th class="py-2.5 pr-4">Session</th>
+                <th class="py-2.5 pr-4">Side</th>
+                <th class="py-2.5 pr-4">R:R</th>
+                <th class="py-2.5 pr-4">P&amp;L</th>
+                <th class="py-2.5">Note</th>
               </tr>
             </thead>
-            <tbody id="hubTradesBody" class="divide-y divide-sky-300/10 font-mono">
-              <tr><td colspan="6" class="py-4 text-center text-sky-300/50 font-sans">No trades logged yet. Add your first trade above.</td></tr>
+            <tbody id="tradeLogBody" class="divide-y divide-sky-300/10 text-sky-100">
+              <tr>
+                <td colspan="6" class="py-6 text-center text-sky-300/60">No trades logged yet. Add your first trade above.</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -610,14 +609,15 @@
   </section>
 
   <!-- ========================================================= -->
-  <!-- PAGE 4 : ESPACE VIP                                       -->
+  <!-- PAGE 4 : ESPACE VIP (CODE + MINIATURES + PLAY YOUTUBE)    -->
   <!-- ========================================================= -->
   <section id="vipPage" class="hidden max-w-6xl mx-auto px-4 py-10">
     <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
+
       <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-sky-300/15 pb-5">
         <div>
           <span class="text-xs font-bold uppercase tracking-widest text-cyanGlow">Page 4 • Espace Privé Membre</span>
-          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Petricor VIP — Séances & Stratégie</h2>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Petricor VIP — Séances &amp; Stratégie</h2>
           <p class="text-xs sm:text-sm text-sky-100/80 mt-1">Entre le code VIP pour afficher les miniatures et ouvrir les vidéos sur YouTube.</p>
         </div>
 
@@ -633,6 +633,7 @@
         </div>
       </div>
 
+      <!-- Password Gate Box -->
       <div class="relative z-10 rounded-2xl bg-sapphire/95 cyan-line p-6 max-w-xl mx-auto space-y-4">
         <div class="space-y-1">
           <label for="confirmCodeInput" class="block text-xs font-bold uppercase tracking-wider text-cyanGlow">
@@ -660,21 +661,30 @@
         <p id="confirmMessage" class="text-xs hidden rounded-xl p-2.5"></p>
       </div>
 
+      <!-- Locked Placeholder -->
       <div id="videosLockedState" class="relative z-10 rounded-2xl bg-abyss/80 border border-sky-300/15 p-10 text-center space-y-3">
         <div class="text-3xl">🔒</div>
         <h3 class="text-lg font-bold text-white">Contenu VIP Protégé</h3>
-        <p class="text-xs sm:text-sm text-sky-200/70 max-w-md mx-auto">
+        <p class="text-xs sm:text-sm text-sky-200/75 max-w-md mx-auto">
           Les vidéos VIP (Séances 1 à 8 + Stratégie + Breakdown) sont verrouillées. Entre le code VIP ci-dessus pour y accéder.
         </p>
+        <div class="pt-2">
+          <button type="button" onclick="switchView('accueil'); setTimeout(()=>document.getElementById('inscription').scrollIntoView({behavior:'smooth'}),120)"
+                  class="ios26-press px-5 py-2.5 rounded-full bg-sky-400/15 hover:bg-sky-400/25 text-xs font-semibold text-cyanGlow transition">
+            Pas encore de code ? S'inscrire sur l'Accueil
+          </button>
+        </div>
       </div>
 
+      <!-- Unlocked VIP Videos Grid -->
       <div id="videosUnlockedGrid" class="relative z-10 hidden grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-sky-300/15 mt-10">
-    <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-sky-200/70">
+  <footer class="border-t border-sky-400/15 mt-10">
+    <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-sky-200/70">
       <div>© <span id="year"></span> Petricor Académie. Tous droits réservés.</div>
       <div>Contact : nemranyy100@gmail.com</div>
     </div>
@@ -690,6 +700,13 @@
         title: "Explication d'un Trade",
         desc: "Analyse complète du trade : contexte, exécution et gestion. Clic sur Play pour ouvrir sur YouTube.",
         url: "https://youtu.be/UeXt6TRI6WY?si=2EDGCsZ3Wlb7TJU2"
+      },
+      {
+        id: "nu_DuAMyv4w",
+        tag: "COMMUNITY VIDEO",
+        title: "Nouvelle Vidéo Communauté — Petricor Académie",
+        desc: "Vidéo partagée avec la communauté. Clic sur Play pour ouvrir sur YouTube.",
+        url: "https://youtu.be/nu_DuAMyv4w"
       }
     ];
 
@@ -708,33 +725,6 @@
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    function switchView(view) {
-      const pages = {
-        accueil: document.getElementById('accueilPage'),
-        community: document.getElementById('communityPage'),
-        backtest: document.getElementById('backtestPage'),
-        vip: document.getElementById('vipPage')
-      };
-      const btns = {
-        accueil: document.getElementById('navAccueilBtn'),
-        community: document.getElementById('navCommunityBtn'),
-        backtest: document.getElementById('navBacktestBtn'),
-        vip: document.getElementById('navVipBtn')
-      };
-
-      Object.keys(pages).forEach(k => {
-        if (k === view) {
-          pages[k].classList.remove('hidden');
-          btns[k].className = "ios26-press px-3 py-1.5 rounded-full bg-cyanGlow text-abyss font-extrabold transition whitespace-nowrap";
-        } else {
-          pages[k].classList.add('hidden');
-          btns[k].className = "ios26-press px-3 py-1.5 rounded-full text-sky-100 hover:bg-sky-400/15 font-semibold transition whitespace-nowrap";
-        }
-      });
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
     function buildYouTubeCard(vid) {
       const thumbUrl = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
       return `
@@ -744,7 +734,7 @@
               <img src="${thumbUrl}" alt="${vid.title}"
                    class="w-full h-full object-cover"
                    onerror="this.src='https://img.youtube.com/vi/${vid.id}/mqdefault.jpg';">
-              <div class="absolute inset-0 bg-abyss/40 group-hover:bg-abyss/55 transition flex items-center justify-center">
+              <div class="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition flex items-center justify-center">
                 <span class="px-4 py-2.5 rounded-full bg-cyanGlow text-abyss font-extrabold text-xs shadow-lg flex items-center gap-1.5">
                   <span>▶</span> Play sur YouTube
                 </span>
@@ -767,207 +757,263 @@
     }
 
     function renderCommunityVideos() {
-      document.getElementById('communityVideoGrid').innerHTML = COMMUNITY_VIDEOS.map(buildYouTubeCard).join('');
+      const grid = document.getElementById('communityVideoGrid');
+      grid.innerHTML = COMMUNITY_VIDEOS.map(buildYouTubeCard).join('');
     }
 
     function renderVipVideos() {
-      document.getElementById('videosUnlockedGrid').innerHTML = VIP_VIDEOS.map(buildYouTubeCard).join('');
+      const grid = document.getElementById('videosUnlockedGrid');
+      grid.innerHTML = VIP_VIDEOS.map(buildYouTubeCard).join('');
     }
 
-    const videosGridEl = document.getElementById('videosUnlockedGrid');
-    const videosLockedEl = document.getElementById('videosLockedState');
-    const gateStatusBadgeEl = document.getElementById('gateStatusBadge');
-    const confirmMsgEl = document.getElementById('confirmMessage');
+    function switchView(page) {
+      const pages = {
+        accueil: document.getElementById('accueilPage'),
+        community: document.getElementById('communityPage'),
+        backtest: document.getElementById('backtestPage'),
+        vip: document.getElementById('vipPage')
+      };
 
-    function setVideosUnlockedState(unlocked) {
-      if (unlocked) {
-        renderVipVideos();
-        videosLockedEl.classList.add('hidden');
-        videosGridEl.classList.remove('hidden');
-        videosGridEl.classList.add('grid');
-        gateStatusBadgeEl.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-cyanGlow/15 text-cyanGlow border border-cyanGlow/40";
-        gateStatusBadgeEl.innerHTML = "<span>✓</span> VIP Débloqué";
+      const navBtns = {
+        accueil: document.getElementById('navAccueilBtn'),
+        community: document.getElementById('navCommunityBtn'),
+        backtest: document.getElementById('navBacktestBtn'),
+        vip: document.getElementById('navVipBtn')
+      };
+
+      Object.values(pages).forEach((el) => el.classList.add('hidden'));
+      navBtns.accueil.className = "ios26-press px-3 py-1.5 rounded-full text-sky-100 hover:bg-sky-400/15 font-semibold transition whitespace-nowrap";
+      navBtns.community.className = "ios26-press px-3 py-1.5 rounded-full text-sky-100 hover:bg-sky-400/15 font-semibold transition whitespace-nowrap";
+      navBtns.backtest.className = "ios26-press px-3 py-1.5 rounded-full text-cyanGlow hover:bg-sky-400/15 font-bold transition whitespace-nowrap";
+      navBtns.vip.className = "ios26-press px-3 py-1.5 rounded-full text-ice hover:bg-sky-400/15 font-bold transition flex items-center gap-1 whitespace-nowrap";
+
+      if (page === 'community') {
+        pages.community.classList.remove('hidden');
+        navBtns.community.className = "ios26-press px-3 py-1.5 rounded-full bg-cyanGlow text-abyss font-extrabold transition whitespace-nowrap";
+        renderCommunityVideos();
+      } else if (page === 'backtest') {
+        pages.backtest.classList.remove('hidden');
+        navBtns.backtest.className = "ios26-press px-3 py-1.5 rounded-full bg-cyanGlow text-abyss font-extrabold transition whitespace-nowrap";
+        renderJournal();
+      } else if (page === 'vip') {
+        pages.vip.classList.remove('hidden');
+        navBtns.vip.className = "ios26-press px-3 py-1.5 rounded-full bg-gradient-to-r from-ice to-cyanGlow text-abyss font-extrabold transition flex items-center gap-1 whitespace-nowrap";
       } else {
-        videosGridEl.innerHTML = "";
-        videosGridEl.classList.add('hidden');
-        videosGridEl.classList.remove('grid');
-        videosLockedEl.classList.remove('hidden');
-        gateStatusBadgeEl.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-400/30";
-        gateStatusBadgeEl.innerHTML = "<span>🔒</span> Verrouillé";
+        pages.accueil.classList.remove('hidden');
+        navBtns.accueil.className = "ios26-press px-3 py-1.5 rounded-full bg-cyanGlow text-abyss font-extrabold transition whitespace-nowrap";
       }
-    }
 
-    function showConfirmMsg(text, ok) {
-      confirmMsgEl.textContent = text;
-      confirmMsgEl.classList.remove('hidden', 'bg-emerald-500/15', 'text-emerald-300', 'border-emerald-500/30', 'bg-red-500/15', 'text-red-300', 'border-red-500/30', 'border');
-      confirmMsgEl.classList.add('border', ok ? 'bg-emerald-500/15' : 'bg-red-500/15', ok ? 'text-emerald-300' : 'text-red-300', ok ? 'border-emerald-500/30' : 'border-red-500/30');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function confirmVideosAccess() {
-      const entered = document.getElementById('confirmCodeInput').value.trim();
+      const input = document.getElementById('confirmCodeInput');
+      const msg = document.getElementById('confirmMessage');
+      const badge = document.getElementById('gateStatusBadge');
+      const lockedState = document.getElementById('videosLockedState');
+      const unlockedGrid = document.getElementById('videosUnlockedGrid');
+
+      const entered = input.value.trim();
+
       if (entered === VIP_PASSWORD) {
-        sessionStorage.setItem('petricor_vip_ok', '1');
-        setVideosUnlockedState(true);
-        showConfirmMsg("Code VIP valide. Bienvenue dans l'espace privé !", true);
+        sessionStorage.setItem('petricor_vip_unlocked', '1');
+        badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-400/30";
+        badge.innerHTML = "<span>🔓</span> Débloqué";
+
+        msg.className = "text-xs rounded-xl p-2.5 bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 block";
+        msg.textContent = "تم تفعيل الولوج للـ VIP بنجاح.";
+
+        lockedState.classList.add('hidden');
+        renderVipVideos();
+        unlockedGrid.classList.remove('hidden');
+        unlockedGrid.classList.add('grid');
       } else {
-        showConfirmMsg("Code VIP incorrect.", false);
+        msg.className = "text-xs rounded-xl p-2.5 bg-red-500/15 text-red-300 border border-red-400/30 block";
+        msg.textContent = "الكود غير صحيح، تأكد من كود VIP.";
       }
     }
 
     function lockVideosAccess() {
-      sessionStorage.removeItem('petricor_vip_ok');
-      document.getElementById('confirmCodeInput').value = '';
-      setVideosUnlockedState(false);
-      showConfirmMsg("Espace VIP verrouillé.", true);
+      sessionStorage.removeItem('petricor_vip_unlocked');
+      document.getElementById('confirmCodeInput').value = "";
+
+      const badge = document.getElementById('gateStatusBadge');
+      badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-400/30";
+      badge.innerHTML = "<span>🔒</span> Verrouillé";
+
+      const msg = document.getElementById('confirmMessage');
+      msg.className = "hidden";
+      msg.textContent = "";
+
+      document.getElementById('videosLockedState').classList.remove('hidden');
+      const unlockedGrid = document.getElementById('videosUnlockedGrid');
+      unlockedGrid.classList.add('hidden');
+      unlockedGrid.classList.remove('grid');
     }
 
-    const nomEl = document.getElementById('nom');
-    const telEl = document.getElementById('telephone');
-    const emailEl = document.getElementById('email');
-    const formuleEl = document.getElementById('formule');
-    const detailsEl = document.getElementById('details');
-    const vipBanner = document.getElementById('vipBanner');
-    const emailSubjectEl = document.getElementById('emailSubject');
-    const formStatusEl = document.getElementById('formStatus');
-    const submitBtn = document.getElementById('submitBtn');
-
-    function getRecapText() {
-      return `Nouvelle Inscription - Petricor Académie\nNom : ${nomEl.value.trim() || '-'}\nTéléphone : ${telEl.value.trim() || '-'}\nEmail : ${emailEl.value.trim() || '-'}\nFormule : ${formuleEl.value}\nDétails : ${detailsEl.value.trim() || '-'}`;
-    }
-
-    function updateRecap() {
-      document.getElementById('recapNom').textContent = nomEl.value.trim() || '-';
-      document.getElementById('recapTel').textContent = telEl.value.trim() || '-';
-      document.getElementById('recapEmail').textContent = emailEl.value.trim() || '-';
-      document.getElementById('recapFormule').textContent = formuleEl.value;
-      document.getElementById('recapDetails').textContent = detailsEl.value.trim() || '-';
-      emailSubjectEl.value = `Nouvelle Inscription Petricor Académie - ${nomEl.value.trim() || 'Client'} (${formuleEl.value})`;
-    }
-
-    function updateVIPBanner() {
-      vipBanner.classList.toggle('hidden', formuleEl.value !== 'VIP Mentorship');
-      updateRecap();
-    }
-
-    function copyRecap() {
-      navigator.clipboard.writeText(getRecapText()).then(() => {
-        showStatus('Récapitulatif copié.', true);
-      });
-    }
-
-    function showStatus(msg, ok) {
-      formStatusEl.textContent = msg;
-      formStatusEl.classList.remove('hidden', 'bg-emerald-500/15', 'text-emerald-300', 'border-emerald-500/30', 'bg-red-500/15', 'text-red-300', 'border-red-500/30', 'border');
-      formStatusEl.classList.add('border', ok ? 'bg-emerald-500/15' : 'bg-red-500/15', ok ? 'text-emerald-300' : 'text-red-300', ok ? 'border-emerald-500/30' : 'border-red-500/30');
-    }
-
-    [nomEl, telEl, emailEl, formuleEl, detailsEl].forEach(el => {
-      el.addEventListener('input', updateRecap);
-      el.addEventListener('change', updateRecap);
-    });
-
-    document.getElementById('inscriptionForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Envoi en cours...';
-      try {
-        const res = await fetch(this.getAttribute('action'), {
-          method: 'POST',
-          body: new FormData(this),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-          showStatus('Inscription envoyée avec succès !', true);
-          this.reset();
-          updateVIPBanner();
-        } else {
-          showStatus("Erreur lors de l'envoi.", false);
-        }
-      } catch {
-        showStatus('Problème de connexion.', false);
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Valider l'Inscription & Envoyer";
-      }
-    });
-
-    // === BACKTEST HUB : CHECKLIST + JOURNAL ===
-    let hubTrades = [];
-
+    // Backtest Checklist & Journal
     function updateChecklistScore() {
       const checks = Array.from(document.querySelectorAll('.chk-rule'));
-      const count = checks.filter(c => c.checked).length;
+      const count = checks.filter((c) => c.checked).length;
       document.getElementById('kpiScore').textContent = `${count} / ${checks.length}`;
       const badge = document.getElementById('checklistBadge');
       if (count === checks.length) {
-        badge.textContent = 'Setup Approved';
-        badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-cyanGlow/20 text-cyanGlow border border-cyanGlow/40';
+        badge.textContent = "Ready to Execute";
+        badge.className = "px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/35";
       } else {
-        badge.textContent = 'Not Ready';
-        badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-sky-400/15 text-sky-200 border border-sky-300/25';
+        badge.textContent = `${count}/${checks.length} Rules`;
+        badge.className = "px-3 py-1 rounded-full text-xs font-bold bg-sky-400/15 text-sky-200 border border-sky-300/25";
       }
     }
 
     function resetChecklist() {
-      document.querySelectorAll('.chk-rule').forEach(c => { c.checked = false; });
+      document.querySelectorAll('.chk-rule').forEach((c) => { c.checked = false; });
       updateChecklistScore();
+    }
+
+    function getTrades() {
+      try {
+        return JSON.parse(localStorage.getItem('petricor_backtest_trades') || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function saveTrades(trades) {
+      localStorage.setItem('petricor_backtest_trades', JSON.stringify(trades));
     }
 
     function addJournalTrade(e) {
       e.preventDefault();
-      const pair = document.getElementById('logPair').value.trim().toUpperCase() || 'XAUUSD';
-      const session = document.getElementById('logSession').value.trim() || 'Session';
+      const pair = document.getElementById('logPair').value.trim().toUpperCase();
+      const session = document.getElementById('logSession').value.trim();
       const side = document.getElementById('logSide').value;
       const rr = document.getElementById('logRr').value.trim() || '-';
       const pnl = parseFloat(document.getElementById('logPnl').value) || 0;
       const note = document.getElementById('logNote').value.trim() || '-';
 
-      hubTrades.unshift({ pair, session, side, rr, pnl, note });
+      const trades = getTrades();
+      trades.unshift({ pair, session, side, rr, pnl, note });
+      saveTrades(trades);
       document.getElementById('logNote').value = '';
-      renderHubTrades();
+      renderJournal();
     }
 
-    function clearTrades() {
-      hubTrades = [];
-      renderHubTrades();
+    function clearJournalTrades() {
+      localStorage.removeItem('petricor_backtest_trades');
+      renderJournal();
     }
 
-    function renderHubTrades() {
-      const total = hubTrades.length;
-      const wins = hubTrades.filter(t => t.pnl > 0).length;
-      const net = hubTrades.reduce((acc, t) => acc + t.pnl, 0);
-      const winRate = total ? Math.round((wins / total) * 100) : 0;
+    function renderJournal() {
+      const trades = getTrades();
+      const tbody = document.getElementById('tradeLogBody');
+      const total = trades.length;
+      const wins = trades.filter((t) => t.pnl > 0).length;
+      const netPnl = trades.reduce((acc, t) => acc + t.pnl, 0);
+      const winRate = total > 0 ? ((wins / total) * 100).toFixed(1) + '%' : '0%';
 
-      document.getElementById('kpiTrades').textContent = String(total);
-      document.getElementById('kpiWinRate').textContent = `${winRate}%`;
-      const netEl = document.getElementById('kpiNetPnl');
-      netEl.textContent = `${net >= 0 ? '+' : ''}$${net.toFixed(2)}`;
-      netEl.className = `text-2xl font-extrabold mt-1 font-mono ${net >= 0 ? 'text-cyanGlow' : 'text-rose-400'}`;
+      document.getElementById('kpiTrades').textContent = total;
+      document.getElementById('kpiWinRate').textContent = winRate;
+      document.getElementById('kpiNetPnl').textContent = `${netPnl >= 0 ? '+' : ''}$${netPnl.toFixed(2)}`;
 
-      const tbody = document.getElementById('hubTradesBody');
       if (!total) {
-        tbody.innerHTML = '<tr><td colspan="6" class="py-4 text-center text-sky-300/50 font-sans">No trades logged yet. Add your first trade above.</td></tr>';
+        tbody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-sky-300/60">No trades logged yet. Add your first trade above.</td></tr>`;
         return;
       }
 
-      tbody.innerHTML = hubTrades.map(t => `
-        <tr>
-          <td class="py-2 pr-3 font-bold text-white">${t.pair}</td>
-          <td class="py-2 px-3 font-sans text-sky-100/80">${t.session}</td>
-          <td class="py-2 px-3 font-bold ${t.side === 'BUY' ? 'text-cyanGlow' : 'text-rose-400'}">${t.side}</td>
-          <td class="py-2 px-3 text-ice">${t.rr}</td>
-          <td class="py-2 px-3 font-sans text-sky-200/75">${t.note}</td>
-          <td class="py-2 pl-3 text-right font-bold ${t.pnl >= 0 ? 'text-cyanGlow' : 'text-rose-400'}">${t.pnl >= 0 ? '+' : ''}$${t.pnl.toFixed(2)}</td>
-        </tr>
-      `).join('');
+      tbody.innerHTML = trades.map((t) => {
+        const pnlColor = t.pnl >= 0 ? 'text-emerald-300' : 'text-red-300';
+        const pnlText = `${t.pnl >= 0 ? '+' : ''}$${t.pnl.toFixed(2)}`;
+        return `
+          <tr>
+            <td class="py-2.5 pr-4 font-bold text-white">${t.pair}</td>
+            <td class="py-2.5 pr-4 text-sky-200/80">${t.session}</td>
+            <td class="py-2.5 pr-4 font-semibold text-cyanGlow">${t.side}</td>
+            <td class="py-2.5 pr-4 font-mono">${t.rr}</td>
+            <td class="py-2.5 pr-4 font-mono font-bold ${pnlColor}">${pnlText}</td>
+            <td class="py-2.5 text-sky-200/75">${t.note}</td>
+          </tr>
+        `;
+      }).join('');
     }
 
-    // Init
-    renderCommunityVideos();
-    setVideosUnlockedState(sessionStorage.getItem('petricor_vip_ok') === '1');
-    updateRecap();
-    updateChecklistScore();
-    renderHubTrades();
+    // Inscription & Recap
+    function updateVIPBanner() {
+      const formule = document.getElementById('formule').value;
+      const banner = document.getElementById('vipBanner');
+      const subject = document.getElementById('emailSubject');
+      document.getElementById('recapFormule').textContent = formule;
+
+      if (formule.includes('VIP')) {
+        banner.classList.remove('hidden');
+        subject.value = "Nouvelle Inscription VIP — Petricor Académie";
+      } else {
+        banner.classList.add('hidden');
+        subject.value = "Nouvelle Inscription Bootcamp — Petricor Académie";
+      }
+    }
+
+    ['nom', 'telephone', 'email', 'details'].forEach((id) => {
+      const el = document.getElementById(id);
+      const targetId = 'recap' + id.charAt(0).toUpperCase() + id.slice(1);
+      el.addEventListener('input', () => {
+        document.getElementById(targetId).textContent = el.value.trim() || '-';
+      });
+    });
+
+    function copyRecap() {
+      const text = [
+        "Nom : " + document.getElementById('recapNom').textContent,
+        "Téléphone : " + document.getElementById('recapTel').textContent,
+        "Email : " + document.getElementById('recapEmail').textContent,
+        "Formule : " + document.getElementById('recapFormule').textContent,
+        "Détails : " + document.getElementById('recapDetails').textContent
+      ].join("\n");
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert("تم نسخ الملخص.");
+      });
+    }
+
+    const form = document.getElementById('inscriptionForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const status = document.getElementById('formStatus');
+      btn.disabled = true;
+      btn.textContent = "جاري الإرسال...";
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          status.className = "text-xs sm:text-sm rounded-xl p-3 bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 block";
+          status.textContent = "تم إرسال التسجيل بنجاح.";
+          form.reset();
+          updateVIPBanner();
+          ['recapNom', 'recapTel', 'recapEmail', 'recapDetails'].forEach((id) => {
+            document.getElementById(id).textContent = '-';
+          });
+        } else {
+          throw new Error('Erreur');
+        }
+      } catch {
+        status.className = "text-xs sm:text-sm rounded-xl p-3 bg-red-500/15 text-red-300 border border-red-400/30 block";
+        status.textContent = "وقع خطأ فالإرسال. عاود المحاولة أو تواصل عبر واتساب.";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Valider l'Inscription & Envoyer";
+      }
+    });
+
+    if (sessionStorage.getItem('petricor_vip_unlocked') === '1') {
+      document.getElementById('confirmCodeInput').value = VIP_PASSWORD;
+      confirmVideosAccess();
+    }
   </script>
 </body>
 </html>
