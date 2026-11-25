@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Petricor Académie — Accueil, Community, Backtest & VIP</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -86,12 +87,22 @@
       transform: scale(1.04);
       filter: blur(1.2px) brightness(0.85);
     }
+
+    #btFullscreenOverlay.is-fullscreen {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      width: 100vw;
+      height: 100vh;
+      border-radius: 0;
+      margin: 0;
+    }
   </style>
 </head>
 <body class="min-h-screen selection:bg-gold selection:text-obsidian">
 
   <!-- Top Navigation -->
-  <header class="sticky top-0 z-40 backdrop-blur-md bg-obsidian/85 border-b border-white/10">
+  <header id="mainHeader" class="sticky top-0 z-40 backdrop-blur-md bg-obsidian/85 border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 flex-wrap">
       <button type="button" onclick="switchView('accueil')" class="press-blur flex items-center gap-2.5 text-left">
         <span class="w-8 h-8 rounded-full bg-white text-obsidian font-extrabold flex items-center justify-center text-sm">
@@ -155,7 +166,7 @@
           </h1>
 
           <p class="max-w-xl mx-auto text-sm sm:text-base text-slate-200/85 leading-relaxed">
-            Découvre nos principes de psychologie, entraîne-toi sur notre espace Backtest style TradingView, et rejoins l'Espace VIP.
+            Découvre nos principes de psychologie, entraîne-toi sur notre espace Backtest plein écran, et rejoins l'Espace VIP.
           </p>
 
           <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
@@ -343,7 +354,6 @@
           </form>
         </div>
 
-        <!-- Récapitulatif -->
         <div class="grain-canvas editorial-frame rounded-2xl p-6 sm:p-8 space-y-5">
           <div class="relative z-10 flex items-center justify-between gap-2">
             <div>
@@ -389,11 +399,10 @@
   </main>
 
   <!-- ========================================================= -->
-  <!-- PAGE 2 : COMMUNITY (MINIATURE + PLAY DIRECT YOUTUBE)       -->
+  <!-- PAGE 2 : COMMUNITY                                        -->
   <!-- ========================================================= -->
   <section id="communityPage" class="hidden max-w-6xl mx-auto px-4 py-10">
     <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
-
       <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
         <div>
           <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Page 2 • Community Open Access</span>
@@ -420,212 +429,188 @@
       </div>
 
       <div id="communityVideoGrid" class="relative z-10 grid md:grid-cols-2 gap-6"></div>
-
     </div>
   </section>
 
   <!-- ========================================================= -->
-  <!-- PAGE 3 : BACKTEST (SESSIONS + TRADINGVIEW WORKSPACE)      -->
+  <!-- PAGE 3 : BACKTEST (SETUP AVANT FULL-SCREEN CHART)         -->
   <!-- ========================================================= -->
-  <section id="backtestPage" class="hidden max-w-7xl mx-auto px-4 py-6">
+  <section id="backtestPage" class="hidden max-w-6xl mx-auto px-4 py-8">
 
-    <!-- VUE A : SESSIONS LIST + NEW SESSION -->
-    <div id="btSessionsLobby" class="rounded-[24px] bg-[#0c0f16] border border-white/10 p-5 sm:p-8 space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+    <!-- ÉTAPE 1 : SETUP SESSION (PAIRE + DATE + CAPITAL) -->
+    <div id="btSetupScreen" class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
+      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Petricor Académie • Backtest</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Your Sessions</h2>
-          <p class="text-xs sm:text-sm text-slate-400 mt-1">Choisis une paire, le capital (balance) et crée une session, puis clique dessus pour ouvrir le chart.</p>
+          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Étape 1 • Configuration Session</span>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Préparer le Backtest</h2>
+          <p class="text-xs sm:text-sm text-slate-300/85 mt-1">
+            Choisis la paire, la date de départ et ton capital avant d'ouvrir le chart en plein écran.
+          </p>
         </div>
-        <button type="button" onclick="openNewSessionModal()"
-                class="press-blur inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-xs sm:text-sm shadow-lg">
-          <span>New Session</span>
-          <span class="text-base leading-none">+</span>
+        <button type="button" onclick="switchView('accueil')"
+                class="press-blur px-4 py-2 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-white">
+          ← Accueil
         </button>
       </div>
 
-      <div id="btSessionsGrid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
-    </div>
-
-    <!-- VUE B : TRADINGVIEW-STYLE FULL CHART WORKSPACE -->
-    <div id="btChartWorkspace" class="hidden rounded-[20px] bg-[#f4f6f9] text-[#131722] overflow-hidden border border-white/15 shadow-2xl">
-
-      <!-- Top TradingView Bar -->
-      <div class="px-3 py-2 bg-white border-b border-slate-200 flex items-center justify-between gap-2 flex-wrap text-xs">
-        <div class="flex items-center gap-2 flex-wrap">
-          <button type="button" onclick="backToSessionsLobby()"
-                  class="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-bold hover:bg-slate-800 transition">
-            ← Sessions
-          </button>
-
-          <span id="wsSymbolBadge" class="px-2.5 py-1 rounded bg-slate-100 font-extrabold text-slate-900">
-            Nas100
-          </span>
-
-          <div class="flex items-center gap-0.5 bg-slate-100 p-0.5 rounded-lg font-bold">
-            <button type="button" onclick="changeWsTf('1m', this)" class="ws-tf px-2 py-1 rounded bg-blue-600 text-white">1m</button>
-            <button type="button" onclick="changeWsTf('5m', this)" class="ws-tf px-2 py-1 rounded text-slate-700 hover:bg-slate-200">5m</button>
-            <button type="button" onclick="changeWsTf('15m', this)" class="ws-tf px-2 py-1 rounded text-slate-700 hover:bg-slate-200">15m</button>
-            <button type="button" onclick="changeWsTf('1H', this)" class="ws-tf px-2 py-1 rounded text-slate-700 hover:bg-slate-200">1H</button>
-            <button type="button" onclick="changeWsTf('4H', this)" class="ws-tf px-2 py-1 rounded text-slate-700 hover:bg-slate-200">4H</button>
-          </div>
-
-          <button type="button" onclick="toggleOrderDrawer()"
-                  class="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 font-bold hover:bg-blue-100">
-            + Open Position
-          </button>
-
-          <button type="button" onclick="rewindSession()"
-                  class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold">
-            ⏮ Rewind
-          </button>
-        </div>
-
-        <div class="flex items-center gap-3 font-mono text-xs">
-          <span class="text-slate-600">Session: <strong id="wsSessionName" class="text-slate-900">-</strong></span>
-          <span class="text-slate-600">Balance: <strong id="wsBalance" class="text-emerald-700">$1,000.00</strong></span>
-          <span id="wsPnlBadge" class="px-2 py-0.5 rounded bg-slate-100 font-bold text-slate-800">P&L: $0.00</span>
-        </div>
-      </div>
-
-      <!-- Main Body: Left Drawing Tools + Large Chart -->
-      <div class="relative flex min-h-[540px] sm:min-h-[620px] bg-white">
-
-        <!-- Left Vertical Toolbar -->
-        <div class="w-11 bg-white border-r border-slate-200 py-2.5 flex flex-col items-center gap-1.5 shrink-0">
-          <button type="button" id="wsToolCross" onclick="setWsTool('crosshair')" title="Crosshair"
-                  class="w-8 h-8 rounded bg-blue-600 text-white font-bold text-xs flex items-center justify-center">
-            ✛
-          </button>
-          <button type="button" id="wsToolTrend" onclick="setWsTool('trendline')" title="Trend Line (2 clics)"
-                  class="w-8 h-8 rounded hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center">
-            ／
-          </button>
-          <button type="button" id="wsToolHline" onclick="setWsTool('hline')" title="Horizontal Line (1 clic)"
-                  class="w-8 h-8 rounded hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center">
-            ―
-          </button>
-          <button type="button" id="wsToolBox" onclick="setWsTool('box')" title="Rectangle / POI Zone (2 clics)"
-                  class="w-8 h-8 rounded hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center">
-            ▭
-          </button>
-          <button type="button" onclick="clearWsDrawings()" title="Effacer dessins"
-                  class="w-8 h-8 rounded hover:bg-red-50 text-red-600 font-bold text-xs flex items-center justify-center mt-auto">
-            🗑
-          </button>
-        </div>
-
-        <!-- Chart Canvas Area -->
-        <div class="flex-1 relative">
-          <!-- Floating Replay Pill (like screenshot 3) -->
-          <div class="absolute top-3 left-1/2 -translate-x-1/2 z-20 bg-[#1e222d]/95 text-white px-3.5 py-1.5 rounded-xl shadow-xl flex items-center gap-2.5 text-xs">
-            <span class="text-slate-400">⋮⋮</span>
-            <input id="wsReplaySlider" type="range" min="15" max="180" value="55"
-                   oninput="onReplaySliderChange(this.value)"
-                   class="w-24 sm:w-36 accent-blue-500 cursor-pointer">
-            <button type="button" id="wsPlayBtn" onclick="toggleWsPlay()"
-                    class="w-6 h-6 rounded hover:bg-white/10 flex items-center justify-center font-bold">
-              ▶
-            </button>
-            <button type="button" onclick="stepWsCandle()" title="Next Candle"
-                    class="w-6 h-6 rounded hover:bg-white/10 flex items-center justify-center font-bold">
-              ⏭
-            </button>
-            <span id="wsReplayCount" class="font-mono text-[11px] text-slate-300">55 / 180</span>
-          </div>
-
-          <!-- OHLC Header inside Chart -->
-          <div id="wsOhlcBar" class="absolute top-2.5 left-3 z-10 bg-white/85 backdrop-blur px-2.5 py-1 rounded text-[11px] font-mono text-slate-700 pointer-events-none">
-            O: - H: - L: - C: -
-          </div>
-
-          <canvas id="wsChartCanvas" class="w-full h-full block cursor-crosshair"></canvas>
-
-          <!-- Floating Order Drawer (when + Open Position is clicked) -->
-          <div id="wsOrderDrawer" class="hidden absolute top-14 right-20 z-20 w-72 rounded-xl bg-[#131722] text-white border border-white/15 p-4 shadow-2xl space-y-3 text-xs">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-goldLight">Nouvel Ordre</span>
-              <button type="button" onclick="toggleOrderDrawer()" class="text-slate-400 hover:text-white">✕</button>
-            </div>
-            <div class="grid grid-cols-3 gap-2">
-              <div>
-                <label class="block text-[10px] text-slate-400 mb-1">Risque ($)</label>
-                <input id="wsRiskInput" type="number" value="50" min="5" class="w-full px-2 py-1 rounded bg-obsidian border border-white/10 text-white font-bold">
-              </div>
-              <div>
-                <label class="block text-[10px] text-slate-400 mb-1">SL (Pts)</label>
-                <input id="wsSlInput" type="number" value="20" min="1" class="w-full px-2 py-1 rounded bg-obsidian border border-white/10 text-white font-bold">
-              </div>
-              <div>
-                <label class="block text-[10px] text-slate-400 mb-1">TP (Pts)</label>
-                <input id="wsTpInput" type="number" value="60" min="1" class="w-full px-2 py-1 rounded bg-obsidian border border-white/10 text-white font-bold">
-              </div>
-            </div>
-            <div class="grid grid-cols-2 gap-2">
-              <button type="button" onclick="placeWsTrade('BUY')" class="py-2 rounded bg-emerald-600 hover:bg-emerald-500 font-extrabold text-white">BUY</button>
-              <button type="button" onclick="placeWsTrade('SELL')" class="py-2 rounded bg-rose-600 hover:bg-rose-500 font-extrabold text-white">SELL</button>
-            </div>
-            <div id="wsOpenPosInfo" class="hidden rounded bg-obsidian p-2 border border-gold/30 flex items-center justify-between">
-              <span id="wsOpenPosText" class="font-mono text-[11px] text-goldLight"></span>
-              <button type="button" onclick="closeWsTrade()" class="px-2 py-0.5 rounded bg-white/10 text-[10px] font-bold">Close</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Modal : New Session (Pair + Balance + Name) -->
-  <div id="newSessionModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="w-full max-w-md rounded-2xl bg-[#121620] border border-white/15 p-6 space-y-4 text-white shadow-2xl">
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-extrabold">Create Backtest Session</h3>
-        <button type="button" onclick="closeNewSessionModal()" class="text-slate-400 hover:text-white text-lg">✕</button>
-      </div>
-
-      <div class="space-y-3 text-xs">
-        <div>
-          <label class="block text-slate-300 font-semibold mb-1">Session Name</label>
-          <input id="nsName" type="text" placeholder="Ex: PETRICOR ACADEMIE"
-                 class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-white focus:outline-none focus:border-gold">
-        </div>
-
-        <div>
-          <label class="block text-slate-300 font-semibold mb-1">Pair / Instrument</label>
-          <select id="nsPair" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-white focus:outline-none focus:border-gold">
-            <option value="Nas100">Nas100</option>
-            <option value="XAUUSD">XAUUSD</option>
-            <option value="EURUSD">EURUSD</option>
-            <option value="GBPUSD">GBPUSD</option>
-            <option value="GBPJPY">GBPJPY</option>
-            <option value="BTCUSD">BTCUSD</option>
+      <div class="relative z-10 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
+          <label class="block text-xs font-bold text-goldLight">1. Paire / Marché</label>
+          <select id="setupPair" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-sm text-white font-bold">
+            <option value="XAU/USD">XAU/USD (Gold)</option>
+            <option value="EUR/USD">EUR/USD (Euro)</option>
+            <option value="GBP/USD">GBP/USD (Pound)</option>
+            <option value="BTC/USD">BTC/USD (Bitcoin)</option>
+            <option value="USD/JPY">USD/JPY (Yen)</option>
           </select>
         </div>
 
-        <div>
-          <label class="block text-slate-300 font-semibold mb-1">Starting Balance ($)</label>
-          <input id="nsBalance" type="number" value="1000" min="100" step="100"
-                 class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-white focus:outline-none focus:border-gold">
+        <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
+          <label class="block text-xs font-bold text-goldLight">2. Date de départ</label>
+          <input id="setupDate" type="date" value="2026-10-15"
+                 class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-sm text-white font-semibold">
+        </div>
+
+        <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
+          <label class="block text-xs font-bold text-goldLight">3. Capital / Balance ($)</label>
+          <input id="setupBalance" type="number" value="10000" min="100" step="500"
+                 class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-sm text-white font-mono font-bold">
+        </div>
+
+        <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
+          <label class="block text-xs font-bold text-goldLight">4. Risque par trade (%)</label>
+          <select id="setupRiskPct" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian border border-white/15 text-sm text-white font-bold">
+            <option value="0.5">0.5% Risque</option>
+            <option value="1" selected>1.0% Risque</option>
+            <option value="2">2.0% Risque</option>
+          </select>
         </div>
       </div>
 
-      <div class="flex items-center justify-end gap-2 pt-2">
-        <button type="button" onclick="closeNewSessionModal()" class="px-4 py-2 rounded-xl bg-white/10 text-xs font-semibold">Annuler</button>
-        <button type="button" onclick="createAndLaunchSession()"
-                class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-xs">
-          Créer & Ouvrir le Chart →
+      <!-- Optional Twelve Data API Key -->
+      <div class="relative z-10 rounded-2xl bg-charcoal/80 border border-white/10 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div class="space-y-0.5">
+          <div class="font-bold text-white">Source Data Réelle (Twelve Data API)</div>
+          <div class="text-slate-400">Ajoute ta clé gratuite Twelve Data pour charger l'historique réel du marché (ou laisse vide pour mode démonstration instantané).</div>
+        </div>
+        <input id="twelveApiKey" type="text" placeholder="Clé API Twelve Data (optionnel)..."
+               class="w-full sm:w-72 px-3.5 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white placeholder-slate-500">
+      </div>
+
+      <div class="relative z-10 flex flex-wrap items-center justify-between gap-4 pt-2">
+        <div class="text-xs text-slate-400">
+          Timeframes : <strong class="text-white">1m</strong> → <strong class="text-white">Weekly</strong> • Settings couleurs candles/chart inclus
+        </div>
+        <button type="button" onclick="launchFullScreenTerminal()"
+                class="press-blur px-7 py-3.5 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-sm shadow-lg hover:opacity-95 transition">
+          ⛶ Lancer le Chart Plein Écran →
         </button>
       </div>
     </div>
-  </div>
+
+    <!-- ÉTAPE 2 : FULL-SCREEN TRADING TERMINAL -->
+    <div id="btFullscreenOverlay" class="hidden rounded-2xl bg-[#0a0c10] border border-white/15 flex flex-col overflow-hidden">
+
+      <!-- Top Bar: Timeframes (1m -> Weekly) + Replay + Settings + Exit Fullscreen -->
+      <div class="px-3 py-2 bg-[#101319] border-b border-white/10 flex items-center justify-between gap-2 flex-wrap text-xs">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span id="termPairLabel" class="px-2.5 py-1 rounded bg-gold/15 border border-gold/30 text-goldLight font-extrabold">
+            XAU/USD
+          </span>
+          <span id="termSourceBadge" class="px-2 py-0.5 rounded bg-white/5 text-[10px] text-slate-300">
+            Data
+          </span>
+
+          <!-- Timeframes 1m to Weekly -->
+          <div class="flex items-center gap-0.5 bg-obsidian p-0.5 rounded-lg border border-white/10 font-bold">
+            <button type="button" onclick="changeTermTf('1min', this)" class="tf-btn px-2 py-1 rounded text-slate-300 hover:text-white">1m</button>
+            <button type="button" onclick="changeTermTf('5min', this)" class="tf-btn px-2 py-1 rounded text-slate-300 hover:text-white">5m</button>
+            <button type="button" onclick="changeTermTf('15min', this)" class="tf-btn px-2 py-1 rounded bg-gold text-obsidian">15m</button>
+            <button type="button" onclick="changeTermTf('1h', this)" class="tf-btn px-2 py-1 rounded text-slate-300 hover:text-white">1H</button>
+            <button type="button" onclick="changeTermTf('4h', this)" class="tf-btn px-2 py-1 rounded text-slate-300 hover:text-white">4H</button>
+            <button type="button" onclick="changeTermTf('1day', this)" class="tf-btn px-2 py-1 rounded text-slate-300 hover:text-white">1D</button>
+            <button type="button" onclick="changeTermTf('1week', this)" class="tf-btn px-2 py-1 rounded text-slate-300 hover:text-white">Weekly</button>
+          </div>
+        </div>
+
+        <!-- Replay Controls -->
+        <div class="flex items-center gap-1.5 bg-obsidian px-2.5 py-1 rounded-lg border border-white/10">
+          <span class="text-[11px] font-bold text-goldLight">Replay:</span>
+          <button type="button" id="termPlayBtn" onclick="toggleTermPlay()"
+                  class="px-2.5 py-0.5 rounded bg-gold text-obsidian font-extrabold">▶ Play</button>
+          <button type="button" onclick="stepTermCandle()"
+                  class="px-2.5 py-0.5 rounded bg-white/10 hover:bg-white/20 text-white font-bold">⏭ +1</button>
+          <span id="termBarProgress" class="font-mono text-[11px] text-slate-400">0/0</span>
+        </div>
+
+        <!-- Settings + Exit Fullscreen -->
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="toggleSettingsPopover()"
+                  class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/10 text-white font-bold">
+            ⚙️ Settings
+          </button>
+          <button type="button" onclick="exitFullScreenTerminal()"
+                  class="px-3 py-1.5 rounded-lg bg-rose-600/20 hover:bg-rose-600/35 border border-rose-500/40 text-rose-300 font-bold">
+            ✕ Exit Fullscreen
+          </button>
+        </div>
+      </div>
+
+      <!-- Settings Popover (Candle Colors + Chart Theme + Grid) -->
+      <div id="chartSettingsPanel" class="hidden bg-[#141923] border-b border-gold/30 px-4 py-3 text-xs">
+        <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-2">
+            <label class="text-slate-300 font-semibold">Bull Candle:</label>
+            <input id="setBullColor" type="color" value="#089981" onchange="applyChartAppearance()" class="w-7 h-7 rounded cursor-pointer bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <label class="text-slate-300 font-semibold">Bear Candle:</label>
+            <input id="setBearColor" type="color" value="#f23645" onchange="applyChartAppearance()" class="w-7 h-7 rounded cursor-pointer bg-transparent">
+          </div>
+          <div class="flex items-center gap-2">
+            <label class="text-slate-300 font-semibold">Chart Theme:</label>
+            <select id="setChartTheme" onchange="applyChartAppearance()" class="px-2.5 py-1 rounded bg-obsidian border border-white/15 text-white font-semibold">
+              <option value="dark">Dark Obsidian (#0a0c10)</option>
+              <option value="light">Light Clean (#ffffff)</option>
+            </select>
+          </div>
+          <label class="flex items-center gap-1.5 text-slate-200 font-semibold cursor-pointer">
+            <input id="setShowGrid" type="checkbox" checked onchange="applyChartAppearance()" class="accent-gold">
+            Afficher Grid
+          </label>
+        </div>
+      </div>
+
+      <!-- Chart Canvas (Expands Full Height) -->
+      <div id="tvChartContainer" class="flex-1 w-full min-h-[460px]"></div>
+
+      <!-- Bottom Trade & Balance Bar -->
+      <div class="px-3 py-2.5 bg-[#101319] border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-4 font-mono">
+          <div><span class="text-slate-400">Balance:</span> <strong id="termBalance" class="text-white">$10,000.00</strong></div>
+          <div><span class="text-slate-400">P&L:</span> <strong id="termPnl" class="text-emerald-400">$0.00</strong></div>
+          <div><span class="text-slate-400">Prix:</span> <strong id="termPrice" class="text-goldLight">-</strong></div>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <label class="text-slate-400">SL (pts):</label>
+          <input id="termSlPts" type="number" value="20" min="1" class="w-16 px-2 py-1 rounded bg-obsidian border border-white/15 text-white font-mono">
+          <label class="text-slate-400">TP (pts):</label>
+          <input id="termTpPts" type="number" value="60" min="1" class="w-16 px-2 py-1 rounded bg-obsidian border border-white/15 text-white font-mono">
+          <button type="button" onclick="openTermOrder('BUY')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold">BUY</button>
+          <button type="button" onclick="openTermOrder('SELL')" class="px-3.5 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-extrabold">SELL</button>
+          <button type="button" id="termCloseBtn" onclick="closeTermOrder()" class="hidden px-3 py-1.5 rounded-lg bg-gold text-obsidian font-extrabold">Close Trade</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- ========================================================= -->
-  <!-- PAGE 4 : ESPACE VIP (CODE + MINIATURES + PLAY YOUTUBE)    -->
+  <!-- PAGE 4 : ESPACE VIP                                       -->
   <!-- ========================================================= -->
   <section id="vipPage" class="hidden max-w-6xl mx-auto px-4 py-10">
     <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
-
       <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
         <div>
           <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Page 4 • Espace Privé Membre</span>
@@ -681,12 +666,11 @@
       </div>
 
       <div id="videosUnlockedGrid" class="relative z-10 hidden grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
-
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-white/10 mt-10">
+  <footer id="mainFooter" class="border-t border-white/10 mt-10">
     <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
       <div>© <span id="year"></span> Petricor Académie. Tous droits réservés.</div>
       <div>Contact : nemranyy100@gmail.com</div>
@@ -735,7 +719,9 @@
         vip: document.getElementById('navVipBtn')
       };
 
-      if (view !== 'backtest') stopWsPlay();
+      if (view !== 'backtest') {
+        exitFullScreenTerminal();
+      }
 
       Object.keys(pages).forEach(k => {
         if (k === view) {
@@ -747,9 +733,6 @@
         }
       });
 
-      if (view === 'backtest' && !document.getElementById('btChartWorkspace').classList.contains('hidden')) {
-        setTimeout(drawWsChart, 40);
-      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -909,454 +892,310 @@
       }
     });
 
-    // === BACKTEST SESSIONS & TRADINGVIEW WORKSPACE ===
-    const STORAGE_KEY = 'petricor_bt_sessions_v1';
-    const PAIR_BASE = {
-      Nas100: { start: 30600, step: 14, dec: 2 },
-      XAUUSD: { start: 2650, step: 4.5, dec: 2 },
-      EURUSD: { start: 1.0850, step: 0.0014, dec: 4 },
-      GBPUSD: { start: 1.2720, step: 0.0016, dec: 4 },
-      GBPJPY: { start: 194.50, step: 0.25, dec: 2 },
-      BTCUSD: { start: 92500, step: 280, dec: 1 }
+    // === FULL-SCREEN REAL DATA TERMINAL (TWELVE DATA + LIGHTWEIGHT CHARTS) ===
+    let tvChart = null;
+    let tvSeries = null;
+    let allBars = [];
+    let replayIdx = 40;
+    let termInterval = null;
+    let termTf = '15min';
+    let termStartBalance = 10000;
+    let termBalance = 10000;
+    let termRiskPct = 1;
+    let activeOrder = null;
+
+    const PAIR_SPECS = {
+      'XAU/USD': { base: 2650, vol: 5.5, prec: 2 },
+      'EUR/USD': { base: 1.0850, vol: 0.0014, prec: 4 },
+      'GBP/USD': { base: 1.2720, vol: 0.0016, prec: 4 },
+      'BTC/USD': { base: 92500, vol: 320, prec: 1 },
+      'USD/JPY': { base: 152.40, vol: 0.28, prec: 2 }
     };
 
-    let sessions = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || [
-      { id: 's1', name: 'PETRICOR ACADEMIE', pair: 'Nas100', balance: 1000, startBalance: 1000, date: '25/11/2026' },
-      { id: 's2', name: 'PETRICOR ACADEMIE', pair: 'XAUUSD', balance: 5000, startBalance: 5000, date: '25/11/2026' }
-    ];
+    function buildMarketBars(pair, startDateStr, count = 240) {
+      const spec = PAIR_SPECS[pair] || PAIR_SPECS['XAU/USD'];
+      const startSec = Math.floor(new Date(startDateStr || '2026-10-15').getTime() / 1000);
+      const tfSecMap = { '1min': 60, '5min': 300, '15min': 900, '1h': 3600, '4h': 14400, '1day': 86400, '1week': 604800 };
+      const stepSec = tfSecMap[termTf] || 900;
 
-    let activeSession = null;
-    let wsCandles = [];
-    let wsCursor = 55;
-    let wsTimer = null;
-    let wsTool = 'crosshair';
-    let wsDrawings = [];
-    let wsPending = null;
-    let wsMouse = null;
-    let wsOpenTrade = null;
-
-    function saveSessions() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
+      let price = spec.base;
+      let trend = 1;
+      const bars = [];
+      for (let i = 0; i < count; i++) {
+        if (i % 18 === 0) trend = Math.random() > 0.48 ? 1 : -1;
+        const open = price;
+        const close = open + (Math.random() - 0.47 + trend * 0.14) * spec.vol;
+        const high = Math.max(open, close) + Math.random() * spec.vol * 0.85;
+        const low = Math.min(open, close) - Math.random() * spec.vol * 0.85;
+        bars.push({
+          time: startSec + i * stepSec,
+          open: +open.toFixed(spec.prec),
+          high: +high.toFixed(spec.prec),
+          low: +low.toFixed(spec.prec),
+          close: +close.toFixed(spec.prec)
+        });
+        price = close;
+      }
+      return bars;
     }
 
-    function renderSessionsGrid() {
-      const grid = document.getElementById('btSessionsGrid');
-      grid.innerHTML = sessions.map(s => `
-        <div onclick="openSessionChart('${s.id}')"
-             class="press-blur cursor-pointer rounded-xl bg-[#131722] hover:bg-[#191f2e] border border-white/10 hover:border-gold/50 p-4 transition flex flex-col justify-between gap-4">
-          <div class="space-y-1 text-xs">
-            <div class="flex justify-between gap-2"><span class="text-slate-400">Name:</span><span class="font-bold text-white truncate">${s.name}</span></div>
-            <div class="flex justify-between gap-2"><span class="text-slate-400">Pair:</span><span class="font-bold text-goldLight">${s.pair}</span></div>
-            <div class="flex justify-between gap-2"><span class="text-slate-400">Balance:</span><span class="font-mono font-bold text-emerald-400">$${Number(s.balance).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span></div>
-            <div class="flex justify-between gap-2"><span class="text-slate-400">Date:</span><span class="text-slate-300">${s.date}</span></div>
-          </div>
-          <div class="flex items-center justify-between pt-2 border-t border-white/5">
-            <span class="text-[11px] text-slate-400">Ouvrir le chart</span>
-            <span class="w-7 h-7 rounded-full bg-gold/15 text-goldLight flex items-center justify-center text-xs font-bold">▶</span>
-          </div>
-        </div>
-      `).join('');
+    async function fetchRealOrFallbackBars(pair, startDateStr) {
+      const apiKey = document.getElementById('twelveApiKey').value.trim();
+      if (apiKey) {
+        try {
+          const url = `https://api.twelvedata.com/time_series?symbol=${encodeURIComponent(pair)}&interval=${encodeURIComponent(termTf)}&start_date=${encodeURIComponent(startDateStr)}&outputsize=250&apikey=${encodeURIComponent(apiKey)}`;
+          const res = await fetch(url);
+          const data = await res.json();
+          if (data && Array.isArray(data.values) && data.values.length > 20) {
+            document.getElementById('termSourceBadge').textContent = 'Twelve Data Live/Hist';
+            return data.values.reverse().map(v => ({
+              time: Math.floor(new Date(v.datetime.replace(' ', 'T') + 'Z').getTime() / 1000),
+              open: parseFloat(v.open),
+              high: parseFloat(v.high),
+              low: parseFloat(v.low),
+              close: parseFloat(v.close)
+            }));
+          }
+        } catch (err) {
+          console.warn('Fallback market stream used:', err);
+        }
+      }
+      document.getElementById('termSourceBadge').textContent = 'Market Stream';
+      return buildMarketBars(pair, startDateStr);
     }
 
-    function openNewSessionModal() {
-      document.getElementById('nsName').value = 'PETRICOR ACADEMIE';
-      document.getElementById('newSessionModal').classList.remove('hidden');
+    function initTvChartIfNeeded() {
+      const container = document.getElementById('tvChartContainer');
+      if (tvChart) return;
+
+      tvChart = LightweightCharts.createChart(container, {
+        width: container.clientWidth,
+        height: container.clientHeight,
+        layout: {
+          background: { type: 'solid', color: '#0a0c10' },
+          textColor: '#d1d4dc',
+        },
+        grid: {
+          vertLines: { color: 'rgba(255,255,255,0.05)' },
+          horzLines: { color: 'rgba(255,255,255,0.05)' },
+        },
+        crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
+        rightPriceScale: { borderColor: 'rgba(255,255,255,0.12)' },
+        timeScale: { borderColor: 'rgba(255,255,255,0.12)', timeVisible: true },
+      });
+
+      tvSeries = tvChart.addCandlestickSeries({
+        upColor: '#089981',
+        downColor: '#f23645',
+        borderDownColor: '#f23645',
+        borderUpColor: '#089981',
+        wickDownColor: '#f23645',
+        wickUpColor: '#089981',
+      });
+
+      window.addEventListener('resize', () => {
+        if (tvChart && !document.getElementById('btFullscreenOverlay').classList.contains('hidden')) {
+          tvChart.applyOptions({ width: container.clientWidth, height: container.clientHeight });
+        }
+      });
     }
 
-    function closeNewSessionModal() {
-      document.getElementById('newSessionModal').classList.add('hidden');
+    function applyChartAppearance() {
+      if (!tvChart || !tvSeries) return;
+      const bull = document.getElementById('setBullColor').value;
+      const bear = document.getElementById('setBearColor').value;
+      const theme = document.getElementById('setChartTheme').value;
+      const showGrid = document.getElementById('setShowGrid').checked;
+
+      const isLight = theme === 'light';
+      tvChart.applyOptions({
+        layout: {
+          background: { type: 'solid', color: isLight ? '#ffffff' : '#0a0c10' },
+          textColor: isLight ? '#131722' : '#d1d4dc',
+        },
+        grid: {
+          vertLines: { visible: showGrid, color: isLight ? '#eef1f6' : 'rgba(255,255,255,0.05)' },
+          horzLines: { visible: showGrid, color: isLight ? '#eef1f6' : 'rgba(255,255,255,0.05)' },
+        }
+      });
+
+      tvSeries.applyOptions({
+        upColor: bull,
+        downColor: bear,
+        borderUpColor: bull,
+        borderDownColor: bear,
+        wickUpColor: bull,
+        wickDownColor: bear,
+      });
     }
 
-    function createAndLaunchSession() {
-      const name = (document.getElementById('nsName').value || 'PETRICOR ACADEMIE').trim();
-      const pair = document.getElementById('nsPair').value;
-      const balance = Math.max(100, Number(document.getElementById('nsBalance').value) || 1000);
-      const now = new Date();
-      const dateStr = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+    async function launchFullScreenTerminal() {
+      const pair = document.getElementById('setupPair').value;
+      const startDate = document.getElementById('setupDate').value;
+      termStartBalance = Math.max(100, Number(document.getElementById('setupBalance').value) || 10000);
+      termBalance = termStartBalance;
+      termRiskPct = Number(document.getElementById('setupRiskPct').value) || 1;
+      activeOrder = null;
 
-      const item = {
-        id: 's_' + Date.now(),
-        name,
-        pair,
-        balance,
-        startBalance: balance,
-        date: dateStr
+      document.getElementById('termPairLabel').textContent = pair;
+      document.getElementById('termCloseBtn').classList.add('hidden');
+      updateTerminalStats(0);
+
+      document.getElementById('btSetupScreen').classList.add('hidden');
+      document.getElementById('mainHeader').classList.add('hidden');
+      document.getElementById('mainFooter').classList.add('hidden');
+
+      const overlay = document.getElementById('btFullscreenOverlay');
+      overlay.classList.remove('hidden');
+      overlay.classList.add('is-fullscreen');
+
+      initTvChartIfNeeded();
+      applyChartAppearance();
+
+      allBars = await fetchRealOrFallbackBars(pair, startDate);
+      replayIdx = Math.min(40, allBars.length);
+      renderReplaySlice();
+
+      const container = document.getElementById('tvChartContainer');
+      tvChart.applyOptions({ width: container.clientWidth, height: container.clientHeight });
+    }
+
+    function exitFullScreenTerminal() {
+      stopTermPlay();
+      const overlay = document.getElementById('btFullscreenOverlay');
+      overlay.classList.add('hidden');
+      overlay.classList.remove('is-fullscreen');
+      document.getElementById('mainHeader').classList.remove('hidden');
+      document.getElementById('mainFooter').classList.remove('hidden');
+      document.getElementById('btSetupScreen').classList.remove('hidden');
+    }
+
+    function toggleSettingsPopover() {
+      document.getElementById('chartSettingsPanel').classList.toggle('hidden');
+    }
+
+    async function changeTermTf(tf, btn) {
+      termTf = tf;
+      document.querySelectorAll('.tf-btn').forEach(b => {
+        b.className = 'tf-btn px-2 py-1 rounded text-slate-300 hover:text-white';
+      });
+      btn.className = 'tf-btn px-2 py-1 rounded bg-gold text-obsidian';
+
+      const pair = document.getElementById('setupPair').value;
+      const startDate = document.getElementById('setupDate').value;
+      allBars = await fetchRealOrFallbackBars(pair, startDate);
+      replayIdx = Math.min(40, allBars.length);
+      renderReplaySlice();
+    }
+
+    function renderReplaySlice() {
+      if (!tvSeries || !allBars.length) return;
+      const slice = allBars.slice(0, replayIdx);
+      tvSeries.setData(slice);
+      const last = slice[slice.length - 1];
+      const spec = PAIR_SPECS[document.getElementById('setupPair').value] || PAIR_SPECS['XAU/USD'];
+      document.getElementById('termPrice').textContent = last.close.toFixed(spec.prec);
+      document.getElementById('termBarProgress').textContent = `${replayIdx}/${allBars.length}`;
+
+      if (activeOrder) {
+        evaluateActiveOrder(last);
+      }
+    }
+
+    function stepTermCandle() {
+      if (replayIdx < allBars.length) {
+        replayIdx++;
+        renderReplaySlice();
+      } else {
+        stopTermPlay();
+      }
+    }
+
+    function toggleTermPlay() {
+      if (termInterval) {
+        stopTermPlay();
+      } else {
+        document.getElementById('termPlayBtn').textContent = '⏸ Pause';
+        termInterval = setInterval(stepTermCandle, 600);
+      }
+    }
+
+    function stopTermPlay() {
+      if (termInterval) {
+        clearInterval(termInterval);
+        termInterval = null;
+      }
+      const b = document.getElementById('termPlayBtn');
+      if (b) b.textContent = '▶ Play';
+    }
+
+    function openTermOrder(side) {
+      if (activeOrder || !allBars.length) return;
+      const last = allBars[replayIdx - 1];
+      const spec = PAIR_SPECS[document.getElementById('setupPair').value] || PAIR_SPECS['XAU/USD'];
+      const riskAmount = termBalance * (termRiskPct / 100);
+      const slPts = Math.max(1, Number(document.getElementById('termSlPts').value) || 20);
+      const tpPts = Math.max(1, Number(document.getElementById('termTpPts').value) || 60);
+      const unit = spec.prec === 4 ? 0.0001 : (spec.prec === 1 ? 5 : 0.5);
+
+      activeOrder = {
+        side,
+        entry: last.close,
+        sl: side === 'BUY' ? last.close - slPts * unit : last.close + slPts * unit,
+        tp: side === 'BUY' ? last.close + tpPts * unit : last.close - tpPts * unit,
+        riskAmount,
+        rr: tpPts / slPts
       };
-      sessions.unshift(item);
-      saveSessions();
-      renderSessionsGrid();
-      closeNewSessionModal();
-      openSessionChart(item.id);
+      document.getElementById('termCloseBtn').classList.remove('hidden');
+      evaluateActiveOrder(last);
     }
 
-    function generatePairCandles(pair) {
-      const cfg = PAIR_BASE[pair] || PAIR_BASE.Nas100;
-      const arr = [];
-      let p = cfg.start;
-      let dir = 1;
-      for (let i = 0; i < 180; i++) {
-        if (i % 20 === 0) dir = Math.random() > 0.48 ? 1 : -1;
-        const open = p;
-        const close = open + (Math.random() - 0.47 + dir * 0.14) * cfg.step;
-        const high = Math.max(open, close) + Math.random() * cfg.step * 0.9;
-        const low = Math.min(open, close) - Math.random() * cfg.step * 0.9;
-        arr.push({ open, high, low, close });
-        p = close;
-      }
-      return arr;
-    }
-
-    function openSessionChart(sessionId) {
-      activeSession = sessions.find(x => x.id === sessionId) || sessions[0];
-      wsCandles = generatePairCandles(activeSession.pair);
-      wsCursor = 55;
-      wsDrawings = [];
-      wsPending = null;
-      wsOpenTrade = null;
-      stopWsPlay();
-
-      document.getElementById('wsSessionName').textContent = activeSession.name;
-      document.getElementById('wsSymbolBadge').textContent = activeSession.pair;
-      updateWsHeaderStats();
-
-      document.getElementById('btSessionsLobby').classList.add('hidden');
-      document.getElementById('btChartWorkspace').classList.remove('hidden');
-      document.getElementById('wsOrderDrawer').classList.add('hidden');
-      document.getElementById('wsOpenPosInfo').classList.add('hidden');
-
-      const slider = document.getElementById('wsReplaySlider');
-      slider.max = wsCandles.length;
-      slider.value = wsCursor;
-
-      setTimeout(drawWsChart, 50);
-    }
-
-    function backToSessionsLobby() {
-      stopWsPlay();
-      renderSessionsGrid();
-      document.getElementById('btChartWorkspace').classList.add('hidden');
-      document.getElementById('btSessionsLobby').classList.remove('hidden');
-    }
-
-    function changeWsTf(tf, btn) {
-      document.querySelectorAll('.ws-tf').forEach(b => {
-        b.className = 'ws-tf px-2 py-1 rounded text-slate-700 hover:bg-slate-200';
-      });
-      btn.className = 'ws-tf px-2 py-1 rounded bg-blue-600 text-white';
-      wsCandles = generatePairCandles(activeSession.pair);
-      drawWsChart();
-    }
-
-    function rewindSession() {
-      stopWsPlay();
-      wsCursor = 25;
-      wsOpenTrade = null;
-      document.getElementById('wsOpenPosInfo').classList.add('hidden');
-      document.getElementById('wsReplaySlider').value = wsCursor;
-      drawWsChart();
-    }
-
-    function onReplaySliderChange(val) {
-      stopWsPlay();
-      wsCursor = Math.max(15, Number(val));
-      checkWsTrade();
-      drawWsChart();
-    }
-
-    function toggleWsPlay() {
-      if (wsTimer) {
-        stopWsPlay();
-      } else {
-        document.getElementById('wsPlayBtn').textContent = '⏸';
-        wsTimer = setInterval(stepWsCandle, 500);
-      }
-    }
-
-    function stopWsPlay() {
-      if (wsTimer) {
-        clearInterval(wsTimer);
-        wsTimer = null;
-      }
-      const b = document.getElementById('wsPlayBtn');
-      if (b) b.textContent = '▶';
-    }
-
-    function stepWsCandle() {
-      if (wsCursor < wsCandles.length) {
-        wsCursor++;
-        document.getElementById('wsReplaySlider').value = wsCursor;
-        checkWsTrade();
-        drawWsChart();
-      } else {
-        stopWsPlay();
-      }
-    }
-
-    function setWsTool(tool) {
-      wsTool = tool;
-      wsPending = null;
-      ['wsToolCross', 'wsToolTrend', 'wsToolHline', 'wsToolBox'].forEach(id => {
-        document.getElementById(id).className = 'w-8 h-8 rounded hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center';
-      });
-      const map = { crosshair: 'wsToolCross', trendline: 'wsToolTrend', hline: 'wsToolHline', box: 'wsToolBox' };
-      document.getElementById(map[tool]).className = 'w-8 h-8 rounded bg-blue-600 text-white font-bold text-xs flex items-center justify-center';
-    }
-
-    function clearWsDrawings() {
-      wsDrawings = [];
-      wsPending = null;
-      drawWsChart();
-    }
-
-    function toggleOrderDrawer() {
-      document.getElementById('wsOrderDrawer').classList.toggle('hidden');
-    }
-
-    function placeWsTrade(side) {
-      if (!activeSession || wsOpenTrade) return;
-      const cfg = PAIR_BASE[activeSession.pair] || PAIR_BASE.Nas100;
-      const c = wsCandles[wsCursor - 1];
-      const risk = Math.max(5, Number(document.getElementById('wsRiskInput').value) || 50);
-      const slPts = Math.max(1, Number(document.getElementById('wsSlInput').value) || 20);
-      const tpPts = Math.max(1, Number(document.getElementById('wsTpInput').value) || 60);
-      const unit = cfg.dec === 4 ? 0.0001 : (cfg.dec === 1 ? 5 : 1);
-
-      const entry = c.close;
-      const sl = side === 'BUY' ? entry - slPts * unit : entry + slPts * unit;
-      const tp = side === 'BUY' ? entry + tpPts * unit : entry - tpPts * unit;
-
-      wsOpenTrade = { side, entry, sl, tp, risk, rr: tpPts / slPts };
-      document.getElementById('wsOpenPosInfo').classList.remove('hidden');
-      document.getElementById('wsOpenPosText').textContent = `${side} @ ${entry.toFixed(cfg.dec)}`;
-      checkWsTrade();
-      drawWsChart();
-    }
-
-    function checkWsTrade() {
-      if (!wsOpenTrade || !activeSession) return;
-      const c = wsCandles[wsCursor - 1];
-      const t = wsOpenTrade;
+    function evaluateActiveOrder(bar) {
+      if (!activeOrder) return;
+      const o = activeOrder;
       let hit = null;
-      if (t.side === 'BUY') {
-        if (c.low <= t.sl) hit = 'LOSS';
-        else if (c.high >= t.tp) hit = 'WIN';
+      if (o.side === 'BUY') {
+        if (bar.low <= o.sl) hit = 'LOSS';
+        else if (bar.high >= o.tp) hit = 'WIN';
       } else {
-        if (c.high >= t.sl) hit = 'LOSS';
-        else if (c.low <= t.tp) hit = 'WIN';
+        if (bar.high >= o.sl) hit = 'LOSS';
+        else if (bar.low <= o.tp) hit = 'WIN';
       }
       if (hit) {
-        const pnl = hit === 'WIN' ? t.risk * t.rr : -t.risk;
-        settleWsTrade(pnl);
+        const realized = hit === 'WIN' ? o.riskAmount * o.rr : -o.riskAmount;
+        termBalance = Math.max(0, termBalance + realized);
+        activeOrder = null;
+        document.getElementById('termCloseBtn').classList.add('hidden');
+        updateTerminalStats(0);
+        return;
       }
+      const move = o.side === 'BUY' ? (bar.close - o.entry) : (o.entry - bar.close);
+      const floating = (move / Math.abs(o.entry - o.sl)) * o.riskAmount;
+      updateTerminalStats(floating);
     }
 
-    function closeWsTrade() {
-      if (!wsOpenTrade || !activeSession) return;
-      const c = wsCandles[wsCursor - 1];
-      const t = wsOpenTrade;
-      const dist = t.side === 'BUY' ? (c.close - t.entry) : (t.entry - c.close);
-      const pnl = (dist / Math.abs(t.entry - t.sl)) * t.risk;
-      settleWsTrade(pnl);
+    function closeTermOrder() {
+      if (!activeOrder || !allBars.length) return;
+      const bar = allBars[replayIdx - 1];
+      const o = activeOrder;
+      const move = o.side === 'BUY' ? (bar.close - o.entry) : (o.entry - bar.close);
+      const realized = (move / Math.abs(o.entry - o.sl)) * o.riskAmount;
+      termBalance = Math.max(0, termBalance + realized);
+      activeOrder = null;
+      document.getElementById('termCloseBtn').classList.add('hidden');
+      updateTerminalStats(0);
     }
 
-    function settleWsTrade(pnl) {
-      activeSession.balance = Math.max(0, Number(activeSession.balance) + pnl);
-      const idx = sessions.findIndex(x => x.id === activeSession.id);
-      if (idx !== -1) sessions[idx].balance = activeSession.balance;
-      saveSessions();
-      wsOpenTrade = null;
-      document.getElementById('wsOpenPosInfo').classList.add('hidden');
-      updateWsHeaderStats();
-      drawWsChart();
+    function updateTerminalStats(floating = 0) {
+      document.getElementById('termBalance').textContent = `$${(termBalance + floating).toFixed(2)}`;
+      const net = (termBalance + floating) - termStartBalance;
+      const pnlEl = document.getElementById('termPnl');
+      pnlEl.textContent = `${net >= 0 ? '+' : ''}$${net.toFixed(2)}`;
+      pnlEl.className = net >= 0 ? 'text-emerald-400' : 'text-rose-400';
     }
-
-    function updateWsHeaderStats() {
-      if (!activeSession) return;
-      document.getElementById('wsBalance').textContent = `$${Number(activeSession.balance).toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
-      const diff = activeSession.balance - activeSession.startBalance;
-      const badge = document.getElementById('wsPnlBadge');
-      badge.textContent = `P&L: ${diff >= 0 ? '+' : ''}$${diff.toFixed(2)}`;
-      badge.className = `px-2 py-0.5 rounded font-bold ${diff >= 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}`;
-    }
-
-    function drawWsChart() {
-      const canvas = document.getElementById('wsChartCanvas');
-      if (!canvas) return;
-      const rect = canvas.parentElement.getBoundingClientRect();
-      if (rect.width === 0 || rect.height === 0) return;
-
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-      const ctx = canvas.getContext('2d');
-      const W = canvas.width;
-      const H = canvas.height;
-      const rightAxisW = 74;
-      const bottomAxisH = 26;
-      const plotW = W - rightAxisW;
-      const plotH = H - bottomAxisH;
-
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, W, H);
-
-      const slice = wsCandles.slice(Math.max(0, wsCursor - 85), wsCursor);
-      if (!slice.length) return;
-
-      const cfg = PAIR_BASE[activeSession ? activeSession.pair : 'Nas100'] || PAIR_BASE.Nas100;
-      const last = slice[slice.length - 1];
-      document.getElementById('wsOhlcBar').textContent =
-        `O:${last.open.toFixed(cfg.dec)}  H:${last.high.toFixed(cfg.dec)}  L:${last.low.toFixed(cfg.dec)}  C:${last.close.toFixed(cfg.dec)}`;
-      document.getElementById('wsReplayCount').textContent = `${wsCursor} / ${wsCandles.length}`;
-
-      let minP = Infinity, maxP = -Infinity;
-      slice.forEach(c => {
-        if (c.low < minP) minP = c.low;
-        if (c.high > maxP) maxP = c.high;
-      });
-      const pad = (maxP - minP) * 0.14 || 1;
-      minP -= pad;
-      maxP += pad;
-
-      const xToIdx = x => Math.max(0, Math.min(slice.length - 1, Math.floor((x / plotW) * slice.length)));
-      const idxToX = i => (i + 0.5) * (plotW / Math.max(slice.length, 45));
-      const pToY = p => plotH - ((p - minP) / (maxP - minP)) * plotH;
-      const yToP = y => minP + ((plotH - y) / plotH) * (maxP - minP);
-      canvas._map = { xToIdx, idxToX, pToY, yToP };
-
-      // Grid & Price Labels
-      ctx.strokeStyle = '#f0f3fa';
-      ctx.fillStyle = '#434651';
-      ctx.font = '11px monospace';
-      for (let i = 1; i <= 7; i++) {
-        const y = (plotH / 8) * i;
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(plotW, y);
-        ctx.stroke();
-        ctx.fillText(yToP(y).toFixed(cfg.dec), plotW + 6, y + 4);
-      }
-
-      // Drawings (Zones / Trendlines / Hlines)
-      wsDrawings.forEach(d => {
-        if (d.type === 'hline') {
-          const y = pToY(d.price);
-          ctx.strokeStyle = '#131722';
-          ctx.lineWidth = 1.4;
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(plotW, y);
-          ctx.stroke();
-        } else if (d.type === 'trendline') {
-          ctx.strokeStyle = '#2962ff';
-          ctx.lineWidth = 1.8;
-          ctx.beginPath();
-          ctx.moveTo(idxToX(d.i1), pToY(d.p1));
-          ctx.lineTo(idxToX(d.i2), pToY(d.p2));
-          ctx.stroke();
-        } else if (d.type === 'box') {
-          const x1 = idxToX(d.i1), x2 = idxToX(d.i2);
-          const y1 = pToY(d.p1), y2 = pToY(d.p2);
-          ctx.fillStyle = 'rgba(242, 54, 69, 0.16)';
-          ctx.fillRect(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
-        }
-      });
-
-      // Candlesticks (TradingView crisp style)
-      const candleW = Math.max(3, (plotW / Math.max(slice.length, 45)) * 0.62);
-      slice.forEach((c, i) => {
-        const x = idxToX(i);
-        const bull = c.close >= c.open;
-        const col = bull ? '#2962ff' : '#131722';
-
-        ctx.strokeStyle = col;
-        ctx.lineWidth = 1.2;
-        ctx.beginPath();
-        ctx.moveTo(x, pToY(c.high));
-        ctx.lineTo(x, pToY(c.low));
-        ctx.stroke();
-
-        const top = pToY(Math.max(c.open, c.close));
-        const bot = pToY(Math.min(c.open, c.close));
-        ctx.fillStyle = col;
-        ctx.fillRect(x - candleW / 2, top, candleW, Math.max(1.8, bot - top));
-      });
-
-      // Active Trade Lines
-      if (wsOpenTrade) {
-        [
-          { label: 'TP', price: wsOpenTrade.tp, color: '#089981' },
-          { label: wsOpenTrade.side, price: wsOpenTrade.entry, color: '#2962ff' },
-          { label: 'SL', price: wsOpenTrade.sl, color: '#f23645' }
-        ].forEach(l => {
-          const y = pToY(l.price);
-          ctx.strokeStyle = l.color;
-          ctx.lineWidth = 1.4;
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(plotW, y);
-          ctx.stroke();
-          ctx.fillStyle = l.color;
-          ctx.fillRect(plotW + 2, y - 9, rightAxisW - 4, 18);
-          ctx.fillStyle = '#fff';
-          ctx.font = 'bold 10px sans-serif';
-          ctx.fillText(l.label, plotW + 8, y + 3);
-        });
-      }
-
-      // Crosshair
-      if (wsMouse && wsMouse.x < plotW && wsMouse.y < plotH) {
-        ctx.strokeStyle = 'rgba(19, 23, 34, 0.25)';
-        ctx.setLineDash([4, 4]);
-        ctx.beginPath();
-        ctx.moveTo(wsMouse.x, 0);
-        ctx.lineTo(wsMouse.x, plotH);
-        ctx.moveTo(0, wsMouse.y);
-        ctx.lineTo(plotW, wsMouse.y);
-        ctx.stroke();
-        ctx.setLineDash([]);
-      }
-    }
-
-    const wsCanvas = document.getElementById('wsChartCanvas');
-    wsCanvas.addEventListener('mousemove', e => {
-      const r = wsCanvas.getBoundingClientRect();
-      wsMouse = { x: e.clientX - r.left, y: e.clientY - r.top };
-      drawWsChart();
-    });
-    wsCanvas.addEventListener('mouseleave', () => {
-      wsMouse = null;
-      drawWsChart();
-    });
-    wsCanvas.addEventListener('click', e => {
-      if (!wsCanvas._map) return;
-      const r = wsCanvas.getBoundingClientRect();
-      const x = e.clientX - r.left;
-      const y = e.clientY - r.top;
-      const { xToIdx, yToP } = wsCanvas._map;
-      const idx = xToIdx(x);
-      const p = yToP(y);
-
-      if (wsTool === 'hline') {
-        wsDrawings.push({ type: 'hline', price: p });
-        drawWsChart();
-      } else if (wsTool === 'trendline' || wsTool === 'box') {
-        if (!wsPending) {
-          wsPending = { type: wsTool, i1: idx, p1: p };
-        } else {
-          wsDrawings.push({ type: wsTool, i1: wsPending.i1, p1: wsPending.p1, i2: idx, p2: p });
-          wsPending = null;
-          drawWsChart();
-        }
-      }
-    });
-    window.addEventListener('resize', () => {
-      if (!document.getElementById('btChartWorkspace').classList.contains('hidden')) {
-        drawWsChart();
-      }
-    });
 
     // Init
     renderCommunityVideos();
-    renderSessionsGrid();
     setVideosUnlockedState(sessionStorage.getItem('petricor_vip_ok') === '1');
     updateRecap();
   </script>
