@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Petricor Académie — Accueil, Community, Backtest & VIP</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,12 +17,12 @@
             display: ['Cinzel', 'serif'],
           },
           colors: {
-            obsidian: '#050608',
-            charcoal: '#0a0c10',
-            surface: '#101319',
-            gold: '#e5b84b',
-            goldLight: '#f6d57b',
-            goldDark: '#a67c1e',
+            abyss: '#040814',
+            sapphire: '#071226',
+            cobalt: '#0c2248',
+            cyanGlow: '#38bdf8',
+            azure: '#2563eb',
+            ice: '#bae6fd',
           }
         }
       }
@@ -31,17 +30,18 @@
   </script>
   <style>
     body {
-      background-color: #050608;
-      color: #f4f6f8;
+      background-color: #040814;
+      color: #f0f9ff;
       overflow-x: hidden;
     }
 
+    /* Grainy Blue & Cyan Graphic Canvas */
     .grain-canvas {
       position: relative;
       background:
-        radial-gradient(ellipse 75% 65% at 72% 18%, rgba(196, 208, 198, 0.22), transparent 62%),
-        radial-gradient(ellipse 55% 50% at 20% 78%, rgba(229, 184, 75, 0.09), transparent 65%),
-        radial-gradient(ellipse 80% 80% at 50% 50%, rgba(18, 22, 28, 0.95), #050608 100%);
+        radial-gradient(ellipse 75% 65% at 75% 18%, rgba(56, 189, 248, 0.24), transparent 60%),
+        radial-gradient(ellipse 60% 55% at 18% 82%, rgba(37, 99, 235, 0.26), transparent 65%),
+        radial-gradient(ellipse 85% 85% at 50% 50%, rgba(12, 34, 72, 0.92), #040814 100%);
       overflow: hidden;
     }
 
@@ -50,34 +50,37 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      opacity: 0.22;
+      opacity: 0.28;
       mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
     .editorial-frame {
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(125, 211, 252, 0.18);
       box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.75),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        0 25px 80px rgba(2, 8, 23, 0.82),
+        inset 0 1px 0 rgba(186, 230, 253, 0.14);
     }
 
-    .gold-line {
-      border: 1px solid rgba(229, 184, 75, 0.35);
+    .cyan-line {
+      border: 1px solid rgba(56, 189, 248, 0.35);
     }
 
     .pill-nav {
-      background: rgba(16, 19, 25, 0.85);
-      backdrop-filter: blur(18px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(7, 18, 38, 0.78);
+      backdrop-filter: blur(22px) saturate(160%);
+      border: 1px solid rgba(125, 211, 252, 0.18);
     }
 
-    .press-blur {
-      transition: filter 0.25s ease, transform 0.2s ease, opacity 0.25s ease;
+    /* iOS 26 Style Liquid Blur on Click */
+    .ios26-press {
+      transition: filter 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
+                  background-color 0.2s ease;
     }
-    .press-blur:active {
-      filter: blur(2.5px);
-      transform: scale(0.99);
+    .ios26-press:active {
+      filter: blur(5px) saturate(150%);
+      transform: scale(0.965);
     }
 
     .thumb-card img {
@@ -85,27 +88,17 @@
     }
     .thumb-card:hover img {
       transform: scale(1.04);
-      filter: blur(1.2px) brightness(0.85);
-    }
-
-    #btFullscreenOverlay.is-fullscreen {
-      position: fixed;
-      inset: 0;
-      z-index: 60;
-      width: 100vw;
-      height: 100vh;
-      border-radius: 0;
-      margin: 0;
+      filter: blur(1.4px) brightness(0.86);
     }
   </style>
 </head>
-<body class="min-h-screen selection:bg-gold selection:text-obsidian">
+<body class="min-h-screen selection:bg-cyanGlow selection:text-abyss">
 
   <!-- Top Navigation -->
-  <header id="mainHeader" class="sticky top-0 z-40 backdrop-blur-md bg-obsidian/85 border-b border-white/10">
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-abyss/80 border-b border-sky-400/15">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 flex-wrap">
-      <button type="button" onclick="switchView('accueil')" class="press-blur flex items-center gap-2.5 text-left">
-        <span class="w-8 h-8 rounded-full bg-white text-obsidian font-extrabold flex items-center justify-center text-sm">
+      <button type="button" onclick="switchView('accueil')" class="ios26-press flex items-center gap-2.5 text-left">
+        <span class="w-8 h-8 rounded-full bg-gradient-to-br from-ice to-cyanGlow text-abyss font-extrabold flex items-center justify-center text-sm shadow-md shadow-sky-500/20">
           P
         </span>
         <span class="font-display font-bold tracking-wider text-xs sm:text-sm text-white">
@@ -115,34 +108,34 @@
 
       <nav class="flex items-center gap-1 px-1.5 py-1 rounded-full pill-nav text-xs overflow-x-auto">
         <button type="button" id="navAccueilBtn" onclick="switchView('accueil')"
-                class="press-blur px-3 py-1.5 rounded-full bg-white text-obsidian font-bold transition whitespace-nowrap">
+                class="ios26-press px-3 py-1.5 rounded-full bg-cyanGlow text-abyss font-extrabold transition whitespace-nowrap">
           1. Accueil
         </button>
         <button type="button" id="navCommunityBtn" onclick="switchView('community')"
-                class="press-blur px-3 py-1.5 rounded-full text-slate-200 hover:bg-white/10 font-semibold transition whitespace-nowrap">
+                class="ios26-press px-3 py-1.5 rounded-full text-sky-100 hover:bg-sky-400/15 font-semibold transition whitespace-nowrap">
           2. Community
         </button>
         <button type="button" id="navBacktestBtn" onclick="switchView('backtest')"
-                class="press-blur px-3 py-1.5 rounded-full text-emerald-300 hover:bg-white/10 font-bold transition whitespace-nowrap">
-          📊 3. Backtest
+                class="ios26-press px-3 py-1.5 rounded-full text-cyanGlow hover:bg-sky-400/15 font-bold transition whitespace-nowrap">
+          ⚡ 3. Backtest Hub
         </button>
         <button type="button" id="navVipBtn" onclick="switchView('vip')"
-                class="press-blur px-3 py-1.5 rounded-full text-goldLight hover:bg-white/10 font-bold transition flex items-center gap-1 whitespace-nowrap">
+                class="ios26-press px-3 py-1.5 rounded-full text-ice hover:bg-sky-400/15 font-bold transition flex items-center gap-1 whitespace-nowrap">
           <span>🔒</span> 4. VIP
         </button>
       </nav>
 
       <div class="hidden lg:flex items-center gap-2">
         <a href="https://nemranyy100-cyber.github.io/petricor_academie/" target="_blank" rel="noopener noreferrer"
-           class="press-blur px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
+           class="ios26-press px-3 py-1.5 rounded-full bg-sky-400/10 hover:bg-sky-400/20 border border-sky-300/20 text-xs text-sky-100 transition">
           Site Web ↗
         </a>
         <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
-           class="press-blur px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
+           class="ios26-press px-3 py-1.5 rounded-full bg-sky-400/10 hover:bg-sky-400/20 border border-sky-300/20 text-xs text-sky-100 transition">
           Discord
         </a>
         <a href="https://www.instagram.com/petricor_academie/" target="_blank" rel="noopener noreferrer"
-           class="press-blur px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
+           class="ios26-press px-3 py-1.5 rounded-full bg-sky-400/10 hover:bg-sky-400/20 border border-sky-300/20 text-xs text-sky-100 transition">
           Instagram
         </a>
       </div>
@@ -157,33 +150,33 @@
     <section class="max-w-6xl mx-auto px-4 pt-8 pb-6">
       <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-12 relative">
         <div class="relative z-10 max-w-3xl mx-auto text-center space-y-5 py-2">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/50 border border-white/15 text-xs text-goldLight font-semibold">
-            ✦ Petricor Académie • Psychologie, Backtest & VIP
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-abyss/70 border border-sky-300/25 text-xs text-ice font-semibold">
+            ✦ Petricor Académie • Mindset, Backtest Hub & VIP
           </div>
 
           <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.08] text-white">
-            Maîtrise le Marché & Ta <span class="text-goldLight">Psychologie</span>
+            Maîtrise le Marché & Ta <span class="text-cyanGlow">Psychologie</span>
           </h1>
 
-          <p class="max-w-xl mx-auto text-sm sm:text-base text-slate-200/85 leading-relaxed">
-            Découvre nos principes de psychologie, entraîne-toi sur notre espace Backtest plein écran, et rejoins l'Espace VIP.
+          <p class="max-w-xl mx-auto text-sm sm:text-base text-sky-100/85 leading-relaxed">
+            Découvre nos principes de psychologie, prépare tes setups sur le Backtest Hub, et rejoins l'Espace VIP.
           </p>
 
           <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
             <a href="#inscription"
-               class="press-blur px-6 py-3 rounded-full bg-white text-obsidian font-bold text-xs sm:text-sm hover:bg-goldLight transition">
+               class="ios26-press px-6 py-3 rounded-full bg-cyanGlow text-abyss font-extrabold text-xs sm:text-sm hover:bg-ice transition">
               S'inscrire Maintenant ↓
             </a>
             <button type="button" onclick="switchView('backtest')"
-                    class="press-blur px-6 py-3 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 font-bold text-xs sm:text-sm transition">
-              📊 Espace Backtest
+                    class="ios26-press px-6 py-3 rounded-full bg-azure/25 hover:bg-azure/40 border border-cyanGlow/40 text-ice font-bold text-xs sm:text-sm transition">
+              ⚡ Backtest Hub
             </button>
             <button type="button" onclick="switchView('community')"
-                    class="press-blur px-6 py-3 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white font-semibold text-xs sm:text-sm transition">
+                    class="ios26-press px-6 py-3 rounded-full bg-abyss/70 hover:bg-abyss/90 border border-sky-300/25 text-white font-semibold text-xs sm:text-sm transition">
               ▶ Page Community
             </button>
             <button type="button" onclick="switchView('vip')"
-                    class="press-blur px-6 py-3 rounded-full bg-black/60 hover:bg-black/80 border border-gold/40 text-goldLight font-semibold text-xs sm:text-sm transition">
+                    class="ios26-press px-6 py-3 rounded-full bg-abyss/70 hover:bg-abyss/90 border border-cyanGlow/35 text-cyanGlow font-semibold text-xs sm:text-sm transition">
               🔒 Page VIP
             </button>
           </div>
@@ -195,99 +188,99 @@
     <section id="psychologie" class="max-w-6xl mx-auto px-4 py-8">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Page 1 • Mindset</span>
+          <span class="text-xs font-bold uppercase tracking-widest text-cyanGlow">Page 1 • Mindset</span>
           <h2 class="font-display text-2xl sm:text-3xl font-bold text-white mt-1">Psychologie & Advices</h2>
-          <p class="text-slate-400 text-xs sm:text-sm mt-1">Les bases mentales essentielles avant toute exécution sur le marché.</p>
+          <p class="text-sky-200/70 text-xs sm:text-sm mt-1">Les bases mentales essentielles avant toute exécution sur le marché.</p>
         </div>
         <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
-           class="press-blur self-start sm:self-auto px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-xs font-semibold text-white transition">
+           class="ios26-press self-start sm:self-auto px-4 py-2 rounded-full bg-sky-400/10 hover:bg-sky-400/20 border border-sky-300/20 text-xs font-semibold text-white transition">
           Rejoindre le Discord ↗
         </a>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div class="press-blur rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
-          <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
+        <div class="ios26-press rounded-2xl bg-sapphire editorial-frame overflow-hidden group">
+          <div class="aspect-[4/5] bg-cobalt overflow-hidden">
             <img src="psy1.jpg" alt="How to Become a Successful Trader"
                  class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="hidden w-full h-full p-6 flex-col justify-between bg-gradient-to-b from-[#0b1f4d] to-[#050811]">
-              <span class="text-xs text-blue-300 font-semibold">Petricor Academy</span>
+            <div class="hidden w-full h-full p-6 flex-col justify-between bg-gradient-to-b from-cobalt to-abyss">
+              <span class="text-xs text-cyanGlow font-semibold">Petricor Academy</span>
               <div class="text-2xl font-extrabold text-white leading-tight">How to Become a Successful Trader</div>
-              <span class="text-xs text-slate-300">Master the financial markets.</span>
+              <span class="text-xs text-sky-200">Master the financial markets.</span>
             </div>
           </div>
-          <div class="p-4 border-t border-white/10">
-            <span class="text-[11px] font-bold text-goldLight uppercase">01 • Vision</span>
+          <div class="p-4 border-t border-sky-400/15">
+            <span class="text-[11px] font-bold text-cyanGlow uppercase">01 • Vision</span>
             <h3 class="text-sm font-bold text-white mt-0.5">Devenir un Trader Rentable</h3>
           </div>
         </div>
 
-        <div class="press-blur rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
-          <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
+        <div class="ios26-press rounded-2xl bg-sapphire editorial-frame overflow-hidden group">
+          <div class="aspect-[4/5] bg-cobalt overflow-hidden">
             <img src="psy2.jpg" alt="Focus on one strategy"
                  class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="hidden w-full h-full p-6 flex-col justify-center bg-gradient-to-br from-[#081a4b] to-[#040712]">
+            <div class="hidden w-full h-full p-6 flex-col justify-center bg-gradient-to-br from-cobalt to-abyss">
               <p class="text-lg font-bold text-white leading-snug">“Never jump from one strategy to another looking for results. Find one strategy, focus on it, and master it.”</p>
             </div>
           </div>
-          <div class="p-4 border-t border-white/10">
-            <span class="text-[11px] font-bold text-goldLight uppercase">02 • Focus</span>
+          <div class="p-4 border-t border-sky-400/15">
+            <span class="text-[11px] font-bold text-cyanGlow uppercase">02 • Focus</span>
             <h3 class="text-sm font-bold text-white mt-0.5">Une Seule Stratégie Maîtrisée</h3>
           </div>
         </div>
 
-        <div class="press-blur rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
-          <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
+        <div class="ios26-press rounded-2xl bg-sapphire editorial-frame overflow-hidden group">
+          <div class="aspect-[4/5] bg-cobalt overflow-hidden">
             <img src="psy3.jpg" alt="Respect your trading setup"
                  class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="hidden w-full h-full p-6 flex-col justify-center bg-gradient-to-br from-[#081a4b] to-[#040712]">
+            <div class="hidden w-full h-full p-6 flex-col justify-center bg-gradient-to-br from-cobalt to-abyss">
               <p class="text-lg font-bold text-white leading-snug">“Respect your trading setup and the specific times you trade. Stay disciplined and stick to your schedule.”</p>
             </div>
           </div>
-          <div class="p-4 border-t border-white/10">
-            <span class="text-[11px] font-bold text-goldLight uppercase">03 • Discipline</span>
+          <div class="p-4 border-t border-sky-400/15">
+            <span class="text-[11px] font-bold text-cyanGlow uppercase">03 • Discipline</span>
             <h3 class="text-sm font-bold text-white mt-0.5">Respecter Ses Horaires & Setups</h3>
           </div>
         </div>
 
-        <div class="press-blur rounded-2xl bg-charcoal editorial-frame overflow-hidden group">
-          <div class="aspect-[4/5] bg-[#071126] overflow-hidden">
+        <div class="ios26-press rounded-2xl bg-sapphire editorial-frame overflow-hidden group">
+          <div class="aspect-[4/5] bg-cobalt overflow-hidden">
             <img src="psy4.jpg" alt="Make the best trades"
                  class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="hidden w-full h-full p-6 flex-col justify-center bg-gradient-to-br from-[#081a4b] to-[#040712]">
+            <div class="hidden w-full h-full p-6 flex-col justify-center bg-gradient-to-br from-cobalt to-abyss">
               <p class="text-lg font-bold text-white leading-snug">“The goal of a successful trader is to make the best trades. Money is secondary.”</p>
             </div>
           </div>
-          <div class="p-4 border-t border-white/10">
-            <span class="text-[11px] font-bold text-goldLight uppercase">04 • Process</span>
+          <div class="p-4 border-t border-sky-400/15">
+            <span class="text-[11px] font-bold text-cyanGlow uppercase">04 • Process</span>
             <h3 class="text-sm font-bold text-white mt-0.5">L'Exécution Avant l'Argent</h3>
           </div>
         </div>
 
-        <div class="press-blur rounded-2xl bg-charcoal editorial-frame overflow-hidden group sm:col-span-2 lg:col-span-2">
-          <div class="aspect-[4/5] lg:aspect-[16/9] bg-[#071126] overflow-hidden">
+        <div class="ios26-press rounded-2xl bg-sapphire editorial-frame overflow-hidden group sm:col-span-2 lg:col-span-2">
+          <div class="aspect-[4/5] lg:aspect-[16/9] bg-cobalt overflow-hidden">
             <img src="psy5.jpg" alt="Petricor Academy Advices"
                  class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="hidden w-full h-full p-8 flex-col items-center justify-center text-center bg-gradient-to-br from-[#081a4b] to-[#040712]">
+            <div class="hidden w-full h-full p-8 flex-col items-center justify-center text-center bg-gradient-to-br from-cobalt to-abyss">
               <div class="text-2xl font-bold text-white">Petricor Academy</div>
-              <div class="text-xs tracking-[0.35em] text-blue-300 mt-1">ADVICES</div>
+              <div class="text-xs tracking-[0.35em] text-cyanGlow mt-1">ADVICES</div>
             </div>
           </div>
-          <div class="p-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-2">
+          <div class="p-4 border-t border-sky-400/15 flex flex-wrap items-center justify-between gap-2">
             <div>
-              <span class="text-[11px] font-bold text-goldLight uppercase">05 • Communauté</span>
+              <span class="text-[11px] font-bold text-cyanGlow uppercase">05 • Communauté</span>
               <h3 class="text-sm font-bold text-white mt-0.5">Petricor Academy Advices — Daily Insights</h3>
             </div>
             <div class="flex items-center gap-2 text-xs">
               <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
-                 class="press-blur px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold transition">Discord</a>
+                 class="ios26-press px-3 py-1.5 rounded-full bg-sky-400/15 hover:bg-sky-400/25 text-white font-semibold transition">Discord</a>
               <a href="https://www.instagram.com/petricor_academie/" target="_blank" rel="noopener noreferrer"
-                 class="press-blur px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold transition">Instagram</a>
+                 class="ios26-press px-3 py-1.5 rounded-full bg-sky-400/15 hover:bg-sky-400/25 text-white font-semibold transition">Instagram</a>
             </div>
           </div>
         </div>
@@ -300,53 +293,53 @@
 
         <div class="grain-canvas editorial-frame rounded-2xl p-6 sm:p-8 space-y-5">
           <div class="relative z-10">
-            <span class="text-xs font-bold tracking-wider uppercase text-goldLight">Étape suivante • Inscription</span>
+            <span class="text-xs font-bold tracking-wider uppercase text-cyanGlow">Étape suivante • Inscription</span>
             <h2 class="font-display text-2xl font-bold text-white mt-1">Inscription Bootcamp & VIP</h2>
-            <p class="text-xs sm:text-sm text-slate-300/80 mt-1">Remplis tes coordonnées pour recevoir ton accès et la confirmation.</p>
+            <p class="text-xs sm:text-sm text-sky-100/80 mt-1">Remplis tes coordonnées pour recevoir ton accès et la confirmation.</p>
           </div>
 
           <form id="inscriptionForm" action="https://formspree.io/f/xzerykgy" method="POST" class="relative z-10 space-y-4">
             <input type="hidden" name="_subject" id="emailSubject" value="Nouvelle Inscription Petricor Académie">
 
             <div>
-              <label class="block text-xs font-semibold text-slate-200 mb-1.5">Nom complet</label>
+              <label class="block text-xs font-semibold text-sky-100 mb-1.5">Nom complet</label>
               <input type="text" id="nom" name="nom" required placeholder="Ex: Yasser Nemrany"
-                     class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
+                     class="w-full px-4 py-3 rounded-xl bg-abyss/90 border border-sky-300/20 text-sm text-white placeholder-sky-300/35 focus:outline-none focus:border-cyanGlow">
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-slate-200 mb-1.5">Téléphone / WhatsApp</label>
+              <label class="block text-xs font-semibold text-sky-100 mb-1.5">Téléphone / WhatsApp</label>
               <input type="tel" id="telephone" name="telephone" required placeholder="Ex: +212 6 XX XX XX XX"
-                     class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
+                     class="w-full px-4 py-3 rounded-xl bg-abyss/90 border border-sky-300/20 text-sm text-white placeholder-sky-300/35 focus:outline-none focus:border-cyanGlow">
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-slate-200 mb-1.5">Adresse email</label>
+              <label class="block text-xs font-semibold text-sky-100 mb-1.5">Adresse email</label>
               <input type="email" id="email" name="email" required placeholder="exemple@email.com"
-                     class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
+                     class="w-full px-4 py-3 rounded-xl bg-abyss/90 border border-sky-300/20 text-sm text-white placeholder-sky-300/35 focus:outline-none focus:border-cyanGlow">
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-slate-200 mb-1.5">Formule souhaitée</label>
+              <label class="block text-xs font-semibold text-sky-100 mb-1.5">Formule souhaitée</label>
               <select id="formule" name="formule" onchange="updateVIPBanner()"
-                      class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white focus:outline-none focus:border-gold">
+                      class="w-full px-4 py-3 rounded-xl bg-abyss/90 border border-sky-300/20 text-sm text-white focus:outline-none focus:border-cyanGlow">
                 <option value="Standard Bootcamp">Standard Bootcamp</option>
                 <option value="VIP Mentorship">VIP Mentorship (Accès Stratégie Videos)</option>
               </select>
             </div>
 
-            <div id="vipBanner" class="hidden rounded-xl bg-gold/15 border border-gold/40 p-3.5 text-xs text-goldLight">
+            <div id="vipBanner" class="hidden rounded-xl bg-cyanGlow/15 border border-cyanGlow/40 p-3.5 text-xs text-ice">
               ★ <strong>VIP Mentorship :</strong> Après validation, tu recevras le mot de passe pour ouvrir la <strong>Page VIP</strong> (Séances 1–8 + Stratégie + Trade Breakdown).
             </div>
 
             <div>
-              <label class="block text-xs font-semibold text-slate-200 mb-1.5">Niveau & objectifs</label>
+              <label class="block text-xs font-semibold text-sky-100 mb-1.5">Niveau & objectifs</label>
               <textarea id="details" name="details" rows="3" placeholder="Débutant / Intermédiaire, tes objectifs..."
-                        class="w-full px-4 py-3 rounded-xl bg-obsidian/90 border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold"></textarea>
+                        class="w-full px-4 py-3 rounded-xl bg-abyss/90 border border-sky-300/20 text-sm text-white placeholder-sky-300/35 focus:outline-none focus:border-cyanGlow"></textarea>
             </div>
 
             <button type="submit" id="submitBtn"
-                    class="press-blur w-full py-3.5 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-sm hover:opacity-95 transition">
+                    class="ios26-press w-full py-3.5 rounded-xl bg-gradient-to-r from-ice to-cyanGlow text-abyss font-extrabold text-sm hover:opacity-95 transition">
               Valider l'Inscription & Envoyer
             </button>
 
@@ -357,38 +350,38 @@
         <div class="grain-canvas editorial-frame rounded-2xl p-6 sm:p-8 space-y-5">
           <div class="relative z-10 flex items-center justify-between gap-2">
             <div>
-              <span class="text-xs font-bold tracking-wider uppercase text-slate-400">Aperçu en direct</span>
+              <span class="text-xs font-bold tracking-wider uppercase text-sky-300/70">Aperçu en direct</span>
               <h3 class="text-xl font-bold text-white mt-0.5">Récapitulatif Instantané</h3>
             </div>
-            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-400/30">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-cyanGlow/15 text-cyanGlow border border-cyanGlow/35">
               Prêt
             </span>
           </div>
 
-          <div class="relative z-10 rounded-xl bg-obsidian/90 border border-white/10 p-4 text-sm space-y-1.5 text-slate-200">
-            <div><span class="text-slate-400">Nom :</span> <span id="recapNom">-</span></div>
-            <div><span class="text-slate-400">Téléphone :</span> <span id="recapTel">-</span></div>
-            <div><span class="text-slate-400">Email :</span> <span id="recapEmail">-</span></div>
-            <div><span class="text-slate-400">Formule :</span> <span id="recapFormule" class="text-goldLight font-semibold">Standard Bootcamp</span></div>
-            <div><span class="text-slate-400">Détails :</span> <span id="recapDetails">-</span></div>
+          <div class="relative z-10 rounded-xl bg-abyss/90 border border-sky-300/15 p-4 text-sm space-y-1.5 text-sky-100">
+            <div><span class="text-sky-300/65">Nom :</span> <span id="recapNom">-</span></div>
+            <div><span class="text-sky-300/65">Téléphone :</span> <span id="recapTel">-</span></div>
+            <div><span class="text-sky-300/65">Email :</span> <span id="recapEmail">-</span></div>
+            <div><span class="text-sky-300/65">Formule :</span> <span id="recapFormule" class="text-cyanGlow font-semibold">Standard Bootcamp</span></div>
+            <div><span class="text-sky-300/65">Détails :</span> <span id="recapDetails">-</span></div>
           </div>
 
           <div class="relative z-10 grid sm:grid-cols-2 gap-3">
             <button type="button" onclick="copyRecap()"
-                    class="press-blur w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 font-semibold text-xs sm:text-sm transition">
+                    class="ios26-press w-full py-3 px-4 rounded-xl bg-sky-400/15 hover:bg-sky-400/25 border border-sky-300/20 font-semibold text-xs sm:text-sm transition">
               Copier le Récapitulatif
             </button>
             <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
-               class="press-blur w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm text-center transition">
+               class="ios26-press w-full py-3 px-4 rounded-xl bg-azure hover:bg-blue-500 text-white font-bold text-xs sm:text-sm text-center transition">
               Confirmer sur WhatsApp
             </a>
           </div>
 
-          <div class="relative z-10 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
-            <button type="button" onclick="switchView('community')" class="press-blur text-white font-semibold hover:underline">
+          <div class="relative z-10 pt-3 border-t border-sky-300/15 flex flex-wrap items-center justify-between gap-2 text-xs text-sky-200/70">
+            <button type="button" onclick="switchView('community')" class="ios26-press text-white font-semibold hover:underline">
               → Aller à la Page Community
             </button>
-            <button type="button" onclick="switchView('vip')" class="press-blur text-goldLight font-bold hover:underline">
+            <button type="button" onclick="switchView('vip')" class="ios26-press text-cyanGlow font-bold hover:underline">
               Ouvrir la Page VIP 🔒 →
             </button>
           </div>
@@ -403,14 +396,14 @@
   <!-- ========================================================= -->
   <section id="communityPage" class="hidden max-w-6xl mx-auto px-4 py-10">
     <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
-      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-sky-300/15 pb-5">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Page 2 • Community Open Access</span>
+          <span class="text-xs font-bold uppercase tracking-widest text-cyanGlow">Page 2 • Community Open Access</span>
           <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Community & Trade Breakdown</h2>
-          <p class="text-xs sm:text-sm text-slate-300/80 mt-1">
+          <p class="text-xs sm:text-sm text-sky-100/80 mt-1">
             Lien du site :
             <a href="https://nemranyy100-cyber.github.io/petricor_academie/" target="_blank" rel="noopener noreferrer"
-               class="text-goldLight underline">
+               class="text-cyanGlow underline">
               https://nemranyy100-cyber.github.io/petricor_academie/
             </a>
           </p>
@@ -418,11 +411,11 @@
 
         <div class="flex items-center gap-2.5">
           <button type="button" onclick="switchView('accueil')"
-                  class="press-blur px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-white transition">
+                  class="ios26-press px-3.5 py-1.5 rounded-full bg-sky-400/15 hover:bg-sky-400/25 text-xs font-semibold text-white transition">
             ← Accueil
           </button>
           <button type="button" onclick="switchView('vip')"
-                  class="press-blur px-3.5 py-1.5 rounded-full bg-gold text-obsidian text-xs font-extrabold hover:bg-goldLight transition">
+                  class="ios26-press px-3.5 py-1.5 rounded-full bg-cyanGlow text-abyss text-xs font-extrabold hover:bg-ice transition">
             🔒 Page VIP
           </button>
         </div>
@@ -433,224 +426,178 @@
   </section>
 
   <!-- ========================================================= -->
-  <!-- PAGE 3 : BACKTEST (TRADERS CASA WORKFLOW • 2026+)          -->
+  <!-- PAGE 3 : BACKTEST HUB (PRE-TRADE CHECKLIST + JOURNAL HUB) -->
   <!-- ========================================================= -->
-  <section id="backtestPage" class="hidden max-w-6xl mx-auto px-4 py-8 space-y-6">
+  <section id="backtestPage" class="hidden max-w-6xl mx-auto px-4 py-10 space-y-6">
+    <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-8">
 
-    <!-- ÉTAPE 1 : SETUP SESSION (TRADERS CASA STYLE) -->
-    <div id="btSetupScreen" class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
-      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+      <!-- Header + Traders Casa Bridge -->
+      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-sky-300/15 pb-6">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Petricor Backtest • 2026+</span>
-          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">New Backtest Session</h2>
-          <p class="text-xs sm:text-sm text-slate-300/85 mt-1">
-            Configure ta session (Pair, Date 2026, Capital, Risque) puis lance le chart plein écran avec Replay et Entry/SL/TP.
+          <span class="text-xs font-bold uppercase tracking-widest text-cyanGlow">Petricor Backtest Hub • English Terminal</span>
+          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Pre-Trade Checklist &amp; Journal Hub</h2>
+          <p class="text-xs sm:text-sm text-sky-100/80 mt-1">
+            Validate every setup rule before entry, launch replay on Traders Casa, and log your real session results here.
           </p>
         </div>
-        <button type="button" onclick="switchView('accueil')"
-                class="press-blur px-4 py-2 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-white">
-          ← Accueil
-        </button>
-      </div>
 
-      <div class="relative z-10 grid md:grid-cols-2 lg:grid-cols-5 gap-4">
-        <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
-          <label class="block text-xs font-bold text-goldLight">Session Name</label>
-          <input id="setupSessionName" type="text" value="Session 2026 - London/NY"
-                 class="w-full px-3 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white font-semibold">
-        </div>
-
-        <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
-          <label class="block text-xs font-bold text-goldLight">Pair</label>
-          <select id="setupPair" class="w-full px-3 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white font-bold">
-            <option value="XAU/USD">XAU/USD (Gold)</option>
-            <option value="EUR/USD">EUR/USD</option>
-            <option value="GBP/USD">GBP/USD</option>
-            <option value="BTC/USD">BTC/USD</option>
-            <option value="USD/JPY">USD/JPY</option>
-          </select>
-        </div>
-
-        <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
-          <label class="block text-xs font-bold text-goldLight">Start Date (2026+)</label>
-          <input id="setupDate" type="date" value="2026-01-02" min="2026-01-01"
-                 class="w-full px-3 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white font-semibold">
-        </div>
-
-        <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
-          <label class="block text-xs font-bold text-goldLight">Balance ($)</label>
-          <input id="setupBalance" type="number" value="10000" min="100" step="500"
-                 class="w-full px-3 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white font-mono font-bold">
-        </div>
-
-        <div class="rounded-2xl bg-charcoal/90 border border-white/10 p-4 space-y-1.5">
-          <label class="block text-xs font-bold text-goldLight">Risk per Trade (%)</label>
-          <select id="setupRiskPct" class="w-full px-3 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white font-bold">
-            <option value="0.5">0.5%</option>
-            <option value="1" selected>1.0%</option>
-            <option value="2">2.0%</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Optional CSV or Twelve Data API Key -->
-      <div class="relative z-10 grid md:grid-cols-2 gap-4 text-xs">
-        <div class="rounded-2xl bg-charcoal/80 border border-white/10 p-4 space-y-1.5">
-          <label class="block font-bold text-white">Importer CSV 2026 (Optionnel)</label>
-          <input id="setupCsvFile" type="file" accept=".csv,text/csv"
-                 class="w-full text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:bg-white/10 file:text-white file:font-semibold">
-          <div class="text-[11px] text-slate-400">Colonnes attendues : date/time, open, high, low, close.</div>
-        </div>
-
-        <div class="rounded-2xl bg-charcoal/80 border border-white/10 p-4 space-y-1.5">
-          <label class="block font-bold text-white">Clé Twelve Data API (Optionnel)</label>
-          <input id="twelveApiKey" type="text" placeholder="Coller clé Twelve Data..."
-                 class="w-full px-3.5 py-2 rounded-xl bg-obsidian border border-white/15 text-xs text-white placeholder-slate-500">
-          <div class="text-[11px] text-slate-400">Sans CSV ni clé, une série 2026 est générée pour tester le workflow.</div>
-        </div>
-      </div>
-
-      <div class="relative z-10 flex flex-wrap items-center justify-between gap-4 pt-1">
-        <div class="text-xs text-slate-400">
-          Workflow : <strong class="text-white">Setup</strong> → <strong class="text-goldLight">Full-Screen Chart</strong> → <strong class="text-white">Replay & Entry/SL/TP</strong> → <strong class="text-white">Journal</strong>
-        </div>
-        <button type="button" onclick="launchFullScreenTerminal()"
-                class="press-blur px-7 py-3.5 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-sm shadow-lg hover:opacity-95 transition">
-          ⛶ Launch Full-Screen Chart →
-        </button>
-      </div>
-    </div>
-
-    <!-- Trade Journal (Visible under Setup Screen) -->
-    <div id="btJournalCard" class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-8 space-y-4">
-      <div class="relative z-10 flex items-center justify-between gap-2 flex-wrap">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Historique & Analytics</span>
-          <h3 class="font-display text-xl font-bold text-white mt-0.5">Trade Journal</h3>
-        </div>
-        <button type="button" onclick="clearJournal()"
-                class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-300">
-          Vider le journal
-        </button>
-      </div>
-      <div class="relative z-10 overflow-x-auto">
-        <table class="w-full text-left text-xs border-collapse">
-          <thead>
-            <tr class="border-b border-white/10 text-slate-400">
-              <th class="py-2 pr-3">Session / Pair</th>
-              <th class="py-2 px-3">Side</th>
-              <th class="py-2 px-3">Entry</th>
-              <th class="py-2 px-3">SL</th>
-              <th class="py-2 px-3">TP</th>
-              <th class="py-2 px-3">Result</th>
-              <th class="py-2 pl-3 text-right">P&amp;L</th>
-            </tr>
-          </thead>
-          <tbody id="journalTbody" class="divide-y divide-white/5 font-mono">
-            <tr><td colspan="7" class="py-4 text-center text-slate-500 font-sans">Aucun trade clôturé pour le moment.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- ÉTAPE 2 : FULL-SCREEN TRADING TERMINAL -->
-    <div id="btFullscreenOverlay" class="hidden rounded-2xl bg-[#0a0c10] border border-white/15 flex flex-col overflow-hidden">
-
-      <!-- Top Bar -->
-      <div class="px-3 py-2 bg-[#101319] border-b border-white/10 flex items-center justify-between gap-2 flex-wrap text-xs">
-        <div class="flex items-center gap-2 flex-wrap">
-          <span id="termPairLabel" class="px-2.5 py-1 rounded bg-gold/15 border border-gold/30 text-goldLight font-extrabold">
-            XAU/USD
-          </span>
-          <span id="termDateLabel" class="px-2 py-0.5 rounded bg-white/5 text-[11px] font-mono text-slate-300">
-            2026-01-02
-          </span>
-
-          <!-- Timeframes 1m to Weekly -->
-          <div class="flex items-center gap-0.5 bg-obsidian p-0.5 rounded-lg border border-white/10 font-bold">
-            <button type="button" onclick="changeTermTf('1min', this)" class="tf-btn px-2 py-1 rounded text-slate-300 hover:text-white">1m</button>
-            <button type="button" onclick="changeTermTf('5min', this)" class="tf-btn px-2 py-1 rounded text-slate-300 hover:text-white">5m</button>
-            <button type="button" onclick="changeTermTf('15min', this)" class="tf-btn px-2 py-1 rounded bg-gold text-obsidian">15m</button>
-            <button type="button" onclick="changeTermTf('1h', this)" class="tf-btn px-2 py-1 rounded text-slate-300 hover:text-white">1H</button>
-            <button type="button" onclick="changeTermTf('4h', this)" class="tf-btn px-2 py-1 rounded text-slate-300 hover:text-white">4H</button>
-            <button type="button" onclick="changeTermTf('1day', this)" class="tf-btn px-2 py-1 rounded text-slate-300 hover:text-white">1D</button>
-            <button type="button" onclick="changeTermTf('1week', this)" class="tf-btn px-2 py-1 rounded text-slate-300 hover:text-white">Weekly</button>
-          </div>
-        </div>
-
-        <!-- Replay Controls -->
-        <div class="flex items-center gap-1.5 bg-obsidian px-2.5 py-1 rounded-lg border border-white/10">
-          <span class="text-[11px] font-bold text-goldLight">Replay:</span>
-          <button type="button" id="termPlayBtn" onclick="toggleTermPlay()"
-                  class="px-2.5 py-0.5 rounded bg-gold text-obsidian font-extrabold">▶ Play</button>
-          <button type="button" onclick="stepTermCandle()"
-                  class="px-2.5 py-0.5 rounded bg-white/10 hover:bg-white/20 text-white font-bold">⏭ +1</button>
-          <select id="termSpeedSel" onchange="restartPlayIfRunning()" class="bg-[#101319] border border-white/10 rounded px-1.5 py-0.5 text-[11px] text-white">
-            <option value="800">1x</option>
-            <option value="350">2x</option>
-            <option value="150">4x</option>
-          </select>
-          <span id="termBarProgress" class="font-mono text-[11px] text-slate-400">0/0</span>
-        </div>
-
-        <!-- Settings + Exit Fullscreen -->
-        <div class="flex items-center gap-2">
-          <button type="button" onclick="toggleSettingsPopover()"
-                  class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/10 text-white font-bold">
-            ⚙️ Settings
-          </button>
-          <button type="button" onclick="exitFullScreenTerminal()"
-                  class="px-3 py-1.5 rounded-lg bg-rose-600/20 hover:bg-rose-600/35 border border-rose-500/40 text-rose-300 font-bold">
-            ✕ Exit Fullscreen
+        <div class="flex flex-wrap items-center gap-2.5">
+          <a href="https://traderscasa.com" target="_blank" rel="noopener noreferrer"
+             class="ios26-press px-4 py-2.5 rounded-xl bg-gradient-to-r from-ice to-cyanGlow text-abyss font-extrabold text-xs sm:text-sm shadow-lg shadow-sky-500/20">
+            Open Traders Casa Replay ↗
+          </a>
+          <button type="button" onclick="switchView('accueil')"
+                  class="ios26-press px-3.5 py-2.5 rounded-xl bg-sky-400/15 hover:bg-sky-400/25 text-xs font-semibold text-white">
+            ← Accueil
           </button>
         </div>
       </div>
 
-      <!-- Settings Popover -->
-      <div id="chartSettingsPanel" class="hidden bg-[#141923] border-b border-gold/30 px-4 py-3 text-xs">
-        <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-4">
-          <div class="flex items-center gap-2">
-            <label class="text-slate-300 font-semibold">Bull Candle:</label>
-            <input id="setBullColor" type="color" value="#089981" onchange="applyChartAppearance()" class="w-7 h-7 rounded cursor-pointer bg-transparent">
-          </div>
-          <div class="flex items-center gap-2">
-            <label class="text-slate-300 font-semibold">Bear Candle:</label>
-            <input id="setBearColor" type="color" value="#f23645" onchange="applyChartAppearance()" class="w-7 h-7 rounded cursor-pointer bg-transparent">
-          </div>
-          <div class="flex items-center gap-2">
-            <label class="text-slate-300 font-semibold">Chart Theme:</label>
-            <select id="setChartTheme" onchange="applyChartAppearance()" class="px-2.5 py-1 rounded bg-obsidian border border-white/15 text-white font-semibold">
-              <option value="dark">Dark Obsidian (#0a0c10)</option>
-              <option value="light">Light Clean (#ffffff)</option>
-            </select>
-          </div>
-          <label class="flex items-center gap-1.5 text-slate-200 font-semibold cursor-pointer">
-            <input id="setShowGrid" type="checkbox" checked onchange="applyChartAppearance()" class="accent-gold">
-            Grid Lines
-          </label>
+      <!-- Analytics KPI Row -->
+      <div class="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="rounded-2xl bg-sapphire/90 cyan-line p-4">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-sky-300/75">Total Trades</div>
+          <div id="kpiTrades" class="text-2xl font-extrabold text-white mt-1 font-mono">0</div>
+        </div>
+        <div class="rounded-2xl bg-sapphire/90 cyan-line p-4">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-sky-300/75">Win Rate</div>
+          <div id="kpiWinRate" class="text-2xl font-extrabold text-cyanGlow mt-1 font-mono">0%</div>
+        </div>
+        <div class="rounded-2xl bg-sapphire/90 cyan-line p-4">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-sky-300/75">Net P&amp;L</div>
+          <div id="kpiNetPnl" class="text-2xl font-extrabold text-ice mt-1 font-mono">$0.00</div>
+        </div>
+        <div class="rounded-2xl bg-sapphire/90 cyan-line p-4">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-sky-300/75">Checklist Score</div>
+          <div id="kpiScore" class="text-2xl font-extrabold text-cyanGlow mt-1 font-mono">0 / 5</div>
         </div>
       </div>
 
-      <!-- Chart Canvas -->
-      <div id="tvChartContainer" class="flex-1 w-full min-h-[460px]"></div>
+      <div class="relative z-10 grid lg:grid-cols-2 gap-6 items-start">
 
-      <!-- Bottom Trade & Balance Bar -->
-      <div class="px-3 py-2.5 bg-[#101319] border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
-        <div class="flex items-center gap-4 font-mono">
-          <div><span class="text-slate-400">Balance:</span> <strong id="termBalance" class="text-white">$10,000.00</strong></div>
-          <div><span class="text-slate-400">P&amp;L:</span> <strong id="termPnl" class="text-emerald-400">$0.00</strong></div>
-          <div><span class="text-slate-400">Price:</span> <strong id="termPrice" class="text-goldLight">-</strong></div>
-          <span id="termPosBadge" class="hidden px-2 py-0.5 rounded bg-gold/20 text-goldLight font-bold"></span>
+        <!-- PART 2 : PRE-TRADE STRATEGY CHECKLIST -->
+        <div class="rounded-2xl bg-sapphire/95 editorial-frame p-6 space-y-5">
+          <div class="flex items-center justify-between gap-2">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-cyanGlow">Discipline Gate</span>
+              <h3 class="text-lg font-extrabold text-white mt-0.5">Petricor Pre-Trade Checklist</h3>
+            </div>
+            <span id="checklistBadge" class="px-3 py-1 rounded-full text-xs font-bold bg-sky-400/15 text-sky-200 border border-sky-300/25">
+              Not Ready
+            </span>
+          </div>
+
+          <div class="space-y-2.5 text-xs sm:text-sm">
+            <label class="ios26-press flex items-center gap-3 p-3 rounded-xl bg-abyss/80 border border-sky-300/15 cursor-pointer">
+              <input type="checkbox" onchange="updateChecklistScore()" class="chk-rule w-4 h-4 accent-sky-400">
+              <span>Higher-timeframe bias &amp; market structure aligned</span>
+            </label>
+            <label class="ios26-press flex items-center gap-3 p-3 rounded-xl bg-abyss/80 border border-sky-300/15 cursor-pointer">
+              <input type="checkbox" onchange="updateChecklistScore()" class="chk-rule w-4 h-4 accent-sky-400">
+              <span>Liquidity sweep / manipulation confirmed before entry</span>
+            </label>
+            <label class="ios26-press flex items-center gap-3 p-3 rounded-xl bg-abyss/80 border border-sky-300/15 cursor-pointer">
+              <input type="checkbox" onchange="updateChecklistScore()" class="chk-rule w-4 h-4 accent-sky-400">
+              <span>Price inside a high-probability Point of Interest (POI)</span>
+            </label>
+            <label class="ios26-press flex items-center gap-3 p-3 rounded-xl bg-abyss/80 border border-sky-300/15 cursor-pointer">
+              <input type="checkbox" onchange="updateChecklistScore()" class="chk-rule w-4 h-4 accent-sky-400">
+              <span>Active session window respected (London / NY)</span>
+            </label>
+            <label class="ios26-press flex items-center gap-3 p-3 rounded-xl bg-abyss/80 border border-sky-300/15 cursor-pointer">
+              <input type="checkbox" onchange="updateChecklistScore()" class="chk-rule w-4 h-4 accent-sky-400">
+              <span>Risk capped strictly within plan (max 1% per trade)</span>
+            </label>
+          </div>
+
+          <button type="button" onclick="resetChecklist()"
+                  class="ios26-press px-4 py-2 rounded-xl bg-sky-400/10 hover:bg-sky-400/20 border border-sky-300/20 text-xs font-semibold text-sky-100">
+            Reset Checklist
+          </button>
         </div>
 
-        <div class="flex items-center gap-2 flex-wrap">
-          <label class="text-slate-400">SL (pts):</label>
-          <input id="termSlPts" type="number" value="20" min="1" class="w-16 px-2 py-1 rounded bg-obsidian border border-white/15 text-white font-mono">
-          <label class="text-slate-400">TP (pts):</label>
-          <input id="termTpPts" type="number" value="60" min="1" class="w-16 px-2 py-1 rounded bg-obsidian border border-white/15 text-white font-mono">
-          <button type="button" onclick="openTermOrder('BUY')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold">BUY</button>
-          <button type="button" onclick="openTermOrder('SELL')" class="px-3.5 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-extrabold">SELL</button>
-          <button type="button" id="termCloseBtn" onclick="closeTermOrder()" class="hidden px-3 py-1.5 rounded-lg bg-gold text-obsidian font-extrabold">Close Trade</button>
+        <!-- PART 3 : LOG SESSION TRADE TO PERFORMANCE HUB -->
+        <div class="rounded-2xl bg-sapphire/95 editorial-frame p-6 space-y-4">
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-cyanGlow">Session Logger</span>
+            <h3 class="text-lg font-extrabold text-white mt-0.5">Log Backtest / Live Trade</h3>
+          </div>
+
+          <form id="tradeLogForm" onsubmit="addJournalTrade(event)" class="space-y-3 text-xs sm:text-sm">
+            <div class="grid sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-sky-200 mb-1">Pair</label>
+                <input id="logPair" type="text" required placeholder="XAUUSD / EURUSD" value="XAUUSD"
+                       class="w-full px-3.5 py-2.5 rounded-xl bg-abyss border border-sky-300/20 text-white">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-sky-200 mb-1">Session / Date</label>
+                <input id="logSession" type="text" required placeholder="NY Killzone • 2026" value="NY Session • 2026"
+                       class="w-full px-3.5 py-2.5 rounded-xl bg-abyss border border-sky-300/20 text-white">
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-sky-200 mb-1">Direction</label>
+                <select id="logSide" class="w-full px-3.5 py-2.5 rounded-xl bg-abyss border border-sky-300/20 text-white">
+                  <option value="BUY">BUY (Long)</option>
+                  <option value="SELL">SELL (Short)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-sky-200 mb-1">R:R Achieved</label>
+                <input id="logRr" type="text" placeholder="1:3.0" value="1:2.5"
+                       class="w-full px-3.5 py-2.5 rounded-xl bg-abyss border border-sky-300/20 text-white">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-sky-200 mb-1">P&amp;L ($)</label>
+                <input id="logPnl" type="number" step="0.01" required placeholder="250 or -100" value="250"
+                       class="w-full px-3.5 py-2.5 rounded-xl bg-abyss border border-sky-300/20 text-white font-mono">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-sky-200 mb-1">Execution Note / Psychology</label>
+              <input id="logNote" type="text" placeholder="Clean sweep + POI entry, held to target..."
+                     class="w-full px-3.5 py-2.5 rounded-xl bg-abyss border border-sky-300/20 text-white">
+            </div>
+
+            <button type="submit"
+                    class="ios26-press w-full py-3 rounded-xl bg-gradient-to-r from-ice to-cyanGlow text-abyss font-extrabold text-xs sm:text-sm">
+              + Save Trade to Performance Hub
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Journal Table -->
+      <div class="relative z-10 rounded-2xl bg-abyss/85 border border-sky-300/15 p-5 space-y-3">
+        <div class="flex items-center justify-between gap-2">
+          <h3 class="text-sm font-extrabold uppercase tracking-wider text-cyanGlow">Logged Trades History</h3>
+          <button type="button" onclick="clearTrades()"
+                  class="ios26-press px-3 py-1 rounded-lg bg-sky-400/10 hover:bg-sky-400/20 text-xs text-sky-200">
+            Clear All
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-sky-300/15 text-sky-300/75">
+                <th class="py-2 pr-3">Pair</th>
+                <th class="py-2 px-3">Session</th>
+                <th class="py-2 px-3">Side</th>
+                <th class="py-2 px-3">R:R</th>
+                <th class="py-2 px-3">Note</th>
+                <th class="py-2 pl-3 text-right">P&amp;L</th>
+              </tr>
+            </thead>
+            <tbody id="hubTradesBody" class="divide-y divide-sky-300/10 font-mono">
+              <tr><td colspan="6" class="py-4 text-center text-sky-300/50 font-sans">No trades logged yet. Add your first trade above.</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -662,11 +609,11 @@
   <!-- ========================================================= -->
   <section id="vipPage" class="hidden max-w-6xl mx-auto px-4 py-10">
     <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
-      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-sky-300/15 pb-5">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Page 4 • Espace Privé Membre</span>
+          <span class="text-xs font-bold uppercase tracking-widest text-cyanGlow">Page 4 • Espace Privé Membre</span>
           <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Petricor VIP — Séances & Stratégie</h2>
-          <p class="text-xs sm:text-sm text-slate-300/80 mt-1">Entre le code VIP pour afficher les miniatures et ouvrir les vidéos sur YouTube.</p>
+          <p class="text-xs sm:text-sm text-sky-100/80 mt-1">Entre le code VIP pour afficher les miniatures et ouvrir les vidéos sur YouTube.</p>
         </div>
 
         <div class="flex items-center gap-2.5">
@@ -675,18 +622,18 @@
             <span>🔒</span> Verrouillé
           </span>
           <button type="button" onclick="switchView('accueil')"
-                  class="press-blur px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-xs font-semibold text-white transition">
+                  class="ios26-press px-3.5 py-1.5 rounded-full bg-sky-400/15 hover:bg-sky-400/25 text-xs font-semibold text-white transition">
             ← Accueil
           </button>
         </div>
       </div>
 
-      <div class="relative z-10 rounded-2xl bg-charcoal/95 gold-line p-6 max-w-xl mx-auto space-y-4">
+      <div class="relative z-10 rounded-2xl bg-sapphire/95 cyan-line p-6 max-w-xl mx-auto space-y-4">
         <div class="space-y-1">
-          <label for="confirmCodeInput" class="block text-xs font-bold uppercase tracking-wider text-goldLight">
+          <label for="confirmCodeInput" class="block text-xs font-bold uppercase tracking-wider text-cyanGlow">
             Code d'accès VIP
           </label>
-          <p class="text-xs text-slate-400">
+          <p class="text-xs text-sky-200/75">
             Saisis le code VIP pour débloquer toutes les séances et la vidéo Stratégie.
           </p>
         </div>
@@ -694,13 +641,13 @@
         <div class="flex flex-col sm:flex-row gap-2.5">
           <input id="confirmCodeInput" type="password" placeholder="Entrez le code VIP..."
                  onkeydown="if(event.key==='Enter') confirmVideosAccess()"
-                 class="flex-1 px-4 py-3 rounded-xl bg-obsidian border border-white/15 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-gold">
+                 class="flex-1 px-4 py-3 rounded-xl bg-abyss border border-sky-300/20 text-sm text-white placeholder-sky-300/35 focus:outline-none focus:border-cyanGlow">
           <button type="button" onclick="confirmVideosAccess()"
-                  class="press-blur px-5 py-3 rounded-xl bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold text-xs sm:text-sm hover:opacity-95 transition">
+                  class="ios26-press px-5 py-3 rounded-xl bg-gradient-to-r from-ice to-cyanGlow text-abyss font-extrabold text-xs sm:text-sm hover:opacity-95 transition">
             Débloquer VIP
           </button>
           <button type="button" onclick="lockVideosAccess()"
-                  class="press-blur px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-slate-300 font-semibold text-xs sm:text-sm transition">
+                  class="ios26-press px-4 py-3 rounded-xl bg-sky-400/10 hover:bg-sky-400/20 border border-sky-300/20 text-sky-100 font-semibold text-xs sm:text-sm transition">
             Verrouiller
           </button>
         </div>
@@ -708,10 +655,10 @@
         <p id="confirmMessage" class="text-xs hidden rounded-xl p-2.5"></p>
       </div>
 
-      <div id="videosLockedState" class="relative z-10 rounded-2xl bg-obsidian/80 border border-white/10 p-10 text-center space-y-3">
+      <div id="videosLockedState" class="relative z-10 rounded-2xl bg-abyss/80 border border-sky-300/15 p-10 text-center space-y-3">
         <div class="text-3xl">🔒</div>
         <h3 class="text-lg font-bold text-white">Contenu VIP Protégé</h3>
-        <p class="text-xs sm:text-sm text-slate-400 max-w-md mx-auto">
+        <p class="text-xs sm:text-sm text-sky-200/70 max-w-md mx-auto">
           Les vidéos VIP (Séances 1 à 8 + Stratégie + Breakdown) sont verrouillées. Entre le code VIP ci-dessus pour y accéder.
         </p>
       </div>
@@ -721,8 +668,8 @@
   </section>
 
   <!-- Footer -->
-  <footer id="mainFooter" class="border-t border-white/10 mt-10">
-    <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+  <footer class="border-t border-sky-300/15 mt-10">
+    <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-sky-200/70">
       <div>© <span id="year"></span> Petricor Académie. Tous droits réservés.</div>
       <div>Contact : nemranyy100@gmail.com</div>
     </div>
@@ -770,17 +717,13 @@
         vip: document.getElementById('navVipBtn')
       };
 
-      if (view !== 'backtest') {
-        exitFullScreenTerminal();
-      }
-
       Object.keys(pages).forEach(k => {
         if (k === view) {
           pages[k].classList.remove('hidden');
-          btns[k].className = "press-blur px-3 py-1.5 rounded-full bg-white text-obsidian font-extrabold transition whitespace-nowrap";
+          btns[k].className = "ios26-press px-3 py-1.5 rounded-full bg-cyanGlow text-abyss font-extrabold transition whitespace-nowrap";
         } else {
           pages[k].classList.add('hidden');
-          btns[k].className = "press-blur px-3 py-1.5 rounded-full text-slate-200 hover:bg-white/10 font-semibold transition whitespace-nowrap";
+          btns[k].className = "ios26-press px-3 py-1.5 rounded-full text-sky-100 hover:bg-sky-400/15 font-semibold transition whitespace-nowrap";
         }
       });
 
@@ -790,27 +733,27 @@
     function buildYouTubeCard(vid) {
       const thumbUrl = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
       return `
-        <div class="press-blur thumb-card rounded-2xl bg-charcoal/95 border border-gold/25 overflow-hidden flex flex-col justify-between">
+        <div class="ios26-press thumb-card rounded-2xl bg-sapphire/95 border border-cyanGlow/25 overflow-hidden flex flex-col justify-between">
           <div>
-            <a href="${vid.url}" target="_blank" rel="noopener noreferrer" class="block relative aspect-video bg-obsidian overflow-hidden group">
+            <a href="${vid.url}" target="_blank" rel="noopener noreferrer" class="block relative aspect-video bg-abyss overflow-hidden group">
               <img src="${thumbUrl}" alt="${vid.title}"
                    class="w-full h-full object-cover"
                    onerror="this.src='https://img.youtube.com/vi/${vid.id}/mqdefault.jpg';">
-              <div class="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition flex items-center justify-center">
-                <span class="px-4 py-2.5 rounded-full bg-gold text-obsidian font-extrabold text-xs shadow-lg flex items-center gap-1.5">
+              <div class="absolute inset-0 bg-abyss/40 group-hover:bg-abyss/55 transition flex items-center justify-center">
+                <span class="px-4 py-2.5 rounded-full bg-cyanGlow text-abyss font-extrabold text-xs shadow-lg flex items-center gap-1.5">
                   <span>▶</span> Play sur YouTube
                 </span>
               </div>
             </a>
             <div class="p-5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-goldLight">${vid.tag}</span>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-cyanGlow">${vid.tag}</span>
               <h3 class="text-base font-bold text-white mt-1">${vid.title}</h3>
-              <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">${vid.desc}</p>
+              <p class="text-xs text-sky-200/75 mt-1.5 leading-relaxed">${vid.desc}</p>
             </div>
           </div>
           <div class="px-5 pb-5">
             <a href="${vid.url}" target="_blank" rel="noopener noreferrer"
-               class="press-blur w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-gold hover:text-obsidian text-white font-bold text-xs transition">
+               class="ios26-press w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-400/15 hover:bg-cyanGlow hover:text-abyss text-white font-bold text-xs transition">
               <span>▶</span> Play
             </a>
           </div>
@@ -837,7 +780,7 @@
         videosLockedEl.classList.add('hidden');
         videosGridEl.classList.remove('hidden');
         videosGridEl.classList.add('grid');
-        gateStatusBadgeEl.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-400/30";
+        gateStatusBadgeEl.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-cyanGlow/15 text-cyanGlow border border-cyanGlow/40";
         gateStatusBadgeEl.innerHTML = "<span>✓</span> VIP Débloqué";
       } else {
         videosGridEl.innerHTML = "";
@@ -943,452 +886,83 @@
       }
     });
 
-    // === TRADERS CASA STYLE TERMINAL (2026+ START) ===
-    let tvChart = null;
-    let tvSeries = null;
-    let allBars = [];
-    let replayIdx = 35;
-    let termInterval = null;
-    let termTf = '15min';
-    let termStartBalance = 10000;
-    let termBalance = 10000;
-    let termRiskPct = 1;
-    let activeOrder = null;
-    let orderLines = [];
-    let tradeMarkers = [];
-    let journalRows = [];
+    // === BACKTEST HUB : CHECKLIST + JOURNAL ===
+    let hubTrades = [];
 
-    const PAIR_SPECS = {
-      'XAU/USD': { base: 2740, vol: 6.0, prec: 2 },
-      'EUR/USD': { base: 1.0420, vol: 0.0014, prec: 4 },
-      'GBP/USD': { base: 1.2510, vol: 0.0016, prec: 4 },
-      'BTC/USD': { base: 94200, vol: 340, prec: 1 },
-      'USD/JPY': { base: 156.80, vol: 0.28, prec: 2 }
-    };
-
-    function parseCsvBars(csvText) {
-      const lines = csvText.trim().split(/\r?\n/).filter(Boolean);
-      if (lines.length < 25) return null;
-      const startRow = /open/i.test(lines[0]) ? 1 : 0;
-      const bars = [];
-      for (let i = startRow; i < lines.length; i++) {
-        const parts = lines[i].split(',');
-        if (parts.length < 5) continue;
-        const ts = Date.parse(parts[0].trim());
-        const o = parseFloat(parts[1]), h = parseFloat(parts[2]), l = parseFloat(parts[3]), c = parseFloat(parts[4]);
-        if (!isNaN(ts) && [o, h, l, c].every(n => !isNaN(n))) {
-          bars.push({ time: Math.floor(ts / 1000), open: o, high: h, low: l, close: c });
-        }
-      }
-      return bars.length >= 25 ? bars : null;
-    }
-
-    function buildSeriesFrom2026(pair, startDateStr, count = 240) {
-      const spec = PAIR_SPECS[pair] || PAIR_SPECS['XAU/USD'];
-      const safeDate = (startDateStr && startDateStr >= '2026-01-01') ? startDateStr : '2026-01-02';
-      const startSec = Math.floor(new Date(safeDate + 'T00:00:00Z').getTime() / 1000);
-      const tfSecMap = { '1min': 60, '5min': 300, '15min': 900, '1h': 3600, '4h': 14400, '1day': 86400, '1week': 604800 };
-      const stepSec = tfSecMap[termTf] || 900;
-
-      let price = spec.base;
-      let trend = 1;
-      const bars = [];
-      for (let i = 0; i < count; i++) {
-        if (i % 16 === 0) trend = Math.random() > 0.48 ? 1 : -1;
-        const open = price;
-        const close = open + (Math.random() - 0.48 + trend * 0.13) * spec.vol;
-        const high = Math.max(open, close) + Math.random() * spec.vol * 0.8;
-        const low = Math.min(open, close) - Math.random() * spec.vol * 0.8;
-        bars.push({
-          time: startSec + i * stepSec,
-          open: +open.toFixed(spec.prec),
-          high: +high.toFixed(spec.prec),
-          low: +low.toFixed(spec.prec),
-          close: +close.toFixed(spec.prec)
-        });
-        price = close;
-      }
-      return bars;
-    }
-
-    async function loadSessionBars(pair, startDateStr) {
-      const fileInput = document.getElementById('setupCsvFile');
-      if (fileInput.files && fileInput.files[0]) {
-        const text = await fileInput.files[0].text();
-        const parsed = parseCsvBars(text);
-        if (parsed) return parsed;
-      }
-
-      const apiKey = document.getElementById('twelveApiKey').value.trim();
-      if (apiKey) {
-        try {
-          const url = `https://api.twelvedata.com/time_series?symbol=${encodeURIComponent(pair)}&interval=${encodeURIComponent(termTf)}&start_date=${encodeURIComponent(startDateStr)}&outputsize=250&apikey=${encodeURIComponent(apiKey)}`;
-          const res = await fetch(url);
-          const data = await res.json();
-          if (data && Array.isArray(data.values) && data.values.length > 20) {
-            return data.values.reverse().map(v => ({
-              time: Math.floor(new Date(v.datetime.replace(' ', 'T') + 'Z').getTime() / 1000),
-              open: parseFloat(v.open),
-              high: parseFloat(v.high),
-              low: parseFloat(v.low),
-              close: parseFloat(v.close)
-            }));
-          }
-        } catch (_) {}
-      }
-
-      return buildSeriesFrom2026(pair, startDateStr);
-    }
-
-    function initTvChartIfNeeded() {
-      const container = document.getElementById('tvChartContainer');
-      if (tvChart) return;
-
-      tvChart = LightweightCharts.createChart(container, {
-        width: container.clientWidth,
-        height: container.clientHeight,
-        layout: {
-          background: { type: 'solid', color: '#0a0c10' },
-          textColor: '#d1d4dc',
-        },
-        grid: {
-          vertLines: { color: 'rgba(255,255,255,0.05)' },
-          horzLines: { color: 'rgba(255,255,255,0.05)' },
-        },
-        crosshair: { mode: LightweightCharts.CrosshairMode.Normal },
-        rightPriceScale: { borderColor: 'rgba(255,255,255,0.12)' },
-        timeScale: { borderColor: 'rgba(255,255,255,0.12)', timeVisible: true },
-      });
-
-      tvSeries = tvChart.addCandlestickSeries({
-        upColor: '#089981',
-        downColor: '#f23645',
-        borderDownColor: '#f23645',
-        borderUpColor: '#089981',
-        wickDownColor: '#f23645',
-        wickUpColor: '#089981',
-      });
-
-      window.addEventListener('resize', () => {
-        if (tvChart && !document.getElementById('btFullscreenOverlay').classList.contains('hidden')) {
-          tvChart.applyOptions({ width: container.clientWidth, height: container.clientHeight });
-        }
-      });
-    }
-
-    function applyChartAppearance() {
-      if (!tvChart || !tvSeries) return;
-      const bull = document.getElementById('setBullColor').value;
-      const bear = document.getElementById('setBearColor').value;
-      const theme = document.getElementById('setChartTheme').value;
-      const showGrid = document.getElementById('setShowGrid').checked;
-      const isLight = theme === 'light';
-
-      tvChart.applyOptions({
-        layout: {
-          background: { type: 'solid', color: isLight ? '#ffffff' : '#0a0c10' },
-          textColor: isLight ? '#131722' : '#d1d4dc',
-        },
-        grid: {
-          vertLines: { visible: showGrid, color: isLight ? '#eef1f6' : 'rgba(255,255,255,0.05)' },
-          horzLines: { visible: showGrid, color: isLight ? '#eef1f6' : 'rgba(255,255,255,0.05)' },
-        }
-      });
-
-      tvSeries.applyOptions({
-        upColor: bull,
-        downColor: bear,
-        borderUpColor: bull,
-        borderDownColor: bear,
-        wickUpColor: bull,
-        wickDownColor: bear,
-      });
-    }
-
-    function clearOrderLines() {
-      if (tvSeries && orderLines.length) {
-        orderLines.forEach(line => tvSeries.removePriceLine(line));
-      }
-      orderLines = [];
-    }
-
-    function drawOrderLines(order) {
-      clearOrderLines();
-      if (!tvSeries || !order) return;
-      orderLines.push(tvSeries.createPriceLine({
-        price: order.entry,
-        color: '#e5b84b',
-        lineWidth: 2,
-        lineStyle: LightweightCharts.LineStyle.Solid,
-        axisLabelVisible: true,
-        title: `ENTRY ${order.side}`,
-      }));
-      orderLines.push(tvSeries.createPriceLine({
-        price: order.sl,
-        color: '#f23645',
-        lineWidth: 2,
-        lineStyle: LightweightCharts.LineStyle.Dashed,
-        axisLabelVisible: true,
-        title: 'SL',
-      }));
-      orderLines.push(tvSeries.createPriceLine({
-        price: order.tp,
-        color: '#089981',
-        lineWidth: 2,
-        lineStyle: LightweightCharts.LineStyle.Dashed,
-        axisLabelVisible: true,
-        title: 'TP',
-      }));
-    }
-
-    async function launchFullScreenTerminal() {
-      const pair = document.getElementById('setupPair').value;
-      const startDate = document.getElementById('setupDate').value || '2026-01-02';
-      termStartBalance = Math.max(100, Number(document.getElementById('setupBalance').value) || 10000);
-      termBalance = termStartBalance;
-      termRiskPct = Number(document.getElementById('setupRiskPct').value) || 1;
-      activeOrder = null;
-      tradeMarkers = [];
-      clearOrderLines();
-
-      document.getElementById('termPairLabel').textContent = pair;
-      document.getElementById('termDateLabel').textContent = startDate;
-      document.getElementById('termCloseBtn').classList.add('hidden');
-      document.getElementById('termPosBadge').classList.add('hidden');
-      updateTerminalStats(0);
-
-      document.getElementById('btSetupScreen').classList.add('hidden');
-      document.getElementById('btJournalCard').classList.add('hidden');
-      document.getElementById('mainHeader').classList.add('hidden');
-      document.getElementById('mainFooter').classList.add('hidden');
-
-      const overlay = document.getElementById('btFullscreenOverlay');
-      overlay.classList.remove('hidden');
-      overlay.classList.add('is-fullscreen');
-
-      initTvChartIfNeeded();
-      applyChartAppearance();
-
-      allBars = await loadSessionBars(pair, startDate);
-      replayIdx = Math.min(35, allBars.length);
-      renderReplaySlice();
-
-      const container = document.getElementById('tvChartContainer');
-      tvChart.applyOptions({ width: container.clientWidth, height: container.clientHeight });
-    }
-
-    function exitFullScreenTerminal() {
-      stopTermPlay();
-      const overlay = document.getElementById('btFullscreenOverlay');
-      overlay.classList.add('hidden');
-      overlay.classList.remove('is-fullscreen');
-      document.getElementById('mainHeader').classList.remove('hidden');
-      document.getElementById('mainFooter').classList.remove('hidden');
-      document.getElementById('btSetupScreen').classList.remove('hidden');
-      document.getElementById('btJournalCard').classList.remove('hidden');
-      renderJournal();
-    }
-
-    function toggleSettingsPopover() {
-      document.getElementById('chartSettingsPanel').classList.toggle('hidden');
-    }
-
-    async function changeTermTf(tf, btn) {
-      termTf = tf;
-      document.querySelectorAll('.tf-btn').forEach(b => {
-        b.className = 'tf-btn px-2 py-1 rounded text-slate-300 hover:text-white';
-      });
-      btn.className = 'tf-btn px-2 py-1 rounded bg-gold text-obsidian';
-
-      const pair = document.getElementById('setupPair').value;
-      const startDate = document.getElementById('setupDate').value || '2026-01-02';
-      activeOrder = null;
-      clearOrderLines();
-      document.getElementById('termCloseBtn').classList.add('hidden');
-      document.getElementById('termPosBadge').classList.add('hidden');
-
-      allBars = await loadSessionBars(pair, startDate);
-      replayIdx = Math.min(35, allBars.length);
-      renderReplaySlice();
-    }
-
-    function renderReplaySlice() {
-      if (!tvSeries || !allBars.length) return;
-      const slice = allBars.slice(0, replayIdx);
-      tvSeries.setData(slice);
-      tvSeries.setMarkers(tradeMarkers);
-
-      const last = slice[slice.length - 1];
-      const spec = PAIR_SPECS[document.getElementById('setupPair').value] || PAIR_SPECS['XAU/USD'];
-      document.getElementById('termPrice').textContent = last.close.toFixed(spec.prec);
-      document.getElementById('termBarProgress').textContent = `${replayIdx}/${allBars.length}`;
-
-      if (activeOrder) {
-        evaluateActiveOrder(last);
-      }
-    }
-
-    function stepTermCandle() {
-      if (replayIdx < allBars.length) {
-        replayIdx++;
-        renderReplaySlice();
+    function updateChecklistScore() {
+      const checks = Array.from(document.querySelectorAll('.chk-rule'));
+      const count = checks.filter(c => c.checked).length;
+      document.getElementById('kpiScore').textContent = `${count} / ${checks.length}`;
+      const badge = document.getElementById('checklistBadge');
+      if (count === checks.length) {
+        badge.textContent = 'Setup Approved';
+        badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-cyanGlow/20 text-cyanGlow border border-cyanGlow/40';
       } else {
-        stopTermPlay();
+        badge.textContent = 'Not Ready';
+        badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-sky-400/15 text-sky-200 border border-sky-300/25';
       }
     }
 
-    function restartPlayIfRunning() {
-      if (termInterval) {
-        stopTermPlay();
-        toggleTermPlay();
-      }
+    function resetChecklist() {
+      document.querySelectorAll('.chk-rule').forEach(c => { c.checked = false; });
+      updateChecklistScore();
     }
 
-    function toggleTermPlay() {
-      if (termInterval) {
-        stopTermPlay();
-      } else {
-        const speed = Number(document.getElementById('termSpeedSel').value) || 800;
-        document.getElementById('termPlayBtn').textContent = '⏸ Pause';
-        termInterval = setInterval(stepTermCandle, speed);
-      }
+    function addJournalTrade(e) {
+      e.preventDefault();
+      const pair = document.getElementById('logPair').value.trim().toUpperCase() || 'XAUUSD';
+      const session = document.getElementById('logSession').value.trim() || 'Session';
+      const side = document.getElementById('logSide').value;
+      const rr = document.getElementById('logRr').value.trim() || '-';
+      const pnl = parseFloat(document.getElementById('logPnl').value) || 0;
+      const note = document.getElementById('logNote').value.trim() || '-';
+
+      hubTrades.unshift({ pair, session, side, rr, pnl, note });
+      document.getElementById('logNote').value = '';
+      renderHubTrades();
     }
 
-    function stopTermPlay() {
-      if (termInterval) {
-        clearInterval(termInterval);
-        termInterval = null;
-      }
-      const b = document.getElementById('termPlayBtn');
-      if (b) b.textContent = '▶ Play';
+    function clearTrades() {
+      hubTrades = [];
+      renderHubTrades();
     }
 
-    function openTermOrder(side) {
-      if (activeOrder || !allBars.length) return;
-      const bar = allBars[replayIdx - 1];
-      const spec = PAIR_SPECS[document.getElementById('setupPair').value] || PAIR_SPECS['XAU/USD'];
-      const riskAmount = termBalance * (termRiskPct / 100);
-      const slPts = Math.max(1, Number(document.getElementById('termSlPts').value) || 20);
-      const tpPts = Math.max(1, Number(document.getElementById('termTpPts').value) || 60);
-      const unit = spec.prec === 4 ? 0.0001 : (spec.prec === 1 ? 5 : 0.5);
+    function renderHubTrades() {
+      const total = hubTrades.length;
+      const wins = hubTrades.filter(t => t.pnl > 0).length;
+      const net = hubTrades.reduce((acc, t) => acc + t.pnl, 0);
+      const winRate = total ? Math.round((wins / total) * 100) : 0;
 
-      activeOrder = {
-        side,
-        entry: bar.close,
-        sl: side === 'BUY' ? bar.close - slPts * unit : bar.close + slPts * unit,
-        tp: side === 'BUY' ? bar.close + tpPts * unit : bar.close - tpPts * unit,
-        riskAmount,
-        rr: tpPts / slPts,
-        prec: spec.prec
-      };
+      document.getElementById('kpiTrades').textContent = String(total);
+      document.getElementById('kpiWinRate').textContent = `${winRate}%`;
+      const netEl = document.getElementById('kpiNetPnl');
+      netEl.textContent = `${net >= 0 ? '+' : ''}$${net.toFixed(2)}`;
+      netEl.className = `text-2xl font-extrabold mt-1 font-mono ${net >= 0 ? 'text-cyanGlow' : 'text-rose-400'}`;
 
-      tradeMarkers.push({
-        time: bar.time,
-        position: side === 'BUY' ? 'belowBar' : 'aboveBar',
-        color: side === 'BUY' ? '#089981' : '#f23645',
-        shape: side === 'BUY' ? 'arrowUp' : 'arrowDown',
-        text: `${side} @ ${bar.close.toFixed(spec.prec)}`
-      });
-
-      drawOrderLines(activeOrder);
-      document.getElementById('termCloseBtn').classList.remove('hidden');
-      const badge = document.getElementById('termPosBadge');
-      badge.textContent = `${side} OPEN`;
-      badge.classList.remove('hidden');
-      evaluateActiveOrder(bar);
-    }
-
-    function finalizeTrade(bar, label, pnlAmount) {
-      const o = activeOrder;
-      termBalance = Math.max(0, termBalance + pnlAmount);
-
-      tradeMarkers.push({
-        time: bar.time,
-        position: o.side === 'BUY' ? 'aboveBar' : 'belowBar',
-        color: pnlAmount >= 0 ? '#089981' : '#f23645',
-        shape: 'circle',
-        text: `${label} (${pnlAmount >= 0 ? '+' : ''}$${pnlAmount.toFixed(2)})`
-      });
-
-      journalRows.unshift({
-        label: `${document.getElementById('setupSessionName').value || 'Session'} • ${document.getElementById('setupPair').value}`,
-        side: o.side,
-        entry: o.entry.toFixed(o.prec),
-        sl: o.sl.toFixed(o.prec),
-        tp: o.tp.toFixed(o.prec),
-        result: label,
-        pnl: pnlAmount
-      });
-
-      activeOrder = null;
-      clearOrderLines();
-      document.getElementById('termCloseBtn').classList.add('hidden');
-      document.getElementById('termPosBadge').classList.add('hidden');
-      tvSeries.setMarkers(tradeMarkers);
-      updateTerminalStats(0);
-    }
-
-    function evaluateActiveOrder(bar) {
-      if (!activeOrder) return;
-      const o = activeOrder;
-      if (o.side === 'BUY') {
-        if (bar.low <= o.sl) return finalizeTrade(bar, 'SL HIT', -o.riskAmount);
-        if (bar.high >= o.tp) return finalizeTrade(bar, 'TP HIT', o.riskAmount * o.rr);
-      } else {
-        if (bar.high >= o.sl) return finalizeTrade(bar, 'SL HIT', -o.riskAmount);
-        if (bar.low <= o.tp) return finalizeTrade(bar, 'TP HIT', o.riskAmount * o.rr);
-      }
-      const move = o.side === 'BUY' ? (bar.close - o.entry) : (o.entry - bar.close);
-      const floating = (move / Math.abs(o.entry - o.sl)) * o.riskAmount;
-      updateTerminalStats(floating);
-    }
-
-    function closeTermOrder() {
-      if (!activeOrder || !allBars.length) return;
-      const bar = allBars[replayIdx - 1];
-      const o = activeOrder;
-      const move = o.side === 'BUY' ? (bar.close - o.entry) : (o.entry - bar.close);
-      const realized = (move / Math.abs(o.entry - o.sl)) * o.riskAmount;
-      finalizeTrade(bar, 'CLOSED', realized);
-    }
-
-    function updateTerminalStats(floating = 0) {
-      document.getElementById('termBalance').textContent = `$${(termBalance + floating).toFixed(2)}`;
-      const net = (termBalance + floating) - termStartBalance;
-      const pnlEl = document.getElementById('termPnl');
-      pnlEl.textContent = `${net >= 0 ? '+' : ''}$${net.toFixed(2)}`;
-      pnlEl.className = net >= 0 ? 'text-emerald-400' : 'text-rose-400';
-    }
-
-    function renderJournal() {
-      const tbody = document.getElementById('journalTbody');
-      if (!journalRows.length) {
-        tbody.innerHTML = '<tr><td colspan="7" class="py-4 text-center text-slate-500 font-sans">Aucun trade clôturé pour le moment.</td></tr>';
+      const tbody = document.getElementById('hubTradesBody');
+      if (!total) {
+        tbody.innerHTML = '<tr><td colspan="6" class="py-4 text-center text-sky-300/50 font-sans">No trades logged yet. Add your first trade above.</td></tr>';
         return;
       }
-      tbody.innerHTML = journalRows.map(r => `
+
+      tbody.innerHTML = hubTrades.map(t => `
         <tr>
-          <td class="py-2 pr-3 font-sans text-white">${r.label}</td>
-          <td class="py-2 px-3 ${r.side === 'BUY' ? 'text-emerald-400' : 'text-rose-400'} font-bold">${r.side}</td>
-          <td class="py-2 px-3">${r.entry}</td>
-          <td class="py-2 px-3 text-rose-300">${r.sl}</td>
-          <td class="py-2 px-3 text-emerald-300">${r.tp}</td>
-          <td class="py-2 px-3">${r.result}</td>
-          <td class="py-2 pl-3 text-right font-bold ${r.pnl >= 0 ? 'text-emerald-400' : 'text-rose-400'}">${r.pnl >= 0 ? '+' : ''}$${r.pnl.toFixed(2)}</td>
+          <td class="py-2 pr-3 font-bold text-white">${t.pair}</td>
+          <td class="py-2 px-3 font-sans text-sky-100/80">${t.session}</td>
+          <td class="py-2 px-3 font-bold ${t.side === 'BUY' ? 'text-cyanGlow' : 'text-rose-400'}">${t.side}</td>
+          <td class="py-2 px-3 text-ice">${t.rr}</td>
+          <td class="py-2 px-3 font-sans text-sky-200/75">${t.note}</td>
+          <td class="py-2 pl-3 text-right font-bold ${t.pnl >= 0 ? 'text-cyanGlow' : 'text-rose-400'}">${t.pnl >= 0 ? '+' : ''}$${t.pnl.toFixed(2)}</td>
         </tr>
       `).join('');
-    }
-
-    function clearJournal() {
-      journalRows = [];
-      renderJournal();
     }
 
     // Init
     renderCommunityVideos();
     setVideosUnlockedState(sessionStorage.getItem('petricor_vip_ok') === '1');
     updateRecap();
-    renderJournal();
+    updateChecklistScore();
+    renderHubTrades();
   </script>
 </body>
 </html>
