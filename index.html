@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Petricor Académie — Accueil, Community & VIP</title>
+  <title>Petricor Académie — Accueil, Community, Backtest & VIP</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,18 +72,12 @@
       border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
-    /* تأثير بلور خفيف عند النقر على أي عنصر أو زر */
     .press-blur {
       transition: filter 0.25s ease, transform 0.2s ease, opacity 0.25s ease;
     }
     .press-blur:active {
       filter: blur(2.5px);
       transform: scale(0.99);
-    }
-
-    .page-blur-pulse {
-      filter: blur(5px);
-      opacity: 0.82;
     }
 
     .thumb-card img {
@@ -97,9 +91,9 @@
 </head>
 <body class="min-h-screen selection:bg-gold selection:text-obsidian">
 
-  <!-- Top Navigation (3 Pages: Accueil, Community, Espace VIP) -->
+  <!-- Top Navigation (4 Pages: Accueil, Community, Backtest, VIP) -->
   <header class="sticky top-0 z-40 backdrop-blur-md bg-obsidian/85 border-b border-white/10">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-2 flex-wrap">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 flex-wrap">
       <button type="button" onclick="switchView('accueil')" class="press-blur flex items-center gap-2.5 text-left">
         <span class="w-8 h-8 rounded-full bg-white text-obsidian font-extrabold flex items-center justify-center text-sm">
           P
@@ -109,24 +103,28 @@
         </span>
       </button>
 
-      <!-- 3-Page Switcher -->
-      <nav class="flex items-center gap-1 px-1.5 py-1 rounded-full pill-nav text-xs">
+      <!-- 4-Page Switcher -->
+      <nav class="flex items-center gap-1 px-1.5 py-1 rounded-full pill-nav text-xs overflow-x-auto">
         <button type="button" id="navAccueilBtn" onclick="switchView('accueil')"
-                class="press-blur px-3.5 py-1.5 rounded-full bg-white text-obsidian font-bold transition">
+                class="press-blur px-3 py-1.5 rounded-full bg-white text-obsidian font-bold transition whitespace-nowrap">
           1. Accueil
         </button>
         <button type="button" id="navCommunityBtn" onclick="switchView('community')"
-                class="press-blur px-3.5 py-1.5 rounded-full text-slate-200 hover:bg-white/10 font-semibold transition">
+                class="press-blur px-3 py-1.5 rounded-full text-slate-200 hover:bg-white/10 font-semibold transition whitespace-nowrap">
           2. Community
         </button>
+        <button type="button" id="navBacktestBtn" onclick="switchView('backtest')"
+                class="press-blur px-3 py-1.5 rounded-full text-emerald-300 hover:bg-white/10 font-bold transition whitespace-nowrap">
+          📊 3. Backtest
+        </button>
         <button type="button" id="navVipBtn" onclick="switchView('vip')"
-                class="press-blur px-3.5 py-1.5 rounded-full text-goldLight hover:bg-white/10 font-bold transition flex items-center gap-1">
-          <span>🔒</span> 3. VIP
+                class="press-blur px-3 py-1.5 rounded-full text-goldLight hover:bg-white/10 font-bold transition flex items-center gap-1 whitespace-nowrap">
+          <span>🔒</span> 4. VIP
         </button>
       </nav>
 
       <!-- Right Links -->
-      <div class="hidden md:flex items-center gap-2">
+      <div class="hidden lg:flex items-center gap-2">
         <a href="https://nemranyy100-cyber.github.io/petricor_academie/" target="_blank" rel="noopener noreferrer"
            class="press-blur px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 transition">
           Site Web ↗
@@ -146,14 +144,14 @@
   <!-- ========================================================= -->
   <!-- PAGE 1 : ACCUEIL (PSYCHOLOGIE + INSCRIPTION)              -->
   <!-- ========================================================= -->
-  <main id="accueilPage" class="block press-blur">
+  <main id="accueilPage" class="block">
 
     <!-- Hero -->
     <section class="max-w-6xl mx-auto px-4 pt-8 pb-6">
       <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-12 relative">
         <div class="relative z-10 max-w-3xl mx-auto text-center space-y-5 py-2">
           <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/50 border border-white/15 text-xs text-goldLight font-semibold">
-            ✦ Petricor Académie • Psychologie & Inscription
+            ✦ Petricor Académie • Psychologie, Backtest & VIP
           </div>
 
           <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.08] text-white">
@@ -161,7 +159,7 @@
           </h1>
 
           <p class="max-w-xl mx-auto text-sm sm:text-base text-slate-200/85 leading-relaxed">
-            Page d'accueil dédiée à la psychologie du trading et à l'inscription. Passe ensuite vers la page Community ou l'Espace VIP.
+            Découvre nos principes de psychologie, entraîne-toi sur notre simulateur Backtest style TradingView, et rejoins l'Espace VIP.
           </p>
 
           <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
@@ -169,6 +167,10 @@
                class="press-blur px-6 py-3 rounded-full bg-white text-obsidian font-bold text-xs sm:text-sm hover:bg-goldLight transition">
               S'inscrire Maintenant ↓
             </a>
+            <button type="button" onclick="switchView('backtest')"
+                    class="press-blur px-6 py-3 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 font-bold text-xs sm:text-sm transition">
+              📊 Simulateur Backtest
+            </button>
             <button type="button" onclick="switchView('community')"
                     class="press-blur px-6 py-3 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 text-white font-semibold text-xs sm:text-sm transition">
               ▶ Page Community
@@ -285,7 +287,7 @@
       </div>
     </section>
 
-    <!-- Inscription (Après Psychologie) -->
+    <!-- Inscription -->
     <section id="inscription" class="max-w-6xl mx-auto px-4 py-10">
       <div class="grid lg:grid-cols-2 gap-6 items-start">
 
@@ -393,7 +395,7 @@
   <!-- ========================================================= -->
   <!-- PAGE 2 : COMMUNITY (MINIATURE + PLAY DIRECT YOUTUBE)       -->
   <!-- ========================================================= -->
-  <section id="communityPage" class="hidden press-blur max-w-6xl mx-auto px-4 py-10">
+  <section id="communityPage" class="hidden max-w-6xl mx-auto px-4 py-10">
     <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
 
       <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
@@ -427,14 +429,181 @@
   </section>
 
   <!-- ========================================================= -->
-  <!-- PAGE 3 : ESPACE VIP (CODE + MINIATURES + PLAY YOUTUBE)    -->
+  <!-- PAGE 3 : BACKTEST SIMULATOR (STYLE TRADINGVIEW REPLAY)    -->
   <!-- ========================================================= -->
-  <section id="vipPage" class="hidden press-blur max-w-6xl mx-auto px-4 py-10">
+  <section id="backtestPage" class="hidden max-w-7xl mx-auto px-4 py-6">
+    <div class="rounded-[24px] bg-[#0d1017] editorial-frame overflow-hidden">
+
+      <!-- Top TradingView-Style Toolbar -->
+      <div class="px-4 py-2.5 bg-[#131722] border-b border-white/10 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5 flex-wrap">
+          <span class="px-2.5 py-1 rounded bg-gold/15 border border-gold/30 text-goldLight font-bold text-xs">
+            PETRICOR REPLAY
+          </span>
+          <select id="btSymbol" onchange="initBacktestData()"
+                  class="px-3 py-1.5 rounded-lg bg-[#1e222d] border border-white/10 text-xs font-bold text-white focus:outline-none focus:border-gold">
+            <option value="XAUUSD">XAUUSD • Gold</option>
+            <option value="EURUSD">EURUSD • Euro</option>
+            <option value="NAS100">NAS100 • Nasdaq</option>
+            <option value="BTCUSD">BTCUSD • Bitcoin</option>
+          </select>
+          <div class="flex items-center gap-1 bg-[#1e222d] p-0.5 rounded-lg text-[11px] font-bold">
+            <button type="button" onclick="setBtTf('15m', this)" class="bt-tf px-2 py-1 rounded bg-gold text-obsidian">15m</button>
+            <button type="button" onclick="setBtTf('1H', this)" class="bt-tf px-2 py-1 rounded text-slate-300 hover:text-white">1H</button>
+            <button type="button" onclick="setBtTf('4H', this)" class="bt-tf px-2 py-1 rounded text-slate-300 hover:text-white">4H</button>
+          </div>
+        </div>
+
+        <!-- Bar Replay Controls -->
+        <div class="flex items-center gap-1.5 bg-[#1e222d] px-2.5 py-1 rounded-xl border border-white/10">
+          <span class="text-[11px] font-bold text-goldLight mr-1">Bar Replay:</span>
+          <button type="button" onclick="stepBackCandle()" title="Bougie précédente"
+                  class="px-2.5 py-1 rounded bg-white/5 hover:bg-white/15 text-xs font-bold text-white">⏮</button>
+          <button type="button" id="btPlayBtn" onclick="toggleReplayPlay()" title="Play / Pause"
+                  class="px-3 py-1 rounded bg-gold text-obsidian text-xs font-extrabold">▶ Play</button>
+          <button type="button" onclick="stepForwardCandle()" title="Bougie suivante"
+                  class="px-2.5 py-1 rounded bg-white/5 hover:bg-white/15 text-xs font-bold text-white">⏭</button>
+          <select id="btSpeed" onchange="updateReplaySpeed()"
+                  class="ml-1 px-2 py-1 rounded bg-obsidian border border-white/10 text-[11px] font-bold text-slate-200">
+            <option value="900">1x</option>
+            <option value="450" selected>2x</option>
+            <option value="180">5x</option>
+          </select>
+          <button type="button" onclick="initBacktestData()" title="Nouveau scénario"
+                  class="ml-1 px-2.5 py-1 rounded bg-white/5 hover:bg-white/15 text-[11px] font-semibold text-slate-300">
+            ↻ Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Chart + Right Execution Panel -->
+      <div class="grid lg:grid-cols-12">
+
+        <!-- Left Drawing Tools + Canvas Chart (8 cols) -->
+        <div class="lg:col-span-8 flex border-b lg:border-b-0 lg:border-r border-white/10 bg-[#131722]">
+          <!-- TradingView Left Sidebar -->
+          <div class="w-11 bg-[#131722] border-r border-white/10 py-3 flex flex-col items-center gap-2.5 shrink-0">
+            <button type="button" id="toolCrosshair" onclick="setDrawTool('crosshair')" title="Curseur / Crosshair"
+                    class="w-8 h-8 rounded-lg bg-gold text-obsidian font-bold text-xs flex items-center justify-center">
+              ✛
+            </button>
+            <button type="button" id="toolHline" onclick="setDrawTool('hline')" title="Ligne Horizontale (POI / Liquidity)"
+                    class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 text-slate-200 font-bold text-xs flex items-center justify-center">
+              ―
+            </button>
+            <button type="button" id="toolBox" onclick="setDrawTool('box')" title="Zone / Order Block (Clic 2 fois)"
+                    class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 text-slate-200 font-bold text-xs flex items-center justify-center">
+              ▭
+            </button>
+            <button type="button" onclick="clearDrawings()" title="Effacer les dessins"
+                    class="w-8 h-8 rounded-lg bg-red-500/15 hover:bg-red-500/25 text-red-300 font-bold text-xs flex items-center justify-center mt-auto">
+              🗑
+            </button>
+          </div>
+
+          <!-- Chart Container -->
+          <div class="flex-1 relative min-h-[430px] sm:min-h-[490px]">
+            <div id="btToolHint" class="absolute top-2.5 left-3 z-10 px-2.5 py-1 rounded bg-black/60 border border-white/10 text-[11px] text-slate-300 pointer-events-none">
+              Outil : Curseur • Utilise ⏭ ou Play pour avancer bougie par bougie
+            </div>
+            <canvas id="btChartCanvas" class="w-full h-full block cursor-crosshair"></canvas>
+          </div>
+        </div>
+
+        <!-- Right Order & Stats Panel (4 cols) -->
+        <div class="lg:col-span-4 bg-[#131722] p-4 space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <!-- Account Stats -->
+            <div class="grid grid-cols-3 gap-2">
+              <div class="rounded-xl bg-[#1e222d] p-2.5 border border-white/5">
+                <div class="text-[10px] text-slate-400 uppercase font-bold">Balance</div>
+                <div id="btBalance" class="text-sm font-extrabold text-white mt-0.5">$10,000.00</div>
+              </div>
+              <div class="rounded-xl bg-[#1e222d] p-2.5 border border-white/5">
+                <div class="text-[10px] text-slate-400 uppercase font-bold">Win Rate</div>
+                <div id="btWinRate" class="text-sm font-extrabold text-goldLight mt-0.5">0%</div>
+              </div>
+              <div class="rounded-xl bg-[#1e222d] p-2.5 border border-white/5">
+                <div class="text-[10px] text-slate-400 uppercase font-bold">Total P&L</div>
+                <div id="btTotalPnl" class="text-sm font-extrabold text-emerald-400 mt-0.5">$0.00</div>
+              </div>
+            </div>
+
+            <!-- Order Ticket -->
+            <div class="rounded-xl bg-[#1e222d] p-3.5 border border-white/10 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-white">Exécution Ordre</span>
+                <span id="btLivePrice" class="text-xs font-mono font-bold text-goldLight">2650.00</span>
+              </div>
+
+              <div class="grid grid-cols-3 gap-2 text-xs">
+                <div>
+                  <label class="block text-[10px] text-slate-400 mb-1">Risque ($)</label>
+                  <input id="btRisk" type="number" value="100" min="10" step="10"
+                         class="w-full px-2.5 py-1.5 rounded bg-obsidian border border-white/10 text-white font-bold">
+                </div>
+                <div>
+                  <label class="block text-[10px] text-slate-400 mb-1">SL (Points)</label>
+                  <input id="btSlPts" type="number" value="15" min="1" step="1"
+                         class="w-full px-2.5 py-1.5 rounded bg-obsidian border border-white/10 text-white font-bold">
+                </div>
+                <div>
+                  <label class="block text-[10px] text-slate-400 mb-1">TP (Points)</label>
+                  <input id="btTpPts" type="number" value="45" min="1" step="1"
+                         class="w-full px-2.5 py-1.5 rounded bg-obsidian border border-white/10 text-white font-bold">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2 pt-1">
+                <button type="button" onclick="openBacktestTrade('BUY')"
+                        class="press-blur py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs transition">
+                  ▲ BUY / LONG
+                </button>
+                <button type="button" onclick="openBacktestTrade('SELL')"
+                        class="press-blur py-2.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-xs transition">
+                  ▼ SELL / SHORT
+                </button>
+              </div>
+
+              <!-- Active Position Box -->
+              <div id="btActiveTradeBox" class="hidden rounded-lg bg-obsidian/90 border border-gold/30 p-2.5 text-xs space-y-2">
+                <div class="flex items-center justify-between">
+                  <span id="btActiveLabel" class="font-bold text-goldLight">BUY @ 2650.00</span>
+                  <span id="btFloatingPnl" class="font-mono font-bold text-emerald-400">+$0.00</span>
+                </div>
+                <button type="button" onclick="closeActiveTradeManual()"
+                        class="w-full py-1.5 rounded bg-white/10 hover:bg-white/20 text-white font-bold text-[11px]">
+                  Fermer la position maintenant
+                </button>
+              </div>
+            </div>
+
+            <!-- Backtest History -->
+            <div class="rounded-xl bg-[#1e222d] p-3 border border-white/10 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-white">Historique Backtest</span>
+                <span id="btTradesCount" class="text-[11px] text-slate-400">0 trades</span>
+              </div>
+              <div id="btHistoryList" class="max-h-40 overflow-y-auto space-y-1.5 text-[11px] text-slate-300">
+                <div class="text-slate-500 py-3 text-center">Aucun trade clôturé. Lance Replay et prends ta première position.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- PAGE 4 : ESPACE VIP (CODE + MINIATURES + PLAY YOUTUBE)    -->
+  <!-- ========================================================= -->
+  <section id="vipPage" class="hidden max-w-6xl mx-auto px-4 py-10">
     <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
 
       <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Page 3 • Espace Privé Membre</span>
+          <span class="text-xs font-bold uppercase tracking-widest text-goldLight">Page 4 • Espace Privé Membre</span>
           <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Petricor VIP — Séances & Stratégie</h2>
           <p class="text-xs sm:text-sm text-slate-300/80 mt-1">Entre le code VIP pour afficher les miniatures et ouvrir les vidéos sur YouTube.</p>
         </div>
@@ -536,6 +705,38 @@
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // === NAVIGATION 4 PAGES ===
+    function switchView(view) {
+      const pages = {
+        accueil: document.getElementById('accueilPage'),
+        community: document.getElementById('communityPage'),
+        backtest: document.getElementById('backtestPage'),
+        vip: document.getElementById('vipPage')
+      };
+      const btns = {
+        accueil: document.getElementById('navAccueilBtn'),
+        community: document.getElementById('navCommunityBtn'),
+        backtest: document.getElementById('navBacktestBtn'),
+        vip: document.getElementById('navVipBtn')
+      };
+
+      Object.keys(pages).forEach(k => {
+        if (k === view) {
+          pages[k].classList.remove('hidden');
+          btns[k].className = "press-blur px-3 py-1.5 rounded-full bg-white text-obsidian font-extrabold transition whitespace-nowrap";
+        } else {
+          pages[k].classList.add('hidden');
+          btns[k].className = "press-blur px-3 py-1.5 rounded-full text-slate-200 hover:bg-white/10 font-semibold transition whitespace-nowrap";
+        }
+      });
+
+      if (view === 'backtest') {
+        setTimeout(drawBtChart, 40);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // === YOUTUBE CARDS ===
     function buildYouTubeCard(vid) {
       const thumbUrl = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
       return `
@@ -568,176 +769,527 @@
     }
 
     function renderCommunityVideos() {
-      const grid = document.getElementById('communityVideoGrid');
-      grid.innerHTML = COMMUNITY_VIDEOS.map(buildYouTubeCard).join('');
+      document.getElementById('communityVideoGrid').innerHTML = COMMUNITY_VIDEOS.map(buildYouTubeCard).join('');
     }
 
     function renderVipVideos() {
-      const grid = document.getElementById('videosUnlockedGrid');
-      grid.innerHTML = VIP_VIDEOS.map(buildYouTubeCard).join('');
+      document.getElementById('videosUnlockedGrid').innerHTML = VIP_VIDEOS.map(buildYouTubeCard).join('');
     }
 
-    function switchView(page) {
-      const accueilPage = document.getElementById('accueilPage');
-      const communityPage = document.getElementById('communityPage');
-      const vipPage = document.getElementById('vipPage');
+    // === VIP GATE ===
+    const videosGridEl = document.getElementById('videosUnlockedGrid');
+    const videosLockedEl = document.getElementById('videosLockedState');
+    const gateStatusBadgeEl = document.getElementById('gateStatusBadge');
+    const confirmMsgEl = document.getElementById('confirmMessage');
 
-      const navAccueilBtn = document.getElementById('navAccueilBtn');
-      const navCommunityBtn = document.getElementById('navCommunityBtn');
-      const navVipBtn = document.getElementById('navVipBtn');
+    function setVideosUnlockedState(unlocked) {
+      if (unlocked) {
+        renderVipVideos();
+        videosLockedEl.classList.add('hidden');
+        videosGridEl.classList.remove('hidden');
+        videosGridEl.classList.add('grid');
+        gateStatusBadgeEl.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-400/30";
+        gateStatusBadgeEl.innerHTML = "<span>✓</span> VIP Débloqué";
+      } else {
+        videosGridEl.innerHTML = "";
+        videosGridEl.classList.add('hidden');
+        videosGridEl.classList.remove('grid');
+        videosLockedEl.classList.remove('hidden');
+        gateStatusBadgeEl.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-400/30";
+        gateStatusBadgeEl.innerHTML = "<span>🔒</span> Verrouillé";
+      }
+    }
 
-      const activeTarget = page === 'community' ? communityPage : page === 'vip' ? vipPage : accueilPage;
-      activeTarget.classList.add('page-blur-pulse');
-
-      setTimeout(() => {
-        accueilPage.classList.add('hidden');
-        communityPage.classList.add('hidden');
-        vipPage.classList.add('hidden');
-
-        navAccueilBtn.className = "press-blur px-3.5 py-1.5 rounded-full text-slate-200 hover:bg-white/10 font-semibold transition";
-        navCommunityBtn.className = "press-blur px-3.5 py-1.5 rounded-full text-slate-200 hover:bg-white/10 font-semibold transition";
-        navVipBtn.className = "press-blur px-3.5 py-1.5 rounded-full text-goldLight hover:bg-white/10 font-bold transition flex items-center gap-1";
-
-        if (page === 'community') {
-          communityPage.classList.remove('hidden');
-          navCommunityBtn.className = "press-blur px-3.5 py-1.5 rounded-full bg-white text-obsidian font-bold transition";
-          renderCommunityVideos();
-        } else if (page === 'vip') {
-          vipPage.classList.remove('hidden');
-          navVipBtn.className = "press-blur px-3.5 py-1.5 rounded-full bg-gradient-to-r from-goldLight to-gold text-obsidian font-extrabold transition flex items-center gap-1";
-        } else {
-          accueilPage.classList.remove('hidden');
-          navAccueilBtn.className = "press-blur px-3.5 py-1.5 rounded-full bg-white text-obsidian font-bold transition";
-        }
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(() => {
-          activeTarget.classList.remove('page-blur-pulse');
-        }, 180);
-      }, 90);
+    function showConfirmMsg(text, ok) {
+      confirmMsgEl.textContent = text;
+      confirmMsgEl.classList.remove('hidden', 'bg-emerald-500/15', 'text-emerald-300', 'border-emerald-500/30', 'bg-red-500/15', 'text-red-300', 'border-red-500/30', 'border');
+      confirmMsgEl.classList.add('border', ok ? 'bg-emerald-500/15' : 'bg-red-500/15', ok ? 'text-emerald-300' : 'text-red-300', ok ? 'border-emerald-500/30' : 'border-red-500/30');
     }
 
     function confirmVideosAccess() {
-      const input = document.getElementById('confirmCodeInput');
-      const msg = document.getElementById('confirmMessage');
-      const badge = document.getElementById('gateStatusBadge');
-      const lockedState = document.getElementById('videosLockedState');
-      const unlockedGrid = document.getElementById('videosUnlockedGrid');
-
-      const entered = input.value.trim();
-
+      const entered = document.getElementById('confirmCodeInput').value.trim();
       if (entered === VIP_PASSWORD) {
-        sessionStorage.setItem('petricor_vip_unlocked', '1');
-        badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-400/30";
-        badge.innerHTML = "<span>🔓</span> Débloqué";
-
-        msg.className = "text-xs rounded-xl p-2.5 bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 block";
-        msg.textContent = "تم تفعيل الولوج للـ VIP بنجاح.";
-
-        lockedState.classList.add('hidden');
-        renderVipVideos();
-        unlockedGrid.classList.remove('hidden');
-        unlockedGrid.classList.add('grid');
+        sessionStorage.setItem('petricor_vip_ok', '1');
+        setVideosUnlockedState(true);
+        showConfirmMsg("Code VIP valide. Bienvenue dans l'espace privé !", true);
       } else {
-        msg.className = "text-xs rounded-xl p-2.5 bg-red-500/15 text-red-300 border border-red-400/30 block";
-        msg.textContent = "الكود غير صحيح، تأكد من كود VIP.";
+        showConfirmMsg("Code VIP incorrect.", false);
       }
     }
 
     function lockVideosAccess() {
-      sessionStorage.removeItem('petricor_vip_unlocked');
-      document.getElementById('confirmCodeInput').value = "";
+      sessionStorage.removeItem('petricor_vip_ok');
+      document.getElementById('confirmCodeInput').value = '';
+      setVideosUnlockedState(false);
+      showConfirmMsg("Espace VIP verrouillé.", true);
+    }
 
-      const badge = document.getElementById('gateStatusBadge');
-      badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-400/30";
-      badge.innerHTML = "<span>🔒</span> Verrouillé";
+    // === FORMULAIRE & RÉCAP ===
+    const nomEl = document.getElementById('nom');
+    const telEl = document.getElementById('telephone');
+    const emailEl = document.getElementById('email');
+    const formuleEl = document.getElementById('formule');
+    const detailsEl = document.getElementById('details');
+    const vipBanner = document.getElementById('vipBanner');
+    const emailSubjectEl = document.getElementById('emailSubject');
+    const formStatusEl = document.getElementById('formStatus');
+    const submitBtn = document.getElementById('submitBtn');
 
-      const msg = document.getElementById('confirmMessage');
-      msg.className = "hidden";
-      msg.textContent = "";
+    function getRecapText() {
+      return `Nouvelle Inscription - Petricor Académie\nNom : ${nomEl.value.trim() || '-'}\nTéléphone : ${telEl.value.trim() || '-'}\nEmail : ${emailEl.value.trim() || '-'}\nFormule : ${formuleEl.value}\nDétails : ${detailsEl.value.trim() || '-'}`;
+    }
 
-      document.getElementById('videosLockedState').classList.remove('hidden');
-      const unlockedGrid = document.getElementById('videosUnlockedGrid');
-      unlockedGrid.classList.add('hidden');
-      unlockedGrid.classList.remove('grid');
+    function updateRecap() {
+      document.getElementById('recapNom').textContent = nomEl.value.trim() || '-';
+      document.getElementById('recapTel').textContent = telEl.value.trim() || '-';
+      document.getElementById('recapEmail').textContent = emailEl.value.trim() || '-';
+      document.getElementById('recapFormule').textContent = formuleEl.value;
+      document.getElementById('recapDetails').textContent = detailsEl.value.trim() || '-';
+      emailSubjectEl.value = `Nouvelle Inscription Petricor Académie - ${nomEl.value.trim() || 'Client'} (${formuleEl.value})`;
     }
 
     function updateVIPBanner() {
-      const formule = document.getElementById('formule').value;
-      const banner = document.getElementById('vipBanner');
-      const subject = document.getElementById('emailSubject');
-      document.getElementById('recapFormule').textContent = formule;
-
-      if (formule.includes('VIP')) {
-        banner.classList.remove('hidden');
-        subject.value = "Nouvelle Inscription VIP — Petricor Académie";
-      } else {
-        banner.classList.add('hidden');
-        subject.value = "Nouvelle Inscription Bootcamp — Petricor Académie";
-      }
+      vipBanner.classList.toggle('hidden', formuleEl.value !== 'VIP Mentorship');
+      updateRecap();
     }
-
-    ['nom', 'telephone', 'email', 'details'].forEach((id) => {
-      const el = document.getElementById(id);
-      const targetId = 'recap' + id.charAt(0).toUpperCase() + id.slice(1);
-      el.addEventListener('input', () => {
-        document.getElementById(targetId).textContent = el.value.trim() || '-';
-      });
-    });
 
     function copyRecap() {
-      const text = [
-        "Nom : " + document.getElementById('recapNom').textContent,
-        "Téléphone : " + document.getElementById('recapTel').textContent,
-        "Email : " + document.getElementById('recapEmail').textContent,
-        "Formule : " + document.getElementById('recapFormule').textContent,
-        "Détails : " + document.getElementById('recapDetails').textContent
-      ].join("\n");
-
-      navigator.clipboard.writeText(text).then(() => {
-        alert("تم نسخ الملخص.");
+      navigator.clipboard.writeText(getRecapText()).then(() => {
+        showStatus('Récapitulatif copié.', true);
       });
     }
 
-    const form = document.getElementById('inscriptionForm');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      const status = document.getElementById('formStatus');
-      btn.disabled = true;
-      btn.textContent = "جاري الإرسال...";
+    function showStatus(msg, ok) {
+      formStatusEl.textContent = msg;
+      formStatusEl.classList.remove('hidden', 'bg-emerald-500/15', 'text-emerald-300', 'border-emerald-500/30', 'bg-red-500/15', 'text-red-300', 'border-red-500/30', 'border');
+      formStatusEl.classList.add('border', ok ? 'bg-emerald-500/15' : 'bg-red-500/15', ok ? 'text-emerald-300' : 'text-red-300', ok ? 'border-emerald-500/30' : 'border-red-500/30');
+    }
 
+    [nomEl, telEl, emailEl, formuleEl, detailsEl].forEach(el => {
+      el.addEventListener('input', updateRecap);
+      el.addEventListener('change', updateRecap);
+    });
+
+    document.getElementById('inscriptionForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Envoi en cours...';
       try {
-        const res = await fetch(form.action, {
+        const res = await fetch(this.getAttribute('action'), {
           method: 'POST',
-          body: new FormData(form),
+          body: new FormData(this),
           headers: { 'Accept': 'application/json' }
         });
-
         if (res.ok) {
-          status.className = "text-xs sm:text-sm rounded-xl p-3 bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 block";
-          status.textContent = "تم إرسال التسجيل بنجاح.";
-          form.reset();
+          showStatus('Inscription envoyée avec succès !', true);
+          this.reset();
           updateVIPBanner();
-          ['recapNom', 'recapTel', 'recapEmail', 'recapDetails'].forEach((id) => {
-            document.getElementById(id).textContent = '-';
-          });
         } else {
-          throw new Error('Erreur');
+          showStatus("Erreur lors de l'envoi.", false);
         }
       } catch {
-        status.className = "text-xs sm:text-sm rounded-xl p-3 bg-red-500/15 text-red-300 border border-red-400/30 block";
-        status.textContent = "وقع خطأ فالإرسال. عاود المحاولة أو تواصل عبر واتساب.";
+        showStatus('Problème de connexion.', false);
       } finally {
-        btn.disabled = false;
-        btn.textContent = "Valider l'Inscription & Envoyer";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Valider l'Inscription & Envoyer";
       }
     });
 
-    if (sessionStorage.getItem('petricor_vip_unlocked') === '1') {
-      document.getElementById('confirmCodeInput').value = VIP_PASSWORD;
-      confirmVideosAccess();
+    // === BACKTEST ENGINE (TRADINGVIEW STYLE REPLAY) ===
+    let btCandles = [];
+    let btVisibleCount = 45;
+    let btTimer = null;
+    let btBalance = 10000;
+    let btHistory = [];
+    let btActiveTrade = null;
+    let btDrawTool = 'crosshair';
+    let btDrawings = [];
+    let btPendingBox = null;
+    let btMouse = null;
+
+    const SYMBOL_CONFIG = {
+      XAUUSD: { start: 2650, step: 6, dec: 2 },
+      EURUSD: { start: 1.0850, step: 0.0018, dec: 4 },
+      NAS100: { start: 20450, step: 45, dec: 1 },
+      BTCUSD: { start: 92500, step: 350, dec: 0 }
+    };
+
+    function initBacktestData() {
+      stopReplayPlay();
+      const sym = document.getElementById('btSymbol').value;
+      const cfg = SYMBOL_CONFIG[sym];
+      btCandles = [];
+      let price = cfg.start;
+      let trend = 1;
+
+      for (let i = 0; i < 220; i++) {
+        if (i % 18 === 0) trend = Math.random() > 0.48 ? 1 : -1;
+        const open = price;
+        const move = (Math.random() - 0.46 + trend * 0.16) * cfg.step;
+        const close = open + move;
+        const high = Math.max(open, close) + Math.random() * cfg.step * 0.85;
+        const low = Math.min(open, close) - Math.random() * cfg.step * 0.85;
+        btCandles.push({ open, high, low, close });
+        price = close;
+      }
+
+      btVisibleCount = 45;
+      btActiveTrade = null;
+      btDrawings = [];
+      btPendingBox = null;
+      document.getElementById('btActiveTradeBox').classList.add('hidden');
+      updateBtStats();
+      drawBtChart();
     }
+
+    function setBtTf(tf, btn) {
+      document.querySelectorAll('.bt-tf').forEach(b => {
+        b.className = 'bt-tf px-2 py-1 rounded text-slate-300 hover:text-white';
+      });
+      btn.className = 'bt-tf px-2 py-1 rounded bg-gold text-obsidian';
+      initBacktestData();
+    }
+
+    function setDrawTool(tool) {
+      btDrawTool = tool;
+      btPendingBox = null;
+      ['toolCrosshair', 'toolHline', 'toolBox'].forEach(id => {
+        document.getElementById(id).className = 'w-8 h-8 rounded-lg bg-white/5 hover:bg-white/15 text-slate-200 font-bold text-xs flex items-center justify-center';
+      });
+      const activeMap = { crosshair: 'toolCrosshair', hline: 'toolHline', box: 'toolBox' };
+      document.getElementById(activeMap[tool]).className = 'w-8 h-8 rounded-lg bg-gold text-obsidian font-bold text-xs flex items-center justify-center';
+      const hints = {
+        crosshair: 'Outil : Curseur • Utilise ⏭ ou Play pour avancer bougie par bougie',
+        hline: 'Outil : Ligne Horizontale • Clique sur le chart pour tracer un niveau',
+        box: 'Outil : Zone Liquidity / OB • Clique 2 points sur le chart pour dessiner une zone'
+      };
+      document.getElementById('btToolHint').textContent = hints[tool];
+    }
+
+    function clearDrawings() {
+      btDrawings = [];
+      btPendingBox = null;
+      drawBtChart();
+    }
+
+    function toggleReplayPlay() {
+      if (btTimer) {
+        stopReplayPlay();
+      } else {
+        const speed = Number(document.getElementById('btSpeed').value);
+        document.getElementById('btPlayBtn').textContent = '⏸ Pause';
+        btTimer = setInterval(stepForwardCandle, speed);
+      }
+    }
+
+    function stopReplayPlay() {
+      if (btTimer) {
+        clearInterval(btTimer);
+        btTimer = null;
+      }
+      const btn = document.getElementById('btPlayBtn');
+      if (btn) btn.textContent = '▶ Play';
+    }
+
+    function updateReplaySpeed() {
+      if (btTimer) {
+        stopReplayPlay();
+        toggleReplayPlay();
+      }
+    }
+
+    function stepForwardCandle() {
+      if (btVisibleCount < btCandles.length) {
+        btVisibleCount++;
+        evaluateActiveTrade();
+        drawBtChart();
+      } else {
+        stopReplayPlay();
+      }
+    }
+
+    function stepBackCandle() {
+      stopReplayPlay();
+      if (btVisibleCount > 15) {
+        btVisibleCount--;
+        drawBtChart();
+      }
+    }
+
+    function openBacktestTrade(side) {
+      if (btActiveTrade) return;
+      const sym = document.getElementById('btSymbol').value;
+      const cfg = SYMBOL_CONFIG[sym];
+      const current = btCandles[btVisibleCount - 1];
+      const risk = Math.max(10, Number(document.getElementById('btRisk').value) || 100);
+      const slPts = Math.max(1, Number(document.getElementById('btSlPts').value) || 15);
+      const tpPts = Math.max(1, Number(document.getElementById('btTpPts').value) || 45);
+      const unit = cfg.dec === 4 ? 0.0001 : (cfg.dec === 2 ? 0.5 : 10);
+
+      const entry = current.close;
+      const sl = side === 'BUY' ? entry - slPts * unit : entry + slPts * unit;
+      const tp = side === 'BUY' ? entry + tpPts * unit : entry - tpPts * unit;
+
+      btActiveTrade = { side, entry, sl, tp, risk, rr: +(tpPts / slPts).toFixed(2) };
+      document.getElementById('btActiveTradeBox').classList.remove('hidden');
+      document.getElementById('btActiveLabel').textContent = `${side} @ ${entry.toFixed(cfg.dec)}`;
+      evaluateActiveTrade();
+      drawBtChart();
+    }
+
+    function evaluateActiveTrade() {
+      if (!btActiveTrade) return;
+      const sym = document.getElementById('btSymbol').value;
+      const cfg = SYMBOL_CONFIG[sym];
+      const c = btCandles[btVisibleCount - 1];
+      const t = btActiveTrade;
+
+      let hit = null;
+      if (t.side === 'BUY') {
+        if (c.low <= t.sl) hit = 'LOSS';
+        else if (c.high >= t.tp) hit = 'WIN';
+      } else {
+        if (c.high >= t.sl) hit = 'LOSS';
+        else if (c.low <= t.tp) hit = 'WIN';
+      }
+
+      if (hit) {
+        const pnl = hit === 'WIN' ? t.risk * t.rr : -t.risk;
+        finalizeTrade(hit, pnl);
+        return;
+      }
+
+      const dist = t.side === 'BUY' ? (c.close - t.entry) : (t.entry - c.close);
+      const fullSl = Math.abs(t.entry - t.sl);
+      const floating = (dist / fullSl) * t.risk;
+      const flEl = document.getElementById('btFloatingPnl');
+      flEl.textContent = `${floating >= 0 ? '+' : ''}$${floating.toFixed(2)}`;
+      flEl.className = `font-mono font-bold ${floating >= 0 ? 'text-emerald-400' : 'text-rose-400'}`;
+    }
+
+    function closeActiveTradeManual() {
+      if (!btActiveTrade) return;
+      const c = btCandles[btVisibleCount - 1];
+      const t = btActiveTrade;
+      const dist = t.side === 'BUY' ? (c.close - t.entry) : (t.entry - c.close);
+      const fullSl = Math.abs(t.entry - t.sl);
+      const pnl = (dist / fullSl) * t.risk;
+      finalizeTrade(pnl >= 0 ? 'WIN' : 'LOSS', pnl);
+    }
+
+    function finalizeTrade(result, pnl) {
+      const sym = document.getElementById('btSymbol').value;
+      btBalance += pnl;
+      btHistory.unshift({
+        sym,
+        side: btActiveTrade.side,
+        result,
+        pnl
+      });
+      btActiveTrade = null;
+      document.getElementById('btActiveTradeBox').classList.add('hidden');
+      updateBtStats();
+      drawBtChart();
+    }
+
+    function updateBtStats() {
+      document.getElementById('btBalance').textContent = `$${btBalance.toFixed(2)}`;
+      const totalPnl = btBalance - 10000;
+      const pnlEl = document.getElementById('btTotalPnl');
+      pnlEl.textContent = `${totalPnl >= 0 ? '+' : ''}$${totalPnl.toFixed(2)}`;
+      pnlEl.className = `text-sm font-extrabold mt-0.5 ${totalPnl >= 0 ? 'text-emerald-400' : 'text-rose-400'}`;
+
+      const wins = btHistory.filter(h => h.pnl > 0).length;
+      const wr = btHistory.length ? Math.round((wins / btHistory.length) * 100) : 0;
+      document.getElementById('btWinRate').textContent = `${wr}%`;
+      document.getElementById('btTradesCount').textContent = `${btHistory.length} trades`;
+
+      const list = document.getElementById('btHistoryList');
+      if (!btHistory.length) {
+        list.innerHTML = `<div class="text-slate-500 py-3 text-center">Aucun trade clôturé. Lance Replay et prends ta première position.</div>`;
+      } else {
+        list.innerHTML = btHistory.map(item => `
+          <div class="flex items-center justify-between px-2.5 py-1.5 rounded bg-obsidian/80 border border-white/5">
+            <span class="font-bold ${item.side === 'BUY' ? 'text-emerald-400' : 'text-rose-400'}">${item.sym} ${item.side}</span>
+            <span class="font-mono font-bold ${item.pnl >= 0 ? 'text-emerald-400' : 'text-rose-400'}">
+              ${item.pnl >= 0 ? '+' : ''}$${item.pnl.toFixed(2)}
+            </span>
+          </div>
+        `).join('');
+      }
+    }
+
+    function drawBtChart() {
+      const canvas = document.getElementById('btChartCanvas');
+      if (!canvas) return;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      if (rect.width === 0) return;
+
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+      const ctx = canvas.getContext('2d');
+      const W = canvas.width;
+      const H = canvas.height;
+      const padRight = 68;
+      const chartW = W - padRight;
+
+      ctx.fillStyle = '#131722';
+      ctx.fillRect(0, 0, W, H);
+
+      const slice = btCandles.slice(Math.max(0, btVisibleCount - 65), btVisibleCount);
+      if (!slice.length) return;
+
+      const sym = document.getElementById('btSymbol').value;
+      const cfg = SYMBOL_CONFIG[sym];
+      document.getElementById('btLivePrice').textContent = slice[slice.length - 1].close.toFixed(cfg.dec);
+
+      let minP = Infinity, maxP = -Infinity;
+      slice.forEach(c => {
+        if (c.low < minP) minP = c.low;
+        if (c.high > maxP) maxP = c.high;
+      });
+      if (btActiveTrade) {
+        minP = Math.min(minP, btActiveTrade.sl, btActiveTrade.tp);
+        maxP = Math.max(maxP, btActiveTrade.sl, btActiveTrade.tp);
+      }
+      const margin = (maxP - minP) * 0.14 || 1;
+      minP -= margin;
+      maxP += margin;
+
+      const priceToY = p => H - ((p - minP) / (maxP - minP)) * H;
+      const yToPrice = y => minP + ((H - y) / H) * (maxP - minP);
+      canvas._yToPrice = yToPrice;
+
+      // Grid & Right Price Axis
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+      ctx.fillStyle = '#787b86';
+      ctx.font = '11px monospace';
+      for (let i = 1; i <= 6; i++) {
+        const y = (H / 7) * i;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(chartW, y);
+        ctx.stroke();
+        ctx.fillText(yToPrice(y).toFixed(cfg.dec), chartW + 6, y + 4);
+      }
+
+      // User Drawings
+      btDrawings.forEach(d => {
+        if (d.type === 'hline') {
+          const y = priceToY(d.price);
+          ctx.strokeStyle = '#e5b84b';
+          ctx.setLineDash([5, 4]);
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(chartW, y);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        } else if (d.type === 'box') {
+          const y1 = priceToY(d.p1);
+          const y2 = priceToY(d.p2);
+          ctx.fillStyle = 'rgba(229, 184, 75, 0.14)';
+          ctx.strokeStyle = 'rgba(229, 184, 75, 0.55)';
+          ctx.fillRect(d.x1, Math.min(y1, y2), d.x2 - d.x1, Math.abs(y2 - y1));
+          ctx.strokeRect(d.x1, Math.min(y1, y2), d.x2 - d.x1, Math.abs(y2 - y1));
+        }
+      });
+
+      // Candlesticks
+      const stepX = chartW / Math.max(slice.length, 40);
+      const candleW = Math.max(3, stepX * 0.65);
+
+      slice.forEach((c, idx) => {
+        const x = idx * stepX + stepX * 0.5;
+        const isBull = c.close >= c.open;
+        const color = isBull ? '#089981' : '#f23645';
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(x, priceToY(c.high));
+        ctx.lineTo(x, priceToY(c.low));
+        ctx.stroke();
+
+        const top = priceToY(Math.max(c.open, c.close));
+        const bot = priceToY(Math.min(c.open, c.close));
+        ctx.fillStyle = color;
+        ctx.fillRect(x - candleW / 2, top, candleW, Math.max(2, bot - top));
+      });
+
+      // Active Trade Entry / SL / TP Lines
+      if (btActiveTrade) {
+        [
+          { label: 'TP', price: btActiveTrade.tp, color: '#089981' },
+          { label: btActiveTrade.side, price: btActiveTrade.entry, color: '#e5b84b' },
+          { label: 'SL', price: btActiveTrade.sl, color: '#f23645' }
+        ].forEach(line => {
+          const y = priceToY(line.price);
+          ctx.strokeStyle = line.color;
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(chartW, y);
+          ctx.stroke();
+
+          ctx.fillStyle = line.color;
+          ctx.fillRect(chartW + 2, y - 9, padRight - 4, 18);
+          ctx.fillStyle = '#050608';
+          ctx.font = 'bold 10px sans-serif';
+          ctx.fillText(line.label, chartW + 8, y + 3);
+        });
+      }
+
+      // Crosshair
+      if (btMouse && btMouse.x < chartW) {
+        ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+        ctx.setLineDash([3, 3]);
+        ctx.beginPath();
+        ctx.moveTo(btMouse.x, 0);
+        ctx.lineTo(btMouse.x, H);
+        ctx.moveTo(0, btMouse.y);
+        ctx.lineTo(chartW, btMouse.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    }
+
+    const btCanvasEl = document.getElementById('btChartCanvas');
+    btCanvasEl.addEventListener('mousemove', e => {
+      const r = btCanvasEl.getBoundingClientRect();
+      btMouse = { x: e.clientX - r.left, y: e.clientY - r.top };
+      drawBtChart();
+    });
+    btCanvasEl.addEventListener('mouseleave', () => {
+      btMouse = null;
+      drawBtChart();
+    });
+    btCanvasEl.addEventListener('click', e => {
+      if (!btCanvasEl._yToPrice) return;
+      const r = btCanvasEl.getBoundingClientRect();
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      const p = btCanvasEl._yToPrice(y);
+
+      if (btDrawTool === 'hline') {
+        btDrawings.push({ type: 'hline', price: p });
+        drawBtChart();
+      } else if (btDrawTool === 'box') {
+        if (!btPendingBox) {
+          btPendingBox = { x1: x, p1: p };
+        } else {
+          btDrawings.push({ type: 'box', x1: btPendingBox.x1, p1: btPendingBox.p1, x2: x, p2: p });
+          btPendingBox = null;
+          drawBtChart();
+        }
+      }
+    });
+    window.addEventListener('resize', drawBtChart);
+
+    // Init all
+    renderCommunityVideos();
+    setVideosUnlockedState(sessionStorage.getItem('petricor_vip_ok') === '1');
+    updateRecap();
+    initBacktestData();
   </script>
 </body>
 </html>
