@@ -435,14 +435,14 @@
 
     function createVideoCard(video) {
       const thumbUrl = `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`;
-      const embedUrl = `https://www.youtube-nocookie.com/embed/${video.id}?rel=0`;
+      const embedUrl = `https://www.youtube.com/embed/${video.id}`;
       const watchUrl = `https://youtu.be/${video.id}`;
 
       const card = document.createElement('div');
       card.className = 'bg-surface border border-white/[0.08] hover:border-ember/50 rounded-2xl overflow-hidden transition flex flex-col justify-between';
       card.innerHTML = `
         <div>
-          <div class="relative aspect-video bg-black cursor-pointer group" onclick="playVideo(this, '${embedUrl}', '${video.title}')">
+          <div class="player-box relative aspect-video bg-black cursor-pointer group" onclick="startPlayer(this, '${embedUrl}', '${video.title}')">
             <img src="${thumbUrl}" alt="${video.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
             <div class="absolute inset-0 bg-black/35 group-hover:bg-black/20 transition flex items-center justify-center">
               <span class="w-12 h-12 rounded-full bg-white/95 text-black flex items-center justify-center text-sm font-bold shadow-lg">▶</span>
@@ -459,19 +459,18 @@
       return card;
     }
 
-    function playVideo(el, embedUrl, title) {
-      el.outerHTML = `
-        <div class="aspect-video bg-black">
-          <iframe
-            class="w-full h-full"
-            src="${embedUrl}"
-            title="${title}"
-            frameborder="0"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
-        </div>
+    function startPlayer(boxEl, embedUrl, title) {
+      boxEl.onclick = null;
+      boxEl.classList.remove('cursor-pointer', 'group');
+      boxEl.innerHTML = `
+        <iframe
+          class="w-full h-full"
+          src="${embedUrl}"
+          title="${title}"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
       `;
     }
 
