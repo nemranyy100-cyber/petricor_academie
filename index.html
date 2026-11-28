@@ -1,1018 +1,446 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="fr" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Petricor Académie — Accueil, Community, Backtest & VIP</title>
+  <title>Petricor Académie — Trading Mindset, Backtest Hub & VIP</title>
+  <meta name="description" content="Petricor Académie — Trading mindset, pre-trade checklist, trade journal, and VIP sessions." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Petricor Académie" />
+  <meta property="og:description" content="Mindset, Backtest Hub, Community & VIP Mentorship." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nemranyy100-cyber.github.io/petricor_academie/" />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
             sans: ['Plus Jakarta Sans', 'sans-serif'],
-            display: ['Cinzel', 'serif'],
           },
           colors: {
-            abyss: '#040814',
-            sapphire: '#071226',
-            cobalt: '#0c2248',
-            cyanGlow: '#38bdf8',
-            azure: '#2563eb',
-            ice: '#bae6fd',
+            obsidian: '#0b0b0c',
+            surface: '#141416',
+            surfaceHover: '#1c1c1f',
+            ember: '#e86a24',
+            amberGlow: '#f59e0b',
           }
         }
       }
     }
   </script>
+
   <style>
     body {
-      background-color: #040814;
-      color: #f0f9ff;
+      background-color: #0b0b0c;
+      color: #f4f4f5;
       overflow-x: hidden;
     }
 
-    /* Grainy Blue & Cyan Graphic Canvas */
-    .grain-canvas {
+    /* Arc lumineux style horizon cosmique (comme l'image) */
+    .horizon-arc {
       position: relative;
-      background:
-        radial-gradient(ellipse 75% 65% at 75% 18%, rgba(56, 189, 248, 0.24), transparent 60%),
-        radial-gradient(ellipse 60% 55% at 18% 82%, rgba(37, 99, 235, 0.26), transparent 65%),
-        radial-gradient(ellipse 85% 85% at 50% 50%, rgba(12, 34, 72, 0.92), #040814 100%);
-      overflow: hidden;
-    }
-
-    .grain-canvas::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+      width: 140%;
+      left: -20%;
+      height: 220px;
+      border-top: 2px solid rgba(255, 166, 94, 0.75);
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(232, 106, 36, 0.35) 0%, rgba(232, 106, 36, 0.08) 45%, transparent 75%);
+      box-shadow: 0 -18px 60px rgba(232, 106, 36, 0.35), inset 0 12px 35px rgba(255, 180, 110, 0.25);
       pointer-events: none;
-      opacity: 0.28;
-      mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    .editorial-frame {
-      border: 1px solid rgba(125, 211, 252, 0.18);
-      box-shadow:
-        0 25px 80px rgba(2, 8, 23, 0.82),
-        inset 0 1px 0 rgba(186, 230, 253, 0.14);
+    /* Lueur d'horizon inférieure */
+    .bottom-horizon {
+      background: radial-gradient(ellipse 65% 85% at 50% 100%, rgba(232, 106, 36, 0.42) 0%, rgba(180, 70, 20, 0.14) 50%, transparent 80%);
+      border-bottom: 1px solid rgba(255, 166, 94, 0.35);
     }
 
-    .cyan-line {
-      border: 1px solid rgba(56, 189, 248, 0.35);
+    /* Champs de formulaire sombres épurés */
+    .dark-input {
+      background-color: #161618;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: #f4f4f5;
+      transition: all 0.25s ease;
+    }
+    .dark-input:focus {
+      outline: none;
+      border-color: rgba(232, 106, 36, 0.55);
+      background-color: #1a1a1d;
+      box-shadow: 0 0 0 3px rgba(232, 106, 36, 0.12);
     }
 
-    .pill-nav {
-      background: rgba(7, 18, 38, 0.78);
-      backdrop-filter: blur(22px) saturate(160%);
-      border: 1px solid rgba(125, 211, 252, 0.18);
+    /* Effet de clic subtil */
+    .tap-blur {
+      transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
     }
-
-    /* iOS 26 Style Liquid Blur on Click */
-    .ios26-press {
-      transition: filter 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.18s cubic-bezier(0.22, 1, 0.36, 1),
-                  background-color 0.2s ease;
-    }
-    .ios26-press:active {
-      filter: blur(5px) saturate(150%);
-      transform: scale(0.965);
-    }
-
-    .thumb-card img {
-      transition: transform 0.35s ease, filter 0.3s ease;
-    }
-    .thumb-card:hover img {
-      transform: scale(1.04);
-      filter: blur(1.4px) brightness(0.86);
+    .tap-blur:active {
+      transform: scale(0.97);
+      filter: blur(0.6px);
     }
   </style>
 </head>
-<body class="min-h-screen selection:bg-cyanGlow selection:text-abyss">
+<body class="antialiased selection:bg-ember/30 selection:text-white">
 
-  <!-- Top Navigation -->
-  <header class="sticky top-0 z-40 backdrop-blur-xl bg-abyss/80 border-b border-sky-400/15">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 flex-wrap">
-      <button type="button" onclick="switchView('accueil')" class="ios26-press flex items-center gap-2.5 text-left">
-        <span class="w-8 h-8 rounded-full bg-gradient-to-br from-ice to-cyanGlow text-abyss font-extrabold flex items-center justify-center text-sm shadow-md shadow-sky-500/20">
+  <!-- NAVBAR MINIMALISTE -->
+  <header class="sticky top-0 z-50 bg-obsidian/80 backdrop-blur-md border-b border-white/[0.04]">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#accueil" class="flex items-center gap-2.5 group">
+        <span class="w-6 h-6 rounded-full border border-white/25 flex items-center justify-center text-[11px] font-bold tracking-tighter group-hover:border-ember transition">
           P
         </span>
-        <span class="font-display font-bold tracking-wider text-xs sm:text-sm text-white">
-          PETRICOR ACADÉMIE
+        <span class="font-semibold tracking-[0.18em] text-xs uppercase text-white">
+          PETRICOR.
         </span>
-      </button>
+      </a>
 
-      <nav class="flex items-center gap-1 px-1.5 py-1 rounded-full pill-nav text-xs overflow-x-auto">
-        <button type="button" id="navAccueilBtn" onclick="switchView('accueil')"
-                class="ios26-press px-3 py-1.5 rounded-full bg-cyanGlow text-abyss font-extrabold transition whitespace-nowrap">
-          1. Accueil
-        </button>
-        <button type="button" id="navCommunityBtn" onclick="switchView('community')"
-                class="ios26-press px-3 py-1.5 rounded-full text-sky-100 hover:bg-sky-400/15 font-semibold transition whitespace-nowrap">
-          2. Community
-        </button>
-        <button type="button" id="navBacktestBtn" onclick="switchView('backtest')"
-                class="ios26-press px-3 py-1.5 rounded-full text-cyanGlow hover:bg-sky-400/15 font-bold transition whitespace-nowrap">
-          ⚡ 3. Backtest Hub
-        </button>
-        <button type="button" id="navVipBtn" onclick="switchView('vip')"
-                class="ios26-press px-3 py-1.5 rounded-full text-ice hover:bg-sky-400/15 font-bold transition flex items-center gap-1 whitespace-nowrap">
-          <span>🔒</span> 4. VIP
-        </button>
+      <!-- Liens centraux -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-medium text-zinc-400">
+        <a href="#accueil" class="hover:text-white transition">Accueil</a>
+        <a href="#psychologie" class="hover:text-white transition">Psychologie</a>
+        <a href="#backtest" class="hover:text-white transition">Backtest Hub</a>
+        <a href="#vip" class="hover:text-white transition">Espace VIP</a>
       </nav>
 
-      <div class="hidden lg:flex items-center gap-2">
-        <a href="https://nemranyy100-cyber.github.io/petricor_academie/" target="_blank" rel="noopener noreferrer"
-           class="ios26-press px-3 py-1.5 rounded-full bg-sky-400/10 hover:bg-sky-400/20 border border-sky-300/20 text-xs text-sky-100 transition">
-          Site Web ↗
-        </a>
-        <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
-           class="ios26-press px-3 py-1.5 rounded-full bg-sky-400/10 hover:bg-sky-400/20 border border-sky-300/20 text-xs text-sky-100 transition">
-          Discord
-        </a>
-        <a href="https://www.instagram.com/petricor_academie/" target="_blank" rel="noopener noreferrer"
-           class="ios26-press px-3 py-1.5 rounded-full bg-sky-400/10 hover:bg-sky-400/20 border border-sky-300/20 text-xs text-sky-100 transition">
-          Instagram
-        </a>
-      </div>
+      <!-- Bouton pilule blanc -->
+      <a href="#rejoindre" class="tap-blur bg-white text-black text-xs font-semibold px-5 py-2.5 rounded-full hover:bg-zinc-200 transition">
+        Rejoindre
+      </a>
     </div>
   </header>
 
-  <!-- ========================================================= -->
-  <!-- PAGE 1 : ACCUEIL (PSYCHOLOGIE + INSCRIPTION)              -->
-  <!-- ========================================================= -->
-  <main id="accueilPage" class="block">
+  <!-- HERO SECTION -->
+  <section id="accueil" class="pt-20 pb-10 px-6 text-center relative">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-4xl sm:text-5xl md:text-[52px] font-normal tracking-tight text-white leading-[1.12]">
+        Tradez avec la précision<br />de Petricor Académie
+      </h1>
 
-    <section class="max-w-6xl mx-auto px-4 pt-8 pb-6">
-      <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-12 relative">
-        <div class="relative z-10 max-w-3xl mx-auto text-center space-y-5 py-2">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-abyss/70 border border-sky-300/25 text-xs text-ice font-semibold">
-            ✦ Petricor Académie • Mindset, Backtest Hub & VIP
-          </div>
-
-          <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.08] text-white">
-            Maîtrise le Marché & Ta <span class="text-cyanGlow">Psychologie</span>
-          </h1>
-
-          <p class="max-w-xl mx-auto text-sm sm:text-base text-sky-100/85 leading-relaxed">
-            Découvre nos principes de psychologie, prépare tes setups sur le Backtest Hub, et rejoins l'Espace VIP.
-          </p>
-
-          <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
-            <a href="#inscription"
-               class="ios26-press px-6 py-3 rounded-full bg-cyanGlow text-abyss font-extrabold text-xs sm:text-sm hover:bg-ice transition">
-              S'inscrire Maintenant ↓
-            </a>
-            <button type="button" onclick="switchView('backtest')"
-                    class="ios26-press px-6 py-3 rounded-full bg-azure/25 hover:bg-azure/40 border border-cyanGlow/40 text-ice font-bold text-xs sm:text-sm transition">
-              ⚡ Backtest Hub
-            </button>
-            <button type="button" onclick="switchView('community')"
-                    class="ios26-press px-6 py-3 rounded-full bg-abyss/70 hover:bg-abyss/90 border border-sky-300/25 text-white font-semibold text-xs sm:text-sm transition">
-              ▶ Page Community
-            </button>
-            <button type="button" onclick="switchView('vip')"
-                    class="ios26-press px-6 py-3 rounded-full bg-abyss/70 hover:bg-abyss/90 border border-cyanGlow/35 text-cyanGlow font-semibold text-xs sm:text-sm transition">
-              🔒 Page VIP
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Psychologie & Advices -->
-    <section id="psychologie" class="max-w-6xl mx-auto px-4 py-8">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-cyanGlow">Page 1 • Mindset</span>
-          <h2 class="font-display text-2xl sm:text-3xl font-bold text-white mt-1">Psychologie & Advices</h2>
-          <p class="text-sky-200/70 text-xs sm:text-sm mt-1">Les bases mentales essentielles avant toute exécution sur le marché.</p>
-        </div>
-        <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
-           class="ios26-press self-start sm:self-auto px-4 py-2 rounded-full bg-sky-400/10 hover:bg-sky-400/20 border border-sky-300/20 text-xs font-semibold text-white transition">
-          Rejoindre le Discord ↗
+      <!-- Icônes sociales rondes -->
+      <div class="flex items-center justify-center gap-3 mt-7">
+        <a href="https://discord.com" target="_blank" aria-label="Discord" class="tap-blur w-9 h-9 rounded-full bg-surface hover:bg-surfaceHover border border-white/[0.06] flex items-center justify-center text-zinc-300 hover:text-white transition text-xs">
+          DC
+        </a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="tap-blur w-9 h-9 rounded-full bg-surface hover:bg-surfaceHover border border-white/[0.06] flex items-center justify-center text-zinc-300 hover:text-white transition text-xs">
+          IG
+        </a>
+        <a href="https://youtube.com" target="_blank" aria-label="YouTube" class="tap-blur w-9 h-9 rounded-full bg-surface hover:bg-surfaceHover border border-white/[0.06] flex items-center justify-center text-zinc-300 hover:text-white transition text-xs">
+          YT
         </a>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        <div class="ios26-press rounded-2xl bg-sapphire editorial-frame overflow-hidden group">
-          <div class="aspect-[4/5] bg-cobalt overflow-hidden">
-            <img src="psy1.jpg" alt="How to Become a Successful Trader"
-                 class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="hidden w-full h-full p-6 flex-col justify-between bg-gradient-to-b from-cobalt to-abyss">
-              <span class="text-xs text-cyanGlow font-semibold">Petricor Academy</span>
-              <div class="text-2xl font-extrabold text-white leading-tight">How to Become a Successful Trader</div>
-              <span class="text-xs text-sky-200">Master the financial markets.</span>
-            </div>
-          </div>
-          <div class="p-4 border-t border-sky-400/15">
-            <span class="text-[11px] font-bold text-cyanGlow uppercase">01 • Vision</span>
-            <h3 class="text-sm font-bold text-white mt-0.5">Devenir un Trader Rentable</h3>
-          </div>
-        </div>
-
-        <div class="ios26-press rounded-2xl bg-sapphire editorial-frame overflow-hidden group">
-          <div class="aspect-[4/5] bg-cobalt overflow-hidden">
-            <img src="psy2.jpg" alt="Focus on one strategy"
-                 class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="hidden w-full h-full p-6 flex-col justify-center bg-gradient-to-br from-cobalt to-abyss">
-              <p class="text-lg font-bold text-white leading-snug">“Never jump from one strategy to another looking for results. Find one strategy, focus on it, and master it.”</p>
-            </div>
-          </div>
-          <div class="p-4 border-t border-sky-400/15">
-            <span class="text-[11px] font-bold text-cyanGlow uppercase">02 • Focus</span>
-            <h3 class="text-sm font-bold text-white mt-0.5">Une Seule Stratégie Maîtrisée</h3>
-          </div>
-        </div>
-
-        <div class="ios26-press rounded-2xl bg-sapphire editorial-frame overflow-hidden group">
-          <div class="aspect-[4/5] bg-cobalt overflow-hidden">
-            <img src="psy3.jpg" alt="Respect your trading setup"
-                 class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="hidden w-full h-full p-6 flex-col justify-center bg-gradient-to-br from-cobalt to-abyss">
-              <p class="text-lg font-bold text-white leading-snug">“Respect your trading setup and the specific times you trade. Stay disciplined and stick to your schedule.”</p>
-            </div>
-          </div>
-          <div class="p-4 border-t border-sky-400/15">
-            <span class="text-[11px] font-bold text-cyanGlow uppercase">03 • Discipline</span>
-            <h3 class="text-sm font-bold text-white mt-0.5">Respecter Ses Horaires & Setups</h3>
-          </div>
-        </div>
-
-        <div class="ios26-press rounded-2xl bg-sapphire editorial-frame overflow-hidden group">
-          <div class="aspect-[4/5] bg-cobalt overflow-hidden">
-            <img src="psy4.jpg" alt="Make the best trades"
-                 class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="hidden w-full h-full p-6 flex-col justify-center bg-gradient-to-br from-cobalt to-abyss">
-              <p class="text-lg font-bold text-white leading-snug">“The goal of a successful trader is to make the best trades. Money is secondary.”</p>
-            </div>
-          </div>
-          <div class="p-4 border-t border-sky-400/15">
-            <span class="text-[11px] font-bold text-cyanGlow uppercase">04 • Process</span>
-            <h3 class="text-sm font-bold text-white mt-0.5">L'Exécution Avant l'Argent</h3>
-          </div>
-        </div>
-
-        <div class="ios26-press rounded-2xl bg-sapphire editorial-frame overflow-hidden group sm:col-span-2 lg:col-span-2">
-          <div class="aspect-[4/5] lg:aspect-[16/9] bg-cobalt overflow-hidden">
-            <img src="psy5.jpg" alt="Petricor Academy Advices"
-                 class="w-full h-full object-cover group-hover:scale-[1.02] transition duration-300"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="hidden w-full h-full p-8 flex-col items-center justify-center text-center bg-gradient-to-br from-cobalt to-abyss">
-              <div class="text-2xl font-bold text-white">Petricor Academy</div>
-              <div class="text-xs tracking-[0.35em] text-cyanGlow mt-1">ADVICES</div>
-            </div>
-          </div>
-          <div class="p-4 border-t border-sky-400/15 flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <span class="text-[11px] font-bold text-cyanGlow uppercase">05 • Communauté</span>
-              <h3 class="text-sm font-bold text-white mt-0.5">Petricor Academy Advices — Daily Insights</h3>
-            </div>
-            <div class="flex items-center gap-2 text-xs">
-              <a href="https://discord.gg/qRY5RHmCr" target="_blank" rel="noopener noreferrer"
-                 class="ios26-press px-3 py-1.5 rounded-full bg-sky-400/15 hover:bg-sky-400/25 text-white font-semibold transition">Discord</a>
-              <a href="https://www.instagram.com/petricor_academie/" target="_blank" rel="noopener noreferrer"
-                 class="ios26-press px-3 py-1.5 rounded-full bg-sky-400/15 hover:bg-sky-400/25 text-white font-semibold transition">Instagram</a>
-            </div>
-          </div>
-        </div>
+      <!-- Pilules contact rapide -->
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-5">
+        <a href="mailto:contact@petricor-academie.com" class="tap-blur px-4 py-1.5 rounded-full bg-surface hover:bg-surfaceHover border border-white/[0.06] text-[11px] text-zinc-300 transition">
+          contact@petricor-academie.com
+        </a>
+        <span class="px-4 py-1.5 rounded-full bg-surface border border-white/[0.06] text-[11px] text-zinc-300">
+          Casablanca • Markets & ICT
+        </span>
       </div>
-    </section>
+    </div>
 
-    <!-- Inscription -->
-    <section id="inscription" class="max-w-6xl mx-auto px-4 py-10">
-      <div class="grid lg:grid-cols-2 gap-6 items-start">
-
-        <div class="grain-canvas editorial-frame rounded-2xl p-6 sm:p-8 space-y-5">
-          <div class="relative z-10">
-            <span class="text-xs font-bold tracking-wider uppercase text-cyanGlow">Étape suivante • Inscription</span>
-            <h2 class="font-display text-2xl font-bold text-white mt-1">Inscription Bootcamp & VIP</h2>
-            <p class="text-xs sm:text-sm text-sky-100/80 mt-1">Remplis tes coordonnées pour recevoir ton accès et la confirmation.</p>
-          </div>
-
-          <form id="inscriptionForm" action="https://formspree.io/f/xzerykgy" method="POST" class="relative z-10 space-y-4">
-            <input type="hidden" name="_subject" id="emailSubject" value="Nouvelle Inscription Petricor Académie">
-
-            <div>
-              <label class="block text-xs font-semibold text-sky-100 mb-1.5">Nom complet</label>
-              <input type="text" id="nom" name="nom" required placeholder="Ex: Yasser Nemrany"
-                     class="w-full px-4 py-3 rounded-xl bg-abyss/90 border border-sky-300/20 text-sm text-white placeholder-sky-300/35 focus:outline-none focus:border-cyanGlow">
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-sky-100 mb-1.5">Téléphone / WhatsApp</label>
-              <input type="tel" id="telephone" name="telephone" required placeholder="Ex: +212 6 XX XX XX XX"
-                     class="w-full px-4 py-3 rounded-xl bg-abyss/90 border border-sky-300/20 text-sm text-white placeholder-sky-300/35 focus:outline-none focus:border-cyanGlow">
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-sky-100 mb-1.5">Adresse email</label>
-              <input type="email" id="email" name="email" required placeholder="exemple@email.com"
-                     class="w-full px-4 py-3 rounded-xl bg-abyss/90 border border-sky-300/20 text-sm text-white placeholder-sky-300/35 focus:outline-none focus:border-cyanGlow">
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-sky-100 mb-1.5">Formule souhaitée</label>
-              <select id="formule" name="formule" onchange="updateVIPBanner()"
-                      class="w-full px-4 py-3 rounded-xl bg-abyss/90 border border-sky-300/20 text-sm text-white focus:outline-none focus:border-cyanGlow">
-                <option value="Standard Bootcamp">Standard Bootcamp</option>
-                <option value="VIP Mentorship">VIP Mentorship (Accès Stratégie Videos)</option>
-              </select>
-            </div>
-
-            <div id="vipBanner" class="hidden rounded-xl bg-cyanGlow/15 border border-cyanGlow/40 p-3.5 text-xs text-ice">
-              ★ <strong>VIP Mentorship :</strong> Après validation, tu recevras le mot de passe pour ouvrir la <strong>Page VIP</strong> (Séances 1–8 + Stratégie + Trade Breakdown).
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-sky-100 mb-1.5">Niveau & objectifs</label>
-              <textarea id="details" name="details" rows="3" placeholder="Débutant / Intermédiaire, tes objectifs..."
-                        class="w-full px-4 py-3 rounded-xl bg-abyss/90 border border-sky-300/20 text-sm text-white placeholder-sky-300/35 focus:outline-none focus:border-cyanGlow"></textarea>
-            </div>
-
-            <button type="submit" id="submitBtn"
-                    class="ios26-press w-full py-3.5 rounded-xl bg-gradient-to-r from-ice to-cyanGlow text-abyss font-extrabold text-sm hover:opacity-95 transition">
-              Valider l'Inscription & Envoyer
-            </button>
-
-            <p id="formStatus" class="text-xs sm:text-sm hidden rounded-xl p-3"></p>
-          </form>
-        </div>
-
-        <div class="grain-canvas editorial-frame rounded-2xl p-6 sm:p-8 space-y-5">
-          <div class="relative z-10 flex items-center justify-between gap-2">
-            <div>
-              <span class="text-xs font-bold tracking-wider uppercase text-sky-300/70">Aperçu en direct</span>
-              <h3 class="text-xl font-bold text-white mt-0.5">Récapitulatif Instantané</h3>
-            </div>
-            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-cyanGlow/15 text-cyanGlow border border-cyanGlow/35">
-              Prêt
-            </span>
-          </div>
-
-          <div class="relative z-10 rounded-xl bg-abyss/90 border border-sky-300/15 p-4 text-sm space-y-1.5 text-sky-100">
-            <div><span class="text-sky-300/65">Nom :</span> <span id="recapNom">-</span></div>
-            <div><span class="text-sky-300/65">Téléphone :</span> <span id="recapTel">-</span></div>
-            <div><span class="text-sky-300/65">Email :</span> <span id="recapEmail">-</span></div>
-            <div><span class="text-sky-300/65">Formule :</span> <span id="recapFormule" class="text-cyanGlow font-semibold">Standard Bootcamp</span></div>
-            <div><span class="text-sky-300/65">Détails :</span> <span id="recapDetails">-</span></div>
-          </div>
-
-          <div class="relative z-10 grid sm:grid-cols-2 gap-3">
-            <button type="button" onclick="copyRecap()"
-                    class="ios26-press w-full py-3 px-4 rounded-xl bg-sky-400/15 hover:bg-sky-400/25 border border-sky-300/20 font-semibold text-xs sm:text-sm transition">
-              Copier le Récapitulatif
-            </button>
-            <a href="https://wa.me/qr/DDJ2PAVEIXOGL1" target="_blank" rel="noopener noreferrer"
-               class="ios26-press w-full py-3 px-4 rounded-xl bg-azure hover:bg-blue-500 text-white font-bold text-xs sm:text-sm text-center transition">
-              Confirmer sur WhatsApp
-            </a>
-          </div>
-
-          <div class="relative z-10 pt-3 border-t border-sky-300/15 flex flex-wrap items-center justify-between gap-2 text-xs text-sky-200/70">
-            <button type="button" onclick="switchView('community')" class="ios26-press text-white font-semibold hover:underline">
-              → Aller à la Page Community
-            </button>
-            <button type="button" onclick="switchView('vip')" class="ios26-press text-cyanGlow font-bold hover:underline">
-              Ouvrir la Page VIP 🔒 →
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </section>
-  </main>
-
-  <!-- ========================================================= -->
-  <!-- PAGE 2 : COMMUNITY                                        -->
-  <!-- ========================================================= -->
-  <section id="communityPage" class="hidden max-w-6xl mx-auto px-4 py-10">
-    <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
-      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-sky-300/15 pb-5">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-cyanGlow">Page 2 • Community Open Access</span>
-          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Community & Trade Breakdown</h2>
-          <p class="text-xs sm:text-sm text-sky-100/80 mt-1">
-            Lien du site :
-            <a href="https://nemranyy100-cyber.github.io/petricor_academie/" target="_blank" rel="noopener noreferrer"
-               class="text-cyanGlow underline">
-              https://nemranyy100-cyber.github.io/petricor_academie/
-            </a>
-          </p>
-        </div>
-
-        <div class="flex items-center gap-2.5">
-          <button type="button" onclick="switchView('accueil')"
-                  class="ios26-press px-3.5 py-1.5 rounded-full bg-sky-400/15 hover:bg-sky-400/25 text-xs font-semibold text-white transition">
-            ← Accueil
-          </button>
-          <button type="button" onclick="switchView('vip')"
-                  class="ios26-press px-3.5 py-1.5 rounded-full bg-cyanGlow text-abyss text-xs font-extrabold hover:bg-ice transition">
-            🔒 Page VIP
-          </button>
-        </div>
-      </div>
-
-      <div id="communityVideoGrid" class="relative z-10 grid md:grid-cols-2 gap-6"></div>
+    <!-- ARC LUMINEUX HORIZON -->
+    <div class="mt-16 overflow-hidden">
+      <div class="horizon-arc"></div>
     </div>
   </section>
 
-  <!-- ========================================================= -->
-  <!-- PAGE 3 : BACKTEST HUB (PRE-TRADE CHECKLIST + JOURNAL HUB) -->
-  <!-- ========================================================= -->
-  <section id="backtestPage" class="hidden max-w-6xl mx-auto px-4 py-10 space-y-6">
-    <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-8">
+  <!-- SECTION FORMULAIRE D'INSCRIPTION (CENTRÉE COMME L'IMAGE) -->
+  <section id="rejoindre" class="-mt-24 pb-24 px-6 relative z-10">
+    <div class="max-w-lg mx-auto text-center">
+      <h2 class="text-xl sm:text-2xl font-normal text-zinc-100 leading-snug mb-10">
+        Que vous soyez débutant ou trader financé,<br class="hidden sm:inline" />
+        passez au niveau supérieur avec nous.
+      </h2>
 
-      <!-- Header + Traders Casa Bridge -->
-      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-sky-300/15 pb-6">
+      <form action="https://formspree.io/f/your-form-id" method="POST" class="space-y-3 text-left">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-cyanGlow">Petricor Backtest Hub • English Terminal</span>
-          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Pre-Trade Checklist &amp; Journal Hub</h2>
-          <p class="text-xs sm:text-sm text-sky-100/80 mt-1">
-            Validate every setup rule before entry, launch replay on Traders Casa, and log your real session results here.
-          </p>
+          <label class="block text-[10px] uppercase tracking-wider text-zinc-500 mb-1 ml-1">Nom complet *</label>
+          <input type="text" name="name" required placeholder="ex. Yasser Nemrany" class="dark-input w-full rounded-lg px-4 py-3 text-xs" />
         </div>
 
-        <div class="flex flex-wrap items-center gap-2.5">
-          <a href="https://traderscasa.com" target="_blank" rel="noopener noreferrer"
-             class="ios26-press px-4 py-2.5 rounded-xl bg-gradient-to-r from-ice to-cyanGlow text-abyss font-extrabold text-xs sm:text-sm shadow-lg shadow-sky-500/20">
-            Open Traders Casa Replay ↗
-          </a>
-          <button type="button" onclick="switchView('accueil')"
-                  class="ios26-press px-3.5 py-2.5 rounded-xl bg-sky-400/15 hover:bg-sky-400/25 text-xs font-semibold text-white">
-            ← Accueil
-          </button>
-        </div>
-      </div>
-
-      <!-- Analytics KPI Row -->
-      <div class="relative z-10 grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="rounded-2xl bg-sapphire/90 cyan-line p-4">
-          <div class="text-[11px] font-bold uppercase tracking-wider text-sky-300/75">Total Trades</div>
-          <div id="kpiTrades" class="text-2xl font-extrabold text-white mt-1 font-mono">0</div>
-        </div>
-        <div class="rounded-2xl bg-sapphire/90 cyan-line p-4">
-          <div class="text-[11px] font-bold uppercase tracking-wider text-sky-300/75">Win Rate</div>
-          <div id="kpiWinRate" class="text-2xl font-extrabold text-cyanGlow mt-1 font-mono">0%</div>
-        </div>
-        <div class="rounded-2xl bg-sapphire/90 cyan-line p-4">
-          <div class="text-[11px] font-bold uppercase tracking-wider text-sky-300/75">Net P&amp;L</div>
-          <div id="kpiNetPnl" class="text-2xl font-extrabold text-ice mt-1 font-mono">$0.00</div>
-        </div>
-        <div class="rounded-2xl bg-sapphire/90 cyan-line p-4">
-          <div class="text-[11px] font-bold uppercase tracking-wider text-sky-300/75">Checklist Score</div>
-          <div id="kpiScore" class="text-2xl font-extrabold text-cyanGlow mt-1 font-mono">0 / 5</div>
-        </div>
-      </div>
-
-      <div class="relative z-10 grid lg:grid-cols-2 gap-6 items-start">
-
-        <!-- PRE-TRADE STRATEGY CHECKLIST -->
-        <div class="rounded-2xl bg-sapphire/95 editorial-frame p-6 space-y-5">
-          <div class="flex items-center justify-between gap-2">
-            <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-cyanGlow">Discipline Gate</span>
-              <h3 class="text-lg font-extrabold text-white mt-0.5">Petricor Pre-Trade Checklist</h3>
-            </div>
-            <span id="checklistBadge" class="px-3 py-1 rounded-full text-xs font-bold bg-sky-400/15 text-sky-200 border border-sky-300/25">
-              Not Ready
-            </span>
-          </div>
-
-          <div class="space-y-2.5 text-xs sm:text-sm">
-            <label class="ios26-press flex items-center gap-3 p-3 rounded-xl bg-abyss/80 border border-sky-300/15 cursor-pointer">
-              <input type="checkbox" onchange="updateChecklistScore()" class="chk-rule w-4 h-4 accent-sky-400">
-              <span>Higher-timeframe bias &amp; market structure aligned</span>
-            </label>
-            <label class="ios26-press flex items-center gap-3 p-3 rounded-xl bg-abyss/80 border border-sky-300/15 cursor-pointer">
-              <input type="checkbox" onchange="updateChecklistScore()" class="chk-rule w-4 h-4 accent-sky-400">
-              <span>Liquidity sweep / manipulation confirmed before entry</span>
-            </label>
-            <label class="ios26-press flex items-center gap-3 p-3 rounded-xl bg-abyss/80 border border-sky-300/15 cursor-pointer">
-              <input type="checkbox" onchange="updateChecklistScore()" class="chk-rule w-4 h-4 accent-sky-400">
-              <span>Price inside a high-probability Point of Interest (POI)</span>
-            </label>
-            <label class="ios26-press flex items-center gap-3 p-3 rounded-xl bg-abyss/80 border border-sky-300/15 cursor-pointer">
-              <input type="checkbox" onchange="updateChecklistScore()" class="chk-rule w-4 h-4 accent-sky-400">
-              <span>Active session window respected (London / NY)</span>
-            </label>
-            <label class="ios26-press flex items-center gap-3 p-3 rounded-xl bg-abyss/80 border border-sky-300/15 cursor-pointer">
-              <input type="checkbox" onchange="updateChecklistScore()" class="chk-rule w-4 h-4 accent-sky-400">
-              <span>Risk capped strictly within plan (max 1% per trade)</span>
-            </label>
-          </div>
-
-          <button type="button" onclick="resetChecklist()"
-                  class="ios26-press px-4 py-2 rounded-xl bg-sky-400/10 hover:bg-sky-400/20 border border-sky-300/20 text-xs font-semibold text-sky-100">
-            Reset Checklist
-          </button>
-        </div>
-
-        <!-- LOG SESSION TRADE TO PERFORMANCE HUB -->
-        <div class="rounded-2xl bg-sapphire/95 editorial-frame p-6 space-y-4">
-          <div>
-            <span class="text-[11px] font-bold uppercase tracking-wider text-cyanGlow">Session Logger</span>
-            <h3 class="text-lg font-extrabold text-white mt-0.5">Log Backtest / Live Trade</h3>
-          </div>
-
-          <form id="tradeLogForm" onsubmit="addJournalTrade(event)" class="space-y-3 text-xs sm:text-sm">
-            <div class="grid sm:grid-cols-2 gap-3">
-              <div>
-                <label class="block text-xs font-semibold text-sky-200 mb-1">Pair</label>
-                <input id="logPair" type="text" required placeholder="XAUUSD / EURUSD" value="XAUUSD"
-                       class="w-full px-3.5 py-2.5 rounded-xl bg-abyss border border-sky-300/20 text-white">
-              </div>
-              <div>
-                <label class="block text-xs font-semibold text-sky-200 mb-1">Session / Date</label>
-                <input id="logSession" type="text" required placeholder="NY Killzone • 2026" value="NY Session • 2026"
-                       class="w-full px-3.5 py-2.5 rounded-xl bg-abyss border border-sky-300/20 text-white">
-              </div>
-            </div>
-
-            <div class="grid sm:grid-cols-3 gap-3">
-              <div>
-                <label class="block text-xs font-semibold text-sky-200 mb-1">Direction</label>
-                <select id="logSide" class="w-full px-3.5 py-2.5 rounded-xl bg-abyss border border-sky-300/20 text-white">
-                  <option value="BUY">BUY (Long)</option>
-                  <option value="SELL">SELL (Short)</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-xs font-semibold text-sky-200 mb-1">R:R Achieved</label>
-                <input id="logRr" type="text" placeholder="1:3.0" value="1:2.5"
-                       class="w-full px-3.5 py-2.5 rounded-xl bg-abyss border border-sky-300/20 text-white">
-              </div>
-              <div>
-                <label class="block text-xs font-semibold text-sky-200 mb-1">P&amp;L ($)</label>
-                <input id="logPnl" type="number" step="0.01" required placeholder="250 or -100" value="250"
-                       class="w-full px-3.5 py-2.5 rounded-xl bg-abyss border border-sky-300/20 text-white font-mono">
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-sky-200 mb-1">Execution Note / Psychology</label>
-              <input id="logNote" type="text" placeholder="Clean sweep + POI entry, held to target..."
-                     class="w-full px-3.5 py-2.5 rounded-xl bg-abyss border border-sky-300/20 text-white">
-            </div>
-
-            <button type="submit"
-                    class="ios26-press w-full py-3 rounded-xl bg-gradient-to-r from-ice to-cyanGlow text-abyss font-extrabold text-xs sm:text-sm hover:opacity-95 transition">
-              + Save Trade to Performance Hub
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Journal Log Table -->
-      <div class="relative z-10 rounded-2xl bg-sapphire/95 editorial-frame p-6 space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <span class="text-[11px] font-bold uppercase tracking-wider text-cyanGlow">Execution History</span>
-            <h3 class="text-lg font-extrabold text-white mt-0.5">Session Trade Log</h3>
-          </div>
-          <button type="button" onclick="clearJournalTrades()"
-                  class="ios26-press px-3.5 py-1.5 rounded-xl bg-red-500/15 hover:bg-red-500/25 border border-red-400/30 text-red-200 text-xs font-semibold">
-            Clear Log
-          </button>
-        </div>
-
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse text-xs sm:text-sm">
-            <thead>
-              <tr class="border-b border-sky-300/15 text-sky-300/75 text-xs uppercase">
-                <th class="py-2.5 pr-4">Pair</th>
-                <th class="py-2.5 pr-4">Session</th>
-                <th class="py-2.5 pr-4">Side</th>
-                <th class="py-2.5 pr-4">R:R</th>
-                <th class="py-2.5 pr-4">P&amp;L</th>
-                <th class="py-2.5">Note</th>
-              </tr>
-            </thead>
-            <tbody id="tradeLogBody" class="divide-y divide-sky-300/10 text-sky-100">
-              <tr>
-                <td colspan="6" class="py-6 text-center text-sky-300/60">No trades logged yet. Add your first trade above.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========================================================= -->
-  <!-- PAGE 4 : ESPACE VIP (CODE + MINIATURES + PLAY YOUTUBE)    -->
-  <!-- ========================================================= -->
-  <section id="vipPage" class="hidden max-w-6xl mx-auto px-4 py-10">
-    <div class="grain-canvas editorial-frame rounded-[28px] p-6 sm:p-10 space-y-6">
-
-      <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-sky-300/15 pb-5">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-cyanGlow">Page 4 • Espace Privé Membre</span>
-          <h2 class="font-display text-2xl sm:text-4xl font-bold text-white mt-1">Petricor VIP — Séances &amp; Stratégie</h2>
-          <p class="text-xs sm:text-sm text-sky-100/80 mt-1">Entre le code VIP pour afficher les miniatures et ouvrir les vidéos sur YouTube.</p>
+          <label class="block text-[10px] uppercase tracking-wider text-zinc-500 mb-1 ml-1">Email *</label>
+          <input type="email" name="email" required placeholder="ex. trader@petricor.ma" class="dark-input w-full rounded-lg px-4 py-3 text-xs" />
         </div>
 
-        <div class="flex items-center gap-2.5">
-          <span id="gateStatusBadge"
-                class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-400/30">
-            <span>🔒</span> Verrouillé
-          </span>
-          <button type="button" onclick="switchView('accueil')"
-                  class="ios26-press px-3.5 py-1.5 rounded-full bg-sky-400/15 hover:bg-sky-400/25 text-xs font-semibold text-white transition">
-            ← Accueil
-          </button>
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider text-zinc-500 mb-1 ml-1">Téléphone / WhatsApp *</label>
+          <input type="tel" name="phone" required placeholder="ex. +212 600 000 000" class="dark-input w-full rounded-lg px-4 py-3 text-xs" />
         </div>
-      </div>
 
-      <!-- Password Gate Box -->
-      <div class="relative z-10 rounded-2xl bg-sapphire/95 cyan-line p-6 max-w-xl mx-auto space-y-4">
-        <div class="space-y-1">
-          <label for="confirmCodeInput" class="block text-xs font-bold uppercase tracking-wider text-cyanGlow">
-            Code d'accès VIP
+        <div>
+          <label class="block text-[10px] uppercase tracking-wider text-zinc-500 mb-1 ml-1">Objectif Trading</label>
+          <textarea name="message" rows="3" placeholder="Prop firm, psychologie, mentorat VIP..." class="dark-input w-full rounded-lg px-4 py-3 text-xs resize-none"></textarea>
+        </div>
+
+        <div class="flex items-center justify-center gap-2 pt-2">
+          <input type="checkbox" id="consent" required class="accent-ember rounded bg-surface border-white/10" />
+          <label for="consent" class="text-[11px] text-zinc-400">
+            J'accepte de recevoir les informations de Petricor Académie
           </label>
-          <p class="text-xs text-sky-200/75">
-            Saisis le code VIP pour débloquer toutes les séances et la vidéo Stratégie.
+        </div>
+
+        <div class="pt-4 text-center">
+          <button type="submit" class="tap-blur bg-white text-black text-xs font-semibold px-7 py-2.5 rounded-full hover:bg-zinc-200 transition">
+            Envoyer
+          </button>
+        </div>
+      </form>
+
+      <!-- Ligne de séparation + 2 colonnes d'infos comme sur le visuel -->
+      <div class="border-t border-white/[0.06] mt-20 pt-12 grid grid-cols-1 sm:grid-cols-2 gap-8 text-left max-w-md mx-auto">
+        <div>
+          <h3 class="text-xs font-semibold text-white mb-2">Académie & Campus</h3>
+          <p class="text-[11px] text-zinc-400 leading-relaxed">
+            Petricor Académie<br />
+            Casablanca, Maroc<br />
+            Sessions Live & Discord Privé
+          </p>
+          <a href="#backtest" class="inline-block mt-3 text-[11px] text-ember hover:underline">
+            Ouvrir le Backtest Hub →
+          </a>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-semibold text-white mb-2">Programmes</h3>
+          <p class="text-[11px] text-zinc-400 leading-relaxed">
+            ICT & Smart Money Concepts<br />
+            Préparation Prop Firms (FTMO / FundedNext)<br />
+            Gestion du Risque & Psychologie
           </p>
         </div>
-
-        <div class="flex flex-col sm:flex-row gap-2.5">
-          <input id="confirmCodeInput" type="password" placeholder="Entrez le code VIP..."
-                 onkeydown="if(event.key==='Enter') confirmVideosAccess()"
-                 class="flex-1 px-4 py-3 rounded-xl bg-abyss border border-sky-300/20 text-sm text-white placeholder-sky-300/35 focus:outline-none focus:border-cyanGlow">
-          <button type="button" onclick="confirmVideosAccess()"
-                  class="ios26-press px-5 py-3 rounded-xl bg-gradient-to-r from-ice to-cyanGlow text-abyss font-extrabold text-xs sm:text-sm hover:opacity-95 transition">
-            Débloquer VIP
-          </button>
-          <button type="button" onclick="lockVideosAccess()"
-                  class="ios26-press px-4 py-3 rounded-xl bg-sky-400/10 hover:bg-sky-400/20 border border-sky-300/20 text-sky-100 font-semibold text-xs sm:text-sm transition">
-            Verrouiller
-          </button>
-        </div>
-
-        <p id="confirmMessage" class="text-xs hidden rounded-xl p-2.5"></p>
       </div>
-
-      <!-- Locked Placeholder -->
-      <div id="videosLockedState" class="relative z-10 rounded-2xl bg-abyss/80 border border-sky-300/15 p-10 text-center space-y-3">
-        <div class="text-3xl">🔒</div>
-        <h3 class="text-lg font-bold text-white">Contenu VIP Protégé</h3>
-        <p class="text-xs sm:text-sm text-sky-200/75 max-w-md mx-auto">
-          Les vidéos VIP (Séances 1 à 8 + Stratégie + Breakdown) sont verrouillées. Entre le code VIP ci-dessus pour y accéder.
-        </p>
-        <div class="pt-2">
-          <button type="button" onclick="switchView('accueil'); setTimeout(()=>document.getElementById('inscription').scrollIntoView({behavior:'smooth'}),120)"
-                  class="ios26-press px-5 py-2.5 rounded-full bg-sky-400/15 hover:bg-sky-400/25 text-xs font-semibold text-cyanGlow transition">
-            Pas encore de code ? S'inscrire sur l'Accueil
-          </button>
-        </div>
-      </div>
-
-      <!-- Unlocked VIP Videos Grid -->
-      <div id="videosUnlockedGrid" class="relative z-10 hidden grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
-
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="border-t border-sky-400/15 mt-10">
-    <div class="max-w-7xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-sky-200/70">
-      <div>© <span id="year"></span> Petricor Académie. Tous droits réservés.</div>
-      <div>Contact : nemranyy100@gmail.com</div>
+  <!-- SECTION PSYCHOLOGIE & RÈGLES -->
+  <section id="psychologie" class="py-20 px-6 border-t border-white/[0.04]">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-[10px] uppercase tracking-[0.25em] text-ember">Discipline & Mindset</span>
+        <h2 class="text-2xl sm:text-3xl font-normal text-white mt-2">Les Piliers Psychologiques</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-surface border border-white/[0.06] rounded-2xl p-6 hover:border-ember/40 transition">
+          <span class="text-xs text-ember font-semibold">01.</span>
+          <h3 class="text-sm font-semibold text-white mt-2">Patience & Killzones</h3>
+          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+            Attendre la liquidité sur les sessions Londres et New York sans forcer d'entrée hors plan.
+          </p>
+        </div>
+
+        <div class="bg-surface border border-white/[0.06] rounded-2xl p-6 hover:border-ember/40 transition">
+          <span class="text-xs text-ember font-semibold">02.</span>
+          <h3 class="text-sm font-semibold text-white mt-2">Risque Fixe 1%</h3>
+          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+            Protéger le capital avant tout. Une série de pertes fait partie des probabilités, jamais de revenge trading.
+          </p>
+        </div>
+
+        <div class="bg-surface border border-white/[0.06] rounded-2xl p-6 hover:border-ember/40 transition">
+          <span class="text-xs text-ember font-semibold">03.</span>
+          <h3 class="text-sm font-semibold text-white mt-2">Exécution Sans Émotion</h3>
+          <p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+            Valider chaque critère de la checklist avant de cliquer. Le résultat d'un seul trade n'a aucune importance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION BACKTEST HUB (PRE-TRADE CHECKLIST + TRADE JOURNAL) -->
+  <section id="backtest" class="py-20 px-6 border-t border-white/[0.04]">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-[10px] uppercase tracking-[0.25em] text-ember">Outils Pratiques</span>
+        <h2 class="text-2xl sm:text-3xl font-normal text-white mt-2">Backtest Hub & Journal</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Pre-Trade Checklist -->
+        <div class="bg-surface border border-white/[0.06] rounded-2xl p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-semibold text-white">Pre-Trade Checklist</h3>
+            <span id="checklist-score" class="text-[11px] px-3 py-1 rounded-full bg-obsidian border border-white/10 text-ember">0 / 5 Validés</span>
+          </div>
+
+          <div class="space-y-3 text-xs text-zinc-300" id="checklist-items">
+            <label class="flex items-center gap-3 p-3 rounded-xl bg-obsidian/70 border border-white/[0.04] cursor-pointer hover:border-ember/40 transition">
+              <input type="checkbox" class="check-rule accent-ember w-4 h-4" onchange="updateScore()" />
+              <span>Biais Daily / H4 clairement identifié</span>
+            </label>
+            <label class="flex items-center gap-3 p-3 rounded-xl bg-obsidian/70 border border-white/[0.04] cursor-pointer hover:border-ember/40 transition">
+              <input type="checkbox" class="check-rule accent-ember w-4 h-4" onchange="updateScore()" />
+              <span>Prise de liquidité (Sweep SSL / BSL) confirmée</span>
+            </label>
+            <label class="flex items-center gap-3 p-3 rounded-xl bg-obsidian/70 border border-white/[0.04] cursor-pointer hover:border-ember/40 transition">
+              <input type="checkbox" class="check-rule accent-ember w-4 h-4" onchange="updateScore()" />
+              <span>Changement de structure (MSS) + FVG / Order Block</span>
+            </label>
+            <label class="flex items-center gap-3 p-3 rounded-xl bg-obsidian/70 border border-white/[0.04] cursor-pointer hover:border-ember/40 transition">
+              <input type="checkbox" class="check-rule accent-ember w-4 h-4" onchange="updateScore()" />
+              <span>Session active (London / NY Killzone) & pas de news rouge</span>
+            </label>
+            <label class="flex items-center gap-3 p-3 rounded-xl bg-obsidian/70 border border-white/[0.04] cursor-pointer hover:border-ember/40 transition">
+              <input type="checkbox" class="check-rule accent-ember w-4 h-4" onchange="updateScore()" />
+              <span>Risk/Reward minimum 1:2 avec SL calculé</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Trade Journal Rapide -->
+        <div class="bg-surface border border-white/[0.06] rounded-2xl p-6">
+          <h3 class="text-sm font-semibold text-white mb-4">Journal de Session</h3>
+
+          <div class="grid grid-cols-3 gap-2.5 mb-3">
+            <input id="j-pair" type="text" placeholder="Paire (ex. XAUUSD)" class="dark-input rounded-lg px-3 py-2 text-xs" />
+            <select id="j-result" class="dark-input rounded-lg px-3 py-2 text-xs">
+              <option value="WIN">WIN (+RR)</option>
+              <option value="LOSS">LOSS (-1R)</option>
+              <option value="BE">BE (0R)</option>
+            </select>
+            <input id="j-rr" type="text" placeholder="RR (ex. +2.5R)" class="dark-input rounded-lg px-3 py-2 text-xs" />
+          </div>
+
+          <input id="j-note" type="text" placeholder="Note rapide (setup, émotion, erreur...)" class="dark-input w-full rounded-lg px-3 py-2 text-xs mb-3" />
+
+          <button onclick="addTrade()" class="tap-blur w-full bg-white text-black text-xs font-semibold py-2.5 rounded-full hover:bg-zinc-200 transition">
+            Enregistrer le trade
+          </button>
+
+          <div id="journal-list" class="mt-4 space-y-2 max-h-48 overflow-y-auto text-xs">
+            <div class="flex items-center justify-between p-2.5 rounded-lg bg-obsidian border border-white/[0.04]">
+              <div>
+                <span class="font-semibold text-white">XAUUSD</span>
+                <span class="text-zinc-500 ml-2">Sweep NY + FVG M5</span>
+              </div>
+              <span class="text-emerald-400 font-medium">+3.0R</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPACE VIP VERROUILLÉ -->
+  <section id="vip" class="py-16 px-6 border-t border-white/[0.04]">
+    <div class="max-w-md mx-auto bg-surface border border-white/[0.06] rounded-2xl p-6 text-center">
+      <span class="text-[10px] uppercase tracking-[0.2em] text-ember">Accès Membres</span>
+      <h3 class="text-lg font-normal text-white mt-1">Espace VIP & Replays</h3>
+      <p class="text-xs text-zinc-400 mt-1 mb-4">Entrez votre code membre Petricor Académie</p>
+
+      <div class="flex gap-2">
+        <input id="vip-pass" type="password" placeholder="Code d'accès VIP" class="dark-input flex-1 rounded-full px-4 py-2 text-xs" />
+        <button onclick="unlockVip()" class="tap-blur bg-white text-black text-xs font-semibold px-5 py-2 rounded-full hover:bg-zinc-200 transition">
+          Entrer
+        </button>
+      </div>
+      <p id="vip-msg" class="text-[11px] text-zinc-500 mt-3"></p>
+    </div>
+  </section>
+
+  <!-- BANNIÈRE FINALE AVEC HALO ORANGE INFÉRIEUR (COMME L'IMAGE) -->
+  <section class="bottom-horizon pt-24 pb-20 px-6 text-center relative">
+    <div class="max-w-xl mx-auto">
+      <div class="w-9 h-9 rounded-full bg-surface/90 border border-white/10 mx-auto mb-5 flex items-center justify-center text-xs font-semibold text-zinc-300">
+        P
+      </div>
+      <p class="text-xl sm:text-2xl font-normal text-zinc-100 leading-relaxed">
+        Petricor Académie accompagne les traders ambitieux vers la régularité et le financement.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER MINIMALISTE 4 COLONNES -->
+  <footer class="bg-obsidian border-t border-white/[0.05] py-14 px-6 text-xs text-zinc-400">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div>
+        <div class="flex items-center gap-2 text-white font-semibold tracking-widest uppercase mb-3">
+          <span>P</span>
+          <span>PETRICOR.</span>
+        </div>
+        <p class="text-[11px] text-zinc-500 leading-relaxed">
+          Copyright © 2026 Petricor Académie.<br />
+          Tous droits réservés.
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <a href="#accueil" class="block text-white hover:text-ember transition">Accueil</a>
+        <a href="#psychologie" class="block text-white hover:text-ember transition">Psychologie</a>
+        <a href="#backtest" class="block text-white hover:text-ember transition">Backtest Hub</a>
+        <a href="#rejoindre" class="block text-white hover:text-ember transition">Contact</a>
+      </div>
+
+      <div class="space-y-2">
+        <p class="text-zinc-300">Casablanca, Maroc</p>
+        <p class="text-zinc-400">contact@petricor-academie.com</p>
+        <div class="flex gap-2 pt-2">
+          <span class="w-7 h-7 rounded-full bg-surface border border-white/10 flex items-center justify-center text-[10px]">DC</span>
+          <span class="w-7 h-7 rounded-full bg-surface border border-white/10 flex items-center justify-center text-[10px]">IG</span>
+          <span class="w-7 h-7 rounded-full bg-surface border border-white/10 flex items-center justify-center text-[10px]">YT</span>
+        </div>
+      </div>
+
+      <div class="md:text-right text-[11px] text-zinc-500">
+        Designed for Petricor Académie
+      </div>
     </div>
   </footer>
 
   <script>
-    const VIP_PASSWORD = "PETRICORVIP";
+    function updateScore() {
+      const checks = document.querySelectorAll('.check-rule');
+      let count = 0;
+      checks.forEach(c => { if (c.checked) count++; });
+      const badge = document.getElementById('checklist-score');
+      badge.textContent = `${count} / ${checks.length} Validés`;
+      badge.className = count === checks.length
+        ? 'text-[11px] px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-400'
+        : 'text-[11px] px-3 py-1 rounded-full bg-obsidian border border-white/10 text-ember';
+    }
 
-    const COMMUNITY_VIDEOS = [
-      {
-        id: "UeXt6TRI6WY",
-        tag: "COMMUNITY BREAKDOWN",
-        title: "Explication d'un Trade",
-        desc: "Analyse complète du trade : contexte, exécution et gestion. Clic sur Play pour ouvrir sur YouTube.",
-        url: "https://youtu.be/UeXt6TRI6WY?si=2EDGCsZ3Wlb7TJU2"
-      },
-      {
-        id: "nu_DuAMyv4w",
-        tag: "COMMUNITY VIDEO",
-        title: "WEBSITE EXPLAINED",
-        desc: "Vidéo partagée avec la communauté. Clic sur Play pour ouvrir sur YouTube.",
-        url: "https://youtu.be/nu_DuAMyv4w"
-      }
-    ];
+    function addTrade() {
+      const pair = document.getElementById('j-pair').value.trim() || 'EURUSD';
+      const res = document.getElementById('j-result').value;
+      const rr = document.getElementById('j-rr').value.trim() || (res === 'WIN' ? '+2R' : res === 'LOSS' ? '-1R' : '0R');
+      const note = document.getElementById('j-note').value.trim() || 'Setup validé';
 
-    const VIP_VIDEOS = [
-      { id: "z0yGCcyQiiA", tag: "SÉANCE 1", title: "Séance 1 — Fondamentaux & Structure", desc: "Lecture de la structure et des zones clés.", url: "https://youtu.be/z0yGCcyQiiA?si=f4MfyDVrl3TkNNyK" },
-      { id: "Dl9XSxMa0CU", tag: "SÉANCE 2", title: "Séance 2 — Liquidité & Manipulation", desc: "Comprendre la chasse de liquidité sur le marché.", url: "https://youtu.be/Dl9XSxMa0CU?si=LKpdm07tTCITvgb_" },
-      { id: "Bc1DYM7tCP4", tag: "SÉANCE 3", title: "Séance 3 — Zones d'Intérêt (POI)", desc: "Identifier les zones à haute probabilité.", url: "https://youtu.be/Bc1DYM7tCP4?si=Z6wMLPbwUThd371n" },
-      { id: "GoTCmA_GfOg", tag: "SÉANCE 4", title: "Séance 4 — Confirmation & Entrée", desc: "Validation et timing d'entrée précis.", url: "https://youtu.be/GoTCmA_GfOg?si=1HAfu7PKoXJtQvLy" },
-      { id: "HfC1V29ZlHQ", tag: "SÉANCE 5", title: "Séance 5 — Risk Management", desc: "Gestion du risque et protection du capital.", url: "https://youtu.be/HfC1V29ZlHQ?si=4MfOuWeL-yHayBFH" },
-      { id: "VpJE-xb_8gA", tag: "SÉANCE 6", title: "Séance 6 — Sessions & Timing", desc: "Se concentrer sur les sessions les plus actives.", url: "https://youtu.be/VpJE-xb_8gA?si=IQDapH04TXfTMPpM" },
-      { id: "J72V8daXBl0", tag: "SÉANCE 7", title: "Séance 7 — Psychologie du Trading", desc: "Contrôle émotionnel, patience et discipline.", url: "https://youtu.be/J72V8daXBl0?si=q7SP8N5yy6-Lfyjr" },
-      { id: "QFCEqH2vVMk", tag: "SÉANCE 8", title: "Séance 8 — Routine, Journal & Revue", desc: "Suivi des performances et amélioration continue.", url: "https://youtu.be/QFCEqH2vVMk?si=gOfT6_117awTtINt" },
-      { id: "_vjHEg3Wffg", tag: "STRATÉGIE", title: "Stratégie Complète Petricor", desc: "Règles complètes de la stratégie du début à la fin.", url: "https://youtu.be/_vjHEg3Wffg?si=luoKRP3wWdIfAU0P" },
-      { id: "UeXt6TRI6WY", tag: "TRADE BREAKDOWN", title: "Explication d'un Trade", desc: "Explication détaillée d'une prise de position réelle.", url: "https://youtu.be/UeXt6TRI6WY?si=2EDGCsZ3Wlb7TJU2" }
-    ];
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    function buildYouTubeCard(vid) {
-      const thumbUrl = `https://img.youtube.com/vi/${vid.id}/hqdefault.jpg`;
-      return `
-        <div class="ios26-press thumb-card rounded-2xl bg-sapphire/95 border border-cyanGlow/25 overflow-hidden flex flex-col justify-between">
-          <div>
-            <a href="${vid.url}" target="_blank" rel="noopener noreferrer" class="block relative aspect-video bg-abyss overflow-hidden group">
-              <img src="${thumbUrl}" alt="${vid.title}"
-                   class="w-full h-full object-cover"
-                   onerror="this.src='https://img.youtube.com/vi/${vid.id}/mqdefault.jpg';">
-              <div class="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition flex items-center justify-center">
-                <span class="px-4 py-2.5 rounded-full bg-cyanGlow text-abyss font-extrabold text-xs shadow-lg flex items-center gap-1.5">
-                  <span>▶</span> Play sur YouTube
-                </span>
-              </div>
-            </a>
-            <div class="p-5">
-              <span class="text-[11px] font-bold uppercase tracking-wider text-cyanGlow">${vid.tag}</span>
-              <h3 class="text-base font-bold text-white mt-1">${vid.title}</h3>
-              <p class="text-xs text-sky-200/75 mt-1.5 leading-relaxed">${vid.desc}</p>
-            </div>
-          </div>
-          <div class="px-5 pb-5">
-            <a href="${vid.url}" target="_blank" rel="noopener noreferrer"
-               class="ios26-press w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-sky-400/15 hover:bg-cyanGlow hover:text-abyss text-white font-bold text-xs transition">
-              <span>▶</span> Play
-            </a>
-          </div>
+      const color = res === 'WIN' ? 'text-emerald-400' : res === 'LOSS' ? 'text-rose-400' : 'text-zinc-400';
+      const item = document.createElement('div');
+      item.className = 'flex items-center justify-between p-2.5 rounded-lg bg-obsidian border border-white/[0.04]';
+      item.innerHTML = `
+        <div>
+          <span class="font-semibold text-white">${pair.toUpperCase()}</span>
+          <span class="text-zinc-500 ml-2">${note}</span>
         </div>
+        <span class="${color} font-medium">${rr}</span>
       `;
+      document.getElementById('journal-list').prepend(item);
+      document.getElementById('j-pair').value = '';
+      document.getElementById('j-rr').value = '';
+      document.getElementById('j-note').value = '';
     }
 
-    function renderCommunityVideos() {
-      const grid = document.getElementById('communityVideoGrid');
-      grid.innerHTML = COMMUNITY_VIDEOS.map(buildYouTubeCard).join('');
-    }
-
-    function renderVipVideos() {
-      const grid = document.getElementById('videosUnlockedGrid');
-      grid.innerHTML = VIP_VIDEOS.map(buildYouTubeCard).join('');
-    }
-
-    function switchView(page) {
-      const pages = {
-        accueil: document.getElementById('accueilPage'),
-        community: document.getElementById('communityPage'),
-        backtest: document.getElementById('backtestPage'),
-        vip: document.getElementById('vipPage')
-      };
-
-      const navBtns = {
-        accueil: document.getElementById('navAccueilBtn'),
-        community: document.getElementById('navCommunityBtn'),
-        backtest: document.getElementById('navBacktestBtn'),
-        vip: document.getElementById('navVipBtn')
-      };
-
-      Object.values(pages).forEach((el) => el.classList.add('hidden'));
-      navBtns.accueil.className = "ios26-press px-3 py-1.5 rounded-full text-sky-100 hover:bg-sky-400/15 font-semibold transition whitespace-nowrap";
-      navBtns.community.className = "ios26-press px-3 py-1.5 rounded-full text-sky-100 hover:bg-sky-400/15 font-semibold transition whitespace-nowrap";
-      navBtns.backtest.className = "ios26-press px-3 py-1.5 rounded-full text-cyanGlow hover:bg-sky-400/15 font-bold transition whitespace-nowrap";
-      navBtns.vip.className = "ios26-press px-3 py-1.5 rounded-full text-ice hover:bg-sky-400/15 font-bold transition flex items-center gap-1 whitespace-nowrap";
-
-      if (page === 'community') {
-        pages.community.classList.remove('hidden');
-        navBtns.community.className = "ios26-press px-3 py-1.5 rounded-full bg-cyanGlow text-abyss font-extrabold transition whitespace-nowrap";
-        renderCommunityVideos();
-      } else if (page === 'backtest') {
-        pages.backtest.classList.remove('hidden');
-        navBtns.backtest.className = "ios26-press px-3 py-1.5 rounded-full bg-cyanGlow text-abyss font-extrabold transition whitespace-nowrap";
-        renderJournal();
-      } else if (page === 'vip') {
-        pages.vip.classList.remove('hidden');
-        navBtns.vip.className = "ios26-press px-3 py-1.5 rounded-full bg-gradient-to-r from-ice to-cyanGlow text-abyss font-extrabold transition flex items-center gap-1 whitespace-nowrap";
+    function unlockVip() {
+      const pass = document.getElementById('vip-pass').value.trim();
+      const msg = document.getElementById('vip-msg');
+      if (pass === 'PETRICOR2026') {
+        msg.textContent = 'Accès VIP débloqué — Bienvenue dans l’espace privé.';
+        msg.className = 'text-[11px] text-emerald-400 mt-3';
       } else {
-        pages.accueil.classList.remove('hidden');
-        navBtns.accueil.className = "ios26-press px-3 py-1.5 rounded-full bg-cyanGlow text-abyss font-extrabold transition whitespace-nowrap";
+        msg.textContent = 'Code incorrect. Contactez le support sur Discord.';
+        msg.className = 'text-[11px] text-rose-400 mt-3';
       }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function confirmVideosAccess() {
-      const input = document.getElementById('confirmCodeInput');
-      const msg = document.getElementById('confirmMessage');
-      const badge = document.getElementById('gateStatusBadge');
-      const lockedState = document.getElementById('videosLockedState');
-      const unlockedGrid = document.getElementById('videosUnlockedGrid');
-
-      const entered = input.value.trim();
-
-      if (entered === VIP_PASSWORD) {
-        sessionStorage.setItem('petricor_vip_unlocked', '1');
-        badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-400/30";
-        badge.innerHTML = "<span>🔓</span> Débloqué";
-
-        msg.className = "text-xs rounded-xl p-2.5 bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 block";
-        msg.textContent = "تم تفعيل الولوج للـ VIP بنجاح.";
-
-        lockedState.classList.add('hidden');
-        renderVipVideos();
-        unlockedGrid.classList.remove('hidden');
-        unlockedGrid.classList.add('grid');
-      } else {
-        msg.className = "text-xs rounded-xl p-2.5 bg-red-500/15 text-red-300 border border-red-400/30 block";
-        msg.textContent = "الكود غير صحيح، تأكد من كود VIP.";
-      }
-    }
-
-    function lockVideosAccess() {
-      sessionStorage.removeItem('petricor_vip_unlocked');
-      document.getElementById('confirmCodeInput').value = "";
-
-      const badge = document.getElementById('gateStatusBadge');
-      badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-500/15 text-amber-300 border border-amber-400/30";
-      badge.innerHTML = "<span>🔒</span> Verrouillé";
-
-      const msg = document.getElementById('confirmMessage');
-      msg.className = "hidden";
-      msg.textContent = "";
-
-      document.getElementById('videosLockedState').classList.remove('hidden');
-      const unlockedGrid = document.getElementById('videosUnlockedGrid');
-      unlockedGrid.classList.add('hidden');
-      unlockedGrid.classList.remove('grid');
-    }
-
-    // Backtest Checklist & Journal
-    function updateChecklistScore() {
-      const checks = Array.from(document.querySelectorAll('.chk-rule'));
-      const count = checks.filter((c) => c.checked).length;
-      document.getElementById('kpiScore').textContent = `${count} / ${checks.length}`;
-      const badge = document.getElementById('checklistBadge');
-      if (count === checks.length) {
-        badge.textContent = "Ready to Execute";
-        badge.className = "px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/35";
-      } else {
-        badge.textContent = `${count}/${checks.length} Rules`;
-        badge.className = "px-3 py-1 rounded-full text-xs font-bold bg-sky-400/15 text-sky-200 border border-sky-300/25";
-      }
-    }
-
-    function resetChecklist() {
-      document.querySelectorAll('.chk-rule').forEach((c) => { c.checked = false; });
-      updateChecklistScore();
-    }
-
-    function getTrades() {
-      try {
-        return JSON.parse(localStorage.getItem('petricor_backtest_trades') || '[]');
-      } catch {
-        return [];
-      }
-    }
-
-    function saveTrades(trades) {
-      localStorage.setItem('petricor_backtest_trades', JSON.stringify(trades));
-    }
-
-    function addJournalTrade(e) {
-      e.preventDefault();
-      const pair = document.getElementById('logPair').value.trim().toUpperCase();
-      const session = document.getElementById('logSession').value.trim();
-      const side = document.getElementById('logSide').value;
-      const rr = document.getElementById('logRr').value.trim() || '-';
-      const pnl = parseFloat(document.getElementById('logPnl').value) || 0;
-      const note = document.getElementById('logNote').value.trim() || '-';
-
-      const trades = getTrades();
-      trades.unshift({ pair, session, side, rr, pnl, note });
-      saveTrades(trades);
-      document.getElementById('logNote').value = '';
-      renderJournal();
-    }
-
-    function clearJournalTrades() {
-      localStorage.removeItem('petricor_backtest_trades');
-      renderJournal();
-    }
-
-    function renderJournal() {
-      const trades = getTrades();
-      const tbody = document.getElementById('tradeLogBody');
-      const total = trades.length;
-      const wins = trades.filter((t) => t.pnl > 0).length;
-      const netPnl = trades.reduce((acc, t) => acc + t.pnl, 0);
-      const winRate = total > 0 ? ((wins / total) * 100).toFixed(1) + '%' : '0%';
-
-      document.getElementById('kpiTrades').textContent = total;
-      document.getElementById('kpiWinRate').textContent = winRate;
-      document.getElementById('kpiNetPnl').textContent = `${netPnl >= 0 ? '+' : ''}$${netPnl.toFixed(2)}`;
-
-      if (!total) {
-        tbody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-sky-300/60">No trades logged yet. Add your first trade above.</td></tr>`;
-        return;
-      }
-
-      tbody.innerHTML = trades.map((t) => {
-        const pnlColor = t.pnl >= 0 ? 'text-emerald-300' : 'text-red-300';
-        const pnlText = `${t.pnl >= 0 ? '+' : ''}$${t.pnl.toFixed(2)}`;
-        return `
-          <tr>
-            <td class="py-2.5 pr-4 font-bold text-white">${t.pair}</td>
-            <td class="py-2.5 pr-4 text-sky-200/80">${t.session}</td>
-            <td class="py-2.5 pr-4 font-semibold text-cyanGlow">${t.side}</td>
-            <td class="py-2.5 pr-4 font-mono">${t.rr}</td>
-            <td class="py-2.5 pr-4 font-mono font-bold ${pnlColor}">${pnlText}</td>
-            <td class="py-2.5 text-sky-200/75">${t.note}</td>
-          </tr>
-        `;
-      }).join('');
-    }
-
-    // Inscription & Recap
-    function updateVIPBanner() {
-      const formule = document.getElementById('formule').value;
-      const banner = document.getElementById('vipBanner');
-      const subject = document.getElementById('emailSubject');
-      document.getElementById('recapFormule').textContent = formule;
-
-      if (formule.includes('VIP')) {
-        banner.classList.remove('hidden');
-        subject.value = "Nouvelle Inscription VIP — Petricor Académie";
-      } else {
-        banner.classList.add('hidden');
-        subject.value = "Nouvelle Inscription Bootcamp — Petricor Académie";
-      }
-    }
-
-    ['nom', 'telephone', 'email', 'details'].forEach((id) => {
-      const el = document.getElementById(id);
-      const targetId = 'recap' + id.charAt(0).toUpperCase() + id.slice(1);
-      el.addEventListener('input', () => {
-        document.getElementById(targetId).textContent = el.value.trim() || '-';
-      });
-    });
-
-    function copyRecap() {
-      const text = [
-        "Nom : " + document.getElementById('recapNom').textContent,
-        "Téléphone : " + document.getElementById('recapTel').textContent,
-        "Email : " + document.getElementById('recapEmail').textContent,
-        "Formule : " + document.getElementById('recapFormule').textContent,
-        "Détails : " + document.getElementById('recapDetails').textContent
-      ].join("\n");
-
-      navigator.clipboard.writeText(text).then(() => {
-        alert("تم نسخ الملخص.");
-      });
-    }
-
-    const form = document.getElementById('inscriptionForm');
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      const status = document.getElementById('formStatus');
-      btn.disabled = true;
-      btn.textContent = "جاري الإرسال...";
-
-      try {
-        const res = await fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (res.ok) {
-          status.className = "text-xs sm:text-sm rounded-xl p-3 bg-emerald-500/15 text-emerald-300 border border-emerald-400/30 block";
-          status.textContent = "تم إرسال التسجيل بنجاح.";
-          form.reset();
-          updateVIPBanner();
-          ['recapNom', 'recapTel', 'recapEmail', 'recapDetails'].forEach((id) => {
-            document.getElementById(id).textContent = '-';
-          });
-        } else {
-          throw new Error('Erreur');
-        }
-      } catch {
-        status.className = "text-xs sm:text-sm rounded-xl p-3 bg-red-500/15 text-red-300 border border-red-400/30 block";
-        status.textContent = "وقع خطأ فالإرسال. عاود المحاولة أو تواصل عبر واتساب.";
-      } finally {
-        btn.disabled = false;
-        btn.textContent = "Valider l'Inscription & Envoyer";
-      }
-    });
-
-    if (sessionStorage.getItem('petricor_vip_unlocked') === '1') {
-      document.getElementById('confirmCodeInput').value = VIP_PASSWORD;
-      confirmVideosAccess();
     }
   </script>
 </body>
